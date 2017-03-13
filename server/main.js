@@ -1,3 +1,5 @@
+'use strict'
+
 const express = require('express')
 const debug = require('debug')('app:server')
 const path = require('path')
@@ -5,6 +7,12 @@ const webpack = require('webpack')
 const webpackConfig = require('../config/webpack.config')
 const project = require('../config/project.config')
 const compress = require('compression')
+
+//Import mongoDB
+const mongo = require('mongodb')
+const monk = require('monk')
+const mongoUrl = process.env.MONGO_URL;
+var db = monk(mongoUrl);
 
 const app = express()
 
