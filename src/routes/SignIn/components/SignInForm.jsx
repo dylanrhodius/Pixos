@@ -7,7 +7,7 @@ const style = {
 
 export const SignInForm = () => (
   <div>
-    <btn>Sign in with facebook!</btn>
+    <button type='button'>Sign in with facebook!</button>
   </div>
 )
 
