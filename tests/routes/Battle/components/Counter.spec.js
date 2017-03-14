@@ -1,34 +1,34 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
-import { Counter } from 'routes/Counter/components/Counter'
+import { Battle } from 'routes/Battle/components/Battle'
 import { shallow } from 'enzyme'
 
-describe('(Component) Counter', () => {
+describe('(Component) Battle', () => {
   let _props, _spies, _wrapper
 
   beforeEach(() => {
     _spies = {}
     _props = {
-      counter : 5,
+      battle : 5,
       ...bindActionCreators({
         doubleAsync : (_spies.doubleAsync = sinon.spy()),
         increment   : (_spies.increment = sinon.spy())
       }, _spies.dispatch = sinon.spy())
     }
-    _wrapper = shallow(<Counter {..._props} />)
+    _wrapper = shallow(<Battle {..._props} />)
   })
 
   it('Should render as a <div>.', () => {
     expect(_wrapper.is('div')).to.equal(true)
   })
 
-  it('Should render with an <h2> that includes Sample Counter text.', () => {
-    expect(_wrapper.find('h2').text()).to.match(/Counter:/)
+  it('Should render with an <h2> that includes Sample Battle text.', () => {
+    expect(_wrapper.find('h2').text()).to.match(/Battle:/)
   })
 
-  it('Should render props.counter at the end of the sample counter <h2>.', () => {
+  it('Should render props.battle at the end of the sample battle <h2>.', () => {
     expect(_wrapper.find('h2').text()).to.match(/5$/)
-    _wrapper.setProps({ counter: 8 })
+    _wrapper.setProps({ battle: 8 })
     expect(_wrapper.find('h2').text()).to.match(/8$/)
   })
 

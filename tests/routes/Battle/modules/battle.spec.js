@@ -1,32 +1,32 @@
 import {
-  COUNTER_INCREMENT,
+  BATTLE_INCREMENT,
   increment,
   doubleAsync,
-  default as counterReducer
-} from 'routes/Counter/modules/counter'
+  default as battleReducer
+} from 'routes/Battle/modules/battle'
 
-describe('(Redux Module) Counter', () => {
-  it('Should export a constant COUNTER_INCREMENT.', () => {
-    expect(COUNTER_INCREMENT).to.equal('COUNTER_INCREMENT')
+describe('(Redux Module) Battle', () => {
+  it('Should export a constant BATTLE_INCREMENT.', () => {
+    expect(BATTLE_INCREMENT).to.equal('BATTLE_INCREMENT')
   })
 
   describe('(Reducer)', () => {
     it('Should be a function.', () => {
-      expect(counterReducer).to.be.a('function')
+      expect(battleReducer).to.be.a('function')
     })
 
     it('Should initialize with a state of 0 (Number).', () => {
-      expect(counterReducer(undefined, {})).to.equal(0)
+      expect(battleReducer(undefined, {})).to.equal(0)
     })
 
     it('Should return the previous state if an action was not matched.', () => {
-      let state = counterReducer(undefined, {})
+      let state = battleReducer(undefined, {})
       expect(state).to.equal(0)
-      state = counterReducer(state, { type: '@@@@@@@' })
+      state = battleReducer(state, { type: '@@@@@@@' })
       expect(state).to.equal(0)
-      state = counterReducer(state, increment(5))
+      state = battleReducer(state, increment(5))
       expect(state).to.equal(5)
-      state = counterReducer(state, { type: '@@@@@@@' })
+      state = battleReducer(state, { type: '@@@@@@@' })
       expect(state).to.equal(5)
     })
   })
@@ -36,8 +36,8 @@ describe('(Redux Module) Counter', () => {
       expect(increment).to.be.a('function')
     })
 
-    it('Should return an action with type "COUNTER_INCREMENT".', () => {
-      expect(increment()).to.have.property('type', COUNTER_INCREMENT)
+    it('Should return an action with type "BATTLE_INCREMENT".', () => {
+      expect(increment()).to.have.property('type', BATTLE_INCREMENT)
     })
 
     it('Should assign the first argument to the "payload" property.', () => {
@@ -56,12 +56,12 @@ describe('(Redux Module) Counter', () => {
 
     beforeEach(() => {
       _globalState = {
-        counter : counterReducer(undefined, {})
+        battle : battleReducer(undefined, {})
       }
       _dispatchSpy = sinon.spy((action) => {
         _globalState = {
           ..._globalState,
-          counter : counterReducer(_globalState.counter, action)
+          battle : battleReducer(_globalState.battle, action)
         }
       })
       _getStateSpy = sinon.spy(() => {
@@ -90,19 +90,19 @@ describe('(Redux Module) Counter', () => {
     })
 
     it('Should produce a state that is double the previous state.', () => {
-      _globalState = { counter: 2 }
+      _globalState = { battle: 2 }
 
       return doubleAsync()(_dispatchSpy, _getStateSpy)
         .then(() => {
           _dispatchSpy.should.have.been.calledOnce
           _getStateSpy.should.have.been.calledOnce
-          expect(_globalState.counter).to.equal(4)
+          expect(_globalState.battle).to.equal(4)
           return doubleAsync()(_dispatchSpy, _getStateSpy)
         })
         .then(() => {
           _dispatchSpy.should.have.been.calledTwice
           _getStateSpy.should.have.been.calledTwice
-          expect(_globalState.counter).to.equal(8)
+          expect(_globalState.battle).to.equal(8)
         })
     })
   })
@@ -110,15 +110,15 @@ describe('(Redux Module) Counter', () => {
   // NOTE: if you have a more complex state, you will probably want to verify
   // that you did not mutate the state. In this case our state is just a number
   // (which cannot be mutated).
-  describe('(Action Handler) COUNTER_INCREMENT', () => {
+  describe('(Action Handler) BATTLE_INCREMENT', () => {
     it('Should increment the state by the action payload\'s "value" property.', () => {
-      let state = counterReducer(undefined, {})
+      let state = battleReducer(undefined, {})
       expect(state).to.equal(0)
-      state = counterReducer(state, increment(1))
+      state = battleReducer(state, increment(1))
       expect(state).to.equal(1)
-      state = counterReducer(state, increment(2))
+      state = battleReducer(state, increment(2))
       expect(state).to.equal(3)
-      state = counterReducer(state, increment(-3))
+      state = battleReducer(state, increment(-3))
       expect(state).to.equal(0)
     })
   })
