@@ -14,5 +14,4 @@ describe('(View) SignInForm', () => {
     expect(button).to.exist
     expect(button.text()).to.match(/Sign in with facebook!/)
   })
-
 })

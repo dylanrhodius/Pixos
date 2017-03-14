@@ -14,5 +14,4 @@ describe('(View) SignInPage', () => {
     expect(signIn).to.exist
     expect(signIn.text()).to.match(/Sign In!/)
   })
-
 })
