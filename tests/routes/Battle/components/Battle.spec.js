@@ -38,7 +38,7 @@ describe('(Component) Battle', () => {
     expect(infobar).to.exist;
   })
 
-  describe('An increment button...', () => {
+  xdescribe('An increment button...', () => {
     let _button
 
     beforeEach(() => {
@@ -59,7 +59,7 @@ describe('(Component) Battle', () => {
     })
   })
 
-  describe('A Double (Async) button...', () => {
+  xdescribe('A Double (Async) button...', () => {
     let _button
 
     beforeEach(() => {

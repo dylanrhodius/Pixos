@@ -31,7 +31,7 @@ describe('(Redux Module) Battle', () => {
     })
   })
 
-  describe('(Action Creator) increment', () => {
+  xdescribe('(Action Creator) increment', () => {
     it('Should be exported as a function.', () => {
       expect(increment).to.be.a('function')
     })
@@ -49,7 +49,7 @@ describe('(Redux Module) Battle', () => {
     })
   })
 
-  describe('(Action Creator) doubleAsync', () => {
+  xdescribe('(Action Creator) doubleAsync', () => {
     let _globalState
     let _dispatchSpy
     let _getStateSpy
@@ -110,7 +110,7 @@ describe('(Redux Module) Battle', () => {
   // NOTE: if you have a more complex state, you will probably want to verify
   // that you did not mutate the state. In this case our state is just a number
   // (which cannot be mutated).
-  describe('(Action Handler) BATTLE_INCREMENT', () => {
+  xdescribe('(Action Handler) BATTLE_INCREMENT', () => {
     it('Should increment the state by the action payload\'s "value" property.', () => {
       let state = battleReducer(undefined, {})
       expect(state).to.equal(0)
