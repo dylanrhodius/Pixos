@@ -1,7 +1,8 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { Battle } from 'routes/Battle/components/Battle'
-import { shallow } from 'enzyme'
+import { InfoBar } from 'routes/Battle/components/InfoBar'
+import { shallow, mount, render } from 'enzyme'
 
 describe('(Component) Battle', () => {
   let _props, _spies, _wrapper
@@ -22,18 +23,19 @@ describe('(Component) Battle', () => {
     expect(_wrapper.is('div')).to.equal(true)
   })
 
-  it('Should render with an <h2> that includes Sample Battle text.', () => {
-    expect(_wrapper.find('h2').text()).to.match(/Battle:/)
-  })
+  // it('Should render with an <h2> that includes Sample Battle text.', () => {
+  //   expect(_wrapper.find('h2').text()).to.match(/Battle:/)
+  // })
 
-  it('Should render props.battle at the end of the sample battle <h2>.', () => {
-    expect(_wrapper.find('h2').text()).to.match(/5$/)
-    _wrapper.setProps({ battle: 8 })
-    expect(_wrapper.find('h2').text()).to.match(/8$/)
-  })
+  // it('Should render props.battle at the end of the sample battle <h2>.', () => {
+  //   expect(_wrapper.find('h2').text()).to.match(/5$/)
+  //   _wrapper.setProps({ battle: 8 })
+  //   expect(_wrapper.find('h2').text()).to.match(/8$/)
+  // })
 
-  it('Should render exactly two buttons.', () => {
-    expect(_wrapper.find('button')).to.have.length(2)
+  it('Should render an InfoBar.', () => {
+    const infobar = _wrapper.find(InfoBar);
+    expect(infobar).to.exist;
   })
 
   describe('An increment button...', () => {

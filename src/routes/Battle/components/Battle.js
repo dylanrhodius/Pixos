@@ -1,8 +1,10 @@
 import React from 'react'
+import { InfoBar } from 'routes/Battle/components/InfoBar'
 
 export const Battle = (props) => (
   <div style={{ margin: '0 auto' }} >
-    <h2>Battle: {props.battle}</h2>
+
+    { <InfoBar/> }
     <button className='btn btn-default' onClick={props.increment}>
       Increment
     </button>
