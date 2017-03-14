@@ -14,10 +14,37 @@ const monk = require('monk')
 const mongoUrl = process.env.MONGO_URL;
 var db = monk(mongoUrl);
 
+//import session from express
+const session = require('express-session')
+const MongodbStoreFactory = require('connect-mongodb-session')
+const MongoDBStore = MongodbStoreFactory(session)
+
 const app = express()
 
 // Apply gzip compression
 app.use(compress())
+
+// Set up sessions
+var store = new MongoDBStore(
+  {
+    uri: mongoUrl,
+    collection: 'mySessions'
+  });
+
+app.use(require('express-session')({
+  secret: 'This is a secret',
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+  },
+  store: store,
+  resave: true,
+  saveUninitialized: true
+}));
+
+app.use(function(req,res,next){
+  req.db = db;
+  next();
+});
 
 // ------------------------------------
 // Apply Webpack HMR Middleware
