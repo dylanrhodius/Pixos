@@ -16,14 +16,14 @@ describe('(Component) Board', () => {
     expect(_wrapper.is('div')).to.equal(true)
   })
 
-  it('Should render Hand.', () => {
+  it('Should render two Hands.', () => {
     const hand = _wrapper.find(Hand);
-    expect(hand).to.exist;
+    expect(hand).to.have.length(2);
   })
 
-  it('Should render PlayingArea.', () => {
+  it('Should render two PlayingAreas.', () => {
     const playingArea = _wrapper.find(PlayingArea);
-    expect(playingArea).to.exist;
+    expect(playingArea).to.have.length(2);
   })
 
 });
