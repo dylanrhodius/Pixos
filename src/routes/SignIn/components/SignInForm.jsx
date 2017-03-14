@@ -11,8 +11,7 @@ export const SignInForm = () => (
       appId={process.env.APP_ID}
       autoLoad={true}
       fields='name,email,picture'
-      callback={responseFacebook} />,
-    <button type='button'>Sign in with facebook!</button>
+      callback={responseFacebook} />
   </div>
 )
 

@@ -1,17 +1,17 @@
 import React from 'react'
 import { SignInForm } from 'routes/SignIn/components/SignInForm.jsx'
-import { render } from 'enzyme'
+import FacebookLogin from 'react-facebook-login'
+import { shallow } from 'enzyme'
 
 describe('(View) SignInForm', () => {
   let _component
 
   beforeEach(() => {
-    _component = render(<SignInForm />)
+    _component = shallow(<SignInForm />)
   })
 
   it('Renders button', () => {
-    const button = _component.find('btn')
+    const button = _component.find(FacebookLogin)
     expect(button).to.exist
-    expect(button.text()).to.match(/Sign in with facebook!/)
   })
 })
