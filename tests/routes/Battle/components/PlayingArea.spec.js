@@ -1,13 +1,13 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
-import { PlayingArea2 } from 'routes/Battle/components/PlayingArea2'
+import { PlayingArea } from 'routes/Battle/components/PlayingArea'
 import { shallow } from 'enzyme'
 
-describe('(Component) PlayingArea2', () => {
+describe('(Component) PlayingArea', () => {
   let _props, _wrapper
 
   beforeEach(() => {
-    _wrapper = shallow(<PlayingArea2 {..._props} />)
+    _wrapper = shallow(<PlayingArea {..._props} />)
   })
 
   it('Should render as a <div>.', () => {

@@ -1,13 +1,13 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
-import { Hand1 } from 'routes/Battle/components/Hand1'
+import { Hand } from 'routes/Battle/components/Hand'
 import { shallow } from 'enzyme'
 
-describe('(Component) Hand1', () => {
+describe('(Component) Hand', () => {
   let _props, _wrapper
 
   beforeEach(() => {
-    _wrapper = shallow(<Hand1 {..._props} />)
+    _wrapper = shallow(<Hand {..._props} />)
   })
 
   it('Should render as a <div>.', () => {
