@@ -2,6 +2,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { Battle } from 'routes/Battle/components/Battle'
 import { InfoBar } from 'routes/Battle/components/InfoBar'
+import { Board } from 'routes/Battle/components/Board'
 import { shallow, mount, render } from 'enzyme'
 
 describe('(Component) Battle', () => {
@@ -36,6 +37,10 @@ describe('(Component) Battle', () => {
   it('Should render an InfoBar.', () => {
     const infobar = _wrapper.find(InfoBar);
     expect(infobar).to.exist;
+  })
+  it('Should render a Board.', () => {
+    const board = _wrapper.find(Board);
+    expect(board).to.exist;
   })
 
   xdescribe('An increment button...', () => {
