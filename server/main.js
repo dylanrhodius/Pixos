@@ -127,6 +127,18 @@ if (project.env === 'development') {
       res.redirect('/')
     })
 
+app.get('/user', (req,res) => {
+  if(typeof(req.session.passport) != 'undefined') {
+    console.log('User is true');
+    res.setHeader('Content-Type', 'application/json');
+    res.send(req.session.passport.user);
+  } else {
+    console.log('User is false');
+    res.setHeader('Content-Type', 'application/json');
+    res.send('No data available');
+  }
+});
+
   app.use('*', function (req, res, next) {
     const filename = path.join(compiler.outputPath, 'index.html')
     compiler.outputFileSystem.readFile(filename, (err, result) => {
