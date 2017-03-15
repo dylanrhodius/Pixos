@@ -10,7 +10,7 @@ describe('(View) SignInPage', () => {
   })
 
   it('Renders sign in message', () => {
-    const signIn = _component.find('h1')
+    const signIn = _component.find('h2')
     expect(signIn).to.exist
     expect(signIn.text()).to.match(/Sign In!/)
   })
