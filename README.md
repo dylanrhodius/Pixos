@@ -57,3 +57,54 @@ Select and place card; update round power; update game score; check for end of r
 
 PLAY_CARD
 ```
+
+### State
+
+```js
+
+State = {
+  battle: {
+    nextTurn: 'player1',
+    cards: [
+      {
+        name: 'big dino',
+        power: 7,
+        type: 'land',
+        imgUrl: 'img23.jpg'
+      }
+      // ...
+    ],
+    player1: {
+      name: 'eric@example.com',
+      power: 0,
+      score: 0,
+      hasPassed: false,
+      hand: [
+        {
+          name: 'bigger dino',
+          power: 9,
+          type: 'land',
+          imgUrl: 'img09.jpg'
+        }
+        // ...
+      ],
+      playingArea: {
+        land: [
+          // cards*
+        ],   
+        water: [
+          // cards*
+        ],
+        air: [
+          // cards*
+        ]
+      }
+    },
+    player2 {
+      // ... as player1
+    }
+  }  
+}
+
+
+```
