@@ -1,5 +1,4 @@
-CARD_DATA = {
-  "cards": [
+export const CARD_DATA = [
   { name: 'alvarezsaurus', imgUrl: '/img/alvarezsaurus.svg', type: 'land', power: 3 },
   { name: 'amargasaurus', imgUrl: '/img/amargasaurus.svg', type: 'land', power: 5 },
   { name: 'ampelosaurus', imgUrl: '/img/ampelosaurus.svg', type: 'land', power: 7 },
@@ -51,9 +50,3 @@ CARD_DATA = {
   { name: 'velociraptor', imgUrl: '/img/velociraptor.svg', type: 'land', power: 8 },
   { name: 'yinlong', imgUrl: '/img/yinlong.svg', type: 'land', power: 5 }
   ]
-}
-
-
-module.exports = {
-  CARD_DATA: CARD_DATA
-}

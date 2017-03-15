@@ -7,8 +7,6 @@ import {
 // ------------------------------------
 export const BATTLE_INCREMENT = 'BATTLE_INCREMENT'
 export const BATTLE_DOUBLE_ASYNC = 'BATTLE_DOUBLE_ASYNC'
-export const REQUEST_ALL_POSSIBLE_CARDS = 'REQUEST_ALL_POSSIBLE_CARDS'
-export const RECEIVE_ALL_POSSIBLE_CARDS = 'RECEIVE_ALL_POSSIBLE_CARDS'
 export const BUILD_PLAYER_HANDS = 'BUILD_PLAYER_HANDS'
 export const SET_NEXT_PLAYER = 'SET_NEXT_PLAYER'
 export const SET_PLAYER_PASS = 'SET_PLAYER_PASS'
@@ -42,16 +40,10 @@ export const doubleAsync = () => {
   }
 }
 
-export function requestCards() {
-  return {
-    type : REQUEST_ALL_POSSIBLE_CARDS
-  }
-}
 
 export const actions = {
   increment,
-  doubleAsync,
-  requestCards
+  doubleAsync
 }
 
 // ------------------------------------

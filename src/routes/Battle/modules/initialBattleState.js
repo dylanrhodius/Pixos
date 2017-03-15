@@ -1,6 +1,10 @@
+import {
+  CARD_DATA
+} from 'routes/Battle/modules/cardData'
+
 export const INITIAL_STATE = {
   nextTurn: '',
-  cards: [],
+  cards: CARD_DATA,
   player1: {
     name: '',
     power: 0,
