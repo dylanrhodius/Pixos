@@ -15,7 +15,7 @@ const mongo = require('mongodb')
 const monk = require('monk')
 const mongoUrl = process.env.MONGO_URL
 var db = monk(mongoUrl)
-
+const request = require('request')
 // import session from express
 const session = require('express-session')
 const MongodbStoreFactory = require('connect-mongodb-session')
@@ -32,28 +32,36 @@ var FBStrategy = new FacebookStrategy({
   callbackURL: 'http://localhost:3000/auth/facebook/callback',
   profileFields: ['id', 'displayName', 'photos', 'email']
 },
-function (accessToken, refreshToken, profile, cb) {
+function (accessToken, refreshToken, profile, done) {
   var user = {
     identifier: profile.id,
-    profile: profile.displayName
+    name: profile.displayName,
+    image: profile.photos[0].value
   }
+  console.log("USER------------")
   console.log(user)
-  console.log(arguments)
-  return cb(null, user)
+  console.log("PROFILE-----------")
+  console.log(profile)
+  return done(null, user)
 })
 
 passport.use(FBStrategy)
 
-passport.serializeUser(function (user, cb) {
-  cb(null, user.identifier)
+passport.serializeUser(function (user, done) {
+  console.log("CB---------------")
+  console.log(done)
+  console.log("USER------------")
+  console.log(user)
+  done(null, user)
 })
 
-passport.deserializeUser(function (identifier, cb) {
+passport.deserializeUser(function (identifier, done) {
   // For this demo, we'll just return an object literal since our user
   // objects are this trivial.  In the real world, you'd probably fetch
   // your user object from your database here.
-  cb(null, {
-    identifier: identifier, facebookId: identifier.match(/\d+$/)[0]
+  console
+  done(null, {
+    identifier: identifier
   })
 })
 
@@ -67,14 +75,19 @@ var store = new MongoDBStore(
     collection: 'mySessions'
   })
 
-app.use(require('express-session')({
+store.on('error', function (error) {
+  assert.ifError(error)
+  assert.ok(false)
+})
+
+app.use(session({
   secret: 'This is a secret',
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
   },
   store: store,
-  resave: true,
-  saveUninitialized: true
+  resave: false,
+  saveUninitialized: false
 }))
 
 app.use(function (req, res, next) {
