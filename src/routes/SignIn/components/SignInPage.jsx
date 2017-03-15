@@ -3,7 +3,7 @@ import SignInForm from './SignInForm.jsx'
 
 export const SignInPage = () => (
   <div>
-    <h1>Sign In!</h1>
+    <h2>Sign In!</h2>
     {<SignInForm />}
   </div>
 )

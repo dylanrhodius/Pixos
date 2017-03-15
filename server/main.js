@@ -21,6 +21,7 @@ const session = require('express-session')
 const MongodbStoreFactory = require('connect-mongodb-session')
 const MongoDBStore = MongodbStoreFactory(session)
 
+const domain = process.env.APP_DOMAIN || 'localhost'
 const app = express()
 
 // Apply gzip compression
@@ -29,7 +30,7 @@ app.use(compress())
 var FBStrategy = new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: 'http://localhost:3000/auth/facebook/callback',
+  callbackURL: "http://"+domain+ "/auth/facebook/callback",
   profileFields: ['id', 'displayName', 'photos', 'email']
 },
 function (accessToken, refreshToken, profile, done) {
@@ -38,20 +39,12 @@ function (accessToken, refreshToken, profile, done) {
     name: profile.displayName,
     image: profile.photos[0].value
   }
-  console.log("USER------------")
-  console.log(user)
-  console.log("PROFILE-----------")
-  console.log(profile)
   return done(null, user)
 })
 
 passport.use(FBStrategy)
 
 passport.serializeUser(function (user, done) {
-  console.log("CB---------------")
-  console.log(done)
-  console.log("USER------------")
-  console.log(user)
   done(null, user)
 })
 
@@ -59,7 +52,6 @@ passport.deserializeUser(function (identifier, done) {
   // For this demo, we'll just return an object literal since our user
   // objects are this trivial.  In the real world, you'd probably fetch
   // your user object from your database here.
-  console
   done(null, {
     identifier: identifier
   })
