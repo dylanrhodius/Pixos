@@ -1,34 +1,59 @@
-# final-project
-Makers Academy, final project
+# Final Project
+
+Dinosaur card matching game.
 
 ## Game Design
 
-#### Actions + Logic
+### Logic
 
-BEGIN:
+```
+BEGIN
 
-choose first player
+Choose first player
 
-get initial cards
+Get initial cards
 
-repeat until both players pass:
+Repeat until both players pass:
 
----opt to pass for rest of round
+  Opt to pass for rest of round
 
----select card
+  Select card
 
----update round power
+  Update round power
 
----switch players
+  Switch players
 
-end round:
+End round:
 
----update game score
+  Update game score
 
----end game if 3rd round or player has won 2
+  End game if 3rd round or player has won 2
 
----switch players if not last round
+  Switch players if not last round
 
----goto get initial cards
+  Goto get initial cards
 
 END
+```
+
+### Actions
+
+```
+Set up state : choose first player; get initial cards and display them
+
+REQUEST_ALL_POSSIBLE_CARDS
+
+RECEIVE_ALL_POSSIBLE_CARDS
+
+BUILD_PLAYER_HANDS
+
+
+SET_NEXT_PLAYER
+
+SET_PLAYER_PASS
+
+
+Select and place card; update round power; update game score; check for end of round or game:
+
+PLAY_CARD
+```
