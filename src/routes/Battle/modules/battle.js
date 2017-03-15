@@ -2,6 +2,8 @@ import {
   INITIAL_STATE
 } from 'routes/Battle/modules/initialBattleState'
 
+import store from 'store/createStore';
+
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -40,10 +42,19 @@ export const doubleAsync = () => {
   }
 }
 
+export function buildPlayerHands() {
+  console.log('BUILDING PLAYER HANDS')
+  console.log(store)
+  return {
+    type: BUILD_PLAYER_HANDS
+  }
+}
+
 
 export const actions = {
   increment,
-  doubleAsync
+  doubleAsync,
+  buildPlayerHands
 }
 
 // ------------------------------------

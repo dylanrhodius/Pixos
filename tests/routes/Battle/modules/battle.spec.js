@@ -4,6 +4,7 @@ import {
   SET_NEXT_PLAYER,
   SET_PLAYER_PASS,
   PLAY_CARD,
+  buildPlayerHands,
   increment,
   doubleAsync,
   default as battleReducer
@@ -35,6 +36,16 @@ describe('(Redux Module) Battle', () => {
       expect(state).to.equal(INITIAL_STATE)
       state = battleReducer(state, { type: '@@@@@@@' })
       expect(state).to.equal(INITIAL_STATE)
+    })
+  })
+
+  describe('(Action Creator) buildPlayerHands', () => {
+    it('Should be exported as a function.', () => {
+      expect(buildPlayerHands).to.be.a('function')
+    })
+
+    it('Should return an action with type "BUILD_PLAYER_HANDS".', () => {
+      expect(buildPlayerHands()).to.have.property('type', BUILD_PLAYER_HANDS)
     })
   })
 

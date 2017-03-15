@@ -7,5 +7,12 @@ export const InfoBar = (props) => (
                                     height: '100%',
                                     float: 'left'
                                     }} >
+    <button className='btn btn-default' onClick={ props.buildPlayerHands }>
+      Start Round
+    </button>
   </div>
 )
+
+InfoBar.propTypes = {
+  buildPlayerHands  : React.PropTypes.func.isRequired
+}
