@@ -30,7 +30,7 @@ app.use(compress())
 var FBStrategy = new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: "http://"+domain+ "/auth/facebook/callback",
+  callbackURL: "http://"+domain+"/auth/facebook/callback",
   profileFields: ['id', 'displayName', 'photos', 'email']
 },
 function (accessToken, refreshToken, profile, done) {
@@ -48,12 +48,12 @@ passport.serializeUser(function (user, done) {
   done(null, user)
 })
 
-passport.deserializeUser(function (identifier, done) {
+passport.deserializeUser(function (user, done) {
   // For this demo, we'll just return an object literal since our user
   // objects are this trivial.  In the real world, you'd probably fetch
   // your user object from your database here.
   done(null, {
-    identifier: identifier
+    user: user
   })
 })
 
