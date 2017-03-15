@@ -1,5 +1,11 @@
 import {
   BATTLE_INCREMENT,
+  REQUEST_ALL_POSSIBLE_CARDS,
+  RECEIVE_ALL_POSSIBLE_CARDS,
+  BUILD_PLAYER_HANDS,
+  SET_NEXT_PLAYER,
+  SET_PLAYER_PASS,
+  PLAY_CARD,
   increment,
   doubleAsync,
   default as battleReducer
@@ -10,8 +16,13 @@ import {
 } from 'routes/Battle/modules/initialBattleState'
 
 describe('(Redux Module) Battle', () => {
-  it('Should export a constant BATTLE_INCREMENT.', () => {
-    expect(BATTLE_INCREMENT).to.equal('BATTLE_INCREMENT')
+  it('Should export a full set of constants.', () => {
+    expect(REQUEST_ALL_POSSIBLE_CARDS).to.equal('REQUEST_ALL_POSSIBLE_CARDS')
+    expect(RECEIVE_ALL_POSSIBLE_CARDS).to.equal('RECEIVE_ALL_POSSIBLE_CARDS')
+    expect(BUILD_PLAYER_HANDS).to.equal('BUILD_PLAYER_HANDS')
+    expect(SET_NEXT_PLAYER).to.equal('SET_NEXT_PLAYER')
+    expect(SET_PLAYER_PASS).to.equal('SET_PLAYER_PASS')
+    expect(PLAY_CARD).to.equal('PLAY_CARD')
   })
 
   describe('(Reducer)', () => {
