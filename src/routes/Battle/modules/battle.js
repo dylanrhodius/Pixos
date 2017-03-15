@@ -1,3 +1,7 @@
+import {
+  INITIAL_STATE
+} from 'routes/Battle/modules/initialBattleState'
+
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -48,7 +52,7 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = 0
+const initialState = INITIAL_STATE
 export default function battleReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 

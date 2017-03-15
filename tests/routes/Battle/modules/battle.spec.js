@@ -5,6 +5,10 @@ import {
   default as battleReducer
 } from 'routes/Battle/modules/battle'
 
+import {
+  INITIAL_STATE
+} from 'routes/Battle/modules/initialBattleState'
+
 describe('(Redux Module) Battle', () => {
   it('Should export a constant BATTLE_INCREMENT.', () => {
     expect(BATTLE_INCREMENT).to.equal('BATTLE_INCREMENT')
@@ -15,19 +19,15 @@ describe('(Redux Module) Battle', () => {
       expect(battleReducer).to.be.a('function')
     })
 
-    it('Should initialize with a state of 0 (Number).', () => {
-      expect(battleReducer(undefined, {})).to.equal(0)
+    it('Should initialize with a blank game state.', () => {
+      expect(battleReducer(undefined, {})).to.equal(INITIAL_STATE)
     })
 
     it('Should return the previous state if an action was not matched.', () => {
       let state = battleReducer(undefined, {})
-      expect(state).to.equal(0)
+      expect(state).to.equal(INITIAL_STATE)
       state = battleReducer(state, { type: '@@@@@@@' })
-      expect(state).to.equal(0)
-      state = battleReducer(state, increment(5))
-      expect(state).to.equal(5)
-      state = battleReducer(state, { type: '@@@@@@@' })
-      expect(state).to.equal(5)
+      expect(state).to.equal(INITIAL_STATE)
     })
   })
 
