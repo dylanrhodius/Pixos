@@ -42,9 +42,16 @@ export const doubleAsync = () => {
   }
 }
 
+export function requestCards() {
+  return {
+    type : REQUEST_ALL_POSSIBLE_CARDS
+  }
+}
+
 export const actions = {
   increment,
-  doubleAsync
+  doubleAsync,
+  requestCards
 }
 
 // ------------------------------------

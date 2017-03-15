@@ -7,6 +7,7 @@ import {
   SET_PLAYER_PASS,
   PLAY_CARD,
   increment,
+  requestCards,
   doubleAsync,
   default as battleReducer
 } from 'routes/Battle/modules/battle'
@@ -59,6 +60,27 @@ describe('(Redux Module) Battle', () => {
       expect(increment()).to.have.property('payload', 1)
     })
   })
+
+  describe('(Action Creator) requestCards', () => {
+    it('Should be exported as a function.', () => {
+      expect(requestCards).to.be.a('function')
+    })
+
+    it('Should return an action with type "REQUEST_ALL_POSSIBLE_CARDS".', () => {
+      expect(requestCards()).to.have.property('type', REQUEST_ALL_POSSIBLE_CARDS)
+    })
+
+    // it('Should assign the first argument to the "payload" property.', () => {
+    //   expect(requestCards(5)).to.have.property('payload', 5)
+    // })
+    //
+    // it('Should default the "payload" property to 1 if not provided.', () => {
+    //   expect(increment()).to.have.property('payload', 1)
+    // })
+  })
+
+
+
 
   xdescribe('(Action Creator) doubleAsync', () => {
     let _globalState
