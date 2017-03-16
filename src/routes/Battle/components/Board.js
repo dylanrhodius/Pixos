@@ -8,9 +8,13 @@ export const Board = (props) => (
                                   float: 'left',
                                   height: '80%',
                                   width: '700px'}} >
-      { <Hand/> }
+      { <Hand hand = {props.battle.self.hand}/> }
       { <PlayingArea/> }
       { <PlayingArea/> }
-      { <Hand/> }
+      { <Hand hand = {props.battle.self.hand}/> }
   </div>
 )
+
+Board.propTypes = {
+  battle : React.PropTypes.object.isRequired
+}

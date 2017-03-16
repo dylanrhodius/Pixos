@@ -5,7 +5,7 @@ import {
   CARD_DATA
 } from 'routes/Battle/modules/cardData'
 
-import store from 'store/createStore';
+import store from 'store/createStore'
 
 // ------------------------------------
 // Constants

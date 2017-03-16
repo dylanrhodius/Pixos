@@ -10,14 +10,15 @@ export const Battle = (props) => (
  }} >
 
   { <InfoBar buildPlayerHands = { props.buildPlayerHands }/> }
-  { <Board/> }
+  { <Board hand = {props.battle.self.hand}/> }
   </div>
 )
 
 Battle.propTypes = {
   buildPlayerHands  : React.PropTypes.func.isRequired,
   doubleAsync : React.PropTypes.func.isRequired,
-  increment   : React.PropTypes.func.isRequired
+  increment   : React.PropTypes.func.isRequired,
+  hand : React.PropTypes.object.isRequired
 }
 
 export default Battle
