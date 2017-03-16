@@ -1,6 +1,4 @@
-import {
-  CARD_DATA
-} from 'routes/Battle/modules/cardData'
+
 
 export const INITIAL_STATE = {
   self: {

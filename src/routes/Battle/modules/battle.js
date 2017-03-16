@@ -1,6 +1,9 @@
 import {
   INITIAL_STATE
 } from 'routes/Battle/modules/initialBattleState'
+import {
+  CARD_DATA
+} from 'routes/Battle/modules/cardData'
 
 import store from 'store/createStore';
 
@@ -43,14 +46,23 @@ export const doubleAsync = () => {
 }
 
 export function buildPlayerHands() {
-  console.log('BUILDING PLAYER HANDS')
-  console.log(store)
   return {
     type: BUILD_PLAYER_HANDS,
-    createHand()
+    payload: getHand()
   }
 }
 
+export function getHand() {
+  var result = []
+  var index
+  var cards = CARD_DATA
+  var choice
+  for (var i = 0; i < 10 ; i++) {
+    choice = Math.floor(Math.random() * 50)
+    result.push(cards[choice])
+  }
+  return result
+}
 
 export const actions = {
   increment,
@@ -63,7 +75,7 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [BATTLE_INCREMENT]    : (state, action) => state + action.payload,
-  [BATTLE_DOUBLE_ASYNC] : (state, action) => state * 2
+  [BATTLE_DOUBLE_ASYNC] : (state, action) => state * 2,
   [BUILD_PLAYER_HANDS] : (state, action) => state + action.payload
 }
 
