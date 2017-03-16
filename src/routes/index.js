@@ -3,6 +3,7 @@ import CoreLayout from '../layouts/CoreLayout'
 import Home from './Home'
 import CounterRoute from './Counter'
 import BattleRoute from './Battle'
+import MatchMakingRoute from './MatchMaking'
 import SignIn from './SignIn/index.jsx'
 
 
@@ -15,7 +16,8 @@ export const createRoutes = (store) => ({
   indexRoute  : SignIn,
   childRoutes : [
     CounterRoute(store),
-    BattleRoute(store)
+    BattleRoute(store),
+    MatchMakingRoute(store)
   ]
 })
 
