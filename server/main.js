@@ -147,10 +147,18 @@ if (project.env === 'development') {
     })
 
 app.get('/user', (req,res) => {
-  if(typeof(req.session.passport) != 'undefined') {
+  // if a session exists:
+  if(typeof(req.session.passport) !== 'undefined') {
     console.log('User is true');
-    res.setHeader('Content-Type', 'application/json');
-    res.send(req.session.passport.user);
+    // set a users variable equal to the users collection
+    var users = db.get('users')
+    // find the user in the database whose facebookId (white) matches the session user's id (red)
+    users.findOne({facebookId: req.session.passport.user}).then((doc) => {
+      console.log(doc)
+      res.setHeader('Content-Type', 'application/json');
+      // return (or send) the document object
+      res.send(doc);
+    })
   } else {
     console.log('User is false');
     res.setHeader('Content-Type', 'application/json');
