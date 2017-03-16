@@ -30,6 +30,16 @@ const server = http.createServer(app);
 // Apply gzip compression
 app.use(compress())
 
+// Loading socket.io
+var io = require('socket.io').listen(server);
+
+// When a client connects, we note it in the console
+io.sockets.on('connection', function (socket) {
+    socket.emit('message', 'Your are connected');
+    console.log('A client is connected!');
+    socket.broadcast.emit('message', 'Another client has just connected!');
+ });
+
 var FBStrategy = new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
