@@ -1,9 +1,20 @@
 import React from 'react'
 
-export const MatchMaking = (props) => (
-  <div>
-    <button> I am a button </button>
-  </div>
-)
+import io from 'socket.io-client';
+const socket = io.connect(`${window.location.origin}`);
 
-export default MatchMaking
+export default class MatchMaking extends React.Component {
+
+  componentDidMount() {
+    socket.emit('request:matchmaking');
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>Matchmaking</h2>
+        <img src="/icons/loading.svg" alt="loading icon"></img>
+      </div>
+    );
+  }
+}
