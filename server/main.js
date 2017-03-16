@@ -52,7 +52,12 @@ passport.serializeUser(function (user, done) {
 
 function populateUsersCollection(user){
   var users = db.get('users')
-  users.insert({facebookId: user.identifier, name: user.name, image: user.image, deck: {} })
+  users.findOne({facebookId: user.identifier}).then((doc) => {
+    if (doc == null){
+      users.insert({facebookId: user.identifier, name: user.name, image: user.image, deck: {} })
+    }
+  })
+
 }
 
 passport.deserializeUser(function (user, done) {
