@@ -3,6 +3,7 @@
 const express = require('express')
 const debug = require('debug')('app:server')
 const path = require('path')
+const http = require('http')
 const webpack = require('webpack')
 const webpackConfig = require('../config/webpack.config')
 const project = require('../config/project.config')
@@ -23,6 +24,8 @@ const MongoDBStore = MongodbStoreFactory(session)
 
 const domain = process.env.APP_DOMAIN || 'localhost'
 const app = express()
+
+const server = http.createServer(app);
 
 // Apply gzip compression
 app.use(compress())
@@ -165,4 +168,4 @@ app.get('/user', (req,res) => {
   app.use(express.static(project.paths.dist()))
 }
 
-module.exports = app
+module.exports = { app, server }
