@@ -7,17 +7,85 @@ const webpack = require('webpack')
 const webpackConfig = require('../config/webpack.config')
 const project = require('../config/project.config')
 const compress = require('compression')
+const passport = require('passport')
+var FacebookStrategy = require('passport-facebook').Strategy
 
-//Import mongoDB
+// Import mongoDB
 const mongo = require('mongodb')
 const monk = require('monk')
-const mongoUrl = process.env.MONGO_URL;
-var db = monk(mongoUrl);
+const mongoUrl = process.env.MONGO_URL
+var db = monk(mongoUrl)
+const request = require('request')
+// import session from express
+const session = require('express-session')
+const MongodbStoreFactory = require('connect-mongodb-session')
+const MongoDBStore = MongodbStoreFactory(session)
 
+const domain = process.env.APP_DOMAIN || 'localhost'
 const app = express()
 
 // Apply gzip compression
 app.use(compress())
+
+var FBStrategy = new FacebookStrategy({
+  clientID: process.env.FACEBOOK_APP_ID,
+  clientSecret: process.env.FACEBOOK_APP_SECRET,
+  callbackURL: "http://"+domain+"/auth/facebook/callback",
+  profileFields: ['id', 'displayName', 'photos', 'email']
+},
+function (accessToken, refreshToken, profile, done) {
+  var user = {
+    identifier: profile.id,
+    name: profile.displayName,
+    image: profile.photos[0].value
+  }
+  return done(null, user)
+})
+
+passport.use(FBStrategy)
+
+passport.serializeUser(function (user, done) {
+  done(null, user)
+})
+
+passport.deserializeUser(function (user, done) {
+  // For this demo, we'll just return an object literal since our user
+  // objects are this trivial.  In the real world, you'd probably fetch
+  // your user object from your database here.
+  done(null, {
+    user: user
+  })
+})
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+// Set up sessions
+var store = new MongoDBStore(
+  {
+    uri: mongoUrl,
+    collection: 'mySessions'
+  })
+
+store.on('error', function (error) {
+  assert.ifError(error)
+  assert.ok(false)
+})
+
+app.use(session({
+  secret: 'This is a secret',
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+  },
+  store: store,
+  resave: false,
+  saveUninitialized: false
+}))
+
+app.use(function (req, res, next) {
+  req.db = db
+  next()
+})
 
 // ------------------------------------
 // Apply Webpack HMR Middleware
@@ -48,6 +116,29 @@ if (project.env === 'development') {
   // This rewrites all routes requests to the root /index.html file
   // (ignoring file requests). If you want to implement universal
   // rendering, you'll want to remove this middleware.
+
+  app.get('/auth/facebook',
+    passport.authenticate('facebook'))
+
+  app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    function (req, res) {
+      // Successful authentication, redirect home.
+      res.redirect('/')
+    })
+
+app.get('/user', (req,res) => {
+  if(typeof(req.session.passport) != 'undefined') {
+    console.log('User is true');
+    res.setHeader('Content-Type', 'application/json');
+    res.send(req.session.passport.user);
+  } else {
+    console.log('User is false');
+    res.setHeader('Content-Type', 'application/json');
+    res.send('No data available');
+  }
+});
+
   app.use('*', function (req, res, next) {
     const filename = path.join(compiler.outputPath, 'index.html')
     compiler.outputFileSystem.readFile(filename, (err, result) => {

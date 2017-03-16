@@ -1,6 +1,6 @@
 import React from 'react'
 import { InfoBar } from 'routes/Battle/components/InfoBar'
-import { Board } from 'routes/Battle/components/Board'
+import Board from 'routes/Battle/components/Board'
 
 export const Battle = (props) => (
   <div style={{ margin: '0 auto',
@@ -9,8 +9,8 @@ export const Battle = (props) => (
                 width: '980px'
  }} >
 
-  { <InfoBar buildPlayerHands = { props.buildPlayerHands }/> }
-  { <Board hand = {props.battle.self.hand}/> }
+  { <InfoBar buildPlayerHands={props.buildPlayerHands}/> }
+  <Board battle={props.battle}/>
   </div>
 )
 
@@ -18,7 +18,7 @@ Battle.propTypes = {
   buildPlayerHands  : React.PropTypes.func.isRequired,
   doubleAsync : React.PropTypes.func.isRequired,
   increment   : React.PropTypes.func.isRequired,
-  hand : React.PropTypes.object.isRequired
+  battle : React.PropTypes.object.isRequired
 }
 
 export default Battle

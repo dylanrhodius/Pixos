@@ -1,11 +1,14 @@
 import React from 'react'
 
 export const Card = (props) => (
+
   <div className="card" style={{ margin: '0 auto' }} >
-    <img class="card-img-top" src=" { imgUrl }  " alt="Card image cap">
-    <div class="card-block">
-      <h4 class="card-title">{ name }</h4>
-      <p class="card-text">{ power }</p>
+    <img className="card-img-top" src={props.imgUrl} alt="Card image cap"/>
+    <div className="card-block">
+      <h4 className="card-title">{ props.name }</h4>
+      <p className="card-text">{ props.power }</p>
     </div>
   </div>
 )
+
+export default Card
