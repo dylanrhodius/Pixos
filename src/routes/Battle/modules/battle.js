@@ -46,7 +46,8 @@ export function buildPlayerHands() {
   console.log('BUILDING PLAYER HANDS')
   console.log(store)
   return {
-    type: BUILD_PLAYER_HANDS
+    type: BUILD_PLAYER_HANDS,
+    createHand()
   }
 }
 
@@ -63,6 +64,7 @@ export const actions = {
 const ACTION_HANDLERS = {
   [BATTLE_INCREMENT]    : (state, action) => state + action.payload,
   [BATTLE_DOUBLE_ASYNC] : (state, action) => state * 2
+  [BUILD_PLAYER_HANDS] : (state, action) => state + action.payload
 }
 
 // ------------------------------------

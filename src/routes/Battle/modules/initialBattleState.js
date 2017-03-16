@@ -3,9 +3,8 @@ import {
 } from 'routes/Battle/modules/cardData'
 
 export const INITIAL_STATE = {
-  nextTurn: '',
-  cards: CARD_DATA,
-  player1: {
+  self: {
+    myTurn: false,
     name: '',
     power: 0,
     score: 0,
@@ -17,7 +16,8 @@ export const INITIAL_STATE = {
       air: []
     }
   },
-  player2: {
+  enemy: {
+    myTurn: false,
     name: '',
     power: 0,
     score: 0,
