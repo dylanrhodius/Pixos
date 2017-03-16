@@ -26,13 +26,24 @@ export default class Battle extends React.Component {
   }
 
   componentDidMount() {
+    var that = this
     if(this.props.battle.self.hand.length == 0) {
       socket.emit('request:matchmaking');
     }
     socket.on("init:battle", function(data) {
       console.log("battle initiated");
-      console.log(data);
+      that.props.buildPlayerHands(data)
     })
+    socket.on("receive:data", function(data) {
+      console.log("received data", data);
+    })
+    console.log('battle is:', that.props.battle)
+    console.log(socket)
+  }
+
+  componentDidUpdate() {
+    console.log('battle is:', this.props.battle)
+    socket.emit('say:Hello')
   }
 
   render () {

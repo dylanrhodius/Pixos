@@ -45,24 +45,24 @@ export const doubleAsync = () => {
   }
 }
 
-export function buildPlayerHands () {
+export function buildPlayerHands (data) {
   return {
     type: BUILD_PLAYER_HANDS,
-    payload: getHand()
+    payload: data
   }
 }
 
-export function getHand () {
-  var result = []
-  var index
-  var cards = CARD_DATA
-  var choice
-  for (var i = 0; i < 10; i++) {
-    choice = Math.floor(Math.random() * 50)
-    result.push(cards[choice])
-  }
-  return result
-}
+// export function getHand () {
+//   var result = []
+//   var index
+//   var cards = CARD_DATA
+//   var choice
+//   for (var i = 0; i < 10; i++) {
+//     choice = Math.floor(Math.random() * 50)
+//     result.push(cards[choice])
+//   }
+//   return result
+// }
 
 export const actions = {
   increment,
@@ -79,7 +79,8 @@ const ACTION_HANDLERS = {
   [BUILD_PLAYER_HANDS] : (state, action) => {
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
-        hand: action.payload
+        hand: action.payload.hand,
+        myTurn: action.payload.selfTurn
       })
     })
   }

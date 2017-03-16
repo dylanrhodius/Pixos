@@ -79,6 +79,18 @@ var Room = (function(){
     return result
   }
 
+  r.passData = function(from, data){
+    console.log(from.getID(), data)
+    var to;
+    if (this._users[0] == from) {
+      to = this._users[1];
+    } else {
+      to = this._users[0]
+    }
+    to.send("receive:data", data);
+  }
+
+
   // r.setReady = function(user, b){
   //   b = typeof b == "undefined" ? true : b;
   //   this._ready[user.getID()] = b;
