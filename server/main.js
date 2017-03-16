@@ -45,7 +45,7 @@ function (accessToken, refreshToken, profile, done) {
 passport.use(FBStrategy)
 
 passport.serializeUser(function (user, done) {
-  done(null, user)
+  done(null, user.identifier)
   // CALL SAVE/Store NEW USER
   populateUsersCollection(user)
 })
