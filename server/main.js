@@ -3,6 +3,7 @@
 const express = require('express')
 const debug = require('debug')('app:server')
 const path = require('path')
+const http = require('http')
 const webpack = require('webpack')
 const webpackConfig = require('../config/webpack.config')
 const project = require('../config/project.config')
@@ -24,8 +25,39 @@ const MongoDBStore = MongodbStoreFactory(session)
 const domain = process.env.APP_DOMAIN || 'localhost'
 const app = express()
 
+const server = http.createServer(app);
+
+global.connections = require("./Connections")();
+
+global.matchmaking = require("./Matchmaker")();
+
+global.Room = require("./Room");
+
+global.User = require("./User");
+
 // Apply gzip compression
 app.use(compress())
+
+// Loading socket.io
+var io = require('socket.io').listen(server);
+
+// When a client connects, we note it in the console
+io.sockets.on('connection', function (socket) {
+    socket.emit('message', 'You are connected');
+    console.log('A client is connected!');
+    socket.broadcast.emit('message', 'Another client has just connected!');
+
+    var user;
+    connections.add(user = User(socket));
+    console.log("new user ", user.getName());
+
+    socket.on("disconnect", function() {
+      connections.remove(user);
+      user.disconnect();
+      console.log("user ", user.getName(), " disconnected");
+      user = null;
+    })
+ });
 
 var FBStrategy = new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
@@ -165,4 +197,4 @@ app.get('/user', (req,res) => {
   app.use(express.static(project.paths.dist()))
 }
 
-module.exports = app
+module.exports = { app, server }
