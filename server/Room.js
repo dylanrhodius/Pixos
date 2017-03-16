@@ -1,4 +1,5 @@
 var shortid = require("shortid");
+var cardData = require('./cardData').CARD_DATA
 // var Battle = require("./Battle");
 
 var Room = (function(){
@@ -62,8 +63,20 @@ var Room = (function(){
     // this._users[0].send("init:battle", {side: "p1", foeSide: "p2"});
     // this._users[1].send("init:battle", {side: "p2", foeSide: "p1"});
     // this._battle = Battle(this._id, this._users[0], this._users[1], io);
-    this._users[0].send("init:battle", {side: "p1", foeSide: "p2"});
-    this._users[1].send("init:battle", {side: "p2", foeSide: "p1"});
+    var p1Hand = this.generateRandomHand();
+    var p2Hand = this.generateRandomHand();
+    this._users[0].send("init:battle", {selfTurn: true, hand: p1Hand});
+    this._users[1].send("init:battle", {selfTurn: false, hand: p2Hand});
+  }
+
+  r.generateRandomHand = function(){
+    var result = []
+    var choice
+    for (var i = 0; i < 10; i++) {
+      choice = Math.floor(Math.random() * 50)
+      result.push(cardData[choice])
+    }
+    return result
   }
 
   // r.setReady = function(user, b){
