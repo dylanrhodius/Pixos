@@ -46,7 +46,14 @@ passport.use(FBStrategy)
 
 passport.serializeUser(function (user, done) {
   done(null, user)
+  // CALL SAVE/Store NEW USER
+  populateUsersCollection(user)
 })
+
+function populateUsersCollection(user){
+  var users = db.get('users')
+  users.insert({facebookId: user.identifier, name: user.name, image: user.image, deck: {} })
+}
 
 passport.deserializeUser(function (user, done) {
   // For this demo, we'll just return an object literal since our user
@@ -55,12 +62,19 @@ passport.deserializeUser(function (user, done) {
   done(null, {
     user: user
   })
+
 })
 
 app.use(passport.initialize())
 app.use(passport.session())
 
 // Set up sessions
+var userStore = new MongoDBStore(
+  {
+    uri: mongoUrl,
+    collection: 'users'
+  })
+
 var store = new MongoDBStore(
   {
     uri: mongoUrl,
