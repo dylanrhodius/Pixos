@@ -21,6 +21,9 @@ const session = require('express-session')
 const MongodbStoreFactory = require('connect-mongodb-session')
 const MongoDBStore = MongodbStoreFactory(session)
 
+// set a usersCollection constant equal to the users collection
+const usersCollection = db.get('users')
+
 const domain = process.env.APP_DOMAIN || 'localhost'
 const app = express()
 
@@ -51,10 +54,9 @@ passport.serializeUser(function (user, done) {
 })
 
 function populateUsersCollection(user){
-  var users = db.get('users')
-  users.findOne({facebookId: user.identifier}).then((doc) => {
+  usersCollection.findOne({facebookId: user.identifier}).then((doc) => {
     if (doc == null){
-      users.insert({facebookId: user.identifier, name: user.name, image: user.image, deck: {} })
+      usersCollection.insert({facebookId: user.identifier, name: user.name, image: user.image, deck: {} })
     }
   })
 
@@ -149,18 +151,15 @@ if (project.env === 'development') {
 app.get('/user', (req,res) => {
   // if a session exists:
   if(typeof(req.session.passport) !== 'undefined') {
-    console.log('User is true');
-    // set a users variable equal to the users collection
-    var users = db.get('users')
+    console.log('Session exists');
     // find the user in the database whose facebookId (white) matches the session user's id (red)
-    users.findOne({facebookId: req.session.passport.user}).then((doc) => {
-      console.log(doc)
+    usersCollection.findOne({facebookId: req.session.passport.user}).then((doc) => {
       res.setHeader('Content-Type', 'application/json');
       // return (or send) the document object
       res.send(doc);
     })
   } else {
-    console.log('User is false');
+    console.log('Session does not exist');
     res.setHeader('Content-Type', 'application/json');
     res.send('No data available');
   }
