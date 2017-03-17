@@ -92,10 +92,12 @@ const ACTION_HANDLERS = {
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
         hand: action.payload.selfHand,
-        myTurn: action.payload.selfTurn
+        myTurn: action.payload.selfTurn,
+        name: action.payload.selfName
       }),
       enemy: Object.assign({}, state.enemy, {
-        hand: action.payload.enemyHand
+        hand: action.payload.enemyHand,
+        name: action.payload.enemyName
       })
     })
   },
