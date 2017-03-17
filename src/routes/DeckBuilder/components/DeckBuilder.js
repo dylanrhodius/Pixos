@@ -1,6 +1,7 @@
 import React from 'react'
 var cardData = require('../../../../server/cardData').CARD_DATA
 import Card from '../../Battle/components/Card'
+import './DeckBuilder.scss'
 
 export default class DeckBuilder extends React.Component {
 
