@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { increment, doubleAsync, setupPlayers, setTurnFinished, setMyTurn } from '../modules/battle'
+import { increment, doubleAsync, setupPlayers, setTurnFinished, setMyTurn, updateEnemyState } from '../modules/battle'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -17,7 +17,8 @@ const mapDispatchToProps = {
   doubleAsync,
   setupPlayers,
   setTurnFinished,
-  setMyTurn
+  setMyTurn,
+  updateEnemyState
 }
 
 const mapStateToProps = (state) => ({

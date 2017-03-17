@@ -18,7 +18,7 @@ export default class Battle extends React.Component {
     } else {
       return (
         <div>
-          <InfoBar setTurnFinished={this.props.setTurnFinished} setMyTurn={this.props.setMyTurn}/>
+          <InfoBar battle={this.props.battle} setTurnFinished={this.props.setTurnFinished} setMyTurn={this.props.setMyTurn}/>
           <Board battle={this.props.battle}/>
         </div>
       )
@@ -37,6 +37,7 @@ export default class Battle extends React.Component {
     socket.on("receive:data", function(data) {
       console.log("Received data from Opponent!:", data);
       that.props.setMyTurn(true)
+      that.props.updateEnemyState(data)
     })
     console.log('Battle state is:', that.props.battle)
     console.log(socket)
@@ -73,5 +74,6 @@ Battle.propTypes = {
   doubleAsync : React.PropTypes.func.isRequired,
   increment   : React.PropTypes.func.isRequired,
   battle : React.PropTypes.object.isRequired,
-  setMyTurn : React.PropTypes.func.isRequired
+  setMyTurn : React.PropTypes.func.isRequired,
+  updateEnemyState : React.PropTypes.func.isRequired
 }

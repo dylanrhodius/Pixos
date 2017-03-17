@@ -15,6 +15,8 @@ export const SET_PLAYER_PASS = 'SET_PLAYER_PASS'
 export const PLAY_CARD = 'PLAY_CARD'
 export const SET_TURN_FINISHED = 'SET_TURN_FINISHED'
 export const SET_MY_TURN = 'SET_MY_TURN'
+export const UPDATE_ENEMY_STATE = 'UPDATE_ENEMY_STATE'
+
 
 
 // ------------------------------------
@@ -66,6 +68,13 @@ export function setMyTurn (boolean) {
   }
 }
 
+export function updateEnemyState (object) {
+  return {
+    type: UPDATE_ENEMY_STATE,
+    payload: object
+  }
+}
+
 export const actions = {
   increment,
   doubleAsync,
@@ -98,8 +107,14 @@ const ACTION_HANDLERS = {
   [SET_MY_TURN] : (state, action) => {
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
-        myTurn: action.payload
+        myTurn: action.payload,
+        power: 99
       }),
+    })
+  },
+  [UPDATE_ENEMY_STATE] : (state, action) => {
+    return Object.assign({}, state, {
+      enemy: action.payload
     })
   }
 }

@@ -6,6 +6,8 @@ import {
   PLAY_CARD,
   SET_TURN_FINISHED,
   SET_MY_TURN,
+  UPDATE_ENEMY_STATE,
+  updateEnemyState,
   setMyTurn,
   setTurnFinished,
   setupPlayers,
@@ -26,6 +28,7 @@ describe('(Redux Module) Battle', () => {
     expect(PLAY_CARD).to.equal('PLAY_CARD')
     expect(SET_TURN_FINISHED).to.equal('SET_TURN_FINISHED')
     expect(SET_MY_TURN).to.equal('SET_MY_TURN')
+    expect(UPDATE_ENEMY_STATE).to.equal('UPDATE_ENEMY_STATE')
 
   })
 
@@ -73,6 +76,16 @@ describe('(Redux Module) Battle', () => {
 
     it('Should return an action with type "SET_TURN_FINISHED".', () => {
       expect(setMyTurn()).to.have.property('type', SET_MY_TURN)
+    })
+  })
+
+  describe('(Action Creator) updateEnemyState', () => {
+    it('Should be exported as a function.', () => {
+      expect(updateEnemyState).to.be.a('function')
+    })
+
+    it('Should return an action with type "SET_TURN_FINISHED".', () => {
+      expect(updateEnemyState()).to.have.property('type', UPDATE_ENEMY_STATE)
     })
   })
 
