@@ -1,12 +1,20 @@
 import React from 'react'
 import Card from './Card'
+import HiddenCard from './HiddenCard'
+
 
 export default class Hand extends React.Component {
 
   renderHandComponents () {
-    return this.props.hand.map(
-      (card, i) => <Card key={i} {...card} />
-    )
+    if (this.props.isEnemyHand) {
+      return this.props.hand.map(
+        (card, i) => <HiddenCard key={i} {...card} />
+      )
+    } else {
+      return this.props.hand.map(
+        (card, i) => <Card key={i} {...card} />
+      )
+    }
   }
 
   loadContent () {
@@ -29,6 +37,7 @@ export default class Hand extends React.Component {
   }
 
   propTypes: {
-    hand : React.PropTypes.object.isRequired
+    hand : React.PropTypes.object.isRequired,
+    isEnemyHand: React.PropTypes.bool.isRequired
   }
 }
