@@ -34,6 +34,9 @@ export default class InfoBar extends React.Component {
                                         height: '100%',
                                         float: 'left'
                                       }} >
+      <p>{ this.props.battle.enemy.name }</p>
+      <p> VS. </p>
+      <p>{ this.props.battle.self.name }</p>
       {content}
     </div>
     )
