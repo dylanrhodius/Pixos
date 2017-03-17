@@ -49,6 +49,6 @@ const CARD_ARRAY = [
   { name: 'tyrannosaurus-rex', imgUrl: '/img/tyrannosaurus-rex.svg', type: 'land', power: 10 },
   { name: 'velociraptor', imgUrl: '/img/velociraptor.svg', type: 'land', power: 8 },
   { name: 'yinlong', imgUrl: '/img/yinlong.svg', type: 'land', power: 5 }
-  ]
+]
 
-  module.exports = { CARD_DATA:  CARD_ARRAY }
+module.exports = { CARD_DATA:  CARD_ARRAY }

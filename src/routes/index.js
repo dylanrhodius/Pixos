@@ -5,6 +5,7 @@ import CounterRoute from './Counter'
 import BattleRoute from './Battle'
 import MatchMakingRoute from './MatchMaking'
 import SignIn from './SignIn/index.jsx'
+import DeckBuilderRoute from './DeckBuilder'
 
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -17,7 +18,8 @@ export const createRoutes = (store) => ({
   childRoutes : [
     CounterRoute(store),
     BattleRoute(store),
-    MatchMakingRoute(store)
+    MatchMakingRoute(store),
+    DeckBuilderRoute(store)
   ]
 })
 
