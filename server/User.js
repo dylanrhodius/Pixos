@@ -122,9 +122,9 @@ var User = (function(){
       matchmaking.findOpponent(self);
     });
 
-    socket.on("say:Hello", function(){
-      console.log(self.getID()+ ' is saying Hello')
-      self.getRoom().passData(self, 'hello')
+    socket.on("pass:ToRoom", function(data){
+      console.log(self.getID()+ ' is passing data to the Room')
+      self.getRoom().passData(self, data)
     })
 
     // socket.on("set:deck", function(data) {

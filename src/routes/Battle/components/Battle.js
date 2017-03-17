@@ -35,15 +35,15 @@ export default class Battle extends React.Component {
       that.props.setupPlayers(data)
     })
     socket.on("receive:data", function(data) {
-      console.log("received data", data);
+      console.log("Received data from Opponent!:", data);
     })
-    console.log('battle is:', that.props.battle)
+    console.log('Battle state is:', that.props.battle)
     console.log(socket)
   }
 
   componentDidUpdate() {
-    console.log('battle is:', this.props.battle)
-    socket.emit('say:Hello')
+    console.log('Battle state is:', this.props.battle)
+    socket.emit('pass:ToRoom', 'Hello from your opponent, myTurn is: '+ this.props.battle.self.myTurn)
   }
 
   render () {

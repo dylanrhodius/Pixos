@@ -1,9 +1,6 @@
 import {
   INITIAL_STATE
 } from 'routes/Battle/modules/initialBattleState'
-import {
-  CARD_DATA
-} from 'routes/Battle/modules/cardData'
 
 import store from 'store/createStore'
 
@@ -51,18 +48,6 @@ export function setupPlayers (data) {
     payload: data
   }
 }
-
-// export function getHand () {
-//   var result = []
-//   var index
-//   var cards = CARD_DATA
-//   var choice
-//   for (var i = 0; i < 10; i++) {
-//     choice = Math.floor(Math.random() * 50)
-//     result.push(cards[choice])
-//   }
-//   return result
-// }
 
 export const actions = {
   increment,
