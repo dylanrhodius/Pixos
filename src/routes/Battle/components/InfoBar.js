@@ -4,7 +4,7 @@ export default class InfoBar extends React.Component {
 
   constructor (props) {
     super(props)
-    
+
     this.setTurnFinishedToTrue = this.setTurnFinishedToTrue.bind(this)
   }
 
@@ -18,7 +18,7 @@ export default class InfoBar extends React.Component {
   loadContent () {
     if(this.props.battle.self.myTurn){
       return (
-        <button onClick={this.setTurnFinishedToTrue}>End Turn</button>
+        <button onClick={this.setTurnFinishedToTrue}>Pass Turn</button>
       )
     } else {
       return

@@ -107,8 +107,7 @@ const ACTION_HANDLERS = {
   [SET_MY_TURN] : (state, action) => {
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
-        myTurn: action.payload,
-        power: 99
+        myTurn: action.payload
       }),
     })
   },
