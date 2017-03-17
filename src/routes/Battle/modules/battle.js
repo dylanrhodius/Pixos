@@ -12,7 +12,7 @@ import store from 'store/createStore'
 // ------------------------------------
 export const BATTLE_INCREMENT = 'BATTLE_INCREMENT'
 export const BATTLE_DOUBLE_ASYNC = 'BATTLE_DOUBLE_ASYNC'
-export const BUILD_PLAYER_HANDS = 'BUILD_PLAYER_HANDS'
+export const SETUP_PLAYERS = 'SETUP_PLAYERS'
 export const SET_NEXT_PLAYER = 'SET_NEXT_PLAYER'
 export const SET_PLAYER_PASS = 'SET_PLAYER_PASS'
 export const PLAY_CARD = 'PLAY_CARD'
@@ -45,9 +45,9 @@ export const doubleAsync = () => {
   }
 }
 
-export function buildPlayerHands (data) {
+export function setupPlayers (data) {
   return {
-    type: BUILD_PLAYER_HANDS,
+    type: SETUP_PLAYERS,
     payload: data
   }
 }
@@ -67,7 +67,7 @@ export function buildPlayerHands (data) {
 export const actions = {
   increment,
   doubleAsync,
-  buildPlayerHands
+  setupPlayers
 }
 
 // ------------------------------------
@@ -76,11 +76,14 @@ export const actions = {
 const ACTION_HANDLERS = {
   [BATTLE_INCREMENT]    : (state, action) => state + action.payload,
   [BATTLE_DOUBLE_ASYNC] : (state, action) => state * 2,
-  [BUILD_PLAYER_HANDS] : (state, action) => {
+  [SETUP_PLAYERS] : (state, action) => {
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
-        hand: action.payload.hand,
+        hand: action.payload.selfHand,
         myTurn: action.payload.selfTurn
+      }),
+      enemy: Object.assign({}, state.enemy, {
+        hand: action.payload.enemyHand
       })
     })
   }

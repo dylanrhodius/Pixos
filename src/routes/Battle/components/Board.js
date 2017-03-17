@@ -8,7 +8,7 @@ export const Board = (props) => (
                                   float: 'left',
                                   height: '80%',
                                   width: '700px'}} >
-      { <Hand hand={props.battle.self.hand}/> }
+      { <Hand hand={props.battle.enemy.hand}/> }
       { <PlayingArea/> }
       { <PlayingArea/> }
       { <Hand hand={props.battle.self.hand}/> }

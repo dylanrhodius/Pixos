@@ -14,8 +14,4 @@ describe('(Component) InfoBar', () => {
     expect(_wrapper.is('div')).to.equal(true)
   })
 
-  it('Should contain a Start Round button', () => {
-    expect(_wrapper.find('button').text()).to.match(/Start Round/)
-  })
-
 });

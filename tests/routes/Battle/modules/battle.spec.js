@@ -1,10 +1,10 @@
 import {
   BATTLE_INCREMENT,
-  BUILD_PLAYER_HANDS,
+  SETUP_PLAYERS,
   SET_NEXT_PLAYER,
   SET_PLAYER_PASS,
   PLAY_CARD,
-  buildPlayerHands,
+  setupPlayers,
   increment,
   doubleAsync,
   default as battleReducer
@@ -16,7 +16,7 @@ import {
 
 describe('(Redux Module) Battle', () => {
   it('Should export a full set of constants.', () => {
-    expect(BUILD_PLAYER_HANDS).to.equal('BUILD_PLAYER_HANDS')
+    expect(SETUP_PLAYERS).to.equal('SETUP_PLAYERS')
     expect(SET_NEXT_PLAYER).to.equal('SET_NEXT_PLAYER')
     expect(SET_PLAYER_PASS).to.equal('SET_PLAYER_PASS')
     expect(PLAY_CARD).to.equal('PLAY_CARD')
@@ -39,13 +39,13 @@ describe('(Redux Module) Battle', () => {
     })
   })
 
-  describe('(Action Creator) buildPlayerHands', () => {
+  describe('(Action Creator) setupPlayers', () => {
     it('Should be exported as a function.', () => {
-      expect(buildPlayerHands).to.be.a('function')
+      expect(setupPlayers).to.be.a('function')
     })
 
-    it('Should return an action with type "BUILD_PLAYER_HANDS".', () => {
-      expect(buildPlayerHands()).to.have.property('type', BUILD_PLAYER_HANDS)
+    it('Should return an action with type "SETUP_PLAYERS".', () => {
+      expect(setupPlayers()).to.have.property('type', SETUP_PLAYERS)
     })
   })
 

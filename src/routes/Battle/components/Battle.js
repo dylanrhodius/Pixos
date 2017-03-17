@@ -18,7 +18,7 @@ export default class Battle extends React.Component {
     } else {
       return (
         <div>
-          <InfoBar buildPlayerHands={this.props.buildPlayerHands}/>
+          <InfoBar/>
           <Board battle={this.props.battle}/>
         </div>
       )
@@ -32,7 +32,7 @@ export default class Battle extends React.Component {
     }
     socket.on("init:battle", function(data) {
       console.log("battle initiated");
-      that.props.buildPlayerHands(data)
+      that.props.setupPlayers(data)
     })
     socket.on("receive:data", function(data) {
       console.log("received data", data);
@@ -62,7 +62,7 @@ export default class Battle extends React.Component {
 }
 
 Battle.propTypes = {
-  buildPlayerHands  : React.PropTypes.func.isRequired,
+  setupPlayers  : React.PropTypes.func.isRequired,
   doubleAsync : React.PropTypes.func.isRequired,
   increment   : React.PropTypes.func.isRequired,
   battle : React.PropTypes.object.isRequired
