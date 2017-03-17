@@ -7,7 +7,7 @@ export const Card = (props) => (
     <div className="d-flex justify-content-center align-items-center game-card-img-holder pb-1">
       <img className="game-card-img" src={props.imgUrl} alt="Card image cap"/>
     </div>
-    <h4 className="card-title game-card-name overflow-wrap m-0">{ props.name }</h4>
+    <h4 className="card-title game-card-name overflow-wrap m-0">{ props.name.charAt(0).toUpperCase() + props.name.slice(1) }</h4>
     <span className={`game-card-text ${props.type}-bkgrnd circle d-inline-block mx-auto`}>{ props.power }</span>
   </div>
 )

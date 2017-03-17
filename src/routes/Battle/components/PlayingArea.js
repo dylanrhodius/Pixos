@@ -4,13 +4,17 @@ import { BattleRow } from 'routes/Battle/components/BattleRow'
 export const PlayingArea = (props) => (
   <div className="playing-area">
 
-  { <BattleRow />}
+  { <BattleRow type={props.type == 'enemy' ? 'air' : 'land'} />}
   <hr className="m-0"/>
-  { <BattleRow />}
+  { <BattleRow type={'water'}/>}
   <hr className="m-0"/>
-  { <BattleRow />}
+  { <BattleRow type={props.type == 'enemy' ? 'land' : 'air'} />}
 
   </div>
 )
+
+PlayingArea.propTypes = {
+  type  : React.PropTypes.string.isRequired
+}
 
 export default PlayingArea
