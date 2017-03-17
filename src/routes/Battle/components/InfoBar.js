@@ -19,10 +19,15 @@ export default class InfoBar extends React.Component {
   loadContent () {
     if(this.props.battle.self.myTurn){
       return (
+        <div>
+        <p>Your turn</p>
         <button onClick={this.setTurnFinishedToTrue}>Pass Turn</button>
+        </div>
       )
     } else {
-      return
+      return(
+        <p>Enemy turn</p>
+      )
     }
   }
 
