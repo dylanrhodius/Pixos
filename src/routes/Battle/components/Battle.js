@@ -18,7 +18,11 @@ export default class Battle extends React.Component {
     } else {
       return (
         <div>
-          <InfoBar battle={this.props.battle} setTurnFinished={this.props.setTurnFinished} setMyTurn={this.props.setMyTurn}/>
+          <InfoBar  battle={this.props.battle}
+                    setTurnFinished={this.props.setTurnFinished}
+                    setMyTurn={this.props.setMyTurn}
+                    passTurn={this.props.passTurn}
+                    />
           <Board battle={this.props.battle}/>
         </div>
       )
@@ -75,5 +79,6 @@ Battle.propTypes = {
   increment   : React.PropTypes.func.isRequired,
   battle : React.PropTypes.object.isRequired,
   setMyTurn : React.PropTypes.func.isRequired,
-  updateEnemyState : React.PropTypes.func.isRequired
+  updateEnemyState : React.PropTypes.func.isRequired,
+  passTurn : React.PropTypes.func.isRequired
 }
