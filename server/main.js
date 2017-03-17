@@ -8,6 +8,7 @@ const webpackConfig = require('../config/webpack.config')
 const project = require('../config/project.config')
 const compress = require('compression')
 const passport = require('passport')
+const databasetools = require('../src/tools/databasetools')
 var FacebookStrategy = require('passport-facebook').Strategy
 
 // Import mongoDB
@@ -20,9 +21,10 @@ const request = require('request')
 const session = require('express-session')
 const MongodbStoreFactory = require('connect-mongodb-session')
 const MongoDBStore = MongodbStoreFactory(session)
-
 // set a usersCollection constant equal to the users collection
+
 const usersCollection = db.get('users')
+
 
 const domain = process.env.APP_DOMAIN || 'localhost'
 const app = express()
@@ -50,17 +52,8 @@ passport.use(FBStrategy)
 passport.serializeUser(function (user, done) {
   done(null, user.identifier)
   // CALL SAVE/Store NEW USER
-  populateUsersCollection(user)
+  databasetools.addTo(user, usersCollection)
 })
-
-function populateUsersCollection(user){
-  usersCollection.findOne({facebookId: user.identifier}).then((doc) => {
-    if (doc == null){
-      usersCollection.insert({facebookId: user.identifier, name: user.name, image: user.image, deck: {} })
-    }
-  })
-
-}
 
 passport.deserializeUser(function (user, done) {
   // For this demo, we'll just return an object literal since our user
