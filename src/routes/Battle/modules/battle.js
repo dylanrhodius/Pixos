@@ -17,9 +17,7 @@ export const SET_TURN_FINISHED = 'SET_TURN_FINISHED'
 export const SET_MY_TURN = 'SET_MY_TURN'
 export const UPDATE_ENEMY_STATE = 'UPDATE_ENEMY_STATE'
 export const PASS_TURN = 'PASS_TURN'
-
-
-
+export const REMOVE_CARD = 'REMOVE_CARD'
 
 // ------------------------------------
 // Actions
@@ -53,6 +51,13 @@ export function setupPlayers (data) {
   return {
     type: SETUP_PLAYERS,
     payload: data
+  }
+}
+
+export function removeCard(cardId) {
+  return {
+    type: REMOVE_CARD,
+    payload: cardId
   }
 }
 
@@ -126,6 +131,18 @@ const ACTION_HANDLERS = {
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
         myTurn: action.payload
+      }),
+    })
+  },
+  [REMOVE_CARD] : (state, action) => {
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        hand: (function() {
+          console.log(action.payload)
+          console.log(state.self.hand.indexOf(action.payload))
+          state.self.hand.splice(state.self.hand.indexOf(action.payload))
+          return state.self.hand
+        })()
       }),
     })
   },

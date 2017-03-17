@@ -8,6 +8,7 @@ import {
   SET_MY_TURN,
   UPDATE_ENEMY_STATE,
   PASS_TURN,
+  REMOVE_CARD,
   passTurn,
   updateEnemyState,
   setMyTurn,
@@ -15,6 +16,7 @@ import {
   setupPlayers,
   increment,
   doubleAsync,
+  removeCard,
   default as battleReducer
 } from 'routes/Battle/modules/battle'
 
@@ -32,7 +34,7 @@ describe('(Redux Module) Battle', () => {
     expect(SET_MY_TURN).to.equal('SET_MY_TURN')
     expect(UPDATE_ENEMY_STATE).to.equal('UPDATE_ENEMY_STATE')
     expect(PASS_TURN).to.equal('PASS_TURN')
-
+    expect(REMOVE_CARD).to.equal('REMOVE_CARD')
   })
 
   describe('(Reducer)', () => {
@@ -69,6 +71,16 @@ describe('(Redux Module) Battle', () => {
 
     it('Should return an action with type "PASS_TURN".', () => {
       expect(passTurn()).to.have.property('type', PASS_TURN)
+    })
+  })
+
+  describe('(Action Creator) removeCard', () => {
+    it('Should be exported as a function.', () => {
+      expect(removeCard).to.be.a('function')
+    })
+
+    it('Should return an action with type "REMOVE_CARD".', () => {
+      expect(removeCard()).to.have.property('type', REMOVE_CARD)
     })
   })
 
