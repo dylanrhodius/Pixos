@@ -14,6 +14,8 @@ export const SET_NEXT_PLAYER = 'SET_NEXT_PLAYER'
 export const SET_PLAYER_PASS = 'SET_PLAYER_PASS'
 export const PLAY_CARD = 'PLAY_CARD'
 export const SET_TURN_FINISHED = 'SET_TURN_FINISHED'
+export const SET_MY_TURN = 'SET_MY_TURN'
+
 
 // ------------------------------------
 // Actions
@@ -57,10 +59,18 @@ export function setTurnFinished (boolean) {
   }
 }
 
+export function setMyTurn (boolean) {
+  return {
+    type: SET_MY_TURN,
+    payload: boolean
+  }
+}
+
 export const actions = {
   increment,
   doubleAsync,
-  setupPlayers
+  setupPlayers,
+  setMyTurn
 }
 
 // ------------------------------------
@@ -83,6 +93,13 @@ const ACTION_HANDLERS = {
   [SET_TURN_FINISHED] : (state, action) => {
     return Object.assign({}, state, {
       turnFinished: action.payload
+    })
+  },
+  [SET_MY_TURN] : (state, action) => {
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        myTurn: action.payload
+      }),
     })
   }
 }

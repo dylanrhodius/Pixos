@@ -5,6 +5,8 @@ import {
   SET_PLAYER_PASS,
   PLAY_CARD,
   SET_TURN_FINISHED,
+  SET_MY_TURN,
+  setMyTurn,
   setTurnFinished,
   setupPlayers,
   increment,
@@ -23,6 +25,8 @@ describe('(Redux Module) Battle', () => {
     expect(SET_PLAYER_PASS).to.equal('SET_PLAYER_PASS')
     expect(PLAY_CARD).to.equal('PLAY_CARD')
     expect(SET_TURN_FINISHED).to.equal('SET_TURN_FINISHED')
+    expect(SET_MY_TURN).to.equal('SET_MY_TURN')
+
   })
 
   describe('(Reducer)', () => {
@@ -59,6 +63,16 @@ describe('(Redux Module) Battle', () => {
 
     it('Should return an action with type "SET_TURN_FINISHED".', () => {
       expect(setTurnFinished()).to.have.property('type', SET_TURN_FINISHED)
+    })
+  })
+
+  describe('(Action Creator) setMyTurn', () => {
+    it('Should be exported as a function.', () => {
+      expect(setMyTurn).to.be.a('function')
+    })
+
+    it('Should return an action with type "SET_TURN_FINISHED".', () => {
+      expect(setMyTurn()).to.have.property('type', SET_MY_TURN)
     })
   })
 
