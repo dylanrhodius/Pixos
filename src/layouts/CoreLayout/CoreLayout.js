@@ -9,7 +9,7 @@ injectTapEventPlugin();
 
 export const CoreLayout = ({ children }) => (
   <MuiThemeProvider>
-    <div className='container text-center'>
+    <div className='container-fluid text-center'>
       <Header />
       <div className='core-layout__viewport'>
         {children}

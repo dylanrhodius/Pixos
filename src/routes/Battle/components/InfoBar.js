@@ -22,7 +22,7 @@ export default class InfoBar extends React.Component {
       return (
         <div>
           <p>Your turn</p>
-          <RaisedButton label="Pass Turn" primary={true} onTouchTap={this.setTurnFinishedToTrue} />
+          <RaisedButton label="Pass" primary={true} onTouchTap={this.setTurnFinishedToTrue} />
         </div>
       )
     } else {
@@ -35,16 +35,11 @@ export default class InfoBar extends React.Component {
   render () {
     let content = this.loadContent()
     return (
-      <div className="info-bar" style={{ margin: '0 auto',
-                                        border: '1px solid blue',
-                                        width: '150px',
-                                        height: '100%',
-                                        float: 'left'
-                                      }} >
-      <p>{ this.props.battle.enemy.name }</p>
-      <p> VS. </p>
-      <p>{ this.props.battle.self.name }</p>
-      {content}
+      <div className="info-bar col-1">
+        <p>{ this.props.battle.enemy.name }</p>
+        <p> VS. </p>
+        <p>{ this.props.battle.self.name }</p>
+        {content}
     </div>
     )
   }
