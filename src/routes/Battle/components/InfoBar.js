@@ -1,4 +1,5 @@
 import React from 'react'
+import RaisedButton from 'material-ui/RaisedButton';
 
 export default class InfoBar extends React.Component {
 
@@ -20,8 +21,8 @@ export default class InfoBar extends React.Component {
     if(this.props.battle.self.myTurn){
       return (
         <div>
-        <p>Your turn</p>
-        <button onClick={this.setTurnFinishedToTrue}>Pass Turn</button>
+          <p>Your turn</p>
+          <RaisedButton label="Pass Turn" primary={true} onTouchTap={this.setTurnFinishedToTrue} />
         </div>
       )
     } else {
