@@ -9,6 +9,7 @@ const webpackConfig = require('../config/webpack.config')
 const project = require('../config/project.config')
 const compress = require('compression')
 const passport = require('passport')
+const databasetools = require('../src/tools/databasetools')
 var FacebookStrategy = require('passport-facebook').Strategy
 
 // Import mongoDB
@@ -21,6 +22,10 @@ const request = require('request')
 const session = require('express-session')
 const MongodbStoreFactory = require('connect-mongodb-session')
 const MongoDBStore = MongodbStoreFactory(session)
+// set a usersCollection constant equal to the users collection
+
+const usersCollection = db.get('users')
+
 
 const domain = process.env.APP_DOMAIN || 'localhost'
 const app = express()
@@ -77,7 +82,9 @@ function (accessToken, refreshToken, profile, done) {
 passport.use(FBStrategy)
 
 passport.serializeUser(function (user, done) {
-  done(null, user)
+  done(null, user.identifier)
+  // CALL SAVE/Store NEW USER
+  databasetools.addTo(user, usersCollection)
 })
 
 passport.deserializeUser(function (user, done) {
@@ -87,12 +94,19 @@ passport.deserializeUser(function (user, done) {
   done(null, {
     user: user
   })
+
 })
 
 app.use(passport.initialize())
 app.use(passport.session())
 
 // Set up sessions
+var userStore = new MongoDBStore(
+  {
+    uri: mongoUrl,
+    collection: 'users'
+  })
+
 var store = new MongoDBStore(
   {
     uri: mongoUrl,
@@ -160,12 +174,17 @@ if (project.env === 'development') {
     })
 
 app.get('/user', (req,res) => {
-  if(typeof(req.session.passport) != 'undefined') {
-    console.log('User is true');
-    res.setHeader('Content-Type', 'application/json');
-    res.send(req.session.passport.user);
+  // if a session exists:
+  if(typeof(req.session.passport) !== 'undefined') {
+    console.log('Session exists');
+    // find the user in the database whose facebookId (white) matches the session user's id (red)
+    usersCollection.findOne({facebookId: req.session.passport.user}).then((doc) => {
+      res.setHeader('Content-Type', 'application/json');
+      // return (or send) the document object
+      res.send(doc);
+    })
   } else {
-    console.log('User is false');
+    console.log('Session does not exist');
     res.setHeader('Content-Type', 'application/json');
     res.send('No data available');
   }
