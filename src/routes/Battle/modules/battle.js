@@ -13,6 +13,7 @@ export const SETUP_PLAYERS = 'SETUP_PLAYERS'
 export const SET_NEXT_PLAYER = 'SET_NEXT_PLAYER'
 export const SET_PLAYER_PASS = 'SET_PLAYER_PASS'
 export const PLAY_CARD = 'PLAY_CARD'
+export const SET_TURN_FINISHED = 'SET_TURN_FINISHED'
 
 // ------------------------------------
 // Actions
@@ -49,6 +50,13 @@ export function setupPlayers (data) {
   }
 }
 
+export function setTurnFinished (boolean) {
+  return {
+    type: SET_TURN_FINISHED,
+    payload: boolean
+  }
+}
+
 export const actions = {
   increment,
   doubleAsync,
@@ -70,6 +78,11 @@ const ACTION_HANDLERS = {
       enemy: Object.assign({}, state.enemy, {
         hand: action.payload.enemyHand
       })
+    })
+  },
+  [SET_TURN_FINISHED] : (state, action) => {
+    return Object.assign({}, state, {
+      turnFinished: action.payload
     })
   }
 }

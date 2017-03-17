@@ -24,5 +24,6 @@ export const INITIAL_STATE = {
       water: [],
       air: []
     }
-  }
+  },
+  turnFinished: false
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { InfoBar } from 'routes/Battle/components/InfoBar'
+import InfoBar from 'routes/Battle/components/InfoBar'
 import Board from 'routes/Battle/components/Board'
 
 import io from 'socket.io-client';
@@ -18,7 +18,7 @@ export default class Battle extends React.Component {
     } else {
       return (
         <div>
-          <InfoBar/>
+          <InfoBar setTurnFinished={this.props.setTurnFinished}/>
           <Board battle={this.props.battle}/>
         </div>
       )
@@ -43,7 +43,12 @@ export default class Battle extends React.Component {
 
   componentDidUpdate() {
     console.log('Battle state is:', this.props.battle)
-    socket.emit('pass:ToRoom', 'Hello from your opponent, myTurn is: '+ this.props.battle.self.myTurn)
+    if (this.props.battle.turnFinished) {
+      console.log('my turn is finished')
+      socket.emit('pass:ToRoom', this.props.battle.self)
+      this.props.setTurnFinished(false)
+    }
+
   }
 
   render () {
@@ -63,6 +68,7 @@ export default class Battle extends React.Component {
 
 Battle.propTypes = {
   setupPlayers  : React.PropTypes.func.isRequired,
+  setTurnFinished  : React.PropTypes.func.isRequired,
   doubleAsync : React.PropTypes.func.isRequired,
   increment   : React.PropTypes.func.isRequired,
   battle : React.PropTypes.object.isRequired
