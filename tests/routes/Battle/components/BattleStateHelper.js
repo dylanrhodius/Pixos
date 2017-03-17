@@ -1,4 +1,4 @@
-export const INITIAL_STATE = {
+export const TEST_STATE = {
   self: {
     myTurn: false,
     name: '',

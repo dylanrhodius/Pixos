@@ -1,9 +1,10 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
-import { Battle } from 'routes/Battle/components/Battle'
+import Battle from 'routes/Battle/components/Battle'
 import { InfoBar } from 'routes/Battle/components/InfoBar'
 import { Board } from 'routes/Battle/components/Board'
 import { shallow, mount, render } from 'enzyme'
+import { TEST_STATE } from './BattleStateHelper'
 
 describe('(Component) Battle', () => {
   let _props, _spies, _wrapper
@@ -11,7 +12,7 @@ describe('(Component) Battle', () => {
   beforeEach(() => {
     _spies = {}
     _props = {
-      battle : 5,
+      battle: TEST_STATE
       ...bindActionCreators({
         doubleAsync : (_spies.doubleAsync = sinon.spy()),
         increment   : (_spies.increment = sinon.spy())

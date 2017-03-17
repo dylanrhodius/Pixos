@@ -1,13 +1,11 @@
 import {
   BATTLE_INCREMENT,
-  REQUEST_ALL_POSSIBLE_CARDS,
-  RECEIVE_ALL_POSSIBLE_CARDS,
-  BUILD_PLAYER_HANDS,
+  SETUP_PLAYERS,
   SET_NEXT_PLAYER,
   SET_PLAYER_PASS,
   PLAY_CARD,
+  setupPlayers,
   increment,
-  requestCards,
   doubleAsync,
   default as battleReducer
 } from 'routes/Battle/modules/battle'
@@ -18,9 +16,7 @@ import {
 
 describe('(Redux Module) Battle', () => {
   it('Should export a full set of constants.', () => {
-    expect(REQUEST_ALL_POSSIBLE_CARDS).to.equal('REQUEST_ALL_POSSIBLE_CARDS')
-    expect(RECEIVE_ALL_POSSIBLE_CARDS).to.equal('RECEIVE_ALL_POSSIBLE_CARDS')
-    expect(BUILD_PLAYER_HANDS).to.equal('BUILD_PLAYER_HANDS')
+    expect(SETUP_PLAYERS).to.equal('SETUP_PLAYERS')
     expect(SET_NEXT_PLAYER).to.equal('SET_NEXT_PLAYER')
     expect(SET_PLAYER_PASS).to.equal('SET_PLAYER_PASS')
     expect(PLAY_CARD).to.equal('PLAY_CARD')
@@ -43,6 +39,16 @@ describe('(Redux Module) Battle', () => {
     })
   })
 
+  describe('(Action Creator) setupPlayers', () => {
+    it('Should be exported as a function.', () => {
+      expect(setupPlayers).to.be.a('function')
+    })
+
+    it('Should return an action with type "SETUP_PLAYERS".', () => {
+      expect(setupPlayers()).to.have.property('type', SETUP_PLAYERS)
+    })
+  })
+
   xdescribe('(Action Creator) increment', () => {
     it('Should be exported as a function.', () => {
       expect(increment).to.be.a('function')
@@ -60,27 +66,6 @@ describe('(Redux Module) Battle', () => {
       expect(increment()).to.have.property('payload', 1)
     })
   })
-
-  describe('(Action Creator) requestCards', () => {
-    it('Should be exported as a function.', () => {
-      expect(requestCards).to.be.a('function')
-    })
-
-    it('Should return an action with type "REQUEST_ALL_POSSIBLE_CARDS".', () => {
-      expect(requestCards()).to.have.property('type', REQUEST_ALL_POSSIBLE_CARDS)
-    })
-
-    // it('Should assign the first argument to the "payload" property.', () => {
-    //   expect(requestCards(5)).to.have.property('payload', 5)
-    // })
-    //
-    // it('Should default the "payload" property to 1 if not provided.', () => {
-    //   expect(increment()).to.have.property('payload', 1)
-    // })
-  })
-
-
-
 
   xdescribe('(Action Creator) doubleAsync', () => {
     let _globalState

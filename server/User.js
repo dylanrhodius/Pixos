@@ -122,9 +122,10 @@ var User = (function(){
       matchmaking.findOpponent(self);
     });
 
-    // socket.on("request:gameLoaded", function(data){
-    //   connections.roomCollection[data._roomID].setReady(self);
-    // })
+    socket.on("pass:ToRoom", function(data){
+      console.log(self.getID()+ ' is passing data to the Room')
+      self.getRoom().passData(self, data)
+    })
 
     // socket.on("set:deck", function(data) {
     //   //console.log(data);

@@ -15,3 +15,5 @@ export const PlayingArea = (props) => (
 
   </div>
 )
+
+export default PlayingArea

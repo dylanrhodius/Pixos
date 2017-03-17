@@ -9,7 +9,7 @@ export default class SignInPage extends React.Component {
       <div>
         <h2>Sign In!</h2>
         {<SignInForm />}
-        <Link to={`/matchmaking`} >Start Matchmaking</Link>
+        <Link to={`/battle`} >Start Matchmaking</Link>
       </div>
     );
   }

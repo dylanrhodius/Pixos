@@ -1,4 +1,5 @@
 var shortid = require("shortid");
+var cardData = require('./cardData').CARD_DATA
 // var Battle = require("./Battle");
 
 var Room = (function(){
@@ -58,13 +59,33 @@ var Room = (function(){
 
   r.initBattle = function(){
     console.log('Room initiating battle!');
-    // this._battle = Battle(this._id, this._users[0], this._users[1], io);
-    // this._users[0].send("init:battle", {side: "p1", foeSide: "p2"});
-    // this._users[1].send("init:battle", {side: "p2", foeSide: "p1"});
-    // this._battle = Battle(this._id, this._users[0], this._users[1], io);
-    this._users[0].send("init:battle", {side: "p1", foeSide: "p2"});
-    this._users[1].send("init:battle", {side: "p2", foeSide: "p1"});
+    var p1Hand = this.generateRandomHand();
+    var p2Hand = this.generateRandomHand();
+    this._users[0].send("init:battle", {selfTurn: true, selfHand: p1Hand, enemyHand: p2Hand});
+    this._users[1].send("init:battle", {selfTurn: false, selfHand: p2Hand, enemyHand: p1Hand});
   }
+
+  r.generateRandomHand = function(){
+    var result = []
+    var choice
+    for (var i = 0; i < 10; i++) {
+      choice = Math.floor(Math.random() * 50)
+      result.push(cardData[choice])
+    }
+    return result
+  }
+
+  r.passData = function(from, data){
+    console.log(from.getID(), data)
+    var to;
+    if (this._users[0] == from) {
+      to = this._users[1];
+    } else {
+      to = this._users[0]
+    }
+    to.send("receive:data", data);
+  }
+
 
   // r.setReady = function(user, b){
   //   b = typeof b == "undefined" ? true : b;

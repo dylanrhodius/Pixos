@@ -2,14 +2,14 @@ import {
   INITIAL_STATE
 } from 'routes/Battle/modules/initialBattleState'
 
+import store from 'store/createStore'
+
 // ------------------------------------
 // Constants
 // ------------------------------------
 export const BATTLE_INCREMENT = 'BATTLE_INCREMENT'
 export const BATTLE_DOUBLE_ASYNC = 'BATTLE_DOUBLE_ASYNC'
-export const REQUEST_ALL_POSSIBLE_CARDS = 'REQUEST_ALL_POSSIBLE_CARDS'
-export const RECEIVE_ALL_POSSIBLE_CARDS = 'RECEIVE_ALL_POSSIBLE_CARDS'
-export const BUILD_PLAYER_HANDS = 'BUILD_PLAYER_HANDS'
+export const SETUP_PLAYERS = 'SETUP_PLAYERS'
 export const SET_NEXT_PLAYER = 'SET_NEXT_PLAYER'
 export const SET_PLAYER_PASS = 'SET_PLAYER_PASS'
 export const PLAY_CARD = 'PLAY_CARD'
@@ -42,16 +42,17 @@ export const doubleAsync = () => {
   }
 }
 
-export function requestCards() {
+export function setupPlayers (data) {
   return {
-    type : REQUEST_ALL_POSSIBLE_CARDS
+    type: SETUP_PLAYERS,
+    payload: data
   }
 }
 
 export const actions = {
   increment,
   doubleAsync,
-  requestCards
+  setupPlayers
 }
 
 // ------------------------------------
@@ -59,7 +60,18 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [BATTLE_INCREMENT]    : (state, action) => state + action.payload,
-  [BATTLE_DOUBLE_ASYNC] : (state, action) => state * 2
+  [BATTLE_DOUBLE_ASYNC] : (state, action) => state * 2,
+  [SETUP_PLAYERS] : (state, action) => {
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        hand: action.payload.selfHand,
+        myTurn: action.payload.selfTurn
+      }),
+      enemy: Object.assign({}, state.enemy, {
+        hand: action.payload.enemyHand
+      })
+    })
+  }
 }
 
 // ------------------------------------
