@@ -61,8 +61,10 @@ var Room = (function(){
     console.log('Room initiating battle!');
     var p1Hand = this.generateRandomHand();
     var p2Hand = this.generateRandomHand();
-    this._users[0].send("init:battle", {selfTurn: true, selfHand: p1Hand, enemyHand: p2Hand});
-    this._users[1].send("init:battle", {selfTurn: false, selfHand: p2Hand, enemyHand: p1Hand});
+    var p1Name = this._users[0].getName();
+    var p2Name = this._users[1].getName();
+    this._users[0].send("init:battle", {selfTurn: true, selfHand: p1Hand, enemyHand: p2Hand, selfName: p1Name, enemyName: p2Name });
+    this._users[1].send("init:battle", {selfTurn: false, selfHand: p2Hand, enemyHand: p1Hand, selfName: p2Name, enemyName: p1Name });
   }
 
   r.generateRandomHand = function(){
