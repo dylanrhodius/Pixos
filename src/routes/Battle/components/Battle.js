@@ -42,6 +42,10 @@ export default class Battle extends React.Component {
       console.log("Received data from Opponent!:", data);
       that.props.setMyTurn(true)
       that.props.updateEnemyState(data)
+      if (that.props.battle.self.hasPassed) {
+        that.props.setMyTurn(false)
+        that.props.setTurnFinished(true)
+      }
     })
     console.log('Battle state is:', that.props.battle)
     console.log(socket)
