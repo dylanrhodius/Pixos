@@ -9,7 +9,7 @@ const webpackConfig = require('../config/webpack.config')
 const project = require('../config/project.config')
 const compress = require('compression')
 const passport = require('passport')
-const databasetools = require('../src/tools/databasetools')
+const databasetools = require('./databasetools')
 var FacebookStrategy = require('passport-facebook').Strategy
 
 // Import mongoDB
