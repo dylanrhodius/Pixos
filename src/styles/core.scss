@@ -29,11 +29,28 @@ body {
 }
 
 .game-card {
-  max-width: 88px;
-  height: 160px;
+  width: 72px;
+  height: 110px;
+  position: relative;
 }
 
 .overflow-wrap {
   overflow-wrap: break-word;
   hyphens: auto;
+}
+
+.circle {
+  border-radius: 100%;
+}
+
+.water-bkgrnd {
+  background: linear-gradient(135deg, #b7deed 0%,#71ceef 50%,#21b4e2 51%,#b7deed 100%)
+}
+
+.land-bkgrnd {
+  background: linear-gradient(135deg, #b2e09a 0%,#7ad76f 50%,#32c31a 51%,#b2e09a 100%)
+}
+
+.air-bkgrnd {
+  background: linear-gradient(135deg, #d0b7ed 0%,#ce71ee 50%,#a421e2 51%,#d0b7ed 100%)
 }

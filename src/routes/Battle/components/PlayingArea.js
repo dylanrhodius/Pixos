@@ -5,7 +5,9 @@ export const PlayingArea = (props) => (
   <div className="playing-area">
 
   { <BattleRow />}
+  <hr className="m-0"/>
   { <BattleRow />}
+  <hr className="m-0"/>
   { <BattleRow />}
 
   </div>

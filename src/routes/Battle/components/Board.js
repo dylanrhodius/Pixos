@@ -6,6 +6,7 @@ export const Board = (props) => (
   <div className="board col-11" >
       { <Hand hand={props.battle.enemy.hand} isEnemyHand={true} /> }
       { <PlayingArea/> }
+      <hr className="m-0"/>
       { <PlayingArea/> }
       { <Hand hand={props.battle.self.hand} isEnemyHand={false} /> }
   </div>

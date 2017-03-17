@@ -21,7 +21,7 @@ export default class Hand extends React.Component {
     let cards = this.renderHandComponents()
     return (
 
-      <div className="games-list d-flex flex-wrap justify-content-center mt-3 px-5">
+      <div className="games-list d-flex flex-wrap justify-content-center mt-3 px-2">
         { cards }
       </div>
     )
