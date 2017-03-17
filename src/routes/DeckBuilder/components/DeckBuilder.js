@@ -19,7 +19,9 @@ export default class DeckBuilder extends React.Component {
     return (
       <div>
         <h2>DeckBuilder</h2>
-        { cards }
+        <div className="deck-container d-flex justify-content-center flex-wrap"  >
+          { cards }
+        </div>
       </div>
     )
   }

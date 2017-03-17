@@ -1,14 +1,14 @@
 import React from 'react'
+import './card.scss'
+
 
 export const Card = (props) => (
 
-  <div className="card" style={{ margin: '0 auto' }} >
-    <img className="card-img-top" src={props.imgUrl} alt="Card image cap"/>
-    <div className="card-block">
+  <div className="card-item mx-1 my-2">
+    <img className="card-img-fluid" src={props.imgUrl} alt="Responsive image"/>
       <h4 className="card-title">{ props.name }</h4>
       <p className="card-text">{ props.power }</p>
     </div>
-  </div>
 )
 
 export default Card
