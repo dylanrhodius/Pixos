@@ -1,18 +1,18 @@
-.game-card-name {
+.deck-card-name {
   font-size: 0.6rem;
 }
 
-.game-card-img-holder {
+.deck-card-img-holder {
   min-height: 62px;
   width: 62px;
 }
 
-.game-card-img {
+.deck-card-img {
   max-width: 100%;
   max-height: 100%;
 }
 
-.game-card-text {
+.deck-card-text {
   width: 22px;
   height: 22px;
   font-size: 0.75rem;
@@ -23,4 +23,10 @@
   color: white;
   text-shadow: 1px 1px 1px black;
   font-weight: bold;
+}
+
+.deck-card {
+  &:hover{
+    box-shadow: 0px 0px 10px 5px #abafb9;
+  }
 }
