@@ -9,6 +9,8 @@ import {
   UPDATE_ENEMY_STATE,
   PASS_TURN,
   REMOVE_CARD,
+  ADD_CARD,
+  addCard,
   passTurn,
   updateEnemyState,
   setMyTurn,
@@ -35,6 +37,7 @@ describe('(Redux Module) Battle', () => {
     expect(UPDATE_ENEMY_STATE).to.equal('UPDATE_ENEMY_STATE')
     expect(PASS_TURN).to.equal('PASS_TURN')
     expect(REMOVE_CARD).to.equal('REMOVE_CARD')
+    expect(ADD_CARD).to.equal('ADD_CARD')
   })
 
   describe('(Reducer)', () => {
@@ -61,6 +64,16 @@ describe('(Redux Module) Battle', () => {
 
     it('Should return an action with type "SETUP_PLAYERS".', () => {
       expect(setupPlayers()).to.have.property('type', SETUP_PLAYERS)
+    })
+  })
+
+  describe('(Action Creator) addCard', () => {
+    it('Should be exported as a function.', () => {
+      expect(addCard).to.be.a('function')
+    })
+
+    it('Should return an action with type "ADD_CARD".', () => {
+      expect(addCard()).to.have.property('type', ADD_CARD)
     })
   })
 

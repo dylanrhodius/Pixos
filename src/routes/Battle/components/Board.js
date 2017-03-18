@@ -12,11 +12,13 @@ render() {
                                   height: '80%',
                                   width: '700px'}} >
       { <Hand hand={this.props.battle.enemy.hand}
-              removeCard={this.props.removeCard}  /> }
+              removeCard={this.props.removeCard}
+              addCard={this.props.addCard}  /> }
       { <PlayingArea/> }
       { <PlayingArea/> }
       { <Hand hand={this.props.battle.self.hand}
-              removeCard={this.props.removeCard}/> }
+              removeCard={this.props.removeCard}
+              addCard={this.props.addCard}/> }
   </div>
   )
 }
@@ -24,5 +26,6 @@ render() {
 
 Board.propTypes = {
   battle : React.PropTypes.object.isRequired,
-  removeCard : React.PropTypes.func.isRequired
+  removeCard : React.PropTypes.func.isRequired,
+  addCard : React.PropTypes.func.isRequired
 }

@@ -9,6 +9,7 @@ export default class Card extends React.Component {
     }
 
 playCard() {
+  this.props.addCard(this.props.id)
   this.props.removeCard(this.props.id)
 }
 
@@ -23,4 +24,10 @@ render() {
     </div>
   </div>)
   }
+
+  // propTypes: {
+  //   card : React.PropTypes.object.isRequired,
+  //   removeCard : React.PropTypes.func.isRequired,
+  //   addCard : React.PropTypes.func.isRequired
+  // }
 }

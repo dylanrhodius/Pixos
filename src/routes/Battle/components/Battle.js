@@ -24,7 +24,8 @@ export default class Battle extends React.Component {
                     passTurn={this.props.passTurn}
                     />
           <Board battle={this.props.battle}
-                removeCard={this.props.removeCard} />
+                removeCard={this.props.removeCard}
+                addCard={this.props.addCard} />
         </div>
       )
     }
@@ -82,5 +83,6 @@ Battle.propTypes = {
   setMyTurn : React.PropTypes.func.isRequired,
   updateEnemyState : React.PropTypes.func.isRequired,
   passTurn : React.PropTypes.func.isRequired,
-  removeCard : React.PropTypes.func.isRequired
+  removeCard : React.PropTypes.func.isRequired,
+  addCard : React.PropTypes.func.isRequired
 }

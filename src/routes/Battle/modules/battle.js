@@ -18,6 +18,8 @@ export const SET_MY_TURN = 'SET_MY_TURN'
 export const UPDATE_ENEMY_STATE = 'UPDATE_ENEMY_STATE'
 export const PASS_TURN = 'PASS_TURN'
 export const REMOVE_CARD = 'REMOVE_CARD'
+export const ADD_CARD = 'ADD_CARD'
+
 
 // ------------------------------------
 // Actions
@@ -51,6 +53,13 @@ export function setupPlayers (data) {
   return {
     type: SETUP_PLAYERS,
     payload: data
+  }
+}
+
+export function addCard (cardId) {
+  return {
+    type: ADD_CARD,
+    payload: cardId
   }
 }
 
@@ -120,6 +129,7 @@ const ACTION_HANDLERS = {
       turnFinished: action.payload
     })
   },
+
   [PASS_TURN] : (state, action) => {
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
@@ -131,6 +141,23 @@ const ACTION_HANDLERS = {
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
         myTurn: action.payload
+      }),
+    })
+  },
+  [ADD_CARD] : (state, action) => {
+    var card = (state.self.hand.splice(action.payload, 1)).pop()
+    console.log(card)
+    console.log(card.type);
+    if(card.type == 'water'){ state.self.playingArea.water.push(card) }
+    else if (card.type == 'land'){ state.self.playingArea.land.push(card) }
+    else { state.self.playingArea.air.push(card) }
+    console.log('AIR FIELD ', state.self.playingArea.air)
+    console.log('LAND FIELD ', state.self.playingArea.land)
+    console.log('WATER FIELD ', state.self.playingArea.water)
+
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        playingArea: state.self.playingArea
       }),
     })
   },

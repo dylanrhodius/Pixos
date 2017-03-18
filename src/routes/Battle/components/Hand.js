@@ -5,7 +5,10 @@ export default class Hand extends React.Component {
 
   renderHandComponents () {
     return this.props.hand.map(
-      (card, i) => <Card key={i} {...card } removeCard={this.props.removeCard} id={i} />
+      (card, i) => <Card  key={i} {...card }
+                          removeCard={this.props.removeCard}
+                          addCard={this.props.addCard}
+                          id={i} />
     )
   }
 
@@ -30,6 +33,7 @@ export default class Hand extends React.Component {
 
   propTypes: {
     hand : React.PropTypes.object.isRequired,
-    removeCard : React.PropTypes.func.isRequired
+    removeCard : React.PropTypes.func.isRequired,
+    addCard : React.PropTypes.func.isRequired
   }
 }
