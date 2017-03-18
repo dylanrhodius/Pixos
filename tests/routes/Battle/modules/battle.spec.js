@@ -8,6 +8,10 @@ import {
   SET_MY_TURN,
   UPDATE_ENEMY_STATE,
   PASS_TURN,
+  REMOVE_CARD,
+  UPDATE_POWER,
+  ADD_CARD,
+  addCard,
   passTurn,
   updateEnemyState,
   setMyTurn,
@@ -15,6 +19,8 @@ import {
   setupPlayers,
   increment,
   doubleAsync,
+  removeCard,
+  updatePower,
   default as battleReducer
 } from 'routes/Battle/modules/battle'
 
@@ -32,7 +38,9 @@ describe('(Redux Module) Battle', () => {
     expect(SET_MY_TURN).to.equal('SET_MY_TURN')
     expect(UPDATE_ENEMY_STATE).to.equal('UPDATE_ENEMY_STATE')
     expect(PASS_TURN).to.equal('PASS_TURN')
-
+    expect(REMOVE_CARD).to.equal('REMOVE_CARD')
+    expect(ADD_CARD).to.equal('ADD_CARD')
+    expect(UPDATE_POWER).to.equal('UPDATE_POWER')
   })
 
   describe('(Reducer)', () => {
@@ -62,6 +70,16 @@ describe('(Redux Module) Battle', () => {
     })
   })
 
+  describe('(Action Creator) addCard', () => {
+    it('Should be exported as a function.', () => {
+      expect(addCard).to.be.a('function')
+    })
+
+    it('Should return an action with type "ADD_CARD".', () => {
+      expect(addCard()).to.have.property('type', ADD_CARD)
+    })
+  })
+
   describe('(Action Creator) passTurn', () => {
     it('Should be exported as a function.', () => {
       expect(passTurn).to.be.a('function')
@@ -69,6 +87,26 @@ describe('(Redux Module) Battle', () => {
 
     it('Should return an action with type "PASS_TURN".', () => {
       expect(passTurn()).to.have.property('type', PASS_TURN)
+    })
+  })
+
+  describe('(Action Creator) removeCard', () => {
+    it('Should be exported as a function.', () => {
+      expect(removeCard).to.be.a('function')
+    })
+
+    it('Should return an action with type "REMOVE_CARD".', () => {
+      expect(removeCard()).to.have.property('type', REMOVE_CARD)
+    })
+  })
+
+  describe('(Action Creator) updatePower', () => {
+    it('Should be exported as a function.', () => {
+      expect(updatePower).to.be.a('function')
+    })
+
+    it('Should return an action with type "UPDATE_POWER".', () => {
+      expect(updatePower()).to.have.property('type', UPDATE_POWER)
     })
   })
 
