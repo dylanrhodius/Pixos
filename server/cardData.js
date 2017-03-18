@@ -29,6 +29,7 @@ const CARD_ARRAY = [
   { name: 'jellyfish', imgUrl: '/img/jellyfish.svg', type: 'water', power: 8, cost: 13  },
   { name: 'lambeosaurus', imgUrl: '/img/lambeosaurus.svg', type: 'land', power: 3, cost: 5  },
   { name: 'owl', imgUrl: '/img/owl.svg', type: 'air', power: 5, cost: 8  },
+  { name: 'kronosaurus', imgUrl: '/img/kronosaurus.svg', type: 'water', power: 7 },
   { name: 'pachycephalosaurus', imgUrl: '/img/pachycephalosaurus.svg', type: 'land', power: 5, cost: 8  },
   { name: 'parasaurolophus', imgUrl: '/img/parasaurolophus.svg', type: 'land', power: 3, cost: 5  },
   { name: 'pelicanimimus', imgUrl: '/img/pelicanimimus.svg', type: 'land', power: 1, cost: 2  },
