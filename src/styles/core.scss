@@ -3,6 +3,9 @@
 @import "~bootstrap/scss/bootstrap.scss";
 
 $shadow-color: rgb(159, 159, 159);
+$light-bkgrnd: rgb(249, 249, 249);
+$bkgrnd-gradient: rgb(232, 229, 229);
+$text-color: rgb(71, 71, 71);
 
 // Some best-practice CSS that's useful for most apps
 // Just remove them if they're not what you want
@@ -12,10 +15,13 @@ html {
 
 html,
 body {
+  color: $text-color;
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
   height: 100%;
+  background: linear-gradient($light-bkgrnd, $bkgrnd-gradient);
+  background-attachment: fixed;
 }
 
 *,
@@ -43,14 +49,45 @@ body {
   border-radius: 100%;
 }
 
+$water-light: #b7deed;
+$water-mid: #71ceef;
+$water-main: #21b4e2;
+
+$land-light: #b2e09a;
+$land-mid: #7ad76f;
+$land-main: #32c31a;
+
+$air-light: #d0b7ed;
+$air-mid: #ce71ee;
+$air-main: #a421e2;
+
+$grey-light: #d4d4d4;
+$grey-mid: #9a9a9a;
+
 .water-bkgrnd {
-  background: linear-gradient(135deg, #b7deed 0%,#71ceef 50%,#21b4e2 51%,#b7deed 100%)
+  background: linear-gradient(135deg, $water-light 0%,$water-mid 50%,$water-main 51%,$water-light 100%)
 }
 
 .land-bkgrnd {
-  background: linear-gradient(135deg, #b2e09a 0%,#7ad76f 50%,#32c31a 51%,#b2e09a 100%)
+  background: linear-gradient(135deg, $land-light 0%,$land-mid 50%,$land-main 51%,$land-light 100%)
 }
 
 .air-bkgrnd {
-  background: linear-gradient(135deg, #d0b7ed 0%,#ce71ee 50%,#a421e2 51%,#d0b7ed 100%)
+  background: linear-gradient(135deg, $air-light 0%,$air-mid 50%,$air-main 51%,$air-light 100%)
+}
+
+.water-faint-bkgrnd {
+  background: linear-gradient(225deg, lighten($water-mid, 20%) 0%,lighten($water-light, 23%) 100%)
+}
+
+.land-faint-bkgrnd {
+  background: linear-gradient(225deg, lighten($land-mid, 20%) 0%,lighten($land-light, 23%) 100%)
+}
+
+.air-faint-bkgrnd {
+  background: linear-gradient(225deg, lighten($air-mid, 20%) 0%,lighten($air-light, 23%) 100%)
+}
+
+.grey-faint-bkgrnd {
+  background: linear-gradient(225deg,$grey-mid 0%,$grey-light 100%)
 }

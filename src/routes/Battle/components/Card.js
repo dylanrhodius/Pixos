@@ -3,7 +3,7 @@ import './Card.scss'
 
 export const Card = (props) => (
 
-  <div className="card game-card box-shadow mx-2 p-1">
+  <div className={`card game-card box-shadow mx-2 p-1 ${props.type}-faint-bkgrnd`}>
     <div className="d-flex justify-content-center align-items-center game-card-img-holder pb-1">
       <img className="game-card-img" src={props.imgUrl} alt="Card image cap"/>
     </div>
