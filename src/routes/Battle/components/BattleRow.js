@@ -13,7 +13,7 @@ export default class BattleRow extends React.Component {
   render () {
     let content = this.renderCardComponents()
     return (
-      <div className="battle-row d-flex flex-wrap justify-content-center px-2">
+      <div className="battle-row d-flex flex-wrap justify-content-center px-2 my-1">
         { content }
         <div className={`${this.props.type}-bkgrnd battle-row-type circle`}/>
       </div>

@@ -37,7 +37,7 @@ export default class Hand extends React.Component {
   loadContent () {
     let cards = this.renderHandComponents()
     return (
-      <div className="d-flex flex-wrap justify-content-center mt-3 px-2">
+      <div className="d-flex flex-wrap justify-content-center my-1 px-2">
         { cards }
       </div>
     )
