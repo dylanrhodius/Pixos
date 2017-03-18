@@ -17,6 +17,7 @@ const CARD_ARRAY = [
   { name: 'coelophysis', imgUrl: '/img/coelophysis.svg', type: 'land', power: 6, cost: 9  },
   { name: 'corythosaurus', imgUrl: '/img/corythosaurus.svg', type: 'land', power: 2, cost: 3  },
   { name: 'dilophosaurus', imgUrl: '/img/dilophosaurus.svg', type: 'land', power: 1, cost: 2  },
+  { name: 'dracorex', imgUrl: '/img/dracorex.svg', type: 'land', power: 8, cost: 13  },
   { name: 'elasmosaurus', imgUrl: '/img/elasmosaurus.svg', type: 'water', power: 6, cost: 9  },
   { name: 'euskelosaurus', imgUrl: '/img/euskelosaurus.svg', type: 'land', power: 5, cost: 8  },
   { name: 'fish', imgUrl: '/img/fish.svg', type: 'water', power: 4, cost: 6  },
@@ -49,8 +50,6 @@ const CARD_ARRAY = [
   { name: 'velociraptor', imgUrl: '/img/velociraptor.svg', type: 'land', power: 8, cost: 13  },
   { name: 'whale', imgUrl: '/img/whale.svg', type: 'water', power: 10, cost: 15  },
   { name: 'yinlong', imgUrl: '/img/yinlong.svg', type: 'land', power: 5, cost: 8  },
-  { name: 'dracorex', imgUrl: '/img/dracorex.svg', type: 'land', power: 8, cost: 13  },
-  { name: 'mew', imgUrl: '/img/mew.svg', type: 'land', power: 15, cost: 20  },
 ]
 
 module.exports = { CARD_DATA:  CARD_ARRAY }
