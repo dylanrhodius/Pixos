@@ -1,5 +1,4 @@
 import React from 'react'
-var cardData = require('../../../../server/cardData').CARD_DATA
 import Card from '../../Battle/components/Card'
 import RaisedButton from 'material-ui/RaisedButton'
 import Popover from 'material-ui/Popover'
@@ -36,14 +35,14 @@ render () {
      <div>
        <div className="deck-container d-flex justify-content-center flex-wrap">
          <div>
-          <Card
-            name={this.props.name}
-            power={this.props.power}
-            type={this.props.type}
-            imgUrl={this.props.imgUrl}
-            onTouchTap={this.handleTouchTap}
-            label="Click me"
-          />
+           <div onTouchTap={this.handleTouchTap}>
+             <Card
+                name={this.props.name}
+                power={this.props.power}
+                type={this.props.type}
+                imgUrl={this.props.imgUrl}
+              />
+            </div>
           <Popover
             open={this.state.open}
             anchorEl={this.state.anchorEl}

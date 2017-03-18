@@ -8,7 +8,7 @@ export default class DeckBuilder extends React.Component {
 
   renderDeckComponents () {
     return cardData.map(
-      (card, i) => <DeckCardWrapper key={i} {...DeckCardWrapper} />
+      (card, i) => <DeckCardWrapper key={i} {...card} />
     )
   }
 
@@ -18,7 +18,7 @@ export default class DeckBuilder extends React.Component {
       <div>
         <h2>DeckBuilder</h2>
         <div className="deck-container d-flex justify-content-center flex-wrap">
-          { DeckCardWrapper }
+          { cards }
         </div>
         <div className="chosen-cards- container d-flex justify-content-center flex-wrap py-5">
           < ChosenCards />
