@@ -58,8 +58,6 @@ export default class CardWrapper extends React.Component {
            type={this.props.type}
            imgUrl={this.props.imgUrl}
            name={this.props.name}
-           removeCard={this.props.removeCard}
-           addCard={this.props.addCard}
          />
         </div>
       <Popover

@@ -5,14 +5,7 @@ export default class Card extends React.Component {
 
     constructor (props) {
       super(props)
-
-      this.playCard = this.playCard.bind(this)
     }
-
-playCard() {
-  this.props.addCard(this.props.id)
-  this.props.removeCard(this.props.id)
-}
 
 render() {
   return (
@@ -31,8 +24,6 @@ render() {
     type : React.PropTypes.string.isRequired,
     imgUrl : React.PropTypes.string.isRequired,
     name : React.PropTypes.string.isRequired,
-    power : React.PropTypes.string.isRequired,
-    removeCard : React.PropTypes.func.isRequired,
-    addCard : React.PropTypes.func.isRequired
+    power : React.PropTypes.string.isRequired
   }
 }

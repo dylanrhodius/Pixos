@@ -19,7 +19,8 @@ export default class Board extends React.Component {
                   setTurnFinished={this.props.setTurnFinished}
                   setMyTurn={this.props.setMyTurn}
                   addCard={this.props.addCard}
-                  isEnemyHand={false}/> }
+                  isEnemyHand={false}
+                  isSelfTurn={this.props.battle.self.myTurn}/> }
       </div>
     )
   }

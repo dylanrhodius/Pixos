@@ -1,5 +1,6 @@
 import React from 'react'
 import CardWrapper from './CardWrapper'
+import Card from './Card'
 import HiddenCard from './HiddenCard'
 
 
@@ -12,12 +13,22 @@ export default class Hand extends React.Component {
       )
     } else {
       return this.props.hand.map(
-        (card, i) => <CardWrapper key={i} {...card }
-                            removeCard={this.props.removeCard}
-                            addCard={this.props.addCard}
-                            setTurnFinished={this.props.setTurnFinished}
-                            setMyTurn={this.props.setMyTurn}
-                            id={i} />
+        (card, i) => {if(this.props.isSelfTurn) {
+          return (
+            <CardWrapper key={i} {...card }
+                                removeCard={this.props.removeCard}
+                                addCard={this.props.addCard}
+                                setTurnFinished={this.props.setTurnFinished}
+                                setMyTurn={this.props.setMyTurn}
+                                id={i} />
+          )
+        } else {
+          return (
+            <Card key={i} {...card }
+                  id={i} />
+          )
+        }
+      }
       )
     }
   }
@@ -46,6 +57,7 @@ export default class Hand extends React.Component {
     removeCard : React.PropTypes.func.isRequired,
     setTurnFinished  : React.PropTypes.func.isRequired,
     setMyTurn : React.PropTypes.func.isRequired,
-    addCard : React.PropTypes.func.isRequired
+    addCard : React.PropTypes.func.isRequired,
+    isSelfTurn : React.PropTypes.bool.isRequired
   }
 }
