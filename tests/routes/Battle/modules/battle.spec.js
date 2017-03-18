@@ -7,6 +7,8 @@ import {
   SET_TURN_FINISHED,
   SET_MY_TURN,
   UPDATE_ENEMY_STATE,
+  PASS_TURN,
+  passTurn,
   updateEnemyState,
   setMyTurn,
   setTurnFinished,
@@ -29,6 +31,7 @@ describe('(Redux Module) Battle', () => {
     expect(SET_TURN_FINISHED).to.equal('SET_TURN_FINISHED')
     expect(SET_MY_TURN).to.equal('SET_MY_TURN')
     expect(UPDATE_ENEMY_STATE).to.equal('UPDATE_ENEMY_STATE')
+    expect(PASS_TURN).to.equal('PASS_TURN')
 
   })
 
@@ -56,6 +59,16 @@ describe('(Redux Module) Battle', () => {
 
     it('Should return an action with type "SETUP_PLAYERS".', () => {
       expect(setupPlayers()).to.have.property('type', SETUP_PLAYERS)
+    })
+  })
+
+  describe('(Action Creator) passTurn', () => {
+    it('Should be exported as a function.', () => {
+      expect(passTurn).to.be.a('function')
+    })
+
+    it('Should return an action with type "PASS_TURN".', () => {
+      expect(passTurn()).to.have.property('type', PASS_TURN)
     })
   })
 

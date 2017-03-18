@@ -1,4 +1,5 @@
 import React from 'react'
+import RaisedButton from 'material-ui/RaisedButton';
 
 export default class InfoBar extends React.Component {
 
@@ -11,6 +12,7 @@ export default class InfoBar extends React.Component {
   setTurnFinishedToTrue () {
     console.log('trying to set turn finished to true')
     console.log('this is ', this)
+    this.props.passTurn()
     this.props.setMyTurn(false)
     this.props.setTurnFinished(true)
   }
@@ -18,23 +20,26 @@ export default class InfoBar extends React.Component {
   loadContent () {
     if(this.props.battle.self.myTurn){
       return (
-        <button onClick={this.setTurnFinishedToTrue}>Pass Turn</button>
+        <div>
+          <p>Your turn</p>
+          <RaisedButton label="Pass" primary={true} onTouchTap={this.setTurnFinishedToTrue} />
+        </div>
       )
     } else {
-      return
+      return(
+        <p>Enemy turn</p>
+      )
     }
   }
 
   render () {
     let content = this.loadContent()
     return (
-      <div className="info-bar" style={{ margin: '0 auto',
-                                        border: '1px solid blue',
-                                        width: '150px',
-                                        height: '100%',
-                                        float: 'left'
-                                      }} >
-      {content}
+      <div className="info-bar col-1">
+        <p>{ this.props.battle.enemy.name }</p>
+        <p> VS. </p>
+        <p>{ this.props.battle.self.name }</p>
+        {content}
     </div>
     )
   }
@@ -43,5 +48,6 @@ export default class InfoBar extends React.Component {
 InfoBar.propTypes = {
   setTurnFinished  : React.PropTypes.func.isRequired,
   setMyTurn : React.PropTypes.func.isRequired,
+  passTurn : React.PropTypes.func.isRequired,
   battle : React.PropTypes.object.isRequired
 }

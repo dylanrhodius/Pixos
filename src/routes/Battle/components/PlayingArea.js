@@ -2,18 +2,19 @@ import React from 'react'
 import { BattleRow } from 'routes/Battle/components/BattleRow'
 
 export const PlayingArea = (props) => (
-  <div className="playing-area" style={{ margin: '0 auto',
-                                        height: '200px',
-                                        width: '80%',
-                                        margin: '10px',
-                                        border: '1px solid green'
-                                        }} >
+  <div className="playing-area">
 
-  { <BattleRow />}
-  { <BattleRow />}
-  { <BattleRow />}
+  { <BattleRow type={props.type == 'enemy' ? 'air' : 'land'} />}
+  <hr className="m-0"/>
+  { <BattleRow type={'water'}/>}
+  <hr className="m-0"/>
+  { <BattleRow type={props.type == 'enemy' ? 'land' : 'air'} />}
 
   </div>
 )
+
+PlayingArea.propTypes = {
+  type  : React.PropTypes.string.isRequired
+}
 
 export default PlayingArea

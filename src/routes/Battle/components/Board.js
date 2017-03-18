@@ -3,15 +3,12 @@ import Hand from 'routes/Battle/components/Hand'
 import { PlayingArea } from 'routes/Battle/components/PlayingArea'
 
 export const Board = (props) => (
-  <div className="board" style={{ margin: '0 100px 0 100px',
-                                  border: '1px solid red',
-                                  float: 'left',
-                                  height: '80%',
-                                  width: '700px'}} >
-      { <Hand hand={props.battle.enemy.hand}/> }
-      { <PlayingArea/> }
-      { <PlayingArea/> }
-      { <Hand hand={props.battle.self.hand}/> }
+  <div className="board col-11" >
+      { <Hand hand={props.battle.enemy.hand} isEnemyHand={true} /> }
+      { <PlayingArea type={'enemy'}/> }
+      <hr className="m-0"/>
+      { <PlayingArea type={'self'}/> }
+      { <Hand hand={props.battle.self.hand} isEnemyHand={false} /> }
   </div>
 )
 

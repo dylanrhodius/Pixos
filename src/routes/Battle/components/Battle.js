@@ -1,6 +1,7 @@
 import React from 'react'
 import InfoBar from 'routes/Battle/components/InfoBar'
 import Board from 'routes/Battle/components/Board'
+import CircularProgress from 'material-ui/CircularProgress';
 
 import io from 'socket.io-client';
 const socket = io.connect(`${window.location.origin}`);
@@ -10,15 +11,21 @@ export default class Battle extends React.Component {
   loadContent () {
     if(this.props.battle.self.hand.length == 0) {
       return (
-        <div>
-          <h2>Matchmaking</h2>
-          <img src="/icons/loading.svg" alt="loading icon"></img>
+        <div className="row">
+          <div className="col-12 text-center">
+            <h2>Matchmaking</h2>
+            <CircularProgress size={60} thickness={7} />
+          </div>
         </div>
       )
     } else {
       return (
-        <div>
-          <InfoBar battle={this.props.battle} setTurnFinished={this.props.setTurnFinished} setMyTurn={this.props.setMyTurn}/>
+        <div className="row no-gutters">
+          <InfoBar  battle={this.props.battle}
+                    setTurnFinished={this.props.setTurnFinished}
+                    setMyTurn={this.props.setMyTurn}
+                    passTurn={this.props.passTurn}
+                    />
           <Board battle={this.props.battle}/>
         </div>
       )
@@ -38,6 +45,10 @@ export default class Battle extends React.Component {
       console.log("Received data from Opponent!:", data);
       that.props.setMyTurn(true)
       that.props.updateEnemyState(data)
+      if (that.props.battle.self.hasPassed) {
+        that.props.setMyTurn(false)
+        that.props.setTurnFinished(true)
+      }
     })
     console.log('Battle state is:', that.props.battle)
     console.log(socket)
@@ -56,11 +67,7 @@ export default class Battle extends React.Component {
   render () {
     let content = this.loadContent();
     return (
-      <div style={{ margin: '0 auto',
-                    border: '1px solid black',
-                    height: '600px',
-                    width: '980px'
-     }} >
+      <div>
       { content }
 
       </div>
@@ -75,5 +82,6 @@ Battle.propTypes = {
   increment   : React.PropTypes.func.isRequired,
   battle : React.PropTypes.object.isRequired,
   setMyTurn : React.PropTypes.func.isRequired,
-  updateEnemyState : React.PropTypes.func.isRequired
+  updateEnemyState : React.PropTypes.func.isRequired,
+  passTurn : React.PropTypes.func.isRequired
 }
