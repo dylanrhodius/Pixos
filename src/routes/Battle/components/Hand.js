@@ -5,7 +5,7 @@ export default class Hand extends React.Component {
 
   renderHandComponents () {
     return this.props.hand.map(
-      (card, i) => <Card key={i} {...card } removeCard={this.props.removeCard} />
+      (card, i) => <Card key={i} {...card } removeCard={this.props.removeCard} id={i} />
     )
   }
 

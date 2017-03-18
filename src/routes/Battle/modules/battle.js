@@ -135,14 +135,10 @@ const ACTION_HANDLERS = {
     })
   },
   [REMOVE_CARD] : (state, action) => {
+    state.self.hand.splice(action.payload, 1)
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
-        hand: (function() {
-          console.log(action.payload)
-          console.log(state.self.hand.indexOf(action.payload))
-          state.self.hand.splice(state.self.hand.indexOf(action.payload))
-          return state.self.hand
-        })()
+        hand: state.self.hand
       }),
     })
   },

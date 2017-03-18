@@ -9,8 +9,7 @@ export default class Card extends React.Component {
     }
 
 playCard() {
-  console.log("I am this in play card: this .. ", this.props)
-  this.props.removeCard(this.props)
+  this.props.removeCard(this.props.id)
 }
 
 render() {
