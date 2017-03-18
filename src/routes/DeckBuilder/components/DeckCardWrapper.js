@@ -4,6 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Popover from 'material-ui/Popover'
 import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
+import { Link } from 'react-router'
 
 export default class DeckCardWrapper extends React.Component {
   constructor (props) {
@@ -30,7 +31,6 @@ export default class DeckCardWrapper extends React.Component {
   };
 
 render () {
-  console.log(this.props);
    return (
      <div>
        <div className="deck-container d-flex justify-content-center flex-wrap">
@@ -41,6 +41,8 @@ render () {
                 power={this.props.power}
                 type={this.props.type}
                 imgUrl={this.props.imgUrl}
+                placeInDeck={this.props.placeInDeck}
+
               />
             </div>
           <Popover
@@ -51,11 +53,12 @@ render () {
             onRequestClose={this.handleRequestClose}
           >
             <Menu>
-              <MenuItem primaryText="Refresh" />
-              <MenuItem primaryText="Help &amp; feedback" />
-              <MenuItem primaryText="Settings" />
-              <MenuItem primaryText="Sign out" />
+            <MenuItem primaryText="Place In Deck" />
+            <Link href={`https://en.wikipedia.org/wiki/Tyrannosaurus`} > <MenuItem primaryText="Card Info"  /> </Link>
+            <MenuItem primaryText="Remove" />
+
             </Menu>
+
           </Popover>
         </div>
        </div>
@@ -67,6 +70,7 @@ render () {
    name: React.propTypes.string.isRequired,
    power: React.propTypes.string.isRequired,
    type: React.propTypes.string.isRequired,
-   imgUrl: React.propTypes.string.isRequired
+   imgUrl: React.propTypes.string.isRequired,
+   placeInDeck: React.propTypes.func.isRequired
  }
 }
