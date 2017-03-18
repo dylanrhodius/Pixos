@@ -17,8 +17,9 @@ export const SET_TURN_FINISHED = 'SET_TURN_FINISHED'
 export const SET_MY_TURN = 'SET_MY_TURN'
 export const UPDATE_ENEMY_STATE = 'UPDATE_ENEMY_STATE'
 export const PASS_TURN = 'PASS_TURN'
-
-
+export const REMOVE_CARD = 'REMOVE_CARD'
+export const ADD_CARD = 'ADD_CARD'
+export const UPDATE_POWER = 'UPDATE_POWER'
 
 
 // ------------------------------------
@@ -56,6 +57,26 @@ export function setupPlayers (data) {
   }
 }
 
+export function addCard (cardId) {
+  return {
+    type: ADD_CARD,
+    payload: cardId
+  }
+}
+
+export function removeCard(cardId) {
+  return {
+    type: REMOVE_CARD,
+    payload: cardId
+  }
+}
+
+export function updatePower () {
+  return {
+    type: UPDATE_POWER
+  }
+}
+
 export function setTurnFinished (boolean) {
   return {
     type: SET_TURN_FINISHED,
@@ -88,7 +109,10 @@ export const actions = {
   increment,
   doubleAsync,
   setupPlayers,
-  setMyTurn
+  setMyTurn,
+  updatePower,
+  addCard,
+  removeCard
 }
 
 // ------------------------------------
@@ -115,6 +139,7 @@ const ACTION_HANDLERS = {
       turnFinished: action.payload
     })
   },
+
   [PASS_TURN] : (state, action) => {
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
@@ -129,9 +154,58 @@ const ACTION_HANDLERS = {
       }),
     })
   },
+  [ADD_CARD] : (state, action) => {
+    var card = (state.self.hand[action.payload])
+    console.log(card)
+    console.log(card.type);
+    if(card.type == 'water'){ state.self.playingArea.water.push(card) }
+    else if (card.type == 'land'){ state.self.playingArea.land.push(card) }
+    else { state.self.playingArea.air.push(card) }
+    console.log('AIR FIELD ', state.self.playingArea.air)
+    console.log('LAND FIELD ', state.self.playingArea.land)
+    console.log('WATER FIELD ', state.self.playingArea.water)
+
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        playingArea: state.self.playingArea
+      }),
+    })
+  },
+  [REMOVE_CARD] : (state, action) => {
+    state.self.hand.splice(action.payload, 1)
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        hand: state.self.hand
+      }),
+    })
+  },
   [UPDATE_ENEMY_STATE] : (state, action) => {
     return Object.assign({}, state, {
       enemy: action.payload
+    })
+  },
+  [UPDATE_POWER] : (state, action) => {
+    let enemyPower = 0
+    for (let array of Object.values(state.enemy.playingArea)) {
+      array.forEach((card) => {
+          enemyPower += card.power
+      })
+    }
+
+    let selfPower = 0
+    for (let array of Object.values(state.self.playingArea)) {
+      array.forEach((card) => {
+          selfPower += card.power
+      })
+    }
+
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        power: selfPower
+      }),
+      enemy: Object.assign({}, state.enemy, {
+        power: enemyPower
+      })
     })
   }
 }

@@ -5,7 +5,10 @@ import {  increment,
           setTurnFinished,
           setMyTurn,
           updateEnemyState,
-          passTurn
+          passTurn,
+          removeCard,
+          addCard,
+          updatePower
 } from '../modules/battle'
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -26,7 +29,10 @@ const mapDispatchToProps = {
   setTurnFinished,
   setMyTurn,
   updateEnemyState,
-  passTurn
+  passTurn,
+  removeCard,
+  addCard,
+  updatePower
 }
 
 const mapStateToProps = (state) => ({

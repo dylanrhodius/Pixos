@@ -1,6 +1,6 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
-import { Card } from 'routes/Battle/components/Card'
+import Card from 'routes/Battle/components/Card'
 import { shallow } from 'enzyme'
 
 describe('(Component) Card', () => {

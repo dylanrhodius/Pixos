@@ -39,7 +39,9 @@ export default class InfoBar extends React.Component {
       <div className="info-bar col-1 d-flex flex-column justify-content-center align-items-center pt-2 pb-4">
         <PixosMenu/>
         <p className="mb-auto">{ this.props.battle.enemy.name }</p>
+        <h3 className="my-2">{this.props.battle.enemy.power}</h3>
         {content}
+        <h3 className="my-2">{this.props.battle.self.power}</h3>
         <p className="mt-auto">{ this.props.battle.self.name }</p>
     </div>
     )
