@@ -55,7 +55,7 @@ export default class PixosMenu extends React.Component {
          <Menu>
            <IndexLink to='/' activeClassName='route--active'>
              <MenuItem primaryText="Home" />
-           </IndexLink>   
+           </IndexLink>
          </Menu>
        </Popover>
       </div>
