@@ -12,10 +12,12 @@ import DeckBuilder from '../components/DeckBuilder'
     implementing our wrapper around increment; the component doesn't care   */
 
 const mapDispatchToProps = {
+  // functions go here, when I've made them
 
 }
 
 const mapStateToProps = (state) => ({
+  // eventual state
 
 })
 
