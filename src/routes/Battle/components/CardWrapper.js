@@ -29,6 +29,7 @@ export default class CardWrapper extends React.Component {
   playCard() {
     this.props.addCard(this.props.id)
     this.props.removeCard(this.props.id)
+    this.props.updatePower()
     this.setTurnFinishedToTrue()
   }
 
@@ -83,6 +84,7 @@ export default class CardWrapper extends React.Component {
     removeCard : React.PropTypes.func.isRequired,
     addCard : React.PropTypes.func.isRequired,
     setTurnFinished  : React.PropTypes.func.isRequired,
-    setMyTurn : React.PropTypes.func.isRequired
+    setMyTurn : React.PropTypes.func.isRequired,
+    updatePower : React.PropTypes.func.isRequired
   }
 }

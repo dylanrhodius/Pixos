@@ -20,7 +20,8 @@ export default class Hand extends React.Component {
                                 addCard={this.props.addCard}
                                 setTurnFinished={this.props.setTurnFinished}
                                 setMyTurn={this.props.setMyTurn}
-                                id={i} />
+                                id={i}
+                                updatePower={this.props.updatePower} />
           )
         } else {
           return (
@@ -58,6 +59,7 @@ export default class Hand extends React.Component {
     setTurnFinished  : React.PropTypes.func.isRequired,
     setMyTurn : React.PropTypes.func.isRequired,
     addCard : React.PropTypes.func.isRequired,
-    isSelfTurn : React.PropTypes.bool.isRequired
+    isSelfTurn : React.PropTypes.bool.isRequired,
+    updatePower : React.PropTypes.func.isRequired
   }
 }

@@ -19,6 +19,7 @@ export const UPDATE_ENEMY_STATE = 'UPDATE_ENEMY_STATE'
 export const PASS_TURN = 'PASS_TURN'
 export const REMOVE_CARD = 'REMOVE_CARD'
 export const ADD_CARD = 'ADD_CARD'
+export const UPDATE_POWER = 'UPDATE_POWER'
 
 
 // ------------------------------------
@@ -70,6 +71,12 @@ export function removeCard(cardId) {
   }
 }
 
+export function updatePower () {
+  return {
+    type: UPDATE_POWER
+  }
+}
+
 export function setTurnFinished (boolean) {
   return {
     type: SET_TURN_FINISHED,
@@ -102,7 +109,10 @@ export const actions = {
   increment,
   doubleAsync,
   setupPlayers,
-  setMyTurn
+  setMyTurn,
+  updatePower,
+  addCard,
+  removeCard
 }
 
 // ------------------------------------
@@ -172,6 +182,30 @@ const ACTION_HANDLERS = {
   [UPDATE_ENEMY_STATE] : (state, action) => {
     return Object.assign({}, state, {
       enemy: action.payload
+    })
+  },
+  [UPDATE_POWER] : (state, action) => {
+    let enemyPower = 0
+    for (let array of Object.values(state.enemy.playingArea)) {
+      array.forEach((card) => {
+          enemyPower += card.power
+      })
+    }
+
+    let selfPower = 0
+    for (let array of Object.values(state.self.playingArea)) {
+      array.forEach((card) => {
+          selfPower += card.power
+      })
+    }
+
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        power: selfPower
+      }),
+      enemy: Object.assign({}, state.enemy, {
+        power: enemyPower
+      })
     })
   }
 }
