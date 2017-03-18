@@ -2,7 +2,7 @@ import React from 'react'
 import CardWrapper from './CardWrapper'
 import Card from './Card'
 import HiddenCard from './HiddenCard'
-
+import './Hand.scss'
 
 export default class Hand extends React.Component {
 
@@ -36,8 +36,9 @@ export default class Hand extends React.Component {
 
   loadContent () {
     let cards = this.renderHandComponents()
+    let owner = this.props.isEnemyHand ? 'enemy' : 'self'
     return (
-      <div className="d-flex flex-wrap justify-content-center my-1 px-2">
+      <div className={`d-flex flex-wrap justify-content-center px-2 py-2 ${owner}-hand-border`}>
         { cards }
       </div>
     )

@@ -1,0 +1,11 @@
+$border-color: rgb(71, 71, 71);
+
+.self-hand-border {
+  border-top: 5px solid $border-color;
+  margin-top: 10px;
+}
+
+.enemy-hand-border {
+  border-bottom: 5px solid $border-color;
+  margin-bottom: 10px;
+}
