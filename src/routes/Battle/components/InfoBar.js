@@ -1,5 +1,6 @@
 import React from 'react'
 import RaisedButton from 'material-ui/RaisedButton';
+import PixosMenu from 'routes/Battle/components/PixosMenu'
 
 export default class InfoBar extends React.Component {
 
@@ -35,11 +36,11 @@ export default class InfoBar extends React.Component {
   render () {
     let content = this.loadContent()
     return (
-      <div className="info-bar col-1">
-        <p>{ this.props.battle.enemy.name }</p>
-        <p> VS. </p>
-        <p>{ this.props.battle.self.name }</p>
+      <div className="info-bar col-1 d-flex flex-column justify-content-center align-items-center pt-2 pb-4">
+        <PixosMenu/>
+        <p className="mb-auto">{ this.props.battle.enemy.name }</p>
         {content}
+        <p className="mt-auto">{ this.props.battle.self.name }</p>
     </div>
     )
   }
