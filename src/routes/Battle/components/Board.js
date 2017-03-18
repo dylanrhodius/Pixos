@@ -16,6 +16,8 @@ export default class Board extends React.Component {
           { <PlayingArea type={'self'} cardArrays={this.props.battle.self.playingArea}/> }
           { <Hand hand={this.props.battle.self.hand}
                   removeCard={this.props.removeCard}
+                  setTurnFinished={this.props.setTurnFinished}
+                  setMyTurn={this.props.setMyTurn}
                   addCard={this.props.addCard}
                   isEnemyHand={false}/> }
       </div>
@@ -26,5 +28,7 @@ export default class Board extends React.Component {
 Board.propTypes = {
   battle : React.PropTypes.object.isRequired,
   removeCard : React.PropTypes.func.isRequired,
+  setTurnFinished  : React.PropTypes.func.isRequired,
+  setMyTurn : React.PropTypes.func.isRequired,
   addCard : React.PropTypes.func.isRequired
 }

@@ -145,7 +145,7 @@ const ACTION_HANDLERS = {
     })
   },
   [ADD_CARD] : (state, action) => {
-    var card = (state.self.hand.splice(action.payload, 1)).pop()
+    var card = (state.self.hand[action.payload])
     console.log(card)
     console.log(card.type);
     if(card.type == 'water'){ state.self.playingArea.water.push(card) }

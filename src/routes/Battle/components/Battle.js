@@ -27,6 +27,8 @@ export default class Battle extends React.Component {
                     passTurn={this.props.passTurn}
                     />
           <Board battle={this.props.battle}
+                setTurnFinished={this.props.setTurnFinished}
+                setMyTurn={this.props.setMyTurn}
                 removeCard={this.props.removeCard}
                 addCard={this.props.addCard} />
         </div>
