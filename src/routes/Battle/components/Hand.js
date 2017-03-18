@@ -12,7 +12,10 @@ export default class Hand extends React.Component {
       )
     } else {
       return this.props.hand.map(
-        (card, i) => <Card key={i} {...card} />
+        (card, i) => <Card key={i} {...card }
+                            removeCard={this.props.removeCard}
+                            addCard={this.props.addCard}
+                            id={i} />
       )
     }
   }
@@ -20,7 +23,6 @@ export default class Hand extends React.Component {
   loadContent () {
     let cards = this.renderHandComponents()
     return (
-
       <div className="d-flex flex-wrap justify-content-center mt-3 px-2">
         { cards }
       </div>
@@ -38,6 +40,8 @@ export default class Hand extends React.Component {
 
   propTypes: {
     hand : React.PropTypes.object.isRequired,
-    isEnemyHand: React.PropTypes.bool.isRequired
+    isEnemyHand: React.PropTypes.bool.isRequired,
+    removeCard : React.PropTypes.func.isRequired,
+    addCard : React.PropTypes.func.isRequired
   }
 }

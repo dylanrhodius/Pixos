@@ -2,18 +2,29 @@ import React from 'react'
 import Hand from 'routes/Battle/components/Hand'
 import { PlayingArea } from 'routes/Battle/components/PlayingArea'
 
-export const Board = (props) => (
-  <div className="board col-11" >
-      { <Hand hand={props.battle.enemy.hand} isEnemyHand={true} /> }
-      { <PlayingArea type={'enemy'} cardArrays={props.battle.enemy.playingArea}/> }
-      <hr className="m-0"/>
-      { <PlayingArea type={'self'} cardArrays={props.battle.self.playingArea}/> }
-      { <Hand hand={props.battle.self.hand} isEnemyHand={false} /> }
-  </div>
-)
+export default class Board extends React.Component {
 
-Board.propTypes = {
-  battle : React.PropTypes.object.isRequired
+  render() {
+    return (
+      <div className="board col-11" >
+          { <Hand hand={this.props.battle.enemy.hand}
+                  removeCard={this.props.removeCard}
+                  addCard={this.props.addCard}
+                  isEnemyHand={true}  /> }
+          { <PlayingArea type={'enemy'} cardArrays={this.props.battle.enemy.playingArea}/> }
+          <hr className="m-0"/>
+          { <PlayingArea type={'self'} cardArrays={this.props.battle.self.playingArea}/> }
+          { <Hand hand={this.props.battle.self.hand}
+                  removeCard={this.props.removeCard}
+                  addCard={this.props.addCard}
+                  isEnemyHand={false}/> }
+      </div>
+    )
+  }
 }
 
-export default Board
+Board.propTypes = {
+  battle : React.PropTypes.object.isRequired,
+  removeCard : React.PropTypes.func.isRequired,
+  addCard : React.PropTypes.func.isRequired
+}
