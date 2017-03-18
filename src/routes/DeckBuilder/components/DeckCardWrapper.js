@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from '../../Battle/components/Card'
+import DeckCard from './DeckCard'
 import RaisedButton from 'material-ui/RaisedButton'
 import Popover from 'material-ui/Popover'
 import Menu from 'material-ui/Menu'
@@ -36,7 +36,7 @@ render () {
        <div className="deck-container d-flex justify-content-center flex-wrap">
          <div>
            <div onTouchTap={this.handleTouchTap}>
-             <Card
+             <DeckCard
                 name={this.props.name}
                 power={this.props.power}
                 type={this.props.type}

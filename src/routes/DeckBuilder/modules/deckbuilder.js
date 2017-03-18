@@ -26,7 +26,6 @@ export function placeInDeck (cardId) {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [PLACE_IN_DECK]
 
 
 }
