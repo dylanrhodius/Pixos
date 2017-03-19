@@ -21,12 +21,26 @@ export function placeInDeck (cardId) {
   }
 }
 
+export const actions = {
+  placeInDeck
+}
+
+
+
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS =
-  [PLACE_IN_DECK]
+  [PLACE_IN_DECK] : (state, action) => {
+    var card = (state.self.chosenCards[action.payload])
+
+    return Object.assign({}, state, {
+      deck : Object.assign({}, state.self, {
+        inDeck: state.self.inDeck
+      })
+    })
+  }
 
 // ------------------------------------
 // Reducer
