@@ -1,14 +1,21 @@
-var cardData = require('../../../../server/cardData').CARD_DATA
-//cardData.js
-//let landCards = [iteration over data get land cards]
-// let landCards () {
-//   return cardData.map(
-//     (card, i) => key={i} {...card} id={i} />
-//   )
-// }
-//water
+let cardData = require('../../../../server/cardData').CARD_DATA
 
-//air
+function isLand(card) {
+  if (card.type === 'land') { return card }
+}
+
+function isWater(card) {
+  if (card.type === 'water') { return card }
+}
+
+function isAir(card) {
+  if (card.type === 'air') { return card }
+}
+
+let landArray = cardData.filter(isLand);
+let waterArray = cardData.filter(isWater);
+let airArray = cardData.filter(isAir);
+
 export const DECKBUILD_STATE = {
     dinoDollars: 200,
     deckLimit: 25,
@@ -16,15 +23,15 @@ export const DECKBUILD_STATE = {
     duplicateCardLimit: 3,
     deckName: '',
     land: {
-      inPool: [],
+      inPool: landArray,
       inDeck: []
     },
     water: {
-      inPool: [],
+      inPool: waterArray,
       inDeck: []
     },
     air: {
-      inPool: [],
+      inPool: airArray,
       inDeck: []
     }
 }
