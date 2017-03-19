@@ -34,12 +34,6 @@ body {
   box-shadow: 2px 2px 2px $shadow-color;
 }
 
-.game-card {
-  width: 72px;
-  height: 110px;
-  position: relative;
-}
-
 .overflow-wrap {
   overflow-wrap: break-word;
   hyphens: auto;
@@ -47,6 +41,12 @@ body {
 
 .circle {
   border-radius: 100%;
+}
+
+.highlighted-white-text {
+  color: white;
+  text-shadow: 1px 1px 1px black;
+  font-weight: bold;
 }
 
 $water-light: #b7deed;
@@ -63,6 +63,18 @@ $air-main: #a421e2;
 
 $grey-light: #d4d4d4;
 $grey-mid: #9a9a9a;
+
+.water-main-bkgrnd {
+  background-color: $water-main;
+}
+
+.land-main-bkgrnd {
+  background-color: $land-main;
+}
+
+.air-main-bkgrnd {
+  background-color: $air-main;
+}
 
 .water-bkgrnd {
   background: linear-gradient(135deg, $water-light 0%,$water-mid 50%,$water-main 51%,$water-light 100%)
