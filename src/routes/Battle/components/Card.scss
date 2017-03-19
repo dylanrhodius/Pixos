@@ -5,11 +5,19 @@
   position: absolute;
   bottom: 3px;
   left: 11px;
-  max-width: 90px;
+  max-width: 85px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
+
+.game-card {
+  width: 76px;
+  height: 90px;
+  position: relative;
+  border-radius: 5px;
+}
+
 
 .game-card-img-holder {
   min-height: 62px;
@@ -26,7 +34,7 @@
   max-height: 100%;
 }
 
-.game-card-text {
+.game-card-power {
   width: 24px;
   height: 24px;
   font-size: 0.9rem;
