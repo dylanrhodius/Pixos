@@ -7,7 +7,9 @@ export default class DeckCard extends React.Component {
   renderDeckComponents (cardArray, section) {
     return cardArray.map(
       (card, i) => { return(
-        <DeckCardWrapper placeInDeck={this.props.placeInDeck}
+        <DeckCardWrapper playerDeck={this.props.playerDeck}
+                    placeInDeck={this.props.placeInDeck}
+                    cards={this.props}
                     key={i} {...card}
                     id={`${this.props.type}_${section}_${i}`} />
                   )
@@ -34,6 +36,7 @@ export default class DeckCard extends React.Component {
   }
 
   propTypes: {
+    playerDeck : React.PropTypes.object.isRequired,
     placeInDeck : React.PropTypes.func.isRequired,
     cards : React.PropTypes.object.isRequired,
     type : React.PropTypes.string.isRequired

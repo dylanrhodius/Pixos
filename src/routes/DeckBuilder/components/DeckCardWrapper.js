@@ -37,7 +37,10 @@ export default class DeckCardWrapper extends React.Component {
       type : this.props.type,
       cardId: parseInt(this.props.id.split("_")[2])
     }
-    this.props.placeInDeck(cardData)
+    if (this.props.playerDeck.dinoDollars >= this.props.cost)
+    {
+      this.props.placeInDeck(cardData)
+    }
   }
 
 render () {
@@ -70,6 +73,7 @@ render () {
  }
 
  propTypes: {
+   playerDeck : React.PropTypes.object.isRequired,
    name: React.propTypes.string.isRequired,
    power: React.propTypes.string.isRequired,
    type: React.propTypes.string.isRequired,
