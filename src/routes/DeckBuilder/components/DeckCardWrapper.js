@@ -32,15 +32,16 @@ export default class DeckCardWrapper extends React.Component {
     });
   };
 
+  sufficientDollars = () => {
+    return (this.props.playerDeck.dinoDollars >= this.props.cost)
+  }
+
   handleCardSelection = () => {
     let cardData = {
       type : this.props.type,
       cardId: parseInt(this.props.id.split("_")[2])
     }
-    if (this.props.playerDeck.dinoDollars >= this.props.cost)
-    {
-      this.props.placeInDeck(cardData)
-    }
+    if (this.sufficientDollars()) { this.props.placeInDeck(cardData) }
   }
 
 render () {
