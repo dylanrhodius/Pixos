@@ -4,6 +4,7 @@ import DeckRow from './DeckRow'
 export default class DeckBuilder extends React.Component {
 
   render () {
+    console.log(this.props.playerDeck);
     return (
       <div>
         <h2>DeckBuilder</h2>

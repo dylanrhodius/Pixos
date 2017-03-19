@@ -2,7 +2,6 @@ import {
   DECKBUILD_STATE
 } from 'routes/DeckBuilder/modules/initialDeckState'
 
-
 import store from 'store/createStore'
 // ------------------------------------
 // Constants
@@ -25,9 +24,6 @@ export const actions = {
   placeInDeck
 }
 
-
-
-
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
@@ -40,10 +36,11 @@ const ACTION_HANDLERS = {
     return Object.assign({}, state, {
       [action.payload.type]: Object.assign({}, state[action.payload.type], {
         inDeck: array
-      })
+      }),
+      cardsInDeck: state.cardsInDeck + 1,
+      dinoDollars: state.dinoDollars - card.cost
     })
   }
-
 }
 
 // ------------------------------------
