@@ -1,30 +1,35 @@
 import React from 'react'
 import './DeckCard.scss'
 import DeckCardWrapper from './DeckCardWrapper'
-var cardData = require('../../../../server/cardData').CARD_DATA
 
 export default class DeckCard extends React.Component {
 
-  renderDeckComponents () {
-    return cardData.map(
+  renderDeckComponents (cardArray) {
+    return cardArray.map(
       (card, i) => <DeckCardWrapper key={i} {...card} id={i} />
     )
   }
 
   render () {
-    let cards = this.renderDeckComponents()
+    let poolCards = this.renderDeckComponents(this.props.cards.inPool)
+    let deckCards = this.renderDeckComponents(this.props.cards.inDeck)
+
     return (
-      <div className="card-container d-flex justify-content-center flex-wrap">
-        { cards }
+      <div>
+        <h3>Available cards</h3>
+        <div className="card-container d-flex justify-content-center flex-wrap">
+          { poolCards }
+        </div>
+        <h3>Chosen cards</h3>
+        <div className="card-container d-flex justify-content-center flex-wrap">
+          { deckCards }
+        </div>
       </div>
     )
   }
 
   propTypes: {
-    type : React.PropTypes.string.isRequired,
-    imgUrl : React.PropTypes.string.isRequired,
-    name : React.PropTypes.string.isRequired,
-    power : React.PropTypes.string.isRequired,
-    cost : React.PropTypes.string.isRequired
+    cards : React.PropTypes.object.isRequired,
+    type : React.PropTypes.string.isRequired
   }
 }

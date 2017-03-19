@@ -17,8 +17,7 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => ({
-  // eventual state
-
+  playerDeck : state.deckbuilder
 })
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:
