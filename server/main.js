@@ -1,6 +1,7 @@
 'use strict'
 
 const express = require('express')
+const bodyParser = require('body-parser')
 const debug = require('debug')('app:server')
 const path = require('path')
 const http = require('http')
@@ -42,6 +43,8 @@ global.User = require("./User");
 
 // Apply gzip compression
 app.use(compress())
+
+app.use(bodyParser.json());
 
 // Loading socket.io
 var io = require('socket.io').listen(server);
@@ -189,6 +192,11 @@ app.get('/user', (req,res) => {
     res.send('No data available');
   }
 });
+
+app.post('/user/deck', function (req, res) {
+  console.log('Received JSON', req.body)
+  res.send('POST request to the homepage')
+})
 
   app.use('*', function (req, res, next) {
     const filename = path.join(compiler.outputPath, 'index.html')
