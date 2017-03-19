@@ -36,12 +36,21 @@ export default class DeckCardWrapper extends React.Component {
     return (this.props.playerDeck.dinoDollars >= this.props.cost)
   }
 
+  lessThanCardLimit = () => {
+    let array = this.props.playerDeck[`${this.props.type}`].inDeck
+    let counter = 0
+    array.forEach((card) => {
+      if (card._id == this.props._id) { counter += 1 }
+    })
+    return counter < this.props.playerDeck.duplicateCardLimit
+  }
+
   handleCardSelection = () => {
     let cardData = {
       type : this.props.type,
       cardId: parseInt(this.props.id.split("_")[2])
     }
-    if (this.sufficientDollars()) { this.props.placeInDeck(cardData) }
+    if ((this.sufficientDollars()) && (this.lessThanCardLimit())) { this.props.placeInDeck(cardData) }
   }
 
 render () {
@@ -81,6 +90,7 @@ render () {
    cost: React.propTypes.string.isRequired,
    imgUrl: React.propTypes.string.isRequired,
    placeInDeck: React.propTypes.func.isRequired,
-   id: React.propTypes.string.isRequired
+   id: React.propTypes.string.isRequired,
+   _id: React.propTypes.string.isRequired
  }
 }
