@@ -26,6 +26,7 @@ const MongoDBStore = MongodbStoreFactory(session)
 // set a usersCollection constant equal to the users collection
 
 const usersCollection = db.get('users')
+const sessionsCollection = db.get('mySessions')
 
 
 const domain = process.env.APP_DOMAIN || 'localhost'
@@ -194,8 +195,8 @@ app.get('/user', (req,res) => {
 });
 
 app.post('/user/deck', function (req, res) {
-  console.log('Received JSON', req.body)
-  res.send('POST request to the homepage')
+  req.session.deck = req.body
+  res.send('')
 })
 
   app.use('*', function (req, res, next) {
