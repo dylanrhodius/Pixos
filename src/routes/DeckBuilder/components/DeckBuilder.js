@@ -29,9 +29,9 @@ export default class DeckBuilder extends React.Component {
       <div>
         <button onClick={this.saveDeck}>Save Deck</button>
         <h2>DeckBuilder</h2>
-        { <DeckRow placeInDeck={this.props.placeInDeck} type={'land'} cards={this.props.playerDeck.land}/>}
-        { <DeckRow placeInDeck={this.props.placeInDeck} type={'air'} cards={this.props.playerDeck.air}/>}
-        { <DeckRow placeInDeck={this.props.placeInDeck} type={'water'} cards={this.props.playerDeck.water}/>}
+        { <DeckRow placeInDeck={this.props.placeInDeck} type={'land'} playerDeck={this.props.playerDeck} cards={this.props.playerDeck.land}/>}
+        { <DeckRow placeInDeck={this.props.placeInDeck} type={'air'} playerDeck={this.props.playerDeck} cards={this.props.playerDeck.air}/>}
+        { <DeckRow placeInDeck={this.props.placeInDeck} type={'water'} playerDeck={this.props.playerDeck} cards={this.props.playerDeck.water}/>}
       </div>
     )
   }
