@@ -9,13 +9,21 @@ export default class DeckCard extends React.Component {
 
 render() {
   return (
-    <div className={`card deck-card box-shadow mx-2 p-1 ${this.props.type}-faint-bkgrnd`}>
-      <div className="d-flex justify-content-center align-items-center deck-card-img-holder pb-1">
-        <img className="deck-card-img justify-content-center" src={this.props.imgUrl} alt="Card image cap"/>
+    <div className={`deck-card box-shadow mx-1 ${this.props.type}-faint-bkgrnd d-flex align-items-stretch`}>
+      <div className={`deck-card-name-holder pb-1 ${this.props.type}-main-bkgrnd`}>
+        <h4 className="deck-card-name m-0 text-left highlighted-white-text">
+          { this.props.name.charAt(0).toUpperCase() + this.props.name.slice(1) }
+        </h4>
       </div>
-      <h4 className="card-title deck-card-name overflow-wrap m-0">{ this.props.name.charAt(0).toUpperCase() + this.props.name.slice(1) }</h4>
-      <span className={`deck-card-text ${this.props.type}-bkgrnd circle d-inline-block mx-auto`}>{ this.props.power }</span>
-      <span className="deck-card-cost bkgrnd circle d-inline-block mx-auto overflow-wrap">${ this.props.cost }</span>
+      <div className="deck-card-img-holder d-flex justify-content-top align-items-center p-1">
+        <img className="deck-card-img pb-2" src={this.props.imgUrl} alt="Card image cap"/>
+      </div>
+      <span className={`deck-card-power ${this.props.type}-bkgrnd circle d-inline-block mx-auto highlighted-white-text`}>
+        { this.props.power }
+      </span>
+      <span className={`deck-card-cost ${this.props.cost}-bkgrnd circle d-inline-block mx-auto highlighted-white-text`}>
+        ${ this.props.cost }
+      </span>
     </div>
   )
 }

@@ -1,10 +1,16 @@
-.deck-card-name {
-  font-size: 0.6rem;
+.deck-card {
+  width: 105px;
+  height: 130px;
+  position: relative;
+  border-radius: 5px;
+  &:hover{
+    box-shadow: 0px 0px 10px 5px #abafb9;
+  }
 }
 
 .deck-card-img-holder {
-  min-height: 62px;
-  width: 62px;
+  min-height: 80px;
+  width: 90px;
 }
 
 .deck-card-img {
@@ -12,21 +18,46 @@
   max-height: 100%;
 }
 
-.deck-card-text {
+.deck-card-name {
+  font-size: 0.6rem;
+  transform: rotate(-90deg);
+  transform-origin: left bottom 0;
+  position: absolute;
+  bottom: 3px;
+  left: 11px;
+  max-width: 105px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.deck-card-name-holder {
+  position: relative;
+  width: 14px;
+}
+
+.deck-card-power {
   width: 22px;
   height: 22px;
   font-size: 0.75rem;
   line-height: 1.9;
   position: absolute;
   bottom: 3px;
-  left: 3px;
+  left: 15px;
   color: white;
   text-shadow: 1px 1px 1px black;
   font-weight: bold;
 }
 
-.deck-card {
-  &:hover{
-    box-shadow: 0px 0px 10px 5px #abafb9;
-  }
+.deck-card-cost {
+  width: 22px;
+  height: 22px;
+  font-size: 0.75rem;
+  line-height: 1.9;
+  position: absolute;
+  bottom: 3px;
+  right: 3px;
+  color: white;
+  text-shadow: 1px 1px 1px black;
+  font-weight: bold;
 }
