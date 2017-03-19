@@ -1,11 +1,11 @@
 var cardData = require('../../../../server/cardData').CARD_DATA
 //cardData.js
 //let landCards = [iteration over data get land cards]
-let landCards () {
-  return cardData.map(
-    (card, i) => key={i} {...card} id={i} />
-  )
-}
+// let landCards () {
+//   return cardData.map(
+//     (card, i) => key={i} {...card} id={i} />
+//   )
+// }
 //water
 
 //air
@@ -16,7 +16,7 @@ export const DECKBUILD_STATE = {
     duplicateCardLimit: 3,
     deckName: '',
     land: {
-      inPool: landCards,
+      inPool: [],
       inDeck: []
     },
     water: {

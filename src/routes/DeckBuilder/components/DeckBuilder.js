@@ -1,7 +1,6 @@
 import React from 'react'
 var cardData = require('../../../../server/cardData').CARD_DATA
 import DeckCardWrapper from './DeckCardWrapper'
-import ChosenCards from './ChosenCards'
 
 export default class DeckBuilder extends React.Component {
 
@@ -20,7 +19,6 @@ export default class DeckBuilder extends React.Component {
           { cards }
         </div>
         <div className="chosen-cards container d-flex justify-content-center flex-wrap py-5">
-          < ChosenCards />
         </div>
       </div>
     )

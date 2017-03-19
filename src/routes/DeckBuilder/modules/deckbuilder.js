@@ -37,7 +37,7 @@ const ACTION_HANDLERS = {
     let array = (state[action.payload.type].inDeck).push(card)
 
     return Object.assign({}, state, {
-      action.payload.type: Object.assign({}, state[action.payload.type], {
+      [action.payload.type]: Object.assign({}, state[action.payload.type], {
         inDeck: array
       })
     })
