@@ -16,13 +16,16 @@ render() {
         </h4>
       </div>
       <div className="deck-card-img-holder d-flex justify-content-top align-items-center p-1">
-        <img className="deck-card-img pb-2" src={this.props.imgUrl} alt="Card image cap"/>
+        <img className="deck-card-img px-1" src={this.props.imgUrl} alt="Card image cap"/>
       </div>
       <span className={`deck-card-power ${this.props.type}-bkgrnd circle d-inline-block mx-auto highlighted-white-text`}>
         { this.props.power }
       </span>
       <span className={`deck-card-cost ${this.props.cost}-bkgrnd circle d-inline-block mx-auto highlighted-white-text`}>
         ${ this.props.cost }
+      </span>
+      <span className={`deck-card-medic circle d-inline-block mx-auto highlighted-white-text`}>
+        +
       </span>
     </div>
   )

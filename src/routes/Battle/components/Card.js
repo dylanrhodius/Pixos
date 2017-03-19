@@ -9,8 +9,6 @@ export default class Card extends React.Component {
 
 render() {
   return (
-
-
       <div className={`game-card box-shadow mx-1 ${this.props.type}-faint-bkgrnd d-flex align-items-stretch`}>
         <div className={`game-card-name-holder pb-1 ${this.props.type}-main-bkgrnd`}>
           <h4 className="game-card-name m-0 text-left highlighted-white-text">
