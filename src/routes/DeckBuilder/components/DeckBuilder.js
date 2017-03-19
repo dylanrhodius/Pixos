@@ -1,28 +1,25 @@
 import React from 'react'
-var cardData = require('../../../../server/cardData').CARD_DATA
-import DeckCardWrapper from './DeckCardWrapper'
 import ChosenCards from './ChosenCards'
+import DeckRow from './DeckRow'
 
 export default class DeckBuilder extends React.Component {
 
-  renderDeckComponents () {
-    return cardData.map(
-      (card, i) => <DeckCardWrapper key={i} {...card} id={i} />
-    )
-  }
-
   render () {
-    let cards = this.renderDeckComponents()
     return (
       <div>
         <h2>DeckBuilder</h2>
-        <div className="deck-container d-flex justify-content-center flex-wrap">
-          { cards }
-        </div>
+        { <DeckRow type={'land'} cards={this.props.land}/>}
+        { <DeckRow type={'air'} cards={this.props.air}/>}
+        { <DeckRow type={'water'} cards={this.props.water}/>}
         <div className="chosen-cards container d-flex justify-content-center flex-wrap py-5">
           < ChosenCards />
         </div>
       </div>
     )
+  }
+
+  propTypes: {
+    type  : React.PropTypes.string.isRequired,
+    cardArrays  : React.PropTypes.object.isRequired
   }
 }

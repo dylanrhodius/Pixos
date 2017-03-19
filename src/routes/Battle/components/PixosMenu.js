@@ -12,7 +12,7 @@ export default class PixosMenu extends React.Component {
     super(props)
 
     this.state = {
-     open: false,
+     open: false
    };
 
    this.handleTouchTap = this.handleTouchTap.bind(this)
