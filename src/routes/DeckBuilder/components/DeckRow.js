@@ -6,7 +6,12 @@ export default class DeckCard extends React.Component {
 
   renderDeckComponents (cardArray, section) {
     return cardArray.map(
-      (card, i) => <DeckCardWrapper key={i} {...card} id={`${this.props.type}_${section}_${i}`} />
+      (card, i) => { return(
+        <DeckCardWrapper placeInDeck={this.props.placeInDeck}
+                    key={i} {...card}
+                    id={`${this.props.type}_${section}_${i}`} />
+                  )
+      }
     )
   }
 

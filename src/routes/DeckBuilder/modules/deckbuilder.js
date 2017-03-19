@@ -34,7 +34,8 @@ export const actions = {
 const ACTION_HANDLERS = {
   [PLACE_IN_DECK] : (state, action) => {
     let card = (state[action.payload.type].inPool[action.payload.cardId])
-    let array = (state[action.payload.type].inDeck).push(card)
+    let array = state[action.payload.type].inDeck
+    array.push(card)
 
     return Object.assign({}, state, {
       [action.payload.type]: Object.assign({}, state[action.payload.type], {

@@ -13,6 +13,8 @@ export default class DeckCardWrapper extends React.Component {
     this.state = {
       open: false
     }
+
+    this.handleCardSelection = this.handleCardSelection.bind(this)
   }
 
   handleTouchTap = (event) => {
@@ -30,6 +32,14 @@ export default class DeckCardWrapper extends React.Component {
     });
   };
 
+  handleCardSelection = () => {
+    let cardData = {
+      type : this.props.type,
+      cardId: parseInt(this.props.id.split("_")[2])
+    }
+    this.props.placeInDeck(cardData)
+  }
+
 render () {
    return (
     <div className="mb-2">
@@ -41,7 +51,6 @@ render () {
             cost={this.props.cost}
             imgUrl={this.props.imgUrl}
             placeInDeck={this.props.placeInDeck}
-
           />
         </div>
       <Popover
@@ -52,10 +61,7 @@ render () {
         onRequestClose={this.handleRequestClose}
       >
         <Menu>
-        <MenuItem primaryText="Place In Deck" />
-        <Link href={`https://en.wikipedia.org/wiki/Tyrannosaurus`} > <MenuItem primaryText="Card Info"  /> </Link>
-        <MenuItem primaryText="Remove" />
-
+        <MenuItem primaryText="Place In Deck" onClick={this.handleCardSelection} />
         </Menu>
 
       </Popover>
@@ -69,6 +75,7 @@ render () {
    type: React.propTypes.string.isRequired,
    cost: React.propTypes.string.isRequired,
    imgUrl: React.propTypes.string.isRequired,
-   placeInDeck: React.propTypes.func.isRequired
+   placeInDeck: React.propTypes.func.isRequired,
+   id: React.propTypes.string.isRequired
  }
 }
