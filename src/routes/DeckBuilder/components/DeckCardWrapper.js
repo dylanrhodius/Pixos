@@ -14,7 +14,8 @@ export default class DeckCardWrapper extends React.Component {
       open: false
     }
 
-    this.handleCardSelection = this.handleCardSelection.bind(this)
+    this.addCardToDeck = this.addCardToDeck.bind(this)
+    this.removeCardFromDeck = this.removeCardFromDeck.bind(this)
   }
 
   handleTouchTap = (event) => {
@@ -45,7 +46,7 @@ export default class DeckCardWrapper extends React.Component {
     return counter < this.props.playerDeck.duplicateCardLimit
   }
 
-  handleCardSelection = () => {
+  addCardToDeck = () => {
     let cardData = {
       type : this.props.type,
       cardId: parseInt(this.props.id.split("_")[2])
@@ -53,7 +54,31 @@ export default class DeckCardWrapper extends React.Component {
     if ((this.sufficientDollars()) && (this.lessThanCardLimit())) { this.props.placeInDeck(cardData) }
   }
 
+  removeCardFromDeck = () => {
+    console.log("removeCardFromDeck");
+    console.log(this.props.id.split("_")[1]);
+    let cardData = {
+      type : this.props.type,
+      cardId: parseInt(this.props.id.split("_")[2])
+    }
+    this.props.removeFromDeck(cardData)
+  }
+
+  loadContent () {
+    if(this.props.id.split("_")[1] == 'pool'){
+      return (
+        <MenuItem primaryText="Place In Deck" onClick={this.addCardToDeck} />
+      )
+    } else {
+      return(
+        <MenuItem primaryText="Remove From Deck" onClick={this.removeCardFromDeck} />
+      )
+    }
+  }
+
+
 render () {
+  let content = this.loadContent()
    return (
     <div className="mb-2">
        <div onTouchTap={this.handleTouchTap}>
@@ -64,6 +89,7 @@ render () {
             cost={this.props.cost}
             imgUrl={this.props.imgUrl}
             placeInDeck={this.props.placeInDeck}
+            removeFromDeck={this.props.removeFromDeck}
           />
         </div>
       <Popover
@@ -74,7 +100,7 @@ render () {
         onRequestClose={this.handleRequestClose}
       >
         <Menu>
-        <MenuItem primaryText="Place In Deck" onClick={this.handleCardSelection} />
+          { content }
         </Menu>
 
       </Popover>
@@ -83,6 +109,7 @@ render () {
  }
 
  propTypes: {
+   removeFromDeck : React.PropTypes.func.isRequired,
    playerDeck : React.PropTypes.object.isRequired,
    name: React.propTypes.string.isRequired,
    power: React.propTypes.string.isRequired,

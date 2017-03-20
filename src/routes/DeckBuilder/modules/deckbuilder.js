@@ -8,6 +8,7 @@ import store from 'store/createStore'
 // ------------------------------------
 // const function
 export const PLACE_IN_DECK = 'PLACE_IN_DECK'
+export const REMOVE_FROM_DECK = 'REMOVE_FROM_DECK'
 
 // ------------------------------------
 // Actions
@@ -20,8 +21,16 @@ export function placeInDeck (card) {
   }
 }
 
+export function removeFromDeck (card) {
+  return {
+    type: REMOVE_FROM_DECK,
+    payload: card
+  }
+}
+
 export const actions = {
-  placeInDeck
+  placeInDeck,
+  removeFromDeck
 }
 
 // ------------------------------------
@@ -39,6 +48,18 @@ const ACTION_HANDLERS = {
       }),
       cardsInDeck: state.cardsInDeck + 1,
       dinoDollars: state.dinoDollars - card.cost
+    })
+  },
+  [REMOVE_FROM_DECK] : (state, action) => {
+    let card = (state[action.payload.type].inDeck[action.payload.cardId])
+    let array = state[action.payload.type].inDeck
+    array.splice(action.payload.cardId, 1)
+    return Object.assign({}, state, {
+      [action.payload.type]: Object.assign({}, state[action.payload.type], {
+        inDeck: array
+      }),
+      cardsInDeck: state.cardsInDeck - 1,
+      dinoDollars: state.dinoDollars + card.cost
     })
   }
 }

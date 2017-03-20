@@ -7,7 +7,8 @@ export default class DeckCard extends React.Component {
   renderDeckComponents (cardArray, section) {
     return cardArray.map(
       (card, i) => { return(
-        <DeckCardWrapper playerDeck={this.props.playerDeck}
+        <DeckCardWrapper removeFromDeck={this.props.removeFromDeck}
+                    playerDeck={this.props.playerDeck}
                     placeInDeck={this.props.placeInDeck}
                     cards={this.props}
                     key={i} {...card}
@@ -36,6 +37,7 @@ export default class DeckCard extends React.Component {
   }
 
   propTypes: {
+    removeFromDeck : React.PropTypes.func.isRequired,
     playerDeck : React.PropTypes.object.isRequired,
     placeInDeck : React.PropTypes.func.isRequired,
     cards : React.PropTypes.object.isRequired,
