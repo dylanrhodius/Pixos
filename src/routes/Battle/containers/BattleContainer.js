@@ -12,7 +12,8 @@ import {  increment,
           updateScore,
           clearPlayingArea,
           setRoundNotification,
-          updateHasRoundFinished
+          updateHasRoundFinished,
+          updateRoundCounter
 } from '../modules/battle'
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -40,7 +41,8 @@ const mapDispatchToProps = {
   updateScore,
   clearPlayingArea,
   setRoundNotification,
-  updateHasRoundFinished
+  updateHasRoundFinished,
+  updateRoundCounter
 }
 
 const mapStateToProps = (state) => ({

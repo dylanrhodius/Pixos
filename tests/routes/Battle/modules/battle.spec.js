@@ -24,7 +24,8 @@ import {
   updateScore,
   clearPlayingArea,
   setRoundNotification,
-  updateHasRoundFinished
+  updateHasRoundFinished,
+  updateRoundCounter
   default as battleReducer
 } from 'routes/Battle/modules/battle'
 
@@ -49,6 +50,7 @@ describe('(Redux Module) Battle', () => {
     expect(CLEAR_PLAYING_AREA).to.equal('CLEAR_PLAYING_AREA'),
     expect(SET_ROUND_NOTIFICATION).to.equal('SET_ROUND_NOTIFICATION')
     expect(UPDATE_HAS_ROUND_FINISHED).to.equal('UPDATE_HAS_ROUND_FINISHED')
+    expect(UPDATE_ROUND_COUNTER).to.equal('UPDATE_ROUND_COUNTER')
   })
 
   describe('(Reducer)', () => {
@@ -75,6 +77,16 @@ describe('(Redux Module) Battle', () => {
 
     it('Should return an action with type "SETUP_PLAYERS".', () => {
       expect(setupPlayers()).to.have.property('type', SETUP_PLAYERS)
+    })
+  })
+
+  describe('(Action Creator) updateRoundCounter', () => {
+    it('Should be exported as a function.', () => {
+      expect(updateRoundCounter).to.be.a('function')
+    })
+
+    it('Should return an action with type "UPDATE_ROUND_COUNTER".', () => {
+      expect(updateRoundCounter()).to.have.property('type', SETUP_PLAYERS)
     })
   })
 

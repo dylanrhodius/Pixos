@@ -24,6 +24,7 @@ export const UPDATE_SCORE = 'UPDATE_SCORE'
 export const CLEAR_PLAYING_AREA = 'CLEAR_PLAYING_AREA'
 export const SET_ROUND_NOTIFICATION = 'SET_ROUND_NOTIFICATION'
 export const UPDATE_HAS_ROUND_FINISHED = 'UPDATE_HAS_ROUND_FINISHED'
+export const UPDATE_ROUND_COUNTER = 'UPDATE_ROUND_COUNTER'
 
 
 // ------------------------------------
@@ -69,10 +70,16 @@ export function addCard (cardId) {
 }
 
 export function updateScore (selfHasWon) {
-  console.log("update score")
+  console.log("updateScore")
   return {
     type: UPDATE_SCORE,
     payload: selfHasWon
+  }
+}
+export function updateRoundCounter() {
+  console.log("updateRoundCounter")
+  return {
+    type: UPDATE_ROUND_COUNTER
   }
 }
 export function updateHasRoundFinished (boolean) {
@@ -150,7 +157,8 @@ export const actions = {
   updateScore,
   clearPlayingArea,
   setRoundNotification,
-  updateHasRoundFinished
+  updateHasRoundFinished,
+  updateRoundCounter
 }
 
 // ------------------------------------
@@ -189,6 +197,14 @@ const ACTION_HANDLERS = {
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
         hasRoundFinished: action.payload
+      }),
+    })
+  },
+  [UPDATE_ROUND_COUNTER] : (state, action) => {
+    let newRoundCount = state.self.roundCounter + 1
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        roundCounter: newRoundCount
       }),
     })
   },
