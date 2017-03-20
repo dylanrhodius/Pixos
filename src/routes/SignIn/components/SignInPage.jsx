@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 import Header from '../../../components/Header'
 import RaisedButton from 'material-ui/RaisedButton'
 import './SignInPage.scss'
+import CircularProgress from 'material-ui/CircularProgress';
 
 export default class SignInPage extends React.Component {
 
@@ -39,19 +40,32 @@ export default class SignInPage extends React.Component {
           });
   }
 
-  
+  loadContent() {
+    if (this.state.completedAPICall) {
+      return (
+        <div>
+          <SignInForm />
+          <br/>
+          <Link to={`/battle`} ><RaisedButton label="Start Matchmaking" primary={true}/></Link>
+          <br/>
+          <br/>
+          <Link to={`/deckbuilder`} ><RaisedButton label="Deck Builder" primary={true}/></Link>
+        </div>
+      )
+    } else {
+      return ( <CircularProgress size={60} thickness={7} /> )
+    }
+  }
+
+
 
   render() {
+    let content = this.loadContent()
     console.log('state is ', this.state)
     return (
       <div className="sign-in-background">
         <Header />
-        {<SignInForm />}
-        <br/>
-        <Link to={`/battle`} ><RaisedButton label="Start Matchmaking" primary={true}/></Link>
-        <br/>
-        <br/>
-        <Link to={`/deckbuilder`} ><RaisedButton label="Deck Builder" primary={true}/></Link>
+        { content }
       </div>
     );
   }
