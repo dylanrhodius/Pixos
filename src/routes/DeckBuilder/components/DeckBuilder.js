@@ -1,48 +1,22 @@
 import React from 'react'
 import DeckRow from './DeckRow'
+import DeckBuilderInfoBar from './DeckBuilderInfoBar'
 
 export default class DeckBuilder extends React.Component {
 
-  constructor (props) {
-    super (props);
-
-    this.saveDeck = this.saveDeck.bind(this)
-  }
-
-  saveDeck () {
-    let deck = this.props.playerDeck.land.inDeck
-                .concat(this.props.playerDeck.air.inDeck
-                  .concat(this.props.playerDeck.water.inDeck))
-    console.log('Deck is', deck)
-    fetch(`${window.location.origin}/user/deck`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(deck)
-    })
-  }
-
-  loadContent() {
-    if (this.props.playerDeck.cardsInDeck == this.props.playerDeck.deckSize)
-    {
-      return <button onClick={this.saveDeck}>Save Deck</button>
-    } else {
-      return <h2>You must have 25 cards before saving</h2>
-    }
-  }
-
   render () {
-    let content = this.loadContent()
     console.log(this.props.playerDeck);
     return (
-      <div>
-        <h2>DeckBuilder</h2>
-        { content }
+      <div className="row no-gutters">
+        <div className="info-bar col-1 justify-content-center align-items-center pt-2 pb-4">
+          { <DeckBuilderInfoBar playerDeck={this.props.playerDeck}/> }
+        </div>
+      <div className="deck col-11" >
         { <DeckRow removeFromDeck={this.props.removeFromDeck} placeInDeck={this.props.placeInDeck} type={'land'} playerDeck={this.props.playerDeck} cards={this.props.playerDeck.land}/>}
         { <DeckRow removeFromDeck={this.props.removeFromDeck} placeInDeck={this.props.placeInDeck} type={'air'} playerDeck={this.props.playerDeck} cards={this.props.playerDeck.air}/>}
         { <DeckRow removeFromDeck={this.props.removeFromDeck} placeInDeck={this.props.placeInDeck} type={'water'} playerDeck={this.props.playerDeck} cards={this.props.playerDeck.water}/>}
       </div>
+    </div>
     )
   }
 
