@@ -251,19 +251,20 @@ if (project.env === 'development') {
     })
 
   app.get('/user', (req,res) => {
+    console.log('session is ', req.session)
     // if a session exists:
     if(typeof(req.session.passport) !== 'undefined') {
       console.log('Session exists');
       // find the user in the database whose facebookId (white) matches the session user's id (red)
-      usersCollection.findOne({facebookId: req.session.passport.user}).then((doc) => {
+      usersCollection.findOne({facebookId: req.session.passport.user}).then((userObj) => {
         res.setHeader('Content-Type', 'application/json');
         // return (or send) the document object
-        res.send(doc);
+        res.send({user: userObj});
       })
     } else {
       console.log('Session does not exist');
       res.setHeader('Content-Type', 'application/json');
-      res.send('No data available');
+      res.send({ user: null });
     }
   });
 
@@ -277,9 +278,10 @@ if (project.env === 'development') {
     } else {
       console.log('Session does not exist');
       res.setHeader('Content-Type', 'application/json');
-      res.send('No data available');
+      res.send({ deck: null });
     }
   });
+
 
   app.post('/user/deck', function (req, res) {
     console.log("Request in /user", req.session);
@@ -323,15 +325,15 @@ if (project.env === 'development') {
     if(typeof(req.session.passport) !== 'undefined') {
       console.log('Session exists');
       // find the user in the database whose facebookId (white) matches the session user's id (red)
-      usersCollection.findOne({facebookId: req.session.passport.user}).then((doc) => {
+      usersCollection.findOne({facebookId: req.session.passport.user}).then((userObj) => {
         res.setHeader('Content-Type', 'application/json');
         // return (or send) the document object
-        res.send(doc);
+        res.send({user: userObj});
       })
     } else {
       console.log('Session does not exist');
       res.setHeader('Content-Type', 'application/json');
-      res.send('No data available');
+      res.send({ user: null });
     }
   });
 
@@ -345,7 +347,7 @@ if (project.env === 'development') {
     } else {
       console.log('Session does not exist');
       res.setHeader('Content-Type', 'application/json');
-      res.send('No data available');
+      res.send({ deck: null });
     }
   });
 
