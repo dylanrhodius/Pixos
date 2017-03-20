@@ -58,7 +58,7 @@ export default class Battle extends React.Component {
       this.props.updateScore(selfHasWon)
       this.props.updateHasRoundFinished(true)
       this.props.passTurn(false)
-      this.props.clearPlayingArea()
+
       this.props.setRoundNotification(selfHasWon)
       this.props.setTurnFinished(true)
       this.props.setMyTurn(false)
@@ -79,6 +79,10 @@ export default class Battle extends React.Component {
       that.props.updateHasRoundFinished(false)
       that.props.updateEnemyState(data)
       that.adjudicateGameState()
+      if(data.hasRoundFinished) {
+        that.props.clearPlayingArea()
+        that.props.updatePower()
+       }
       if (that.props.battle.self.hasPassed) {
         that.props.setMyTurn(false)
         that.props.setTurnFinished(true)

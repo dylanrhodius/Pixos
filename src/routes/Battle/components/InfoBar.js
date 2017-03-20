@@ -38,11 +38,13 @@ export default class InfoBar extends React.Component {
     return (
       <div className="info-bar col-1 d-flex flex-column justify-content-center align-items-center pt-2 pb-4">
         <PixosMenu/>
+        <h3 className="my-2"><span>Score: </span>{this.props.battle.enemy.score}</h3>
         <p className="mb-auto">{ this.props.battle.enemy.name }</p>
-        <h3 className="my-2">{this.props.battle.enemy.power}</h3>
+        <h4 className="my-2"><span>Power: </span>{this.props.battle.enemy.power}</h4>
         {content}
-        <h3 className="my-2">{this.props.battle.self.power}</h3>
+        <h4 className="my-2"><span>Power: </span>{this.props.battle.self.power}</h4>
         <p className="mt-auto">{ this.props.battle.self.name }</p>
+        <h3 className="my-2"><span>Score: </span>{this.props.battle.self.score}</h3>
     </div>
     )
   }

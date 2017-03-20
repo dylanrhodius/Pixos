@@ -201,14 +201,9 @@ const ACTION_HANDLERS = {
   },
   [ADD_CARD] : (state, action) => {
     var card = (state.self.hand[action.payload])
-    console.log(card)
-    console.log(card.type);
     if(card.type == 'water'){ state.self.playingArea.water.push(card) }
     else if (card.type == 'land'){ state.self.playingArea.land.push(card) }
     else { state.self.playingArea.air.push(card) }
-    console.log('AIR FIELD ', state.self.playingArea.air)
-    console.log('LAND FIELD ', state.self.playingArea.land)
-    console.log('WATER FIELD ', state.self.playingArea.water)
 
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
@@ -263,6 +258,30 @@ const ACTION_HANDLERS = {
       })
     }
     return state
+  },
+  [CLEAR_PLAYING_AREA] : (state, action) => {
+    let enemyDiscards = []
+    for (let array of Object.values(state.enemy.playingArea)) {
+      array.forEach((card) => {
+          enemyDiscards.push(card)
+      })
+    }
+    let selfDiscards = []
+    for (let array of Object.values(state.self.playingArea)) {
+      array.forEach((card) => {
+          selfDiscards.push(card)
+      })
+    }
+    return Object.assign({}, state, {
+      enemy: Object.assign({}, state.enemy, {
+        discardPile: state.enemy.discardPile.concat(enemyDiscards),
+        playingArea: { land: [], water: [], air: [] }
+      }),
+      self: Object.assign({}, state.self, {
+        discardPile: state.self.discardPile.concat(selfDiscards),
+        playingArea: { land: [], water: [], air: [] }
+      })
+    })
   }
 }
 

@@ -7,6 +7,7 @@ export const INITIAL_STATE = {
     score: 0,
     hasPassed: false,
     hand: [],
+    discardPile: [],
     playingArea: {
       land: [],
       water: [],
@@ -21,6 +22,7 @@ export const INITIAL_STATE = {
     score: 0,
     hasPassed: false,
     hand: [],
+    discardPile: [],
     playingArea: {
       land: [],
       water: [],
