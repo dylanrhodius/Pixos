@@ -152,19 +152,19 @@ io.listen(server)
 // When a client connects, we note it in the console
 io.sockets.on('connection', function (socket) {
     console.log('new socket connection, session is ', socket.request.session)
-    socket.emit('message', 'You are connected');
-    console.log('A client is connected!');
-    socket.broadcast.emit('message', 'Another client has just connected!');
+    usersCollection.findOne({facebookId: socket.request.session.passport.user}).then((userObj) => {
+      console.log(userObj)
+      console.log('A client is connected!');
+      var user;
+      connections.add(user = User(socket));
+      console.log("new user ", user.getName());
 
-    var user;
-    connections.add(user = User(socket));
-    console.log("new user ", user.getName());
-
-    socket.on("disconnect", function() {
-      connections.remove(user);
-      user.disconnect();
-      console.log("user ", user.getName(), " disconnected");
-      user = null;
+      socket.on("disconnect", function() {
+        connections.remove(user);
+        user.disconnect();
+        console.log("user ", user.getName(), " disconnected");
+        user = null;
+      })
     })
  });
 
