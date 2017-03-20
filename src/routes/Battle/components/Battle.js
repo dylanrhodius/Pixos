@@ -53,7 +53,7 @@ export default class Battle extends React.Component {
     // endif
     let battle = this.props.battle
     if (battle.self.hasPassed && ( battle.enemy.hasPassed
-    || battle.enemy.hasFinishedRound) )  {
+    || battle.enemy.hasRoundFinished) )  {
       let selfHasWon = battle.self.power > battle.enemy.power
       this.props.updateScore(selfHasWon)
       this.props.updateHasRoundFinished(true)
@@ -61,6 +61,7 @@ export default class Battle extends React.Component {
       this.props.clearPlayingArea()
       this.props.setRoundNotification(selfHasWon)
       this.props.setTurnFinished(true)
+      this.props.setMyTurn(false)
     }
   }
 
