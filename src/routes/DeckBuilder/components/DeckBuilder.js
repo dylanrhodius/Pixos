@@ -29,14 +29,15 @@ export default class DeckBuilder extends React.Component {
       <div>
         <button onClick={this.saveDeck}>Save Deck</button>
         <h2>DeckBuilder</h2>
-        { <DeckRow placeInDeck={this.props.placeInDeck} type={'land'} playerDeck={this.props.playerDeck} cards={this.props.playerDeck.land}/>}
-        { <DeckRow placeInDeck={this.props.placeInDeck} type={'air'} playerDeck={this.props.playerDeck} cards={this.props.playerDeck.air}/>}
-        { <DeckRow placeInDeck={this.props.placeInDeck} type={'water'} playerDeck={this.props.playerDeck} cards={this.props.playerDeck.water}/>}
+        { <DeckRow removeFromDeck={this.props.removeFromDeck} placeInDeck={this.props.placeInDeck} type={'land'} playerDeck={this.props.playerDeck} cards={this.props.playerDeck.land}/>}
+        { <DeckRow removeFromDeck={this.props.removeFromDeck} placeInDeck={this.props.placeInDeck} type={'air'} playerDeck={this.props.playerDeck} cards={this.props.playerDeck.air}/>}
+        { <DeckRow removeFromDeck={this.props.removeFromDeck} placeInDeck={this.props.placeInDeck} type={'water'} playerDeck={this.props.playerDeck} cards={this.props.playerDeck.water}/>}
       </div>
     )
   }
 
   propTypes: {
+    removeFromDeck : React.PropTypes.func.isRequired,
     placeInDeck : React.PropTypes.func.isRequired,
     playerDeck : React.PropTypes.object.isRequired
   }

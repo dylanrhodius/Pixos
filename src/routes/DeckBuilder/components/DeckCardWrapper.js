@@ -14,7 +14,9 @@ export default class DeckCardWrapper extends React.Component {
       open: false
     }
 
-    this.handleCardSelection = this.handleCardSelection.bind(this)
+    this.addCardToDeck = this.addCardToDeck.bind(this)
+    this.removeCardFromDeck = this.removeCardFromDeck.bind(this)
+
   }
 
   handleTouchTap = (event) => {
@@ -45,13 +47,23 @@ export default class DeckCardWrapper extends React.Component {
     return counter < this.props.playerDeck.duplicateCardLimit
   }
 
-  handleCardSelection = () => {
+  addCardToDeck = () => {
     let cardData = {
       type : this.props.type,
       cardId: parseInt(this.props.id.split("_")[2])
     }
     if ((this.sufficientDollars()) && (this.lessThanCardLimit())) { this.props.placeInDeck(cardData) }
   }
+
+  removeCardFromDeck = () => {
+    console.log("removeCardFromDeck");
+    let cardData = {
+      type : this.props.type,
+      cardId: parseInt(this.props.id.split("_")[2])
+    }
+    this.props.removeFromDeck(cardData)
+  }
+
 
 render () {
    return (
@@ -64,6 +76,7 @@ render () {
             cost={this.props.cost}
             imgUrl={this.props.imgUrl}
             placeInDeck={this.props.placeInDeck}
+            removeFromDeck={this.props.removeFromDeck}
           />
         </div>
       <Popover
@@ -74,7 +87,8 @@ render () {
         onRequestClose={this.handleRequestClose}
       >
         <Menu>
-        <MenuItem primaryText="Place In Deck" onClick={this.handleCardSelection} />
+        <MenuItem primaryText="Place In Deck" onClick={this.addCardToDeck} />
+        <MenuItem primaryText="Remove From Deck" onClick={this.removeCardFromDeck} />
         </Menu>
 
       </Popover>
@@ -83,6 +97,7 @@ render () {
  }
 
  propTypes: {
+   removeFromDeck : React.PropTypes.func.isRequired,
    playerDeck : React.PropTypes.object.isRequired,
    name: React.propTypes.string.isRequired,
    power: React.propTypes.string.isRequired,
