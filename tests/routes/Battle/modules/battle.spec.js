@@ -12,6 +12,12 @@ import {
   UPDATE_POWER,
   ADD_CARD,
   SET_ROUND_NOTIFICATION,
+  INCREMENT_ENEMY_SCORE,
+  INCREMENT_ROUND_COUNTER,
+  INCREMENT_SELF_SCORE,
+  incrementSelfScore,
+  incrementEnemyScore,
+  incrementRoundCounter,
   setRoundNotification,
   addCard,
   passTurn,
@@ -27,7 +33,7 @@ import {
   clearPlayingArea,
   setRoundNotification,
   updateHasRoundFinished,
-  updateRoundCounter
+  incrementRoundCounter
   default as battleReducer
 } from 'routes/Battle/modules/battle'
 
@@ -52,8 +58,12 @@ describe('(Redux Module) Battle', () => {
     expect(CLEAR_PLAYING_AREA).to.equal('CLEAR_PLAYING_AREA'),
     expect(SET_ROUND_NOTIFICATION).to.equal('SET_ROUND_NOTIFICATION')
     expect(UPDATE_HAS_ROUND_FINISHED).to.equal('UPDATE_HAS_ROUND_FINISHED')
-    expect(UPDATE_ROUND_COUNTER).to.equal('UPDATE_ROUND_COUNTER')
+    expect(INCREMENT_ROUND_COUNTER).to.equal('INCREMENT_ROUND_COUNTER')
     expect(SET_ROUND_NOTIFICATION).to.equal('SET_ROUND_NOTIFICATION')
+    expect(INCREMENT_ENEMY_SCORE).to.equal('INCREMENT_ENEMY_SCORE')
+    expect(INCREMENT_ROUND_COUNTER).to.equal('INCREMENT_ROUND_COUNTER')
+    expect(INCREMENT_SELF_SCORE).to.equal('INCREMENT_SELF_SCORE')
+
   })
 
   describe('(Reducer)', () => {
@@ -83,13 +93,13 @@ describe('(Redux Module) Battle', () => {
     })
   })
 
-  describe('(Action Creator) updateRoundCounter', () => {
+  describe('(Action Creator) incrementRoundCounter', () => {
     it('Should be exported as a function.', () => {
-      expect(updateRoundCounter).to.be.a('function')
+      expect(incrementRoundCounter).to.be.a('function')
     })
 
-    it('Should return an action with type "UPDATE_ROUND_COUNTER".', () => {
-      expect(updateRoundCounter()).to.have.property('type', SETUP_PLAYERS)
+    it('Should return an action with type "INCREMENT_ROUND_COUNTER".', () => {
+      expect(incrementRoundCounter()).to.have.property('type', SETUP_PLAYERS)
     })
   })
 
@@ -210,6 +220,33 @@ describe('(Redux Module) Battle', () => {
 
     it('Should return an action with type "UPDATE_HAS_ROUND_FINISHED".', () => {
       expect(updateHasRoundFinished()).to.have.property('type', UPDATE_HAS_ROUND_FINISHED)
+    })
+  })
+  describe('(Action Creator) incrementEnemyScore', () => {
+    it('Should be exported as a function.', () => {
+      expect(incrementEnemyScore).to.be.a('function')
+    })
+
+    it('Should return an action with type "INCREMENT_ENEMY_SCORE".', () => {
+      expect(incrementEnemyScore()).to.have.property('type', INCREMENT_ENEMY_SCORE)
+    })
+  })
+  describe('(Action Creator) incrementSelfScore', () => {
+    it('Should be exported as a function.', () => {
+      expect(incrementSelfScore).to.be.a('function')
+    })
+
+    it('Should return an action with type "INCREMENT_SELF_SCORE".', () => {
+      expect(incrementSelfScore()).to.have.property('type', INCREMENT_SELF_SCORE)
+    })
+  })
+  describe('(Action Creator) incrementRoundCounter', () => {
+    it('Should be exported as a function.', () => {
+      expect(incrementRoundCounter).to.be.a('function')
+    })
+
+    it('Should return an action with type "INCREMENT_ROUND_COUNTER".', () => {
+      expect(incrementRoundCounter()).to.have.property('type', INCREMENT_ROUND_COUNTER)
     })
   })
 

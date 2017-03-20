@@ -24,7 +24,9 @@ export const UPDATE_SCORE = 'UPDATE_SCORE'
 export const CLEAR_PLAYING_AREA = 'CLEAR_PLAYING_AREA'
 export const SET_ROUND_NOTIFICATION = 'SET_ROUND_NOTIFICATION'
 export const UPDATE_HAS_ROUND_FINISHED = 'UPDATE_HAS_ROUND_FINISHED'
-export const UPDATE_ROUND_COUNTER = 'UPDATE_ROUND_COUNTER'
+export const INCREMENT_ROUND_COUNTER = 'INCREMENT_ROUND_COUNTER'
+export const INCREMENT_ENEMY_SCORE = 'INCREMENT_ENEMY_SCORE'
+export const INCREMENT_SELF_SCORE = 'INCREMENT_SELF_SCORE'
 
 
 // ------------------------------------
@@ -55,6 +57,17 @@ export const doubleAsync = () => {
   }
 }
 
+export function incrementEnemyScore () {
+  return {
+    type: INCREMENT_ENEMY_SCORE
+  }
+}
+export function incrementSelfScore () {
+  return {
+    type: INCREMENT_SELF_SCORE
+  }
+}
+
 export function setupPlayers (data) {
   return {
     type: SETUP_PLAYERS,
@@ -76,10 +89,10 @@ export function updateScore (selfHasWon) {
     payload: selfHasWon
   }
 }
-export function updateRoundCounter() {
-  console.log("updateRoundCounter")
+export function incrementRoundCounter() {
+  console.log("incrementRoundCounter")
   return {
-    type: UPDATE_ROUND_COUNTER
+    type: INCREMENT_ROUND_COUNTER
   }
 }
 export function updateHasRoundFinished (boolean) {
@@ -158,7 +171,9 @@ export const actions = {
   clearPlayingArea,
   setRoundNotification,
   updateHasRoundFinished,
-  updateRoundCounter
+  incrementRoundCounter,
+  incrementEnemyScore,
+  incrementSelfScore
 }
 
 // ------------------------------------
@@ -180,6 +195,8 @@ const ACTION_HANDLERS = {
       })
     })
   },
+
+
   [SET_TURN_FINISHED] : (state, action) => {
     return Object.assign({}, state, {
       turnFinished: action.payload
@@ -200,11 +217,27 @@ const ACTION_HANDLERS = {
       }),
     })
   },
-  [UPDATE_ROUND_COUNTER] : (state, action) => {
+  [INCREMENT_ROUND_COUNTER] : (state, action) => {
     let newRoundCount = state.self.roundCounter + 1
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
         roundCounter: newRoundCount
+      }),
+    })
+  },
+  [INCREMENT_ENEMY_SCORE] : (state, action) => {
+    let newEnemyScore = state.enemy.score + 1
+    return Object.assign({}, state, {
+      enemy: Object.assign({}, state.enemy, {
+        score: newEnemyScore
+      }),
+    })
+  },
+  [INCREMENT_SELF_SCORE] : (state, action) => {
+    let newSelfScore = state.self.score + 1
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        score: newSelfScore
       }),
     })
   },

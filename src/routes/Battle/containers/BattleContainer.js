@@ -12,8 +12,10 @@ import {  increment,
           updateScore,
           clearPlayingArea,
           updateHasRoundFinished,
-          updateRoundCounter,
-          setRoundNotification
+          incrementRoundCounter,
+          setRoundNotification,
+          incrementEnemyScore,
+          incrementSelfScore
 } from '../modules/battle'
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -41,8 +43,10 @@ const mapDispatchToProps = {
   updateScore,
   clearPlayingArea,
   updateHasRoundFinished,
-  updateRoundCounter,
-  setRoundNotification
+  incrementRoundCounter,
+  setRoundNotification,
+  incrementEnemyScore,
+  incrementSelfScore
 }
 
 const mapStateToProps = (state) => ({

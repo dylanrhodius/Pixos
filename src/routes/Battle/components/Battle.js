@@ -37,32 +37,48 @@ export default class Battle extends React.Component {
     }
   }
 
-  adjudicateGameState() {
-    // todo: add round counter; when 3 it's a draw
-    // if enemy has won
-    //   adjudicate end of game:
-    //   set game end notifcation message as loser
-    // else if enemy has passed & self has passed:
-        // decide round winner
-        // clear playing area
-        // if self won
-        //   update self score
-        //   if self score == 2
-        //     set game end notification as winner
-        // set notification message
-    // endif
+  roundIsOver() {
     let battle = this.props.battle
     if (battle.self.hasPassed && ( battle.enemy.hasPassed
-    || battle.enemy.hasRoundFinished) )  {
+    || battle.enemy.hasRoundFinished) ) {
+      return true;
+    }
+  }
+
+  updateScores() {
+    let battle = this.props.battle
+    if (battle.self.power > battle.enemy.power) {
+      this.props.incrementSelfScore()
+    } else if (battle.self.power < battle.enemy.power) {
+      this.props.incrementEnemyScore()
+    }
+  }
+
+  // adjudicateGameStateBeta() {
+  //     this.props.incrementRoundCounter() - DONE
+  //     this.props.updateScores() - DONE
+  //     let result = this.props.getResult()
+  //     this.props.displayResult(result)
+  //     this.props.passTurn(false)
+  //     this.props.updateHasRoundFinished(true)
+  //     this.props.setTurnFinished(true)
+  //     this.props.setMyTurn(false)
+  //   }
+
+    adjudicateGameState() {
+    let battle = this.props.battle
+    // if round is over
+    // if (battle.self.hasPassed && ( battle.enemy.hasPassed
+    // || battle.enemy.hasRoundFinished) )  {
       let selfHasWon = battle.self.power > battle.enemy.power
       this.props.updateScore(selfHasWon)
-      this.props.updateHasRoundFinished(true)
-      this.props.updateRoundCounter()
-      this.props.passTurn(false)
+      this.props.incrementRoundCounter()
       this.props.setRoundNotification(selfHasWon)
+      this.props.passTurn(false)
+      this.props.updateHasRoundFinished(true)
       this.props.setTurnFinished(true)
       this.props.setMyTurn(false)
-    }
+    // }
   }
 
   componentDidMount() {
@@ -78,7 +94,9 @@ export default class Battle extends React.Component {
       that.props.setMyTurn(true)
       that.props.updateHasRoundFinished(false)
       that.props.updateEnemyState(data)
-      that.adjudicateGameState()
+      if (that.roundIsOver()) {
+        that.adjudicateGameState()
+      }
       if(data.hasRoundFinished) {
         that.props.clearPlayingArea()
         that.props.updatePower()
@@ -130,6 +148,8 @@ Battle.propTypes = {
   clearPlayingArea : React.PropTypes.func.isRequired,
   setRoundNotification : React.PropTypes.func.isRequired,
   updateHasRoundFinished : React.PropTypes.func.isRequired,
-  updateRoundCounter : React.PropTypes.func.isRequired,
-  setRoundNotification : React.PropTypes.func.isRequired
+  incrementRoundCounter : React.PropTypes.func.isRequired,
+  setRoundNotification : React.PropTypes.func.isRequired,
+  incrementEnemyScore : React.PropTypes.func.isRequired,
+  incrementSelfScore : React.PropTypes.func.isRequired
 }
