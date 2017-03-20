@@ -21,7 +21,9 @@ body {
   padding: 0;
   height: 100%;
   background: linear-gradient($light-bkgrnd, $bkgrnd-gradient);
+  background-image: url("../../public/background.jpg");
   background-attachment: fixed;
+  background-size: contain;
 }
 
 *,
