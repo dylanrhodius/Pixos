@@ -23,7 +23,8 @@ body {
   background: linear-gradient($light-bkgrnd, $bkgrnd-gradient);
   background-image: url("../../public/background.jpg");
   background-attachment: fixed;
-  background-size: contain;
+  background-size: cover;
+  background-position: center;
 }
 
 *,
