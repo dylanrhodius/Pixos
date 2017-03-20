@@ -60,6 +60,7 @@ export default class Battle extends React.Component {
       this.props.passTurn(false)
       this.props.clearPlayingArea()
       this.props.setRoundNotification(selfHasWon)
+      this.props.setTurnFinished(true)
     }
   }
 
