@@ -17,6 +17,7 @@ export default class SignInPage extends React.Component {
         <Link to={`/battle`} ><RaisedButton label="Start Matchmaking" primary={true} linkButton={true}/></Link>
         <br />
         <br/>
+        <Link to={`/deckbuilder`} ><RaisedButton label="Deck Builder" primary={true} linkButton={true}/></Link>
 
       </div>
     );
