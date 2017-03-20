@@ -37,27 +37,48 @@ export default class Battle extends React.Component {
     }
   }
 
+  adjudicateGameState() {
+    // todo: add round counter; when 3 it's a draw
+    // if enemy has won
+    //   adjudicate end of game:
+    //   set game end notifcation message as loser
+    // else if enemy has passed & self has passed:
+        // decide round winner
+        // clear playing area
+        // if self won
+        //   update self score
+        //   if self score == 2
+        //     set game end notification as winner
+        // set notification message
+    // endif
+    let battle = this.props.battle
+    if (battle.self.hasPassed && battle.enemy.hasPassed) {
+      let selfHasWon = battle.self.power > battle.enemy.power
+      this.props.updateScore(selfHasWon)
+      this.props.clearPlayingArea()
+      this.props.setRoundNotification(selfHasWon)
+    }
+  }
+
   componentDidMount() {
     var that = this
     if(this.props.battle.self.hand.length == 0) {
       socket.emit('request:matchmaking');
     }
     socket.on("init:battle", function(data) {
-      console.log("battle initiated");
       that.props.setupPlayers(data)
     })
     socket.on("receive:data", function(data) {
       console.log("Received data from Opponent!:", data);
       that.props.setMyTurn(true)
       that.props.updateEnemyState(data)
+      that.adjudicateGameState()
       if (that.props.battle.self.hasPassed) {
         that.props.setMyTurn(false)
         that.props.setTurnFinished(true)
       }
-      console.log('Battle updated with opponent data to:', that.props.battle)
     })
     console.log('Battle state is:', that.props.battle)
-    console.log(socket)
   }
 
   componentDidUpdate() {
@@ -66,8 +87,6 @@ export default class Battle extends React.Component {
     }
     console.log('Battle state is:', this.props.battle)
     if (this.props.battle.turnFinished) {
-      console.log('my turn is finished')
-      // this.props.updatePower()
       socket.emit('pass:ToRoom', this.props.battle.self)
       this.props.setTurnFinished(false)
     }
@@ -96,5 +115,8 @@ Battle.propTypes = {
   passTurn : React.PropTypes.func.isRequired,
   removeCard : React.PropTypes.func.isRequired,
   addCard : React.PropTypes.func.isRequired,
-  updatePower : React.PropTypes.func.isRequired
+  updatePower : React.PropTypes.func.isRequired,
+  updateScore : React.PropTypes.func.isRequired,
+  clearPlayingArea : React.PropTypes.func.isRequired,
+  setRoundNotification : React.PropTypes.func.isRequired
 }

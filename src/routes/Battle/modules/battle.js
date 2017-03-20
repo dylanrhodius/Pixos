@@ -20,6 +20,9 @@ export const PASS_TURN = 'PASS_TURN'
 export const REMOVE_CARD = 'REMOVE_CARD'
 export const ADD_CARD = 'ADD_CARD'
 export const UPDATE_POWER = 'UPDATE_POWER'
+export const UPDATE_SCORE = 'UPDATE_SCORE'
+export const CLEAR_PLAYING_AREA = 'CLEAR_PLAYING_AREA'
+export const SET_ROUND_NOTIFICATION = 'SET_ROUND_NOTIFICATION'
 
 
 // ------------------------------------
@@ -63,6 +66,29 @@ export function addCard (cardId) {
     payload: cardId
   }
 }
+
+export function updateScore (selfHasWon) {
+  console.log("update score")
+  return {
+    type: UPDATE_SCORE,
+    payload: selfHasWon
+  }
+}
+
+export function clearPlayingArea () {
+  console.log("clearPlayingArea")
+  return {
+    type: CLEAR_PLAYING_AREA
+  }
+}
+export function setRoundNotification (selfHasWon) {
+  console.log("setRoundNotification")
+  return {
+    type: SET_ROUND_NOTIFICATION,
+    payload: selfHasWon
+  }
+}
+
 
 export function removeCard(cardId) {
   return {
@@ -112,7 +138,10 @@ export const actions = {
   setMyTurn,
   updatePower,
   addCard,
-  removeCard
+  removeCard,
+  updateScore,
+  clearPlayingArea,
+  setRoundNotification
 }
 
 // ------------------------------------

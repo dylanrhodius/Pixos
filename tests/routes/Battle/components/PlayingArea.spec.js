@@ -4,7 +4,7 @@ import { PlayingArea } from 'routes/Battle/components/PlayingArea'
 import { BattleRow } from 'routes/Battle/components/BattleRow'
 import { shallow } from 'enzyme'
 
-describe('(Component) PlayingArea', () => {
+xdescribe('(Component) PlayingArea', () => {
   let _props, _wrapper
 
   beforeEach(() => {
