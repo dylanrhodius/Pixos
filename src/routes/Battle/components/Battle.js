@@ -52,9 +52,12 @@ export default class Battle extends React.Component {
         // set notification message
     // endif
     let battle = this.props.battle
-    if (battle.self.hasPassed && battle.enemy.hasPassed) {
+    if (battle.self.hasPassed && ( battle.enemy.hasPassed
+    || battle.enemy.hasFinishedRound) )  {
       let selfHasWon = battle.self.power > battle.enemy.power
       this.props.updateScore(selfHasWon)
+      this.props.updateHasRoundFinished(true)
+      this.props.passTurn(false)
       this.props.clearPlayingArea()
       this.props.setRoundNotification(selfHasWon)
     }
@@ -71,6 +74,7 @@ export default class Battle extends React.Component {
     socket.on("receive:data", function(data) {
       console.log("Received data from Opponent!:", data);
       that.props.setMyTurn(true)
+      that.props.updateHasRoundFinished(false)
       that.props.updateEnemyState(data)
       that.adjudicateGameState()
       if (that.props.battle.self.hasPassed) {
@@ -83,7 +87,7 @@ export default class Battle extends React.Component {
 
   componentDidUpdate() {
     if (this.props.battle.self.hand.length == 0) {
-      this.props.passTurn()
+      this.props.passTurn(true)
     }
     console.log('Battle state is:', this.props.battle)
     if (this.props.battle.turnFinished) {
@@ -118,5 +122,6 @@ Battle.propTypes = {
   updatePower : React.PropTypes.func.isRequired,
   updateScore : React.PropTypes.func.isRequired,
   clearPlayingArea : React.PropTypes.func.isRequired,
-  setRoundNotification : React.PropTypes.func.isRequired
+  setRoundNotification : React.PropTypes.func.isRequired,
+  updateHasRoundFinished : React.PropTypes.func.isRequired
 }

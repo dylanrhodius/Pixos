@@ -23,6 +23,7 @@ export const UPDATE_POWER = 'UPDATE_POWER'
 export const UPDATE_SCORE = 'UPDATE_SCORE'
 export const CLEAR_PLAYING_AREA = 'CLEAR_PLAYING_AREA'
 export const SET_ROUND_NOTIFICATION = 'SET_ROUND_NOTIFICATION'
+export const UPDATE_HAS_ROUND_FINISHED = 'UPDATE_HAS_ROUND_FINISHED'
 
 
 // ------------------------------------
@@ -74,6 +75,13 @@ export function updateScore (selfHasWon) {
     payload: selfHasWon
   }
 }
+export function updateHasRoundFinished (boolean) {
+  console.log("updateHasRoundFinished")
+  return {
+    type: UPDATE_HAS_ROUND_FINISHED,
+    payload: boolean
+  }
+}
 
 export function clearPlayingArea () {
   console.log("clearPlayingArea")
@@ -117,10 +125,10 @@ export function setMyTurn (boolean) {
   }
 }
 
-export function passTurn () {
+export function passTurn (boolean) {
   return {
     type: PASS_TURN,
-    payload: true
+    payload: boolean
   }
 }
 
@@ -141,7 +149,8 @@ export const actions = {
   removeCard,
   updateScore,
   clearPlayingArea,
-  setRoundNotification
+  setRoundNotification,
+  updateHasRoundFinished
 }
 
 // ------------------------------------
@@ -173,6 +182,13 @@ const ACTION_HANDLERS = {
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
         hasPassed: action.payload
+      }),
+    })
+  },
+  [UPDATE_HAS_ROUND_FINISHED] : (state, action) => {
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        hasRoundFinished: action.payload
       }),
     })
   },
