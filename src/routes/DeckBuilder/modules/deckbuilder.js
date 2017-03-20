@@ -51,11 +51,9 @@ const ACTION_HANDLERS = {
     })
   },
   [REMOVE_FROM_DECK] : (state, action) => {
-    console.log("REMOVE FROM DECK BEING CALLED");
-    let card = (state[action.payload.type].inPool[action.payload.cardId])
+    let card = (state[action.payload.type].inDeck[action.payload.cardId])
     let array = state[action.payload.type].inDeck
     array.splice(action.payload.cardId, 1)
-
     return Object.assign({}, state, {
       [action.payload.type]: Object.assign({}, state[action.payload.type], {
         inDeck: array

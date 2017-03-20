@@ -57,6 +57,7 @@ export default class DeckCardWrapper extends React.Component {
 
   removeCardFromDeck = () => {
     console.log("removeCardFromDeck");
+    console.log(this.props.id.split("_")[1]);
     let cardData = {
       type : this.props.type,
       cardId: parseInt(this.props.id.split("_")[2])
@@ -64,8 +65,21 @@ export default class DeckCardWrapper extends React.Component {
     this.props.removeFromDeck(cardData)
   }
 
+  loadContent () {
+    if(this.props.id.split("_")[1] == 'pool'){
+      return (
+        <MenuItem primaryText="Place In Deck" onClick={this.addCardToDeck} />
+      )
+    } else {
+      return(
+        <MenuItem primaryText="Remove From Deck" onClick={this.removeCardFromDeck} />
+      )
+    }
+  }
+
 
 render () {
+  let content = this.loadContent()
    return (
     <div className="mb-2">
        <div onTouchTap={this.handleTouchTap}>
@@ -87,8 +101,7 @@ render () {
         onRequestClose={this.handleRequestClose}
       >
         <Menu>
-        <MenuItem primaryText="Place In Deck" onClick={this.addCardToDeck} />
-        <MenuItem primaryText="Remove From Deck" onClick={this.removeCardFromDeck} />
+          { content }
         </Menu>
 
       </Popover>
