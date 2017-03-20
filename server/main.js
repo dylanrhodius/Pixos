@@ -2,6 +2,7 @@
 
 const express = require('express')
 const bodyParser = require('body-parser')
+const expressCookieParser = require('cookie-parser')
 const debug = require('debug')('app:server')
 const path = require('path')
 const http = require('http')
@@ -11,7 +12,9 @@ const project = require('../config/project.config')
 const compress = require('compression')
 const passport = require('passport')
 const databasetools = require('./databasetools')
+const sharedSession = require("express-socket.io-session");
 var FacebookStrategy = require('passport-facebook').Strategy
+var socketIo = require('socket.io')
 
 // Import mongoDB
 const mongo = require('mongodb')
@@ -47,11 +50,108 @@ app.use(compress())
 
 app.use(bodyParser.json());
 
+// Set up sessions
+var userStore = new MongoDBStore(
+  {
+    uri: mongoUrl,
+    collection: 'users'
+  })
+
+var store = new MongoDBStore(
+  {
+    uri: mongoUrl,
+    collection: 'mySessions'
+  })
+
+store.on('error', function (error) {
+  assert.ifError(error)
+  assert.ok(false)
+})
+
+const SESSION_SECRET = 'Dr4c0R3x is the best'
+
+const EXPRESS_SID_KEY = 'connect.sid';
+const cookieParser = expressCookieParser(SESSION_SECRET)
+
+app.use(session({
+  secret: SESSION_SECRET,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+  },
+  store: store,
+  resave: false,
+  saveUninitialized: false,
+  name: EXPRESS_SID_KEY
+}))
+
+app.use(function (req, res, next) {
+  req.db = db
+  next()
+})
+
+
 // Loading socket.io
-var io = require('socket.io').listen(server);
+var io = socketIo({
+    // Optional Socket.io options
+});
+
+
+io.use(function(socket, next) {
+  console.log('in new session code')
+    var request = socket.request;
+
+    if(!request.headers.cookie) {
+        console.log('no cookie transmitted')
+        // If we want to refuse authentification, we pass an error to the first callback
+        return next(new Error('No cookie transmitted.'));
+    }
+
+    // We use the Express cookieParser created before to parse the cookie
+    // Express cookieParser(req, res, next) is used initialy to parse data in "req.headers.cookie".
+    // Here our cookies are stored in "request.headers.cookie", so we just pass "request" to the first argument of function
+    cookieParser(request, {}, function(parseErr) {
+        console.log('in cookie parser')
+        if(parseErr) { return next(new Error('Error parsing cookies.')); }
+
+        // Get the SID cookie
+        var sidCookie = (request.secureCookies && request.secureCookies[EXPRESS_SID_KEY]) ||
+                        (request.signedCookies && request.signedCookies[EXPRESS_SID_KEY]) ||
+                        (request.cookies && request.cookies[EXPRESS_SID_KEY]);
+        console.log('sidCookie is', sidCookie)
+        // Then we just need to load the session from the Express Session Store
+        store.load(sidCookie, function(err, session) {
+            console.log('in store loading, sessions is ', session)
+            // And last, we check if the used has a valid session and if he is logged in
+            if (err) {
+                return next(err);
+
+            // Session is empty
+            } else if(!session) {
+                return next(new Error('Session cannot be found/loaded'));
+
+            // // Check for auth here, here is a basic example
+            // } else if (session.isLogged !== true) {
+            //     return next(new Error('User not logged in'));
+
+            // Everything is fine
+            } else {
+                console.log('all is well')
+                // If you want, you can attach the session to the handshake data, so you can use it again later
+                // You can access it later with "socket.request.session" and "socket.request.sessionId"
+                request.session = session;
+                request.sessionId = sidCookie;
+
+                return next();
+            }
+        });
+    });
+});
+
+io.listen(server)
 
 // When a client connects, we note it in the console
 io.sockets.on('connection', function (socket) {
+    console.log('new socket connection, session is ', socket.request.session)
     socket.emit('message', 'You are connected');
     console.log('A client is connected!');
     socket.broadcast.emit('message', 'Another client has just connected!');
@@ -104,38 +204,6 @@ passport.deserializeUser(function (user, done) {
 app.use(passport.initialize())
 app.use(passport.session())
 
-// Set up sessions
-var userStore = new MongoDBStore(
-  {
-    uri: mongoUrl,
-    collection: 'users'
-  })
-
-var store = new MongoDBStore(
-  {
-    uri: mongoUrl,
-    collection: 'mySessions'
-  })
-
-store.on('error', function (error) {
-  assert.ifError(error)
-  assert.ok(false)
-})
-
-app.use(session({
-  secret: 'This is a secret',
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
-  },
-  store: store,
-  resave: false,
-  saveUninitialized: false
-}))
-
-app.use(function (req, res, next) {
-  req.db = db
-  next()
-})
 
 // ------------------------------------
 // Apply Webpack HMR Middleware
@@ -177,27 +245,27 @@ if (project.env === 'development') {
       res.redirect('/')
     })
 
-app.get('/user', (req,res) => {
-  // if a session exists:
-  if(typeof(req.session.passport) !== 'undefined') {
-    console.log('Session exists');
-    // find the user in the database whose facebookId (white) matches the session user's id (red)
-    usersCollection.findOne({facebookId: req.session.passport.user}).then((doc) => {
+  app.get('/user', (req,res) => {
+    // if a session exists:
+    if(typeof(req.session.passport) !== 'undefined') {
+      console.log('Session exists');
+      // find the user in the database whose facebookId (white) matches the session user's id (red)
+      usersCollection.findOne({facebookId: req.session.passport.user}).then((doc) => {
+        res.setHeader('Content-Type', 'application/json');
+        // return (or send) the document object
+        res.send(doc);
+      })
+    } else {
+      console.log('Session does not exist');
       res.setHeader('Content-Type', 'application/json');
-      // return (or send) the document object
-      res.send(doc);
-    })
-  } else {
-    console.log('Session does not exist');
-    res.setHeader('Content-Type', 'application/json');
-    res.send('No data available');
-  }
-});
+      res.send('No data available');
+    }
+  });
 
-app.post('/user/deck', function (req, res) {
-  req.session.deck = req.body
-  res.send('')
-})
+  app.post('/user/deck', function (req, res) {
+    req.session.deck = req.body
+    res.send('')
+  })
 
   app.use('*', function (req, res, next) {
     const filename = path.join(compiler.outputPath, 'index.html')
