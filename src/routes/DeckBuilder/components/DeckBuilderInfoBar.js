@@ -1,7 +1,7 @@
 import React from 'react'
-import RaisedButton from 'material-ui/RaisedButton';
 import PixosMenu from 'routes/Battle/components/PixosMenu'
 import './DeckBuilderInfoBar.scss'
+import RaisedButton from 'material-ui/RaisedButton';
 
 export default class DeckBuilderInfoBar extends React.Component {
 
@@ -30,9 +30,9 @@ export default class DeckBuilderInfoBar extends React.Component {
   loadContent() {
     if (this.props.playerDeck.cardsInDeck == this.props.playerDeck.deckSize)
     {
-      return <button onClick={this.saveDeck}>Save Deck</button>
+      return <RaisedButton onClick={this.saveDeck} label="Save Deck" primary={true}/>
     } else {
-      return <button disabled>Save Deck</button>
+      return <RaisedButton disabled label="Save Deck" primary={true}/>
     }
   }
 
