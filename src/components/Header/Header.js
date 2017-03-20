@@ -4,7 +4,7 @@ import './Header.scss'
 
 export const Header = () => (
   <div>
-    <h1>Pixos</h1>
+    <h1><img src="/icons/pixos-logo.png" alt="pixos logo" width="30" height="30"></img>Pixos</h1>
   </div>
 )
 
