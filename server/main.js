@@ -289,6 +289,40 @@ if (project.env === 'development') {
     'section in the README for more information on deployment strategies.'
   )
 
+  app.get('/auth/facebook',
+    passport.authenticate('facebook'))
+
+  app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    function (req, res) {
+      // Successful authentication, redirect home.
+      res.redirect('/')
+    })
+
+  app.get('/user', (req,res) => {
+    // if a session exists:
+    if(typeof(req.session.passport) !== 'undefined') {
+      console.log('Session exists');
+      // find the user in the database whose facebookId (white) matches the session user's id (red)
+      usersCollection.findOne({facebookId: req.session.passport.user}).then((doc) => {
+        res.setHeader('Content-Type', 'application/json');
+        // return (or send) the document object
+        res.send(doc);
+      })
+    } else {
+      console.log('Session does not exist');
+      res.setHeader('Content-Type', 'application/json');
+      res.send('No data available');
+    }
+  });
+
+  app.post('/user/deck', function (req, res) {
+    console.log("Request in /user", req.session);
+    console.log("Request in /user", req.sessionId);
+    req.session.deck = req.body
+    res.send('')
+  })
+
   // Serving ~/dist by default. Ideally these files should be served by
   // the web server and not the app server, but this helps to demo the
   // server in production.
