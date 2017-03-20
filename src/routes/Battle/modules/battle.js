@@ -20,6 +20,11 @@ export const PASS_TURN = 'PASS_TURN'
 export const REMOVE_CARD = 'REMOVE_CARD'
 export const ADD_CARD = 'ADD_CARD'
 export const UPDATE_POWER = 'UPDATE_POWER'
+export const UPDATE_SCORE = 'UPDATE_SCORE'
+export const CLEAR_PLAYING_AREA = 'CLEAR_PLAYING_AREA'
+export const SET_ROUND_NOTIFICATION = 'SET_ROUND_NOTIFICATION'
+export const UPDATE_HAS_ROUND_FINISHED = 'UPDATE_HAS_ROUND_FINISHED'
+export const UPDATE_ROUND_COUNTER = 'UPDATE_ROUND_COUNTER'
 
 
 // ------------------------------------
@@ -64,6 +69,42 @@ export function addCard (cardId) {
   }
 }
 
+export function updateScore (selfHasWon) {
+  console.log("updateScore")
+  return {
+    type: UPDATE_SCORE,
+    payload: selfHasWon
+  }
+}
+export function updateRoundCounter() {
+  console.log("updateRoundCounter")
+  return {
+    type: UPDATE_ROUND_COUNTER
+  }
+}
+export function updateHasRoundFinished (boolean) {
+  console.log("updateHasRoundFinished")
+  return {
+    type: UPDATE_HAS_ROUND_FINISHED,
+    payload: boolean
+  }
+}
+
+export function clearPlayingArea () {
+  console.log("clearPlayingArea")
+  return {
+    type: CLEAR_PLAYING_AREA
+  }
+}
+export function setRoundNotification (selfHasWon) {
+  console.log("setRoundNotification")
+  return {
+    type: SET_ROUND_NOTIFICATION,
+    payload: selfHasWon
+  }
+}
+
+
 export function removeCard(cardId) {
   return {
     type: REMOVE_CARD,
@@ -91,10 +132,10 @@ export function setMyTurn (boolean) {
   }
 }
 
-export function passTurn () {
+export function passTurn (boolean) {
   return {
     type: PASS_TURN,
-    payload: true
+    payload: boolean
   }
 }
 
@@ -112,7 +153,12 @@ export const actions = {
   setMyTurn,
   updatePower,
   addCard,
-  removeCard
+  removeCard,
+  updateScore,
+  clearPlayingArea,
+  setRoundNotification,
+  updateHasRoundFinished,
+  updateRoundCounter
 }
 
 // ------------------------------------
@@ -147,6 +193,21 @@ const ACTION_HANDLERS = {
       }),
     })
   },
+  [UPDATE_HAS_ROUND_FINISHED] : (state, action) => {
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        hasRoundFinished: action.payload
+      }),
+    })
+  },
+  [UPDATE_ROUND_COUNTER] : (state, action) => {
+    let newRoundCount = state.self.roundCounter + 1
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        roundCounter: newRoundCount
+      }),
+    })
+  },
   [SET_MY_TURN] : (state, action) => {
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
@@ -156,14 +217,9 @@ const ACTION_HANDLERS = {
   },
   [ADD_CARD] : (state, action) => {
     var card = (state.self.hand[action.payload])
-    console.log(card)
-    console.log(card.type);
     if(card.type == 'water'){ state.self.playingArea.water.push(card) }
     else if (card.type == 'land'){ state.self.playingArea.land.push(card) }
     else { state.self.playingArea.air.push(card) }
-    console.log('AIR FIELD ', state.self.playingArea.air)
-    console.log('LAND FIELD ', state.self.playingArea.land)
-    console.log('WATER FIELD ', state.self.playingArea.water)
 
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
@@ -205,6 +261,57 @@ const ACTION_HANDLERS = {
       }),
       enemy: Object.assign({}, state.enemy, {
         power: enemyPower
+      })
+    })
+  },
+  [UPDATE_SCORE] : (state, action) => {
+    let selfHasWon = action.payload
+    if (selfHasWon) {
+      return Object.assign({}, state, {
+        self: Object.assign({}, state.self, {
+          score: state.self.score + 1
+        }),
+      })
+    }
+    return state
+  },
+  [SET_ROUND_NOTIFICATION] : (state, action) => {
+    let selfHasWon = action.payload
+    if (selfHasWon) {
+      return Object.assign({}, state, {
+        self: Object.assign({}, state.self, {
+          roundNotification: "Round over: you win"
+        }),
+      })
+    } else {
+      return Object.assign({}, state, {
+        self: Object.assign({}, state.self, {
+          roundNotification: "Round over: you lose"
+        }),
+      })
+    }
+  },
+  [CLEAR_PLAYING_AREA] : (state, action) => {
+    let enemyDiscards = []
+    for (let array of Object.values(state.enemy.playingArea)) {
+      array.forEach((card) => {
+          enemyDiscards.push(card)
+      })
+    }
+    let selfDiscards = []
+    for (let array of Object.values(state.self.playingArea)) {
+      array.forEach((card) => {
+          selfDiscards.push(card)
+      })
+    }
+    return Object.assign({}, state, {
+      enemy: Object.assign({}, state.enemy, {
+        discardPile: state.enemy.discardPile.concat(enemyDiscards),
+        playingArea: { land: [], water: [], air: [] }
+      }),
+      self: Object.assign({}, state.self, {
+        discardPile: state.self.discardPile.concat(selfDiscards),
+        playingArea: { land: [], water: [], air: [] }
       })
     })
   }

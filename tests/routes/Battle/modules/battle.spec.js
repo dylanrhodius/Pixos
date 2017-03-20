@@ -11,6 +11,8 @@ import {
   REMOVE_CARD,
   UPDATE_POWER,
   ADD_CARD,
+  SET_ROUND_NOTIFICATION,
+  setRoundNotification,
   addCard,
   passTurn,
   updateEnemyState,
@@ -21,6 +23,11 @@ import {
   doubleAsync,
   removeCard,
   updatePower,
+  updateScore,
+  clearPlayingArea,
+  setRoundNotification,
+  updateHasRoundFinished,
+  updateRoundCounter
   default as battleReducer
 } from 'routes/Battle/modules/battle'
 
@@ -40,7 +47,13 @@ describe('(Redux Module) Battle', () => {
     expect(PASS_TURN).to.equal('PASS_TURN')
     expect(REMOVE_CARD).to.equal('REMOVE_CARD')
     expect(ADD_CARD).to.equal('ADD_CARD')
-    expect(UPDATE_POWER).to.equal('UPDATE_POWER')
+    expect(UPDATE_POWER).to.equal('UPDATE_POWER'),
+    expect(UPDATE_SCORE).to.equal('UPDATE_SCORE'),
+    expect(CLEAR_PLAYING_AREA).to.equal('CLEAR_PLAYING_AREA'),
+    expect(SET_ROUND_NOTIFICATION).to.equal('SET_ROUND_NOTIFICATION')
+    expect(UPDATE_HAS_ROUND_FINISHED).to.equal('UPDATE_HAS_ROUND_FINISHED')
+    expect(UPDATE_ROUND_COUNTER).to.equal('UPDATE_ROUND_COUNTER')
+    expect(SET_ROUND_NOTIFICATION).to.equal('SET_ROUND_NOTIFICATION')
   })
 
   describe('(Reducer)', () => {
@@ -67,6 +80,16 @@ describe('(Redux Module) Battle', () => {
 
     it('Should return an action with type "SETUP_PLAYERS".', () => {
       expect(setupPlayers()).to.have.property('type', SETUP_PLAYERS)
+    })
+  })
+
+  describe('(Action Creator) updateRoundCounter', () => {
+    it('Should be exported as a function.', () => {
+      expect(updateRoundCounter).to.be.a('function')
+    })
+
+    it('Should return an action with type "UPDATE_ROUND_COUNTER".', () => {
+      expect(updateRoundCounter()).to.have.property('type', SETUP_PLAYERS)
     })
   })
 
@@ -97,6 +120,16 @@ describe('(Redux Module) Battle', () => {
 
     it('Should return an action with type "REMOVE_CARD".', () => {
       expect(removeCard()).to.have.property('type', REMOVE_CARD)
+    })
+  })
+
+  describe('(Action Creator) setRoundNotification', () => {
+    it('Should be exported as a function.', () => {
+      expect(setRoundNotification).to.be.a('function')
+    })
+
+    it('Should return an action with type "SET_ROUND_NOTIFICATION".', () => {
+      expect(setRoundNotification()).to.have.property('type', SET_ROUND_NOTIFICATION)
     })
   })
 
@@ -137,6 +170,46 @@ describe('(Redux Module) Battle', () => {
 
     it('Should return an action with type "SET_TURN_FINISHED".', () => {
       expect(updateEnemyState()).to.have.property('type', UPDATE_ENEMY_STATE)
+    })
+  })
+
+  describe('(Action Creator) updateScore', () => {
+    it('Should be exported as a function.', () => {
+      expect(updateScore).to.be.a('function')
+    })
+
+    it('Should return an action with type "UPDATE_SCORE".', () => {
+      expect(updateScore()).to.have.property('type', UPDATE_SCORE)
+    })
+  })
+
+  describe('(Action Creator) clearPlayingArea', () => {
+    it('Should be exported as a function.', () => {
+      expect(clearPlayingArea).to.be.a('function')
+    })
+
+    it('Should return an action with type "CLEAR_PLAYING_AREA".', () => {
+      expect(clearPlayingArea()).to.have.property('type', CLEAR_PLAYING_AREA)
+    })
+  })
+
+  describe('(Action Creator) setRoundNotification', () => {
+    it('Should be exported as a function.', () => {
+      expect(setRoundNotification).to.be.a('function')
+    })
+
+    it('Should return an action with type "SET_ROUND_NOTIFICATION".', () => {
+      expect(setRoundNotification()).to.have.property('type', SET_ROUND_NOTIFICATION)
+    })
+  })
+
+  describe('(Action Creator) updateHasRoundFinished', () => {
+    it('Should be exported as a function.', () => {
+      expect(updateHasRoundFinished).to.be.a('function')
+    })
+
+    it('Should return an action with type "UPDATE_HAS_ROUND_FINISHED".', () => {
+      expect(updateHasRoundFinished()).to.have.property('type', UPDATE_HAS_ROUND_FINISHED)
     })
   })
 
@@ -220,15 +293,3 @@ describe('(Redux Module) Battle', () => {
   // that you did not mutate the state. In this case our state is just a number
   // (which cannot be mutated).
   xdescribe('(Action Handler) BATTLE_INCREMENT', () => {
-    it('Should increment the state by the action payload\'s "value" property.', () => {
-      let state = battleReducer(undefined, {})
-      expect(state).to.equal(0)
-      state = battleReducer(state, increment(1))
-      expect(state).to.equal(1)
-      state = battleReducer(state, increment(2))
-      expect(state).to.equal(3)
-      state = battleReducer(state, increment(-3))
-      expect(state).to.equal(0)
-    })
-  })
-})

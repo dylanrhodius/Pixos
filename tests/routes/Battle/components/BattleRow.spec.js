@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { BattleRow } from 'routes/Battle/components/BattleRow'
 import { shallow } from 'enzyme'
 
-describe('(Component) BattleRow', () => {
+xdescribe('(Component) BattleRow', () => {
   let _props, _wrapper
 
   beforeEach(() => {
