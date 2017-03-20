@@ -1,3 +1,21 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Gist
+ @Holden4
+ Sign out
+ Unwatch 4
+  Star 0
+ Fork 0 bvjones/final-project
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Pulse  Graphs
+Tree: df54daf80c Find file Copy pathfinal-project/package.json
+df54daf  an hour ago
+@Holden4 Holden4 compile changed to build in json
+41 contributors @davezuko @justingreenberg @rkclark @neverfox @Holden4 @rsilvestre @bulby97 @dougvk @ptim @Sinble @fuczak @patrickheeney @oliviertassinari @nodkz @Nishant-Pathak @hoffman211 @mikefieldmay @matyunya @mlusetti @josedab @mtsr @jarohmh @hamczu @marshallford @vkvelho @iamstarkov and others
+RawBlameHistory
+166 lines (165 sloc)  4.61 KB
 {
   "name": "react-redux-starter-kit",
   "version": "3.0.0-alpha.2",
@@ -12,9 +30,7 @@
     "heroku-postbuild": "better-npm-run heroku-postbuild",
     "lint": "eslint bin build config server src tests",
     "lint:fix": "npm run lint -- --fix",
-    "start": "better-npm-run start:prod",
-    "serve": "better-npm-run start",
-    "postinstall": "npm run deploy:prod",
+    "start": "better-npm-run start",
     "dev": "better-npm-run dev",
     "test": "better-npm-run test",
     "test:dev": "npm run test -- --watch",
@@ -57,11 +73,11 @@
         "DEBUG": "app:*"
       }
     },
-    "start:prod": {
-      "command": "node bin/server",
+    "start": {
+      "command": "node bin/dev-server",
       "env": {
-        "NODE_ENV": "production"
-     }
+        "DEBUG": "app:*"
+      }
     },
     "test": {
       "command": "node ./node_modules/karma/bin/karma start config/karma.config",
@@ -165,3 +181,5 @@
     "webpack-hot-middleware": "^2.12.2"
   }
 }
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help
