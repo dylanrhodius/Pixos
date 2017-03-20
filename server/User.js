@@ -1,17 +1,17 @@
 var User = (function(){
-  var User = function(socket){
+  var User = function(socket, userObj){
     if(!(this instanceof User)){
-      return (new User(socket));
+      return (new User(socket, userObj));
     }
     /**
      * constructor here
      */
 
-
+    this._userObj = userObj || null
     this.socket = socket;
     this._rooms = [];
     this._id = socket.id;
-    this.generateName();
+    this.setupName();
 
     this._events();
   };
@@ -27,6 +27,7 @@ var User = (function(){
   r._rooms = null;
   r._inQueue = false;
   r.socket = null;
+  r._userObj = null
   r.disconnected = false;
 
   r.getID = function(){
@@ -44,9 +45,19 @@ var User = (function(){
     }
   }
 
+  r.setupName = function(){
+    var name;
+    if (this._userObj) {
+      name = this._userObj.name
+    } else {
+      name = this.generateName()
+    }
+    this._name = name;
+    // return name;
+  }
+
   r.generateName = function(){
     var name = "Guest" + (((Math.random() * 8999) + 1000) | 0);
-    this._name = name;
     return name;
   }
 
@@ -118,6 +129,7 @@ var User = (function(){
 
     socket.on("request:matchmaking", function() {
       console.log('Matchmaking requested by'+ self.getName())
+      console.log('User obj in User is', self._userObj)
       if(self._inQueue) return;
       matchmaking.findOpponent(self);
     });
