@@ -4,7 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 export const SignInForm = () => (
   <div>
-    <a className='FacebookLogin' href='/auth/facebook' method='post'><RaisedButton label="Facebook Sign In" primary={true}/></a>
+    <a className='FacebookLogin' href='/auth/facebook' method='post'><RaisedButton label="Sign In With Facebook" primary={true}/></a>
   </div>
 )
 
