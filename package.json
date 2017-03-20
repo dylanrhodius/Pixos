@@ -1,4 +1,4 @@
-
+{
   "name": "react-redux-starter-kit",
   "version": "3.0.0-alpha.2",
   "description": "Get started with React, Redux, and React-Router!",
@@ -163,5 +163,3 @@
     "webpack-hot-middleware": "^2.12.2"
   }
 }
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status Help
