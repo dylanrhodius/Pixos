@@ -236,6 +236,17 @@ const ACTION_HANDLERS = {
         power: enemyPower
       })
     })
+  },
+  [UPDATE_SCORE] : (state, action) => {
+    let selfHasWon = action.payload
+    if (selfHasWon) {
+      return Object.assign({}, state, {
+        self: Object.assign({}, state.self, {
+          score: state.self.score + 1
+        }),
+      })
+    }
+    return state
   }
 }
 
