@@ -75,6 +75,18 @@ var User = (function(){
     return this._rooms[0];
   }
 
+  r.getUserObj = function() {
+    return this._userObj;
+  }
+
+  r.getUserImg = function() {
+    var userObj = this.getUserObj();
+    if (userObj) {
+      return userObj.image
+    }
+    return null;
+  }
+
   // r.setDeck = function(deck) {
   //   //console.log("set deck: ", deck);
   //   this._deck = deck;

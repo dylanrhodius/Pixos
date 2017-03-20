@@ -71,6 +71,7 @@ export default class Battle extends React.Component {
       socket.emit('request:matchmaking');
     }
     socket.on("init:battle", function(data) {
+      console.log('init battle data: ', data)
       that.props.setupPlayers(data)
     })
     socket.on("receive:data", function(data) {

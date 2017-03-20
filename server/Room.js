@@ -63,8 +63,22 @@ var Room = (function(){
     var p2Hand = this.generateRandomHand();
     var p1Name = this._users[0].getName();
     var p2Name = this._users[1].getName();
-    this._users[0].send("init:battle", {selfTurn: true, selfHand: p1Hand, enemyHand: p2Hand, selfName: p1Name, enemyName: p2Name });
-    this._users[1].send("init:battle", {selfTurn: false, selfHand: p2Hand, enemyHand: p1Hand, selfName: p2Name, enemyName: p1Name });
+    var p1Img = this._users[0].getUserImg() || '/img/anon-player.svg';
+    var p2Img = this._users[1].getUserImg() || '/img/anon-player.svg';
+    this._users[0].send("init:battle", {selfTurn: true,
+                                        selfHand: p1Hand,
+                                        enemyHand: p2Hand,
+                                        selfName: p1Name,
+                                        enemyName: p2Name,
+                                        selfImg: p1Img,
+                                        enemyImg: p2Img});
+    this._users[1].send("init:battle", {selfTurn: false,
+                                        selfHand: p2Hand,
+                                        enemyHand: p1Hand,
+                                        selfName: p2Name,
+                                        enemyName: p1Name,
+                                        selfImg: p2Img,
+                                        enemyImg: p1Img });
   }
 
   r.generateRandomHand = function(){
