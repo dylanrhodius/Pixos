@@ -1,13 +1,14 @@
 import React from 'react'
 import DeckRow from './DeckRow'
 import DeckBuilderInfoBar from './DeckBuilderInfoBar'
+import './DeckBuilder.scss'
 
 export default class DeckBuilder extends React.Component {
 
   render () {
     console.log(this.props.playerDeck);
     return (
-      <div className="row no-gutters">
+      <div className="row no-gutters deck-builder-background">
         <div className="info-bar col-1 justify-content-center align-items-center pt-2 pb-4">
           { <DeckBuilderInfoBar playerDeck={this.props.playerDeck}/> }
         </div>
