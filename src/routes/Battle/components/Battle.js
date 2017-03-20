@@ -61,6 +61,9 @@ export default class Battle extends React.Component {
   }
 
   componentDidUpdate() {
+    if (this.props.battle.self.hand.length == 0) {
+      this.props.passTurn()
+    }
     console.log('Battle state is:', this.props.battle)
     if (this.props.battle.turnFinished) {
       console.log('my turn is finished')
