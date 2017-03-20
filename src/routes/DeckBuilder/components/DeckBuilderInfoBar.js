@@ -12,11 +12,13 @@ export default class DeckBuilderInfoBar extends React.Component {
   }
 
   saveDeck () {
+
     let deck = this.props.playerDeck.land.inDeck
                 .concat(this.props.playerDeck.air.inDeck
                   .concat(this.props.playerDeck.water.inDeck))
     console.log('Deck is', deck)
     fetch(`${window.location.origin}/user/deck`, {
+      credentials: "same-origin",
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
