@@ -16,7 +16,6 @@ export default class DeckCardWrapper extends React.Component {
 
     this.addCardToDeck = this.addCardToDeck.bind(this)
     this.removeCardFromDeck = this.removeCardFromDeck.bind(this)
-
   }
 
   handleTouchTap = (event) => {

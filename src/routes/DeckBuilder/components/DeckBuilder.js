@@ -23,12 +23,22 @@ export default class DeckBuilder extends React.Component {
     })
   }
 
+  loadContent() {
+    if (this.props.playerDeck.cardsInDeck == this.props.playerDeck.deckSize)
+    {
+      return <button onClick={this.saveDeck}>Save Deck</button>
+    } else {
+      return <h2>You must have 25 cards before saving</h2>
+    }
+  }
+
   render () {
+    let content = this.loadContent()
     console.log(this.props.playerDeck);
     return (
       <div>
-        <button onClick={this.saveDeck}>Save Deck</button>
         <h2>DeckBuilder</h2>
+        { content }
         { <DeckRow removeFromDeck={this.props.removeFromDeck} placeInDeck={this.props.placeInDeck} type={'land'} playerDeck={this.props.playerDeck} cards={this.props.playerDeck.land}/>}
         { <DeckRow removeFromDeck={this.props.removeFromDeck} placeInDeck={this.props.placeInDeck} type={'air'} playerDeck={this.props.playerDeck} cards={this.props.playerDeck.air}/>}
         { <DeckRow removeFromDeck={this.props.removeFromDeck} placeInDeck={this.props.placeInDeck} type={'water'} playerDeck={this.props.playerDeck} cards={this.props.playerDeck.water}/>}
