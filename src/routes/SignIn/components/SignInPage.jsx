@@ -7,7 +7,42 @@ import './SignInPage.scss'
 
 export default class SignInPage extends React.Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      hasDeck: false,
+      signedIn: false,
+      completedAPICall: false
+    };
+  }
+
+  componentDidMount() {
+    let hasDeck = this.state.hasDeck;
+    let signedIn = this.state.signedIn;
+    fetch(`${window.location.origin}/user/`, { credentials: "same-origin"})
+      .then(res => {
+        return res.json() })
+          .then(json => {
+            if (json.user) {
+              signedIn = true
+            }
+            fetch(`${window.location.origin}/user/deck`, { credentials: "same-origin"})
+              .then(res => {
+                return res.json() })
+                  .then(json => {
+                    if (json.deck) {
+                      hasDeck = true
+                    }
+                    this.setState({ hasDeck: hasDeck, signedIn: signedIn, completedAPICall: true })
+                  });
+          });
+  }
+
+  
+
   render() {
+    console.log('state is ', this.state)
     return (
       <div className="sign-in-background">
         <Header />
