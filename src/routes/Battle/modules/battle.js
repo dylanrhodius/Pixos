@@ -275,6 +275,22 @@ const ACTION_HANDLERS = {
     }
     return state
   },
+  [SET_ROUND_NOTIFICATION] : (state, action) => {
+    let selfHasWon = action.payload
+    if (selfHasWon) {
+      return Object.assign({}, state, {
+        self: Object.assign({}, state.self, {
+          roundNotification: "Round over: you win"
+        }),
+      })
+    } else {
+      return Object.assign({}, state, {
+        self: Object.assign({}, state.self, {
+          roundNotification: "Round over: you lose"
+        }),
+      })
+    }
+  },
   [CLEAR_PLAYING_AREA] : (state, action) => {
     let enemyDiscards = []
     for (let array of Object.values(state.enemy.playingArea)) {

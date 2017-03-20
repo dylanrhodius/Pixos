@@ -11,6 +11,8 @@ import {
   REMOVE_CARD,
   UPDATE_POWER,
   ADD_CARD,
+  SET_ROUND_NOTIFICATION,
+  setRoundNotification,
   addCard,
   passTurn,
   updateEnemyState,
@@ -51,6 +53,7 @@ describe('(Redux Module) Battle', () => {
     expect(SET_ROUND_NOTIFICATION).to.equal('SET_ROUND_NOTIFICATION')
     expect(UPDATE_HAS_ROUND_FINISHED).to.equal('UPDATE_HAS_ROUND_FINISHED')
     expect(UPDATE_ROUND_COUNTER).to.equal('UPDATE_ROUND_COUNTER')
+    expect(SET_ROUND_NOTIFICATION).to.equal('SET_ROUND_NOTIFICATION')
   })
 
   describe('(Reducer)', () => {
@@ -117,6 +120,16 @@ describe('(Redux Module) Battle', () => {
 
     it('Should return an action with type "REMOVE_CARD".', () => {
       expect(removeCard()).to.have.property('type', REMOVE_CARD)
+    })
+  })
+
+  describe('(Action Creator) setRoundNotification', () => {
+    it('Should be exported as a function.', () => {
+      expect(setRoundNotification).to.be.a('function')
+    })
+
+    it('Should return an action with type "SET_ROUND_NOTIFICATION".', () => {
+      expect(setRoundNotification()).to.have.property('type', SET_ROUND_NOTIFICATION)
     })
   })
 

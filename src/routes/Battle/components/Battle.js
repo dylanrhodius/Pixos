@@ -59,7 +59,6 @@ export default class Battle extends React.Component {
       this.props.updateHasRoundFinished(true)
       this.props.updateRoundCounter()
       this.props.passTurn(false)
-
       this.props.setRoundNotification(selfHasWon)
       this.props.setTurnFinished(true)
       this.props.setMyTurn(false)
@@ -131,5 +130,6 @@ Battle.propTypes = {
   clearPlayingArea : React.PropTypes.func.isRequired,
   setRoundNotification : React.PropTypes.func.isRequired,
   updateHasRoundFinished : React.PropTypes.func.isRequired,
-  updateRoundCounter : React.PropTypes.func.isRequired
+  updateRoundCounter : React.PropTypes.func.isRequired,
+  setRoundNotification : React.PropTypes.func.isRequired
 }
