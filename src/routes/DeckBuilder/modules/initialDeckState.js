@@ -12,13 +12,13 @@ function isAir(card) {
   if (card.type === 'air') { return card }
 }
 
-let landArray = cardData.filter(isLand);
-let waterArray = cardData.filter(isWater);
-let airArray = cardData.filter(isAir);
+let landArray = cardData.cards.filter(isLand);
+let waterArray = cardData.cards.filter(isWater);
+let airArray = cardData.cards.filter(isAir);
 
 export const DECKBUILD_STATE = {
     dinoDollars: 200,
-    deckSize: 25,
+    deckSize: cardData.deckLimit,
     cardsInDeck: 0,
     duplicateCardLimit: 3,
     deckName: '',
