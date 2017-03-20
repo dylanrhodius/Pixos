@@ -59,8 +59,10 @@ var Room = (function(){
 
   r.initBattle = function(){
     console.log('Room initiating battle!');
-    var p1Hand = this.generateRandomHand();
-    var p2Hand = this.generateRandomHand();
+    var p1Deck = this._users[0].getDeck();
+    var p2Deck = this._users[1].getDeck();
+    var p1Hand = this.generateRandomHand(p1Deck);
+    var p2Hand = this.generateRandomHand(p2Deck);
     var p1Name = this._users[0].getName();
     var p2Name = this._users[1].getName();
     var p1Img = this._users[0].getUserImg() || '/img/anon-player.svg';
@@ -81,12 +83,12 @@ var Room = (function(){
                                         enemyImg: p1Img });
   }
 
-  r.generateRandomHand = function(){
+  r.generateRandomHand = function(deck){
     var result = []
     var choice
     for (var i = 0; i < 10; i++) {
-      choice = Math.floor(Math.random() * 50)
-      result.push(cardData[choice])
+      choice = Math.floor(Math.random() * cardData.deckLimit)
+      result.push(deck[choice])
     }
     return result
   }

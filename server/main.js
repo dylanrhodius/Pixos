@@ -153,6 +153,7 @@ io.listen(server)
 io.sockets.on('connection', function (socket) {
     console.log('new socket connection, session is ', socket.request.session)
     var userId = null;
+    var deck = socket.request.session.deck
     if (socket.request.session.hasOwnProperty('passport')) {
       userId = socket.request.session.passport.user;
     }
@@ -160,7 +161,7 @@ io.sockets.on('connection', function (socket) {
       console.log(userObj)
       console.log('A client is connected!');
       var user;
-      connections.add(user = User(socket, userObj));
+      connections.add(user = User(socket, userObj, deck));
       console.log("new user ", user.getName());
 
       socket.on("disconnect", function() {
