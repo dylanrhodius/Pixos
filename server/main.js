@@ -335,6 +335,20 @@ if (project.env === 'development') {
     }
   });
 
+  app.get('/user/deck', (req,res) => {
+    // if a session deck exists:
+    if (typeof(req.session.deck) !== 'undefined') {
+      console.log('Session deck exists');
+      res.setHeader('Content-Type', 'application/json');
+      // return (or send) the document object
+      res.send({ deck: req.session.deck });
+    } else {
+      console.log('Session does not exist');
+      res.setHeader('Content-Type', 'application/json');
+      res.send('No data available');
+    }
+  });
+
   app.post('/user/deck', function (req, res) {
     console.log("Request in /user", req.session);
     console.log("Request in /user", req.sessionId);
