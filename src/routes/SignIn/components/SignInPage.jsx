@@ -10,7 +10,6 @@ export default class SignInPage extends React.Component {
     return (
       <div>
         <Header />
-        <h2>Sign In!</h2>
         {<SignInForm />}
         <br/>
         <Link to={`/battle`} ><RaisedButton label="Start Matchmaking" primary={true}/></Link>
