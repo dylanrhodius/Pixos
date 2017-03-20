@@ -263,6 +263,8 @@ if (project.env === 'development') {
   });
 
   app.post('/user/deck', function (req, res) {
+    console.log("Request in /user", req.session);
+    console.log("Request in /user", req.sessionId);
     req.session.deck = req.body
     res.send('')
   })
