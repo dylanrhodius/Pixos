@@ -16,7 +16,14 @@ import {  increment,
           setRoundNotification,
           resurrectCards,
           applyMeteorEffect,
-          applyParagonEffect
+          applyParagonEffect,
+          setReadyForNewRound,
+          incrementRoundCounter,
+          setPlayerNotification,
+          incrementEnemyScore,
+          incrementSelfScore,
+          clearPlayerNotification,
+          setGameEnded
 } from '../modules/battle'
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -48,7 +55,14 @@ const mapDispatchToProps = {
   setRoundNotification,
   resurrectCards,
   applyMeteorEffect,
-  applyParagonEffect
+  applyParagonEffect,
+  setReadyForNewRound,
+  incrementRoundCounter,
+  setPlayerNotification,
+  incrementEnemyScore,
+  incrementSelfScore,
+  clearPlayerNotification,
+  setGameEnded
 }
 
 const mapStateToProps = (state) => ({

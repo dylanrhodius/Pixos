@@ -3,24 +3,11 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 
-/**
- * Dialog with action buttons. The actions are passed in as an array of React objects,
- * in this example [FlatButtons](/#/components/flat-button).
- *
- * You can also close this dialog by clicking outside the dialog, or with the 'Esc' key.
- */
+
 export default class Notification extends React.Component {
   state = {
     open: true,
   };
-
-
-  componentWillMount() {
-    console.log('NOTIF will mount')
-  }
-  componentWillUpdate() {
-    console.log('NOTIF will update')
-  }
 
   handleOpen = () => {
     this.setState({open: true});
@@ -28,19 +15,14 @@ export default class Notification extends React.Component {
 
   handleClose = () => {
     this.setState({open: false});
+    window.location = '/'
   };
 
   render() {
     const actions = [
       <FlatButton
-        label="Cancel"
+        label="Back to Home"
         primary={true}
-        onTouchTap={this.handleClose}
-      />,
-      <FlatButton
-        label="Submit"
-        primary={true}
-        keyboardFocused={true}
         onTouchTap={this.handleClose}
       />,
     ];
@@ -48,13 +30,12 @@ export default class Notification extends React.Component {
     return (
       <div>
         <Dialog
-          title="Dialog With Actions"
+          title="Game Over!"
           actions={actions}
-          modal={false}
+          modal={true}
           open={this.state.open}
-          onRequestClose={this.handleClose}
         >
-          {this.props.text }
+          {this.props.text}
         </Dialog>
       </div>
     );

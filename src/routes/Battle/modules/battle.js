@@ -29,6 +29,14 @@ export const RESURRECT_CARDS = 'RESURRECT_CARDS'
 export const APPLY_METEOR_EFFECT = 'APPLY_METEOR_EFFECT'
 export const APPLY_PARAGON_EFFECT = 'APPLY_PARAGON_EFFECT'
 export const APPLY_PARAGON_EFFECT_ENEMY = 'APPLY_PARAGON_EFFECT_ENEMY'
+export const SET_PLAYER_NOTIFICATION = 'SET_PLAYER_NOTIFICATION'
+export const SET_READY_FOR_NEW_ROUND = 'SET_READY_FOR_NEW_ROUND'
+export const INCREMENT_ROUND_COUNTER = 'INCREMENT_ROUND_COUNTER'
+export const INCREMENT_ENEMY_SCORE = 'INCREMENT_ENEMY_SCORE'
+export const INCREMENT_SELF_SCORE = 'INCREMENT_SELF_SCORE'
+export const CLEAR_PLAYER_NOTIFICATION = 'CLEAR_PLAYER_NOTIFICATION'
+export const SET_GAME_ENDED = 'SET_GAME_ENDED'
+export const POP_UP_DIALOG = 'POP_UP_DIALOG'
 
 
 // ------------------------------------
@@ -59,12 +67,24 @@ export const doubleAsync = () => {
   }
 }
 
+export function incrementEnemyScore () {
+  return {
+    type: INCREMENT_ENEMY_SCORE
+  }
+}
+export function incrementSelfScore () {
+  return {
+    type: INCREMENT_SELF_SCORE
+  }
+}
+
 export function setupPlayers (data) {
   return {
     type: SETUP_PLAYERS,
     payload: data
   }
 }
+
 
 export function addCard (cardId) {
   return {
@@ -74,37 +94,50 @@ export function addCard (cardId) {
 }
 
 export function updateScore (selfHasWon) {
-  console.log("updateScore")
+  // console.log("updateScore")
   return {
     type: UPDATE_SCORE,
     payload: selfHasWon
   }
 }
-export function updateRoundCounter() {
-  console.log("updateRoundCounter")
+export function incrementRoundCounter() {
+  // console.log("incrementRoundCounter")
   return {
-    type: UPDATE_ROUND_COUNTER
+    type: INCREMENT_ROUND_COUNTER
   }
 }
-export function updateHasRoundFinished (boolean) {
-  console.log("updateHasRoundFinished")
+export function setReadyForNewRound (boolean) {
+  // console.log("setReadyForNewRound")
   return {
-    type: UPDATE_HAS_ROUND_FINISHED,
+    type: SET_READY_FOR_NEW_ROUND,
     payload: boolean
   }
 }
 
 export function clearPlayingArea () {
-  console.log("clearPlayingArea")
+  // console.log("clearPlayingArea")
   return {
     type: CLEAR_PLAYING_AREA
   }
 }
-export function setRoundNotification (selfHasWon) {
-  console.log("setRoundNotification")
+export function setPlayerNotification (notification) {
+  // console.log("setPlayerNotification")
   return {
-    type: SET_ROUND_NOTIFICATION,
-    payload: selfHasWon
+    type: SET_PLAYER_NOTIFICATION,
+    payload: notification
+  }
+}
+
+export function clearPlayerNotification () {
+  // console.log("setPlayerNotification")
+  return {
+    type: CLEAR_PLAYER_NOTIFICATION
+  }
+}
+export function setGameEnded () {
+  // console.log("setGameEnded")
+  return {
+    type: SET_GAME_ENDED
   }
 }
 
@@ -187,12 +220,18 @@ export const actions = {
   removeCard,
   updateScore,
   clearPlayingArea,
-  setRoundNotification,
-  updateHasRoundFinished,
-  updateRoundCounter,
   resurrectCards,
   applyParagonEffect,
-  applyParagonEffectEnemy
+  applyParagonEffectEnemy,
+  setPlayerNotification,
+  setReadyForNewRound,
+  incrementRoundCounter,
+  incrementEnemyScore,
+  incrementSelfScore,
+  clearPlayerNotification,
+  setGameEnded,
+  setTurnFinished,
+  passTurn
 }
 
 // ------------------------------------
@@ -214,6 +253,8 @@ const ACTION_HANDLERS = {
       })
     })
   },
+
+
   [SET_TURN_FINISHED] : (state, action) => {
     return Object.assign({}, state, {
       turnFinished: action.payload
@@ -227,18 +268,44 @@ const ACTION_HANDLERS = {
       }),
     })
   },
-  [UPDATE_HAS_ROUND_FINISHED] : (state, action) => {
+
+  [SET_GAME_ENDED] : (state, action) => {
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
-        hasRoundFinished: action.payload
+        gameEnded: true
       }),
     })
   },
-  [UPDATE_ROUND_COUNTER] : (state, action) => {
+
+
+  [SET_READY_FOR_NEW_ROUND] : (state, action) => {
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        readyForNewRound: action.payload
+      }),
+    })
+  },
+  [INCREMENT_ROUND_COUNTER] : (state, action) => {
     let newRoundCount = state.self.roundCounter + 1
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
         roundCounter: newRoundCount
+      }),
+    })
+  },
+  [INCREMENT_ENEMY_SCORE] : (state, action) => {
+    let newEnemyScore = state.enemy.score + 1
+    return Object.assign({}, state, {
+      enemy: Object.assign({}, state.enemy, {
+        score: newEnemyScore
+      }),
+    })
+  },
+  [INCREMENT_SELF_SCORE] : (state, action) => {
+    let newSelfScore = state.self.score + 1
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        score: newSelfScore
       }),
     })
   },
@@ -317,21 +384,18 @@ const ACTION_HANDLERS = {
     }
     return state
   },
-  [SET_ROUND_NOTIFICATION] : (state, action) => {
-    let selfHasWon = action.payload
-    if (selfHasWon) {
-      return Object.assign({}, state, {
-        self: Object.assign({}, state.self, {
-          roundNotification: "Round over: you win"
-        }),
-      })
-    } else {
-      return Object.assign({}, state, {
-        self: Object.assign({}, state.self, {
-          roundNotification: "Round over: you lose"
-        }),
-      })
-    }
+  [SET_PLAYER_NOTIFICATION] : (state, action) => {
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        PlayerNotification: action.payload
+      }),
+    })
+  },[CLEAR_PLAYER_NOTIFICATION] : (state, action) => {
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        PlayerNotification: ""
+      }),
+    })
   },
   [CLEAR_PLAYING_AREA] : (state, action) => {
     let enemyDiscards = []

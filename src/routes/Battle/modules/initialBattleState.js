@@ -1,9 +1,10 @@
 export const INITIAL_STATE = {
   self: {
     myTurn: false,
-    hasRoundFinished: false,
-    roundCounter: 0,
-    roundNotification: "",
+    readyForNewRound: false,
+    roundCounter: 1,
+    PlayerNotification: "",
+    gameEnded: false,
     name: '',
     power: 0,
     score: 0,
@@ -28,9 +29,10 @@ export const INITIAL_STATE = {
   },
   enemy: {
     myTurn: false,
-    hasRoundFinished: false,
-    roundCounter: 0,
-    roundNotification: "",
+    readyForNewRound: false,
+    roundCounter: 1,
+    PlayerNotification: "",
+    gameEnded: false,
     name: '',
     power: 0,
     score: 0,

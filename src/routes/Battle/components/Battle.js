@@ -1,15 +1,31 @@
 import React from 'react'
 import InfoBar from 'routes/Battle/components/InfoBar'
 import Board from 'routes/Battle/components/Board'
-import CircularProgress from 'material-ui/CircularProgress';
+import CircularProgress from 'material-ui/CircularProgress'
+import shortId from 'shortid'
+import Notification from 'routes/Battle/components/Notification'
+
 
 import io from 'socket.io-client';
 const socket = io.connect(`${window.location.origin}`);
 
 export default class Battle extends React.Component {
 
+  loadNotifcation () {
+    if (this.props.battle.self.gameEnded) {
+      console.log('GAME ENDED!!!')
+      return (
+        <Notification open={true}
+           key={shortId.generate()}
+           text={this.props.battle.self.PlayerNotification} />
+      )
+    }
+  }
+
   loadContent () {
-    if(this.props.battle.self.hand.length == 0) {
+    if(this.props.battle.self.hand.length == 0
+       && this.props.battle.self.discardPile.length == 0
+        && this.props.battle.self.power == 0 ) {
       return (
         <div className="row pt-5">
           <div className="col-12 text-center pt-5">
@@ -41,6 +57,7 @@ export default class Battle extends React.Component {
     }
   }
 
+
   checkMeteorStatus() {
     if (this.props.battle.enemy.meteor.land) {
       console.log('APPLYING METEOR EFFECT');
@@ -56,32 +73,55 @@ export default class Battle extends React.Component {
     }
   }
 
-  adjudicateGameState() {
-    // todo: add round counter; when 3 it's a draw
-    // if enemy has won
-    //   adjudicate end of game:
-    //   set game end notifcation message as loser
-    // else if enemy has passed & self has passed:
-        // decide round winner
-        // clear playing area
-        // if self won
-        //   update self score
-        //   if self score == 2
-        //     set game end notification as winner
-        // set notification message
-    // endif
+
+  roundIsOver() {
     let battle = this.props.battle
-    if (battle.self.hasPassed && ( battle.enemy.hasPassed
-    || battle.enemy.hasRoundFinished) )  {
-      let selfHasWon = battle.self.power > battle.enemy.power
-      this.props.updateScore(selfHasWon)
-      this.props.updateHasRoundFinished(true)
-      this.props.updateRoundCounter()
-      this.props.passTurn(false)
-      this.props.setRoundNotification(selfHasWon)
-      this.props.setTurnFinished(true)
-      this.props.setMyTurn(false)
+    console.log('EVALUATING ROUND IS OVER', { selfHasPassed: this.props.battle.self.hasPassed, selfreadyForNewRound: this.props.battle.self.hasPassed,  enemyHasPassed: this.props.battle.enemy.hasPassed, enemyreadyForNewRound: this.props.battle.enemy.readyForNewRound })
+
+    if (battle.self.hasPassed && ( battle.enemy.hasPassed || battle.enemy.readyForNewRound) ) {
+      return true;
     }
+  }
+
+  gameIsOver() {
+    let battle = this.props.battle
+    if (battle.self.roundCounter == 4 || battle.self.score == 2
+      || battle.enemy.score == 2) {
+        return true
+      }
+  }
+
+  endRound() {
+    let battle = this.props.battle
+    let roundResult = ""
+    if (battle.self.power > battle.enemy.power) { roundResult = "win" }
+    else if (battle.self.power < battle.enemy.power) { roundResult = "lose" }
+    else { roundResult = "both draw" }
+    if (roundResult == "win") {this.props.incrementSelfScore()}
+    this.props.setPlayerNotification("Round over, you " + roundResult)
+    this.props.passTurn(false)
+    this.props.setReadyForNewRound(true)
+    this.props.setMyTurn(false)
+    this.props.setTurnFinished(true)
+  }
+
+  startNewRound() {
+    this.props.clearPlayingArea()
+    this.props.updatePower()
+    this.props.clearPlayerNotification()
+    this.props.incrementRoundCounter()
+  }
+
+  endGame() {
+    let battle = this.props.battle
+    let gameResult = ""
+    if (battle.self.score > battle.enemy.score) { gameResult = "win" }
+    else if (battle.self.score < battle.enemy.score) { gameResult = "lose" }
+    else { gameResult = "both draw" }
+    this.props.setPlayerNotification("Game over, you " + gameResult)
+    this.props.setGameEnded()
+    this.props.setMyTurn(false)
+    this.props.setTurnFinished(true)
   }
 
   componentDidMount() {
@@ -89,36 +129,40 @@ export default class Battle extends React.Component {
     if(this.props.battle.self.hand.length == 0) {
       socket.emit('request:matchmaking');
     }
-    socket.on("init:battle", function(data) {
-      console.log('init battle data: ', data)
-      that.props.setupPlayers(data)
+    socket.on("init:battle", function(enemyData) {
+      that.props.setupPlayers(enemyData)
     })
-    socket.on("receive:data", function(data) {
-      console.log("Received data from Opponent!:", data);
-      that.props.setMyTurn(true)
-      that.props.updateHasRoundFinished(false)
-      that.props.updateEnemyState(data)
-      that.checkMeteorStatus()
 
-      that.adjudicateGameState()
-      if(data.hasRoundFinished) {
-        that.props.clearPlayingArea()
-        that.props.updatePower()
-       }
-      if (that.props.battle.self.hasPassed) {
-        that.props.setMyTurn(false)
-        that.props.setTurnFinished(true)
+    socket.on("receive:data", function(enemyData) {
+      console.log("Received data from Opponent!:", enemyData);
+      if (!that.props.battle.self.gameEnded) {
+        that.props.setMyTurn(true)
+        that.props.setReadyForNewRound(false)
+        that.props.updateEnemyState(enemyData)
+        that.checkMeteorStatus()
+        if (that.roundIsOver()) { that.endRound() }
+
+        if(enemyData.readyForNewRound) {
+          that.startNewRound()
+          if (that.gameIsOver()) { that.endGame() }
+        }
+
+        if (that.props.battle.self.hasPassed) {
+          that.props.setMyTurn(false)
+          that.props.setTurnFinished(true)
+        }
       }
     })
-    console.log('Battle state is:', that.props.battle)
   }
 
   componentDidUpdate() {
-    if (this.props.battle.self.hand.length == 0) {
-      this.props.passTurn(true)
-    }
-    console.log('Battle state is:', this.props.battle)
+    console.log('Battle updated with: ', this.props.battle)
+
     if (this.props.battle.turnFinished) {
+      if (this.props.battle.self.hand.length == 0 && (!this.props.battle.self.readyForNewRound)) {
+        this.props.passTurn(true)
+      }
+      console.log('Passing to Opponent!:', this.props.battle)
       socket.emit('pass:ToRoom', this.props.battle.self)
       this.props.setTurnFinished(false)
     }
@@ -126,11 +170,12 @@ export default class Battle extends React.Component {
   }
 
   render () {
+    let notification = this.loadNotifcation();
     let content = this.loadContent();
     return (
       <div>
       { content }
-
+      { notification }
       </div>
     )
   }
@@ -156,6 +201,13 @@ Battle.propTypes = {
   setRoundNotification : React.PropTypes.func.isRequired,
   resurrectCards : React.PropTypes.func.isRequired,
   applyMeteorEffect : React.PropTypes.func.isRequired,
-  applyParagonEffect : React.PropTypes.func.isRequired
-
+  applyParagonEffect : React.PropTypes.func.isRequired,
+  setPlayerNotification : React.PropTypes.func.isRequired,
+  setReadyForNewRound : React.PropTypes.func.isRequired,
+  incrementRoundCounter : React.PropTypes.func.isRequired,
+  setPlayerNotification : React.PropTypes.func.isRequired,
+  incrementEnemyScore : React.PropTypes.func.isRequired,
+  incrementSelfScore : React.PropTypes.func.isRequired,
+  clearPlayerNotification : React.PropTypes.func.isRequired,
+  setGameEnded : React.PropTypes.func.isRequired
 }
