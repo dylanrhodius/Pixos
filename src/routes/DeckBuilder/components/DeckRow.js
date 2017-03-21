@@ -24,11 +24,11 @@ export default class DeckCard extends React.Component {
 
     return (
       <div>
-        <h3>Available cards</h3>
+        <h4>{`Available ${this.props.type} cards`}</h4>
         <div className="card-container d-flex justify-content-center flex-wrap">
-          { poolCards }
+            { poolCards }
         </div>
-        <h3>Chosen cards</h3>
+        <h4>{`Chosen ${this.props.type} cards`}</h4>
         <div className="card-container d-flex justify-content-center flex-wrap">
           { deckCards }
         </div>

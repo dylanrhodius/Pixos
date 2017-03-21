@@ -1,4 +1,19 @@
 .info-bar {
   position: relative;
   word-wrap: break-word;
+  border-right: 5px solid #474747;
+  min-height: 100%;
+}
+
+.info-card-cost {
+  width: 75px;
+  height: 75px;
+  font-size: 1.5rem;
+  line-height: 3.2;
+  background-color: grey;
+  color: white;
+}
+
+.inside {
+  height: 100%;
 }

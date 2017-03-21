@@ -19,7 +19,9 @@ body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-  height: 100%;
+}
+
+.root {
   background: linear-gradient($light-bkgrnd, $bkgrnd-gradient);
 }
 
@@ -121,4 +123,12 @@ $paragon-col: #f4cc41;
 
 .grey-faint-bkgrnd {
   background: linear-gradient(225deg,$grey-mid 0%,$grey-light 100%)
+}
+
+.max-page-height {
+  height: 100vh;
+}
+
+.min-page-height {
+  min-height: 100vh;
 }
