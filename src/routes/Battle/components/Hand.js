@@ -22,7 +22,8 @@ export default class Hand extends React.Component {
                                 setMyTurn={this.props.setMyTurn}
                                 id={i}
                                 updatePower={this.props.updatePower}
-                                resurrectCards={this.props.resurrectCards} />
+                                resurrectCards={this.props.resurrectCards}
+                                applyMeteorEffect={this.props.applyMeteorEffect} />
           )
         } else {
           return (
@@ -63,6 +64,7 @@ export default class Hand extends React.Component {
     addCard : React.PropTypes.func.isRequired,
     isSelfTurn : React.PropTypes.bool.isRequired,
     updatePower : React.PropTypes.func.isRequired,
-    resurrectCards : React.PropTypes.func.isRequired
+    resurrectCards : React.PropTypes.func.isRequired,
+    applyMeteorEffect : React.PropTypes.func.isRequired
   }
 }

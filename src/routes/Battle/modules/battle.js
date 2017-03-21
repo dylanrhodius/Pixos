@@ -26,6 +26,7 @@ export const SET_ROUND_NOTIFICATION = 'SET_ROUND_NOTIFICATION'
 export const UPDATE_HAS_ROUND_FINISHED = 'UPDATE_HAS_ROUND_FINISHED'
 export const UPDATE_ROUND_COUNTER = 'UPDATE_ROUND_COUNTER'
 export const RESURRECT_CARDS = 'RESURRECT_CARDS'
+export const APPLY_METEOR_EFFECT = 'APPLY_METEOR_EFFECT'
 
 
 // ------------------------------------
@@ -152,6 +153,15 @@ export function resurrectCards () {
     type: RESURRECT_CARDS
   }
 }
+
+export function applyMeteorEffect (type) {
+  console.log('applying meteor effect for ', type)
+  return {
+    type: APPLY_METEOR_EFFECT,
+    payload: type
+  }
+}
+
 
 
 export const actions = {
@@ -342,6 +352,33 @@ const ACTION_HANDLERS = {
       self: Object.assign({}, state.self, {
         discardPile: discards,
         hand: state.self.hand.concat(resurrects)
+      })
+    })
+  },
+  [APPLY_METEOR_EFFECT] : (state, action) => {
+    let type = action.payload
+    let selfMeteoredRow = []
+    let enemyMeteoredRow = []
+
+    state.self.playingArea[action.payload].forEach((card) => {
+      card.power = 1
+      selfMeteoredRow.push(card)
+    })
+    state.enemy.playingArea[action.payload].forEach((card) => {
+      card.power = 1
+      enemyMeteoredRow.push(card)
+    })
+
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        playingArea: Object.assign({}, state.self.playingArea, {
+            [action.payload]: selfMeteoredRow
+          }),
+      }),
+      enemy: Object.assign({}, state.enemy, {
+        playingArea: Object.assign({}, state.enemy.playingArea, {
+            [action.payload]: enemyMeteoredRow
+          }),
       })
     })
   }

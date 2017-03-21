@@ -14,7 +14,8 @@ import {  increment,
           updateHasRoundFinished,
           updateRoundCounter,
           setRoundNotification,
-          resurrectCards
+          resurrectCards,
+          applyMeteorEffect
 } from '../modules/battle'
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -44,7 +45,8 @@ const mapDispatchToProps = {
   updateHasRoundFinished,
   updateRoundCounter,
   setRoundNotification,
-  resurrectCards
+  resurrectCards,
+  applyMeteorEffect
 }
 
 const mapStateToProps = (state) => ({

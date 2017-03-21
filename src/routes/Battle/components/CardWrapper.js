@@ -32,6 +32,10 @@ export default class CardWrapper extends React.Component {
    }
    this.props.addCard(this.props.id)
    this.props.removeCard(this.props.id)
+   if (this.props.special == 'meteor') {
+     console.log('meteor card played')
+     this.props.applyMeteorEffect(this.props.type)
+   }
    this.props.updatePower()
    this.setTurnFinishedToTrue()
  }
@@ -92,6 +96,7 @@ export default class CardWrapper extends React.Component {
    setTurnFinished  : React.PropTypes.func.isRequired,
    setMyTurn : React.PropTypes.func.isRequired,
    updatePower : React.PropTypes.func.isRequired,
-   resurrectCards : React.PropTypes.func.isRequired
+   resurrectCards : React.PropTypes.func.isRequired,
+   applyMeteorEffect : React.PropTypes.func.isRequired
  }
 }

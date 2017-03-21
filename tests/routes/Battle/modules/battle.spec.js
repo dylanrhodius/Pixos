@@ -13,6 +13,7 @@ import {
   ADD_CARD,
   SET_ROUND_NOTIFICATION,
   RESURRECT_CARDS,
+  APPLY_METEOR_EFFECT,
   setRoundNotification,
   addCard,
   passTurn,
@@ -29,6 +30,7 @@ import {
   updateHasRoundFinished,
   updateRoundCounter,
   resurrectCards,
+  applyMeteorEffect,
   default as battleReducer
 } from 'routes/Battle/modules/battle'
 
@@ -56,6 +58,7 @@ describe('(Redux Module) Battle', () => {
     expect(UPDATE_ROUND_COUNTER).to.equal('UPDATE_ROUND_COUNTER')
     expect(SET_ROUND_NOTIFICATION).to.equal('SET_ROUND_NOTIFICATION')
     expect(RESURRECT_CARDS).to.equal('RESURRECT_CARDS')
+    expect(APPLY_METEOR_EFFECT).to.equal('APPLY_METEOR_EFFECT')
   })
 
   describe('(Reducer)', () => {
@@ -222,6 +225,16 @@ describe('(Redux Module) Battle', () => {
 
     it('Should return an action with type "RESURRECT_CARDS".', () => {
       expect(resurrectCards()).to.have.property('type', RESURRECT_CARDS)
+    })
+  })
+
+  describe('(Action Creator) applyMeteorEffect', () => {
+    it('Should be exported as a function.', () => {
+      expect(applyMeteorEffect).to.be.a('function')
+    })
+
+    it('Should return an action with type "APPLY_METEOR_EFFECT".', () => {
+      expect(applyMeteorEffect()).to.have.property('type', APPLY_METEOR_EFFECT)
     })
   })
 

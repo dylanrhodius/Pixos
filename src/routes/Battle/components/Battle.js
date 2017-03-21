@@ -32,7 +32,8 @@ export default class Battle extends React.Component {
                 removeCard={this.props.removeCard}
                 addCard={this.props.addCard}
                 updatePower={this.props.updatePower}
-                resurrectCards={this.props.resurrectCards} />
+                resurrectCards={this.props.resurrectCards}
+                applyMeteorEffect={this.props.applyMeteorEffect} />
         </div>
       )
     }
@@ -134,5 +135,6 @@ Battle.propTypes = {
   updateHasRoundFinished : React.PropTypes.func.isRequired,
   updateRoundCounter : React.PropTypes.func.isRequired,
   setRoundNotification : React.PropTypes.func.isRequired,
-  resurrectCards : React.PropTypes.func.isRequired
+  resurrectCards : React.PropTypes.func.isRequired,
+  applyMeteorEffect : React.PropTypes.func.isRequired
 }
