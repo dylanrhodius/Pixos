@@ -374,11 +374,14 @@ const ACTION_HANDLERS = {
         playingArea: Object.assign({}, state.self.playingArea, {
             [action.payload]: selfMeteoredRow
           }),
+        meteor: Object.assign({}, state.self.meteor, {
+            [action.payload]: true
+          })
       }),
       enemy: Object.assign({}, state.enemy, {
         playingArea: Object.assign({}, state.enemy.playingArea, {
             [action.payload]: enemyMeteoredRow
-          }),
+          })
       })
     })
   }

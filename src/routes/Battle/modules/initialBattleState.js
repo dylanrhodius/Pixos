@@ -14,6 +14,11 @@ export const INITIAL_STATE = {
       land: [],
       water: [],
       air: []
+    },
+    meteor: {
+      land: false,
+      water: false,
+      air: false
     }
   },
   enemy: {
@@ -31,6 +36,11 @@ export const INITIAL_STATE = {
       land: [],
       water: [],
       air: []
+    },
+    meteor: {
+      land: false,
+      water: false,
+      air: false
     }
   },
   turnFinished: false
