@@ -8,7 +8,7 @@ export default class DeckBuilder extends React.Component {
     console.log(this.props.playerDeck);
     return (
       <div className="row no-gutters max-page-height">
-        <div className="info-bar col-1 d-flex min-page-height justify-content-center align-items-center pt-2 pb-4">
+        <div className="info-bar col-1 d-flex align-middle min-page-height justify-content-center align-items-center pt-2 pb-4">
           { <DeckBuilderInfoBar playerDeck={this.props.playerDeck}/> }
         </div>
       <div className="deck col-11">
