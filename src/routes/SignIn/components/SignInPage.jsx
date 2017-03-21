@@ -3,7 +3,6 @@ import SignInForm from './SignInForm.jsx'
 import { Link } from 'react-router'
 import Header from '../../../components/Header'
 import RaisedButton from 'material-ui/RaisedButton'
-import './SignInPage.scss'
 import CircularProgress from 'material-ui/CircularProgress';
 
 export default class SignInPage extends React.Component {
@@ -47,7 +46,7 @@ export default class SignInPage extends React.Component {
 
       let topMessage, topButton, middleMessage, middleButton, bottomMessage, bottomButton
 
-      bottomButton = ( <Link to={`/deckbuilder`} key={'bottomButton'} ><RaisedButton label="Deck Builder" primary={true}/></Link> )
+      bottomButton = ( <Link to={`/deckbuilder`}  className='mb-5' key={'bottomButton'} ><RaisedButton label="Deck Builder" primary={true}/></Link> )
 
       if (!this.state.hasDeck) {
         topMessage = ( <p className="my-4" key={'topMessage'}>Welcome! Build your deck to get started&hellip;</p> )
@@ -87,7 +86,7 @@ export default class SignInPage extends React.Component {
     let content = this.loadContent()
     console.log('state is ', this.state)
     return (
-      <div className="sign-in-background">
+      <div className="sign-in-background max-page-height d-flex flex-column justify-content-center align-items-center">
         <Header />
         { content }
       </div>

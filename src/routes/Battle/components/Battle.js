@@ -4,6 +4,8 @@ import Board from 'routes/Battle/components/Board'
 import CircularProgress from 'material-ui/CircularProgress'
 import shortId from 'shortid'
 import Notification from 'routes/Battle/components/Notification'
+import RaisedButton from 'material-ui/RaisedButton'
+import { Link } from 'react-router'
 
 
 import io from 'socket.io-client';
@@ -27,10 +29,11 @@ export default class Battle extends React.Component {
        && this.props.battle.self.discardPile.length == 0
         && this.props.battle.self.power == 0 ) {
       return (
-        <div className="row pt-5">
-          <div className="col-12 text-center pt-5">
-            <h2 className="mb-4">Matchmaking</h2>
-            <CircularProgress size={60} thickness={7} />
+        <div className="row max-page-height sign-in-background">
+          <div className="col-12 text-center max-page-height d-flex flex-column align-items-center justify-content-center">
+            <h2 className="mb-4">Matchmaking&hellip;</h2>
+            <CircularProgress className='mb-4' size={60} thickness={7} />
+            <Link to={`/`} ><RaisedButton label="Cancel" primary={true}/></Link>
           </div>
         </div>
       )

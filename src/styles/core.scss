@@ -151,3 +151,17 @@ $paragon-col: #f4cc41;
 .min-page-height {
   min-height: 100vh;
 }
+
+.sign-in-background {
+  background-image: url("../../public/background.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+// .sign-in-position {
+//   height: 100%;
+//   width: 100%;
+//   position: fixed;
+//   padding: 15%;
+// }
