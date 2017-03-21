@@ -91,6 +91,7 @@ render () {
             placeInDeck={this.props.placeInDeck}
             removeFromDeck={this.props.removeFromDeck}
             special={this.props.special}
+            description={this.props.description}
           />
         </div>
       <Popover
@@ -119,6 +120,7 @@ render () {
    imgUrl: React.propTypes.string.isRequired,
    placeInDeck: React.propTypes.func.isRequired,
    id: React.propTypes.string.isRequired,
-   _id: React.propTypes.string.isRequired
+   _id: React.propTypes.string.isRequired,
+   description : React.PropTypes.string.isRequired
  }
 }

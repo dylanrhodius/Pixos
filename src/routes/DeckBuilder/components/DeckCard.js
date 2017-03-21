@@ -54,5 +54,6 @@ render() {
     power : React.PropTypes.string.isRequired,
     cost : React.PropTypes.string.isRequired,
     special : React.PropTypes.string.isRequired,
+    description : React.PropTypes.string.isRequired
   }
 }
