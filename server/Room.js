@@ -65,8 +65,8 @@ var Room = (function(){
     var p2Hand = this.generateRandomHand(p2Deck);
     var p1Name = this._users[0].getName();
     var p2Name = this._users[1].getName();
-    var p1Img = this._users[0].getUserImg() || '/img/anon-player.svg';
-    var p2Img = this._users[1].getUserImg() || '/img/anon-player.svg';
+    var p1Img = this._users[0].getUserImg() || '/icons/anon-player.svg';
+    var p2Img = this._users[1].getUserImg() || '/icons/anon-player.svg';
     this._users[0].send("init:battle", {selfTurn: true,
                                         selfHand: p1Hand,
                                         enemyHand: p2Hand,

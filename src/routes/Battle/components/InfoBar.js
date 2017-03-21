@@ -35,11 +35,11 @@ export default class InfoBar extends React.Component {
   }
 
   render () {
-    let content = this.loadContent()
+    let passButton = this.loadContent()
     return (
       <div className="info-bar col-1 d-flex flex-column justify-content-center align-items-center grey-bkgrnd">
         <PixosMenu />
-        <img className="game-avatar circle" src={`${this.props.battle.enemy.img}`}/>
+        <img className="game-avatar circle circle-highlight" src={`${this.props.battle.enemy.img}`}/>
         <span className="info-bar-text mx-2">{ this.props.battle.enemy.name }</span>
         <span className="my-2 info-bar-text land-main-bkgrnd circle circle-highlight info-bar-indicator">{this.props.battle.enemy.score}</span>
         <span className="info-bar-text small-text mb-auto">Score</span>
@@ -53,8 +53,8 @@ export default class InfoBar extends React.Component {
         <span className="mt-auto mb-1 info-bar-text small-text">Score</span>
         <span className="mb-2 info-bar-text land-main-bkgrnd circle circle-highlight info-bar-indicator">{this.props.battle.self.score}</span>
         <span className="info-bar-text mx-2">{ this.props.battle.self.name }</span>
-        <img className="game-avatar circle mb-2" src={`${this.props.battle.self.img}`}/>
-        {content}
+        <img className="game-avatar circle circle-highlight mb-2" src={`${this.props.battle.self.img}`}/>
+        {passButton}
     </div>
     )
   }
