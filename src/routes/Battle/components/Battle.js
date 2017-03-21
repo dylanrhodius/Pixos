@@ -2,8 +2,9 @@ import React from 'react'
 import InfoBar from 'routes/Battle/components/InfoBar'
 import Board from 'routes/Battle/components/Board'
 import CircularProgress from 'material-ui/CircularProgress'
-import './Battle.scss'
 import shortId from 'shortid'
+import Notification from 'routes/Battle/components/Notification'
+
 
 import io from 'socket.io-client';
 const socket = io.connect(`${window.location.origin}`);
@@ -11,24 +12,12 @@ const socket = io.connect(`${window.location.origin}`);
 export default class Battle extends React.Component {
 
   loadNotifcation () {
-    console.log('loading notification')
-    if (this.props.battle.self.PlayerNotification) {
-      // var element = document.getElementById('notification-popup');
-      // element.style.display = 'block'
-      console.log('notification shold be ', this.props.battle.self.PlayerNotification)
+    if (this.props.battle.self.gameEnded || this.props.battle.enemy.gameEnded) {
+      console.log('GAEME ENDED!!!')
       return (
-        <div id="notification-popup" className="notification" style={{display: 'block'}} key={shortId.generate()}>
-          <p>{this.props.battle.self.PlayerNotification}</p>
-          <button onClick={this.hideNotification}>Go Away</button>
-        </div>
-       )
+        <Notification open={true} key={shortId.generate()} />
+      )
     }
-  }
-
-  hideNotification() {
-    var element = document.getElementById('notification-popup');
-    element.style.display = 'none'
-    window.setTimeout(() => {  }, 5000)
   }
 
   loadContent () {
@@ -192,5 +181,5 @@ Battle.propTypes = {
   incrementSelfScore : React.PropTypes.func.isRequired,
   clearPlayerNotification : React.PropTypes.func.isRequired,
   setGameEnded : React.PropTypes.func.isRequired,
-  popUpDialog : React.PropTypes.func.isRequired
+  // popUpDialog : React.PropTypes.func.isRequired
 }
