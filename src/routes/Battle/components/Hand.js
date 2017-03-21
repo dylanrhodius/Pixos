@@ -16,13 +16,11 @@ export default class Hand extends React.Component {
         (card, i) => {if(this.props.isSelfTurn) {
           let subjectToMeteor = false
           let subjectToParagonSelf = false
-          let subjectToParagonEnemy = false
+
           if (this.props.paragonStateSelf[card.type]) {
             subjectToParagonSelf = true
           }
-          if (this.props.paragonStateEnemy[card.type]) {
-            subjectToParagonEnemy = true
-          }
+
           if (this.props.meteorState[card.type]) {
             subjectToMeteor = true
           }
@@ -37,10 +35,9 @@ export default class Hand extends React.Component {
                                 resurrectCards={this.props.resurrectCards}
                                 applyMeteorEffect={this.props.applyMeteorEffect}
                                 applyParagonEffectSelf={this.props.applyParagonEffectSelf}
-                                applyParagonEffectEnemy={this.props.applyParagonEffectEnemy}
                                 subjectToMeteor={subjectToMeteor}
                                 subjectToParagonSelf={subjectToParagonSelf}
-                                subjectToParagonEnemy={subjectToParagonEnemy} />
+                                 />
           )
         } else {
           return (
@@ -85,9 +82,7 @@ export default class Hand extends React.Component {
     applyMeteorEffect : React.PropTypes.func.isRequired,
     applyParagonEffectSelf : React.PropTypes.func.isRequired,
     meteorState : React.PropTypes.object.isRequired,
-    paragonStateSelf : React.PropTypes.object.isRequired,
-    applyParagonEffectEnemy : React.PropTypes.func.isRequired,
-    paragonStateEnemy : React.PropTypes.object.isRequired
+    paragonStateSelf : React.PropTypes.object.isRequired
 
   }
 }

@@ -30,7 +30,7 @@ render() {
           <img className="game-card-img" src={this.props.imgUrl} alt="Card image cap"/>
         </div>
         <span className={`game-card-power ${this.props.type}-bkgrnd circle d-inline-block mx-auto highlighted-white-text`}>
-          { this.props.power }
+          { this.props.doubled ? this.props.power * 2 : this.props.power }
         </span>
         { specialIcon }
       </div>

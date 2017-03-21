@@ -278,14 +278,22 @@ const ACTION_HANDLERS = {
     let enemyPower = 0
     for (let array of Object.values(state.enemy.playingArea)) {
       array.forEach((card) => {
-          enemyPower += card.power
+        if (card.doubled){
+            enemyPower += (card.power * 2)
+        } else {
+            enemyPower += card.power
+        }
       })
     }
 
     let selfPower = 0
     for (let array of Object.values(state.self.playingArea)) {
       array.forEach((card) => {
-          selfPower += card.power
+        if (card.doubled){
+            selfPower += (card.power * 2)
+        } else {
+            selfPower += card.power
+        }
       })
     }
 
@@ -329,12 +337,14 @@ const ACTION_HANDLERS = {
     let enemyDiscards = []
     for (let array of Object.values(state.enemy.playingArea)) {
       array.forEach((card) => {
+          card.doubled = false
           enemyDiscards.push(card)
       })
     }
     let selfDiscards = []
     for (let array of Object.values(state.self.playingArea)) {
       array.forEach((card) => {
+          card.doubled = false
           selfDiscards.push(card)
       })
     }
@@ -342,12 +352,15 @@ const ACTION_HANDLERS = {
       enemy: Object.assign({}, state.enemy, {
         discardPile: state.enemy.discardPile.concat(enemyDiscards),
         playingArea: { land: [], water: [], air: [] },
-        meteor: { land: false, water: false, air: false }
+        meteor: { land: false, water: false, air: false },
+        paragon: { land: false, water: false, air: false }
       }),
       self: Object.assign({}, state.self, {
         discardPile: state.self.discardPile.concat(selfDiscards),
         playingArea: { land: [], water: [], air: [] },
-        meteor: { land: false, water: false, air: false }
+        meteor: { land: false, water: false, air: false },
+        paragon: { land: false, water: false, air: false }
+
       })
     })
   },
@@ -408,7 +421,7 @@ const ACTION_HANDLERS = {
     let selfInspiredRow = []
 
     state.self.playingArea[action.payload].forEach((card) => {
-      card.power = card.power * 2
+      card.doubled = true
       selfInspiredRow.push(card)
     })
 
@@ -419,23 +432,6 @@ const ACTION_HANDLERS = {
           }),
         paragon: Object.assign({}, state.self.paragon, {
             [action.payload]: true
-          })
-      })
-    })
-  },
-  [APPLY_PARAGON_EFFECT_ENEMY] : (state, action) => {
-    let type = action.payload
-    let enemyInspiredRow = []
-
-    state.enemy.playingArea[action.payload].forEach((card) => {
-      card.power = card.power * 2
-      enemyInspiredRow.push(card)
-    })
-
-    return Object.assign({}, state, {
-      enemy: Object.assign({}, state.enemy, {
-        playingArea: Object.assign({}, state.enemy.playingArea, {
-            [action.payload]: enemyInspiredRow
           })
       })
     })

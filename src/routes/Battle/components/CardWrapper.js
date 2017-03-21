@@ -38,43 +38,19 @@ export default class CardWrapper extends React.Component {
      }
    }
 
-
-
-
  playCard() {
    if (this.props.special == 'resurrector') {
      this.props.resurrectCards()
    }
    this.props.addCard(this.props.id)
    this.props.removeCard(this.props.id)
-  //  if (this.isMeteorConditions() && this.isParagonConditionsSelf()) {
-  //    console.log("PARAGON AND METEOR BOTH SIDES OF BOARD");
-  //    this.props.applyMeteorEffect(this.props.type)
-  //    this.props.applyParagonEffectSelf(this.props.type)
-  //    this.props.applyParagonEffectEnemy(this.props.type)
-  //  } else if (this.isMeteorConditions() && this.isParagonConditionsSelf())
-  //  else if (this.isMeteorConditions()) {
-  //    console.log("METEOR CONDITIONS");
-  //    this.props.applyMeteorEffect(this.props.type)
-  //  } else if (this.isParagonConditionsSelf()){
-  //    console.log("JUST PARAGON");
-  //    this.props.applyParagonEffectSelf(this.props.type)
-  //  }
 
    if(this.isMeteorConditions()) {
-     console.log("METEOR CONDITIONS");
      this.props.applyMeteorEffect(this.props.type)
      if (this.isParagonConditionsSelf()){
-       console.log("PARAGON CONDITION ON SELF");
        this.props.applyParagonEffectSelf(this.props.type)
      }
-     if (this.props.subjectToParagonEnemy){
-       console.log("PARAGON CONDITION ON ENEMY");
-       this.props.applyParagonEffectEnemy(this.props.type)
-       console.log('applyParagonEffectEnemy should have been called');
-     }
    } else if (this.isParagonConditionsSelf()){
-     console.log("PARAGON CONDITION ON SELF");
      this.props.applyParagonEffectSelf(this.props.type)
    }
    this.props.updatePower()
@@ -140,8 +116,7 @@ export default class CardWrapper extends React.Component {
    applyMeteorEffect : React.PropTypes.func.isRequired,
    subjectToMeteor : React.PropTypes.bool.isRequired,
    applyParagonEffectSelf : React.PropTypes.func.isRequired,
-   subjectToParagonSelf : React.PropTypes.bool.isRequired,
-   applyParagonEffectEnemy : React.PropTypes.func.isRequired,
-   subjectToParagonEnemy : React.PropTypes.bool.isRequired
+   subjectToParagonSelf : React.PropTypes.bool.isRequired
+
  }
 }

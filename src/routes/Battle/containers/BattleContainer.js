@@ -16,8 +16,7 @@ import {  increment,
           setRoundNotification,
           resurrectCards,
           applyMeteorEffect,
-          applyParagonEffectSelf,
-          applyParagonEffectEnemy
+          applyParagonEffectSelf
 } from '../modules/battle'
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -49,8 +48,7 @@ const mapDispatchToProps = {
   setRoundNotification,
   resurrectCards,
   applyMeteorEffect,
-  applyParagonEffectSelf,
-  applyParagonEffectEnemy
+  applyParagonEffectSelf
 }
 
 const mapStateToProps = (state) => ({
