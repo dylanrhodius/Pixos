@@ -137,8 +137,8 @@ export default class Battle extends React.Component {
     if(this.props.battle.self.hand.length == 0) {
       socket.emit('request:matchmaking');
     }
-    socket.on("init:battle", function(enemyData) {
-      that.props.setupPlayers(enemyData)
+    socket.on("init:battle", function(data) {
+      that.props.setupPlayers(data)
     })
 
     socket.on("receive:data", function(enemyData) {
@@ -204,10 +204,6 @@ Battle.propTypes = {
   updatePower : React.PropTypes.func.isRequired,
   updateScore : React.PropTypes.func.isRequired,
   clearPlayingArea : React.PropTypes.func.isRequired,
-  setRoundNotification : React.PropTypes.func.isRequired,
-  updateHasRoundFinished : React.PropTypes.func.isRequired,
-  updateRoundCounter : React.PropTypes.func.isRequired,
-  setRoundNotification : React.PropTypes.func.isRequired,
   resurrectCards : React.PropTypes.func.isRequired,
   applyMeteorEffect : React.PropTypes.func.isRequired,
   applyParagonEffect : React.PropTypes.func.isRequired,
