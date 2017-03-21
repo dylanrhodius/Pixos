@@ -12,6 +12,7 @@ import {
   UPDATE_POWER,
   ADD_CARD,
   SET_ROUND_NOTIFICATION,
+  RESURRECT_CARDS,
   setRoundNotification,
   addCard,
   passTurn,
@@ -25,9 +26,9 @@ import {
   updatePower,
   updateScore,
   clearPlayingArea,
-  setRoundNotification,
   updateHasRoundFinished,
-  updateRoundCounter
+  updateRoundCounter,
+  resurrectCards,
   default as battleReducer
 } from 'routes/Battle/modules/battle'
 
@@ -54,6 +55,7 @@ describe('(Redux Module) Battle', () => {
     expect(UPDATE_HAS_ROUND_FINISHED).to.equal('UPDATE_HAS_ROUND_FINISHED')
     expect(UPDATE_ROUND_COUNTER).to.equal('UPDATE_ROUND_COUNTER')
     expect(SET_ROUND_NOTIFICATION).to.equal('SET_ROUND_NOTIFICATION')
+    expect(RESURRECT_CARDS).to.equal('RESURRECT_CARDS')
   })
 
   describe('(Reducer)', () => {
@@ -213,6 +215,16 @@ describe('(Redux Module) Battle', () => {
     })
   })
 
+  describe('(Action Creator) resurrectCards', () => {
+    it('Should be exported as a function.', () => {
+      expect(resurrectCards).to.be.a('function')
+    })
+
+    it('Should return an action with type "RESURRECT_CARDS".', () => {
+      expect(resurrectCards()).to.have.property('type', RESURRECT_CARDS)
+    })
+  })
+
   xdescribe('(Action Creator) increment', () => {
     it('Should be exported as a function.', () => {
       expect(increment).to.be.a('function')
@@ -292,4 +304,3 @@ describe('(Redux Module) Battle', () => {
   // NOTE: if you have a more complex state, you will probably want to verify
   // that you did not mutate the state. In this case our state is just a number
   // (which cannot be mutated).
-  xdescribe('(Action Handler) BATTLE_INCREMENT', () => {

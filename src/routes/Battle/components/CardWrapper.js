@@ -27,6 +27,9 @@ export default class CardWrapper extends React.Component {
  }
 
  playCard() {
+   if (this.props.special == 'resurrector') {
+     this.props.resurrectCards()
+   }
    this.props.addCard(this.props.id)
    this.props.removeCard(this.props.id)
    this.props.updatePower()
@@ -87,6 +90,7 @@ export default class CardWrapper extends React.Component {
    addCard : React.PropTypes.func.isRequired,
    setTurnFinished  : React.PropTypes.func.isRequired,
    setMyTurn : React.PropTypes.func.isRequired,
-   updatePower : React.PropTypes.func.isRequired
+   updatePower : React.PropTypes.func.isRequired,
+   resurrectCards : React.PropTypes.func.isRequired
  }
 }

@@ -25,6 +25,7 @@ export const CLEAR_PLAYING_AREA = 'CLEAR_PLAYING_AREA'
 export const SET_ROUND_NOTIFICATION = 'SET_ROUND_NOTIFICATION'
 export const UPDATE_HAS_ROUND_FINISHED = 'UPDATE_HAS_ROUND_FINISHED'
 export const UPDATE_ROUND_COUNTER = 'UPDATE_ROUND_COUNTER'
+export const RESURRECT_CARDS = 'RESURRECT_CARDS'
 
 
 // ------------------------------------
@@ -146,6 +147,13 @@ export function updateEnemyState (object) {
   }
 }
 
+export function resurrectCards () {
+  return {
+    type: RESURRECT_CARDS
+  }
+}
+
+
 export const actions = {
   increment,
   doubleAsync,
@@ -158,7 +166,8 @@ export const actions = {
   clearPlayingArea,
   setRoundNotification,
   updateHasRoundFinished,
-  updateRoundCounter
+  updateRoundCounter,
+  resurrectCards
 }
 
 // ------------------------------------
@@ -312,6 +321,27 @@ const ACTION_HANDLERS = {
       self: Object.assign({}, state.self, {
         discardPile: state.self.discardPile.concat(selfDiscards),
         playingArea: { land: [], water: [], air: [] }
+      })
+    })
+  },
+  [RESURRECT_CARDS] : (state, action) => {
+    let resurrects = []
+    let discards = state.self.discardPile
+    if (discards.length > 0) {
+      let index = Math.floor(Math.random()*discards.length)
+      resurrects.push(discards[index]);
+      discards.splice(index, 1);
+    }
+    if (discards.length > 0) {
+      let index = Math.floor(Math.random()*discards.length)
+      resurrects.push(discards[index]);
+      discards.splice(index, 1);
+    }
+
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        discardPile: discards,
+        hand: state.self.hand.concat(resurrects)
       })
     })
   }

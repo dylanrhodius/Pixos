@@ -21,7 +21,8 @@ export default class Board extends React.Component {
                   addCard={this.props.addCard}
                   isEnemyHand={false}
                   isSelfTurn={this.props.battle.self.myTurn}
-                  updatePower={ this.props.updatePower }/> }
+                  updatePower={ this.props.updatePower }
+                  resurrectCards={this.props.resurrectCards}/> }
       </div>
     )
   }
@@ -33,5 +34,6 @@ Board.propTypes = {
   setTurnFinished  : React.PropTypes.func.isRequired,
   setMyTurn : React.PropTypes.func.isRequired,
   addCard : React.PropTypes.func.isRequired,
-  updatePower : React.PropTypes.func.isRequired
+  updatePower : React.PropTypes.func.isRequired,
+  resurrectCards : React.PropTypes.func.isRequired
 }
