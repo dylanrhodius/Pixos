@@ -27,7 +27,7 @@ export const UPDATE_HAS_ROUND_FINISHED = 'UPDATE_HAS_ROUND_FINISHED'
 export const UPDATE_ROUND_COUNTER = 'UPDATE_ROUND_COUNTER'
 export const RESURRECT_CARDS = 'RESURRECT_CARDS'
 export const APPLY_METEOR_EFFECT = 'APPLY_METEOR_EFFECT'
-
+export const APPLY_PARAGON_EFFECT = 'APPLY_PARAGON_EFFECT'
 
 // ------------------------------------
 // Actions
@@ -161,7 +161,12 @@ export function applyMeteorEffect (type) {
   }
 }
 
-
+export function applyParagonEffect (data) {
+  return {
+    type: APPLY_PARAGON_EFFECT,
+    payload: data
+  }
+}
 
 export const actions = {
   increment,
@@ -176,7 +181,8 @@ export const actions = {
   setRoundNotification,
   updateHasRoundFinished,
   updateRoundCounter,
-  resurrectCards
+  resurrectCards,
+  applyParagonEffect
 }
 
 // ------------------------------------
@@ -382,6 +388,27 @@ const ACTION_HANDLERS = {
       enemy: Object.assign({}, state.enemy, {
         playingArea: Object.assign({}, state.enemy.playingArea, {
             [action.payload]: enemyMeteoredRow
+          })
+      })
+    })
+  },
+  [APPLY_PARAGON_EFFECT] : (state, action) => {
+    console.log(action);
+    let type = action.payload
+    let selfInspiredRow = []
+
+    state.self.playingArea[action.payload].forEach((card) => {
+      card.power = card.power * 2
+      selfInspiredRow.push(card)
+    })
+
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        playingArea: Object.assign({}, state.self.playingArea, {
+            [action.payload]: selfInspiredRow
+          }),
+        paragon: Object.assign({}, state.self.paragon, {
+            [action.payload]: true
           })
       })
     })

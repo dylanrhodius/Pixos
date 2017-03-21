@@ -26,14 +26,34 @@ export default class CardWrapper extends React.Component {
    this.props.setTurnFinished(true)
  }
 
+ isMeteorConditions() {
+   if (this.props.special == 'meteor' || this.props.subjectToMeteor) {
+     return true
+   }
+ }
+
+  isParagonConditions() {
+     if (this.props.special == 'paragon' || this.props.subjectToParagon) {
+       return true
+     }
+   }
+
  playCard() {
    if (this.props.special == 'resurrector') {
      this.props.resurrectCards()
    }
    this.props.addCard(this.props.id)
    this.props.removeCard(this.props.id)
-   if (this.props.special == 'meteor' || this.props.subjectToMeteor) {
+   if (this.isMeteorConditions() && this.isParagonConditions()) {
+     console.log("PARAGON AND METEOR");
      this.props.applyMeteorEffect(this.props.type)
+     this.props.applyParagonEffect(this.props.type)
+   } else if (this.isMeteorConditions()) {
+     console.log("JUST METEOR");
+     this.props.applyMeteorEffect(this.props.type)
+   } else if (this.isParagonConditions()){
+     console.log("JUST PARAGON");
+     this.props.applyParagonEffect(this.props.type)
    }
    this.props.updatePower()
    this.setTurnFinishedToTrue()
@@ -96,6 +116,8 @@ export default class CardWrapper extends React.Component {
    updatePower : React.PropTypes.func.isRequired,
    resurrectCards : React.PropTypes.func.isRequired,
    applyMeteorEffect : React.PropTypes.func.isRequired,
-   subjectToMeteor : React.PropTypes.bool.isRequired
+   subjectToMeteor : React.PropTypes.bool.isRequired,
+   applyParagonEffect : React.PropTypes.func.isRequired,
+   subjectToParagon : React.PropTypes.bool.isRequired
  }
 }

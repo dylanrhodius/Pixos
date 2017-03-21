@@ -24,7 +24,9 @@ export default class Board extends React.Component {
                   updatePower={ this.props.updatePower }
                   resurrectCards={this.props.resurrectCards}
                   applyMeteorEffect={this.props.applyMeteorEffect}
-                  meteorState = {this.props.battle.self.meteor}/> }
+                  applyParagonEffect={this.props.applyParagonEffect}
+                  meteorState = {this.props.battle.self.meteor}
+                  paragonState={this.props.battle.self.paragon}/> }
       </div>
     )
   }
@@ -38,5 +40,6 @@ Board.propTypes = {
   addCard : React.PropTypes.func.isRequired,
   updatePower : React.PropTypes.func.isRequired,
   resurrectCards : React.PropTypes.func.isRequired,
-  applyMeteorEffect : React.PropTypes.func.isRequired
+  applyMeteorEffect : React.PropTypes.func.isRequired,
+  applyParagonEffect : React.PropTypes.func.isRequired
 }

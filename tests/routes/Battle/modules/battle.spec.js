@@ -14,6 +14,8 @@ import {
   SET_ROUND_NOTIFICATION,
   RESURRECT_CARDS,
   APPLY_METEOR_EFFECT,
+  APPLY_PARAGON_EFFECT,
+  applyParagonEffect,
   setRoundNotification,
   addCard,
   passTurn,
@@ -59,6 +61,8 @@ describe('(Redux Module) Battle', () => {
     expect(SET_ROUND_NOTIFICATION).to.equal('SET_ROUND_NOTIFICATION')
     expect(RESURRECT_CARDS).to.equal('RESURRECT_CARDS')
     expect(APPLY_METEOR_EFFECT).to.equal('APPLY_METEOR_EFFECT')
+    expect(APPLY_PARAGON_EFFECT).to.equal('APPLY_PARAGON_EFFECT')
+
   })
 
   describe('(Reducer)', () => {
@@ -105,6 +109,16 @@ describe('(Redux Module) Battle', () => {
 
     it('Should return an action with type "ADD_CARD".', () => {
       expect(addCard()).to.have.property('type', ADD_CARD)
+    })
+  })
+
+  describe('(Action Creator) applyParagonEffect', () => {
+    it('Should be exported as a function.', () => {
+      expect(applyParagonEffect).to.be.a('function')
+    })
+
+    it('Should return an action with type "APPLY_PARAGON_EFFECT".', () => {
+      expect(applyParagonEffect()).to.have.property('type', APPLY_PARAGON_EFFECT)
     })
   })
 

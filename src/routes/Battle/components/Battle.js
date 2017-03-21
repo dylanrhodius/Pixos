@@ -33,7 +33,8 @@ export default class Battle extends React.Component {
                 addCard={this.props.addCard}
                 updatePower={this.props.updatePower}
                 resurrectCards={this.props.resurrectCards}
-                applyMeteorEffect={this.props.applyMeteorEffect} />
+                applyMeteorEffect={this.props.applyMeteorEffect}
+                applyParagonEffect={this.props.applyParagonEffect} />
         </div>
       )
     }
@@ -41,12 +42,35 @@ export default class Battle extends React.Component {
 
   checkMeteorStatus() {
     if (this.props.battle.enemy.meteor.land) {
+      console.log('APPLYING METEOR EFFECT');
       this.props.applyMeteorEffect('land')
+      this.checkParagonStatus()
     }
     if (this.props.battle.enemy.meteor.water) {
+      console.log('APPLYING METEOR EFFECT');
       this.props.applyMeteorEffect('water')
+      this.checkParagonStatus()
     }
     if (this.props.battle.enemy.meteor.air) {
+      console.log('APPLYING METEOR EFFECT');
+      this.props.applyMeteorEffect('air')
+      this.checkParagonStatus()
+    }
+  }
+
+  checkParagonStatus() {
+    if(this.props.battle.self.paragon.land) {
+      console.log('APPLYING PARAGON EFFECT');
+    this.props.applyParagonEffect('land')
+    }
+    if (this.props.battle.self.paragon.water) {
+      console.log('APPLYING PARAGON EFFECT');
+
+      this.props.applyParagonEffect('water')
+    }
+    if (this.props.battle.self.paragon.air) {
+      console.log('APPLYING PARAGON EFFECT');
+
       this.props.applyMeteorEffect('air')
     }
   }
@@ -94,6 +118,7 @@ export default class Battle extends React.Component {
       that.props.updateHasRoundFinished(false)
       that.props.updateEnemyState(data)
       that.checkMeteorStatus()
+
       that.adjudicateGameState()
       if(data.hasRoundFinished) {
         that.props.clearPlayingArea()
@@ -149,5 +174,7 @@ Battle.propTypes = {
   updateRoundCounter : React.PropTypes.func.isRequired,
   setRoundNotification : React.PropTypes.func.isRequired,
   resurrectCards : React.PropTypes.func.isRequired,
-  applyMeteorEffect : React.PropTypes.func.isRequired
+  applyMeteorEffect : React.PropTypes.func.isRequired,
+  applyParagonEffect : React.PropTypes.func.isRequired
+
 }
