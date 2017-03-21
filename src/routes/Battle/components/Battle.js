@@ -140,6 +140,7 @@ export default class Battle extends React.Component {
         that.props.setReadyForNewRound(false)
         that.props.updateEnemyState(enemyData)
         that.checkMeteorStatus()
+        that.updatePower()
         if (that.roundIsOver()) { that.endRound() }
 
         if(enemyData.readyForNewRound) {
