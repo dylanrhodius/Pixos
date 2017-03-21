@@ -52,7 +52,7 @@ const CARD_DATA_OBJECT =
         { _id: 47, name: 'tyrannosaurus-rex', imgUrl: '/img/tyrannosaurus-rex.svg', type: 'land', power: 10, cost: 20, special: '', description: '' , doubled: false  },
         { _id: 48, name: 'velociraptor', imgUrl: '/img/velociraptor.svg', type: 'land', power: 8, cost: 13, special: '', description: '' , doubled: false  },
         { _id: 49, name: 'whale', imgUrl: '/img/whale.svg', type: 'water', power: 10, cost: 15, special: '', description: '' , doubled: false  },
-        { _id: 50, name: 'yinlong', imgUrl: '/img/yinlong.svg', type: 'land', power: 5, cost: 8, special: '', description: '' , doubled: false  },
+        { _id: 50, name: 'yinlong', imgUrl: '/img/yinlong.svg', type: 'land', power: 5, cost: 8, special: '', description: '' , doubled: false  }
     ]
   }
 

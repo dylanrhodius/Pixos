@@ -1,5 +1,6 @@
 import React from 'react'
 import './DeckCard.scss'
+import ReactTooltip from 'react-tooltip'
 
 export default class DeckCard extends React.Component {
 
@@ -15,10 +16,14 @@ getSpecialIcon() {
   }
 }
 
+capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
 render() {
   let specialIcon = this.getSpecialIcon()
   return (
-    <div className={`deck-card box-shadow mx-1 ${this.props.type}-faint-bkgrnd d-flex align-items-stretch show-pointer`}>
+    <div className={`deck-card box-shadow mx-1 ${this.props.type}-faint-bkgrnd d-flex align-items-stretch show-pointer`} data-tip data-for={`card_${this.props.name}`}>
       <div className={`deck-card-name-holder pb-1 ${this.props.type}-main-bkgrnd`}>
         <h4 className="deck-card-name m-0 text-left highlighted-white-text">
           { this.props.name.charAt(0).toUpperCase() + this.props.name.slice(1) }
@@ -33,6 +38,10 @@ render() {
       <span className={`deck-card-cost ${this.props.cost}-bkgrnd circle d-inline-block mx-auto highlighted-white-text`}>
         ${ this.props.cost }
       </span>
+      <ReactTooltip id={`card_${this.props.name}`}>
+        <p>{this.capitalize(this.props.name)}</p>
+        <p>{this.props.description}</p>
+      </ReactTooltip>
       { specialIcon }
     </div>
   )
@@ -44,6 +53,7 @@ render() {
     name : React.PropTypes.string.isRequired,
     power : React.PropTypes.string.isRequired,
     cost : React.PropTypes.string.isRequired,
-    special : React.PropTypes.string.isRequired
+    special : React.PropTypes.string.isRequired,
+    description : React.PropTypes.string.isRequired
   }
 }
