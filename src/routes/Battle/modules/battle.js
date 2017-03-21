@@ -27,7 +27,9 @@ export const UPDATE_HAS_ROUND_FINISHED = 'UPDATE_HAS_ROUND_FINISHED'
 export const UPDATE_ROUND_COUNTER = 'UPDATE_ROUND_COUNTER'
 export const RESURRECT_CARDS = 'RESURRECT_CARDS'
 export const APPLY_METEOR_EFFECT = 'APPLY_METEOR_EFFECT'
-export const APPLY_PARAGON_EFFECT = 'APPLY_PARAGON_EFFECT'
+export const APPLY_PARAGON_EFFECT_SELF = 'APPLY_PARAGON_EFFECT_SELF'
+export const APPLY_PARAGON_EFFECT_ENEMY = 'APPLY_PARAGON_EFFECT_ENEMY'
+
 
 // ------------------------------------
 // Actions
@@ -161,9 +163,16 @@ export function applyMeteorEffect (type) {
   }
 }
 
-export function applyParagonEffect (data) {
+export function applyParagonEffectSelf (data) {
   return {
-    type: APPLY_PARAGON_EFFECT,
+    type: APPLY_PARAGON_EFFECT_SELF,
+    payload: data
+  }
+}
+
+export function applyParagonEffectEnemy (data) {
+  return {
+    type: APPLY_PARAGON_EFFECT_ENEMY,
     payload: data
   }
 }
@@ -182,7 +191,8 @@ export const actions = {
   updateHasRoundFinished,
   updateRoundCounter,
   resurrectCards,
-  applyParagonEffect
+  applyParagonEffectSelf,
+  applyParagonEffectEnemy
 }
 
 // ------------------------------------
@@ -392,8 +402,8 @@ const ACTION_HANDLERS = {
       })
     })
   },
-  [APPLY_PARAGON_EFFECT] : (state, action) => {
-    console.log(action);
+  [APPLY_PARAGON_EFFECT_SELF] : (state, action) => {
+
     let type = action.payload
     let selfInspiredRow = []
 
@@ -409,6 +419,23 @@ const ACTION_HANDLERS = {
           }),
         paragon: Object.assign({}, state.self.paragon, {
             [action.payload]: true
+          })
+      })
+    })
+  },
+  [APPLY_PARAGON_EFFECT_ENEMY] : (state, action) => {
+    let type = action.payload
+    let enemyInspiredRow = []
+
+    state.enemy.playingArea[action.payload].forEach((card) => {
+      card.power = card.power * 2
+      enemyInspiredRow.push(card)
+    })
+
+    return Object.assign({}, state, {
+      enemy: Object.assign({}, state.enemy, {
+        playingArea: Object.assign({}, state.enemy.playingArea, {
+            [action.payload]: enemyInspiredRow
           })
       })
     })

@@ -34,7 +34,8 @@ export default class Battle extends React.Component {
                 updatePower={this.props.updatePower}
                 resurrectCards={this.props.resurrectCards}
                 applyMeteorEffect={this.props.applyMeteorEffect}
-                applyParagonEffect={this.props.applyParagonEffect} />
+                applyParagonEffectSelf={this.props.applyParagonEffectSelf}
+                applyParagonEffectEnemy={this.props.applyParagonEffectEnemy} />
         </div>
       )
     }
@@ -44,34 +45,55 @@ export default class Battle extends React.Component {
     if (this.props.battle.enemy.meteor.land) {
       console.log('APPLYING METEOR EFFECT');
       this.props.applyMeteorEffect('land')
-      this.checkParagonStatus()
+      this.checkParagonStatusSelf()
+      this.checkParagonStatusEnemy()
     }
     if (this.props.battle.enemy.meteor.water) {
       console.log('APPLYING METEOR EFFECT');
       this.props.applyMeteorEffect('water')
-      this.checkParagonStatus()
+      this.checkParagonStatusSelf()
+      this.checkParagonStatusEnemy()
+
     }
     if (this.props.battle.enemy.meteor.air) {
       console.log('APPLYING METEOR EFFECT');
       this.props.applyMeteorEffect('air')
-      this.checkParagonStatus()
+      this.checkParagonStatusSelf()
+      this.checkParagonStatusEnemy()
     }
   }
 
-  checkParagonStatus() {
+  checkParagonStatusSelf() {
     if(this.props.battle.self.paragon.land) {
-      console.log('APPLYING PARAGON EFFECT');
-    this.props.applyParagonEffect('land')
+      console.log('APPLYING PARAGON EFFECT SELF');
+    this.props.applyParagonEffectSelf('land')
     }
     if (this.props.battle.self.paragon.water) {
-      console.log('APPLYING PARAGON EFFECT');
+      console.log('APPLYING PARAGON EFFECT SELF');
 
-      this.props.applyParagonEffect('water')
+      this.props.applyParagonEffectSelf('water')
     }
     if (this.props.battle.self.paragon.air) {
-      console.log('APPLYING PARAGON EFFECT');
+      console.log('APPLYING PARAGON EFFECT SELF');
 
-      this.props.applyMeteorEffect('air')
+      this.props.applyParagonEffectSelf('air')
+    }
+  }
+
+  checkParagonStatusEnemy() {
+    if(this.props.battle.enemy.paragon.land) {
+      console.log('APPLYING PARAGON EFFECT ENEMY');
+    this.props.applyParagonEffectEnemy('land')
+    }
+    if (this.props.battle.enemy.paragon.water) {
+      console.log('APPLYING PARAGON EFFECT ENEMY');
+
+      this.props.applyParagonEffectEnemy('water')
+    }
+    if (this.props.battle.enemy.paragon.air) {
+      console.log('APPLYING PARAGON EFFECT ENEMY');
+
+      this.props.applyParagonEffectEnemy('air')
     }
   }
 
@@ -175,6 +197,8 @@ Battle.propTypes = {
   setRoundNotification : React.PropTypes.func.isRequired,
   resurrectCards : React.PropTypes.func.isRequired,
   applyMeteorEffect : React.PropTypes.func.isRequired,
-  applyParagonEffect : React.PropTypes.func.isRequired
+  applyParagonEffectSelf : React.PropTypes.func.isRequired,
+  applyParagonEffectEnemy : React.PropTypes.func.isRequired
+
 
 }

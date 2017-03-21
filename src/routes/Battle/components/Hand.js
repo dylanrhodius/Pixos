@@ -15,9 +15,13 @@ export default class Hand extends React.Component {
       return this.props.hand.map(
         (card, i) => {if(this.props.isSelfTurn) {
           let subjectToMeteor = false
-          let subjectToParagon = false
-          if (this.props.paragonState[card.type]) {
-            subjectToParagon = true
+          let subjectToParagonSelf = false
+          let subjectToParagonEnemy = false
+          if (this.props.paragonStateSelf[card.type]) {
+            subjectToParagonSelf = true
+          }
+          if (this.props.paragonStateEnemy[card.type]) {
+            subjectToParagonEnemy = true
           }
           if (this.props.meteorState[card.type]) {
             subjectToMeteor = true
@@ -32,9 +36,11 @@ export default class Hand extends React.Component {
                                 updatePower={this.props.updatePower}
                                 resurrectCards={this.props.resurrectCards}
                                 applyMeteorEffect={this.props.applyMeteorEffect}
-                                applyParagonEffect={this.props.applyParagonEffect}
+                                applyParagonEffectSelf={this.props.applyParagonEffectSelf}
+                                applyParagonEffectEnemy={this.props.applyParagonEffectEnemy}
                                 subjectToMeteor={subjectToMeteor}
-                                subjectToParagon={subjectToParagon} />
+                                subjectToParagonSelf={subjectToParagonSelf}
+                                subjectToParagonEnemy={subjectToParagonEnemy} />
           )
         } else {
           return (
@@ -77,8 +83,11 @@ export default class Hand extends React.Component {
     updatePower : React.PropTypes.func.isRequired,
     resurrectCards : React.PropTypes.func.isRequired,
     applyMeteorEffect : React.PropTypes.func.isRequired,
-    applyParagonEffect : React.PropTypes.func.isRequired,
+    applyParagonEffectSelf : React.PropTypes.func.isRequired,
     meteorState : React.PropTypes.object.isRequired,
-    paragonState : React.PropTypes.object.isRequired
+    paragonStateSelf : React.PropTypes.object.isRequired,
+    applyParagonEffectEnemy : React.PropTypes.func.isRequired,
+    paragonStateEnemy : React.PropTypes.object.isRequired
+
   }
 }
