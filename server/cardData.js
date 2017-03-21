@@ -45,7 +45,7 @@ const CARD_DATA_OBJECT =
       { _id: 41, name: 'starfish', imgUrl: '/img/starfish.svg', type: 'water', power: 2, cost: 5, special: 'resurrector', doubled: 'false'  },
       { _id: 42, name: 'stegosaurus', imgUrl: '/img/stegosaurus.svg', type: 'land', power: 8, cost: 13, special: '', doubled: 'false'  },
       { _id: 43, name: 'styracosaurus', imgUrl: '/img/styracosaurus.svg', type: 'land', power: 5, cost: 8, special: '', doubled: 'false'  },
-      { _id: 44, name: 'syntarsus', imgUrl: '/img/syntarsus.svg', type: 'land', power: 7, cost: 11, special: 'resurrector', doubled: 'false'  },
+      { _id: 44, name: 'syntarsus', imgUrl: '/img/syntarsus.svg', type: 'land', power: 7, cost: 12, special: 'resurrector', doubled: 'false'  },
       { _id: 45, name: 'toucan', imgUrl: '/img/toucan.svg', type: 'air', power: 3, cost: 5, special: '', doubled: 'false'  },
       { _id: 46, name: 'triceratops', imgUrl: '/img/triceratops.svg', type: 'land', power: 8, cost: 13, special: '', doubled: 'false'  },
       { _id: 47, name: 'tyrannosaurus-rex', imgUrl: '/img/tyrannosaurus-rex.svg', type: 'land', power: 10, cost: 15, special: 'resurrector', doubled: 'false'  },
