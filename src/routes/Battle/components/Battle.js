@@ -12,8 +12,8 @@ const socket = io.connect(`${window.location.origin}`);
 export default class Battle extends React.Component {
 
   loadNotifcation () {
-    if (this.props.battle.self.gameEnded || this.props.battle.enemy.gameEnded) {
-      console.log('GAEME ENDED!!!')
+    if (this.props.battle.self.gameEnded) {
+      console.log('GAME ENDED!!!')
       return (
         <Notification open={true} key={shortId.generate()} text={this.props.battle.self.PlayerNotification} />
       )
@@ -56,8 +56,9 @@ export default class Battle extends React.Component {
 
   roundIsOver() {
     let battle = this.props.battle
-    if (battle.self.hasPassed && ( battle.enemy.hasPassed
-    || battle.enemy.readyForNewRound) ) {
+    console.log('EVALUATING ROUND IS OVER', { selfHasPassed: this.props.battle.self.hasPassed, selfreadyForNewRound: this.props.battle.self.hasPassed,  enemyHasPassed: this.props.battle.enemy.hasPassed, enemyreadyForNewRound: this.props.battle.enemy.readyForNewRound })
+
+    if (battle.self.hasPassed && ( battle.enemy.hasPassed || battle.enemy.readyForNewRound) ) {
       return true;
     }
   }
@@ -71,6 +72,7 @@ export default class Battle extends React.Component {
   }
 
   endRound() {
+    console.log('ROUND IS ENDING', { selfHasPassed: this.props.battle.self.hasPassed, selfreadyForNewRound: this.props.battle.self.hasPassed,  enemyHasPassed: this.props.battle.enemy.hasPassed, enemyreadyForNewRound: this.props.battle.enemy.readyForNewRound })
     let battle = this.props.battle
     let roundResult = ""
     if (battle.self.power > battle.enemy.power) { roundResult = "win" }
@@ -136,13 +138,13 @@ export default class Battle extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log('Battle updated', this.props.battle)
+    console.log('Battle updated with: ', this.props.battle)
 
     if (this.props.battle.turnFinished) {
-      if (this.props.battle.self.hand.length == 0) {
+      if (this.props.battle.self.hand.length == 0 && (!this.props.battle.self.readyForNewRound)) {
         this.props.passTurn(true)
       }
-      console.log('End of round:', this.props.battle)
+      console.log('Passing to Opponent!:', this.props.battle)
       socket.emit('pass:ToRoom', this.props.battle.self)
       this.props.setTurnFinished(false)
     }
@@ -152,7 +154,6 @@ export default class Battle extends React.Component {
   render () {
     let notification = this.loadNotifcation();
     let content = this.loadContent();
-    console.log('notification for display is', notification)
     return (
       <div>
       { content }
