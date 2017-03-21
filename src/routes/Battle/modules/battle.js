@@ -325,11 +325,13 @@ const ACTION_HANDLERS = {
     return Object.assign({}, state, {
       enemy: Object.assign({}, state.enemy, {
         discardPile: state.enemy.discardPile.concat(enemyDiscards),
-        playingArea: { land: [], water: [], air: [] }
+        playingArea: { land: [], water: [], air: [] },
+        meteor: { land: false, water: false, air: false }
       }),
       self: Object.assign({}, state.self, {
         discardPile: state.self.discardPile.concat(selfDiscards),
-        playingArea: { land: [], water: [], air: [] }
+        playingArea: { land: [], water: [], air: [] },
+        meteor: { land: false, water: false, air: false }
       })
     })
   },
