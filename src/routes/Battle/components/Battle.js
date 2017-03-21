@@ -59,18 +59,26 @@ export default class Battle extends React.Component {
 
 
   checkMeteorStatus() {
+    let meteor = false
     if (this.props.battle.enemy.meteor.land) {
       console.log('APPLYING METEOR EFFECT');
       this.props.applyMeteorEffect('land')
+      meteor = true
     }
     if (this.props.battle.enemy.meteor.water) {
       console.log('APPLYING METEOR EFFECT');
       this.props.applyMeteorEffect('water')
+      meteor = true
     }
     if (this.props.battle.enemy.meteor.air) {
       console.log('APPLYING METEOR EFFECT');
       this.props.applyMeteorEffect('air')
+      meteor = true
     }
+    if (meteor) {
+      this.props.updatePower()
+    }
+
   }
 
 
@@ -140,7 +148,7 @@ export default class Battle extends React.Component {
         that.props.setReadyForNewRound(false)
         that.props.updateEnemyState(enemyData)
         that.checkMeteorStatus()
-        that.updatePower()
+
         if (that.roundIsOver()) { that.endRound() }
 
         if(enemyData.readyForNewRound) {
