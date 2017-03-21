@@ -11,8 +11,6 @@ export default class InfoBar extends React.Component {
   }
 
   setTurnFinishedToTrue () {
-    // console.log('trying to set turn finished to true')
-    // console.log('this is ', this)
     this.props.passTurn(true)
     this.props.setMyTurn(false)
     this.props.setTurnFinished(true)
@@ -22,13 +20,8 @@ export default class InfoBar extends React.Component {
     if(this.props.battle.self.myTurn){
       return (
         <div>
-          <p>Your turn</p>
           <RaisedButton label="Pass" primary={true} onTouchTap={this.setTurnFinishedToTrue} />
         </div>
-      )
-    } else {
-      return(
-        <p>Enemy turn</p>
       )
     }
   }
@@ -40,11 +33,13 @@ export default class InfoBar extends React.Component {
         <PixosMenu/>
         <h3 className="my-2"><span>Score: </span>{this.props.battle.enemy.score}</h3>
         <p className="mb-auto">{ this.props.battle.enemy.name }</p>
+        <img className="game-avatar" src={`${this.props.battle.enemy.img}`}/>
         <h4 className="my-2"><span>Power: </span>{this.props.battle.enemy.power}</h4>
         {content}
         <h4 className="my-2"><span>Power: </span>{this.props.battle.self.power}</h4>
         <p className="mt-auto">{ this.props.battle.self.PlayerNotification }</p>
         <p className="mt-auto">{ this.props.battle.self.name }</p>
+        <img className="game-avatar" src={`${this.props.battle.self.img}`}/>
         <h3 className="my-2"><span>Score: </span>{this.props.battle.self.score}</h3>
         <h3 className="my-2"><span>Round: </span>{ this.props.battle.self.roundCounter > 3 ? 3 : this.props.battle.self.roundCounter }</h3>
     </div>
