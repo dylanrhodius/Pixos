@@ -39,6 +39,18 @@ export default class Battle extends React.Component {
     }
   }
 
+  checkMeteorStatus() {
+    if (this.props.battle.enemy.meteor.land) {
+      this.props.applyMeteorEffect('land')
+    }
+    if (this.props.battle.enemy.meteor.water) {
+      this.props.applyMeteorEffect('water')
+    }
+    if (this.props.battle.enemy.meteor.air) {
+      this.props.applyMeteorEffect('air')
+    }
+  }
+
   adjudicateGameState() {
     // todo: add round counter; when 3 it's a draw
     // if enemy has won
@@ -81,6 +93,7 @@ export default class Battle extends React.Component {
       that.props.setMyTurn(true)
       that.props.updateHasRoundFinished(false)
       that.props.updateEnemyState(data)
+      that.checkMeteorStatus()
       that.adjudicateGameState()
       if(data.hasRoundFinished) {
         that.props.clearPlayingArea()

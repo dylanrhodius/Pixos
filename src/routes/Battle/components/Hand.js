@@ -14,6 +14,10 @@ export default class Hand extends React.Component {
     } else {
       return this.props.hand.map(
         (card, i) => {if(this.props.isSelfTurn) {
+          let subjectToMeteor = false
+          if (this.props.meteorState[card.type]) {
+            subjectToMeteor = true
+          }
           return (
             <CardWrapper key={i} {...card }
                                 removeCard={this.props.removeCard}
@@ -23,7 +27,8 @@ export default class Hand extends React.Component {
                                 id={i}
                                 updatePower={this.props.updatePower}
                                 resurrectCards={this.props.resurrectCards}
-                                applyMeteorEffect={this.props.applyMeteorEffect} />
+                                applyMeteorEffect={this.props.applyMeteorEffect}
+                                subjectToMeteor={subjectToMeteor} />
           )
         } else {
           return (
@@ -65,6 +70,7 @@ export default class Hand extends React.Component {
     isSelfTurn : React.PropTypes.bool.isRequired,
     updatePower : React.PropTypes.func.isRequired,
     resurrectCards : React.PropTypes.func.isRequired,
-    applyMeteorEffect : React.PropTypes.func.isRequired
+    applyMeteorEffect : React.PropTypes.func.isRequired,
+    meteorState : React.PropTypes.object.isRequired
   }
 }

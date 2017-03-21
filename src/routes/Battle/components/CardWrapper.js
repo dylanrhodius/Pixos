@@ -32,8 +32,7 @@ export default class CardWrapper extends React.Component {
    }
    this.props.addCard(this.props.id)
    this.props.removeCard(this.props.id)
-   if (this.props.special == 'meteor') {
-     console.log('meteor card played')
+   if (this.props.special == 'meteor' || this.props.subjectToMeteor) {
      this.props.applyMeteorEffect(this.props.type)
    }
    this.props.updatePower()
@@ -41,7 +40,6 @@ export default class CardWrapper extends React.Component {
  }
 
  handleTouchTap (event) {
-   console.log('have been tapped')
    // This prevents ghost click.
    event.preventDefault();
 
@@ -97,6 +95,7 @@ export default class CardWrapper extends React.Component {
    setMyTurn : React.PropTypes.func.isRequired,
    updatePower : React.PropTypes.func.isRequired,
    resurrectCards : React.PropTypes.func.isRequired,
-   applyMeteorEffect : React.PropTypes.func.isRequired
+   applyMeteorEffect : React.PropTypes.func.isRequired,
+   subjectToMeteor : React.PropTypes.bool.isRequired
  }
 }

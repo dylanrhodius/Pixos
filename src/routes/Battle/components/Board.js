@@ -23,7 +23,8 @@ export default class Board extends React.Component {
                   isSelfTurn={this.props.battle.self.myTurn}
                   updatePower={ this.props.updatePower }
                   resurrectCards={this.props.resurrectCards}
-                  applyMeteorEffect={this.props.applyMeteorEffect}/> }
+                  applyMeteorEffect={this.props.applyMeteorEffect}
+                  meteorState = {this.props.battle.self.meteor}/> }
       </div>
     )
   }

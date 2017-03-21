@@ -155,7 +155,6 @@ export function resurrectCards () {
 }
 
 export function applyMeteorEffect (type) {
-  console.log('applying meteor effect for ', type)
   return {
     type: APPLY_METEOR_EFFECT,
     payload: type
