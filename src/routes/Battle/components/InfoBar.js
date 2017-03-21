@@ -1,6 +1,7 @@
 import React from 'react'
 import RaisedButton from 'material-ui/RaisedButton';
 import PixosMenu from 'routes/Battle/components/PixosMenu'
+import './InfoBar.scss'
 
 export default class InfoBar extends React.Component {
 
@@ -19,9 +20,16 @@ export default class InfoBar extends React.Component {
   loadContent () {
     if(this.props.battle.self.myTurn){
       return (
-        <div>
-          <RaisedButton label="Pass" primary={true} onTouchTap={this.setTurnFinishedToTrue} />
+        <div className="full-width">
+          <RaisedButton label="Pass"
+                        primary={true}
+                        fullWidth={true}
+                        onTouchTap={this.setTurnFinishedToTrue} />
         </div>
+      )
+    } else {
+      return (
+        <div style={{ height: '35.99px' }}></div>
       )
     }
   }
@@ -29,19 +37,24 @@ export default class InfoBar extends React.Component {
   render () {
     let content = this.loadContent()
     return (
-      <div className="info-bar col-1 d-flex flex-column justify-content-center align-items-center pt-2 pb-4">
-        <PixosMenu/>
-        <h3 className="my-2"><span>Score: </span>{this.props.battle.enemy.score}</h3>
-        <p className="mb-auto">{ this.props.battle.enemy.name }</p>
-        <img className="game-avatar" src={`${this.props.battle.enemy.img}`}/>
-        <h4 className="my-2"><span>Power: </span>{this.props.battle.enemy.power}</h4>
+      <div className="info-bar col-1 d-flex flex-column justify-content-center align-items-center grey-bkgrnd">
+        <PixosMenu />
+        <img className="game-avatar circle" src={`${this.props.battle.enemy.img}`}/>
+        <span className="info-bar-text mx-2">{ this.props.battle.enemy.name }</span>
+        <span className="my-2 info-bar-text land-main-bkgrnd circle circle-highlight info-bar-indicator">{this.props.battle.enemy.score}</span>
+        <span className="info-bar-text small-text mb-auto">Score</span>
+        <span className="mb-1 info-bar-text small-text">Power</span>
+        <span className="mb-2 air-main-bkgrnd circle circle-highlight info-bar-indicator">{this.props.battle.enemy.power}</span>
+        <span className="my-2 circle circle-highlight round-indicator material-bkgrnd">{ this.props.battle.self.roundCounter > 3 ? 3 : this.props.battle.self.roundCounter }/3</span>
+
+
+        <span className="mt-2 air-main-bkgrnd circle circle-highlight info-bar-indicator">{this.props.battle.self.power}</span>
+        <span className="mt-1 info-bar-text small-text">Power</span>
+        <span className="mt-auto mb-1 info-bar-text small-text">Score</span>
+        <span className="mb-2 info-bar-text land-main-bkgrnd circle circle-highlight info-bar-indicator">{this.props.battle.self.score}</span>
+        <span className="info-bar-text mx-2">{ this.props.battle.self.name }</span>
+        <img className="game-avatar circle mb-2" src={`${this.props.battle.self.img}`}/>
         {content}
-        <h4 className="my-2"><span>Power: </span>{this.props.battle.self.power}</h4>
-        <p className="mt-auto">{ this.props.battle.self.PlayerNotification }</p>
-        <p className="mt-auto">{ this.props.battle.self.name }</p>
-        <img className="game-avatar" src={`${this.props.battle.self.img}`}/>
-        <h3 className="my-2"><span>Score: </span>{this.props.battle.self.score}</h3>
-        <h3 className="my-2"><span>Round: </span>{ this.props.battle.self.roundCounter > 3 ? 3 : this.props.battle.self.roundCounter }</h3>
     </div>
     )
   }

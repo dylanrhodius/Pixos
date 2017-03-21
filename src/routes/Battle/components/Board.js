@@ -6,7 +6,7 @@ export default class Board extends React.Component {
 
   render() {
     return (
-      <div className="board col-11" >
+      <div className="board col-11 d-flex flex-column justify-content-center" >
           { <Hand hand={this.props.battle.enemy.hand}
                   removeCard={this.props.removeCard}
                   addCard={this.props.addCard}

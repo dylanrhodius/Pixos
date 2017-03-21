@@ -36,7 +36,7 @@ export default class Battle extends React.Component {
       )
     } else {
       return (
-        <div className="row no-gutters">
+        <div className="row no-gutters max-page-height">
           <InfoBar  battle={this.props.battle}
                     setTurnFinished={this.props.setTurnFinished}
                     setMyTurn={this.props.setMyTurn}
@@ -182,7 +182,7 @@ export default class Battle extends React.Component {
     let notification = this.loadNotifcation();
     let content = this.loadContent();
     return (
-      <div>
+      <div className='max-page-height'>
       { content }
       { notification }
       </div>

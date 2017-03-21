@@ -1,0 +1,33 @@
+.game-avatar {
+  width: 70%;
+}
+
+.info-bar {
+  color: #ffffff;
+  display: relative;
+}
+
+.info-bar-text {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.small-text {
+  font-size: 0.65rem;
+}
+
+.info-bar-indicator {
+  width: 40px;
+  height: 40px;
+  font-size: 1.3rem;
+  line-height: 2.1;
+  font-weight: bold;
+}
+
+.round-indicator {
+  width: 50px;
+  height: 50px;
+  font-size: 1.4rem;
+  line-height: 2.3;
+  font-weight: bold;
+}

@@ -6,6 +6,7 @@ $shadow-color: rgb(159, 159, 159);
 $light-bkgrnd: rgb(249, 249, 249);
 $bkgrnd-gradient: rgb(232, 229, 229);
 $text-color: rgb(71, 71, 71);
+$grey-bkgrnd: #666666;
 
 // Some best-practice CSS that's useful for most apps
 // Just remove them if they're not what you want
@@ -35,6 +36,10 @@ body {
   box-shadow: 2px 2px 2px $shadow-color;
 }
 
+.circle-highlight {
+  box-shadow: 0px 0px 2px 1px $shadow-color;
+}
+
 .overflow-wrap {
   overflow-wrap: break-word;
   hyphens: auto;
@@ -53,6 +58,12 @@ body {
 .show-pointer {
   cursor: pointer;
 }
+
+.full-width {
+  width: 100%;
+}
+
+$material-ui-blue: #00BCD4;
 
 $water-light: #b7deed;
 $water-mid: #71ceef;
@@ -83,6 +94,10 @@ $paragon-col: #f4cc41;
 
 .paragon-bkgrnd {
   background-color: $paragon-col;
+}
+
+.material-bkgrnd {
+  background-color: $material-ui-blue;
 }
 
 .water-main-bkgrnd {
@@ -119,6 +134,10 @@ $paragon-col: #f4cc41;
 
 .air-faint-bkgrnd {
   background: linear-gradient(225deg, lighten($air-mid, 20%) 0%,lighten($air-light, 23%) 100%)
+}
+
+.grey-bkgrnd {
+  background: linear-gradient(180deg,$grey-bkgrnd 0%, lighten($grey-bkgrnd, 10%) 100%)
 }
 
 .grey-faint-bkgrnd {
