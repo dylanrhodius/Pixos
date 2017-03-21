@@ -15,13 +15,13 @@ export default class Battle extends React.Component {
     if (this.props.battle.self.gameEnded || this.props.battle.enemy.gameEnded) {
       console.log('GAEME ENDED!!!')
       return (
-        <Notification open={true} key={shortId.generate()} />
+        <Notification open={true} key={shortId.generate()} text={this.props.battle.self.PlayerNotification} />
       )
     }
   }
 
   loadContent () {
-    if(this.props.battle.self.hand.length == 0) {
+    if(this.props.battle.self.hand.length == 0 && this.props.battle.self.discardPile.length == 0 && this.props.battle.self.power == 0 ) {
       return (
         <div className="row pt-5">
           <div className="col-12 text-center pt-5">
@@ -115,30 +115,33 @@ export default class Battle extends React.Component {
     socket.on("receive:data", function(enemyData) {
 
       console.log("Received data from Opponent!:", enemyData);
-      that.props.setMyTurn(true)
-      that.props.setReadyForNewRound(false)
-      that.props.updateEnemyState(enemyData)
+      if (!that.props.battle.self.gameEnded) {
+        that.props.setMyTurn(true)
+        that.props.setReadyForNewRound(false)
+        that.props.updateEnemyState(enemyData)
 
-      if (that.roundIsOver()) { that.endRound() }
+        if (that.roundIsOver()) { that.endRound() }
 
-      else if(enemyData.readyForNewRound) {
-        that.startNewRound()
-        if (that.gameIsOver()) { that.endGame() }
-      }
+        if(enemyData.readyForNewRound) {
+          that.startNewRound()
+          if (that.gameIsOver()) { that.endGame() }
+        }
 
-      else if (that.props.battle.self.hasPassed) {
-        that.props.setMyTurn(false)
-        that.props.setTurnFinished(true)
+        if (that.props.battle.self.hasPassed) {
+          that.props.setMyTurn(false)
+          that.props.setTurnFinished(true)
+        }
       }
     })
   }
 
   componentDidUpdate() {
     console.log('Battle updated', this.props.battle)
-    if (this.props.battle.self.hand.length == 0) {
-      this.props.passTurn(true)
-    }
+
     if (this.props.battle.turnFinished) {
+      if (this.props.battle.self.hand.length == 0) {
+        this.props.passTurn(true)
+      }
       console.log('End of round:', this.props.battle)
       socket.emit('pass:ToRoom', this.props.battle.self)
       this.props.setTurnFinished(false)

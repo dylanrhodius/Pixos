@@ -21,14 +21,8 @@ export default class Notification extends React.Component {
   render() {
     const actions = [
       <FlatButton
-        label="Cancel"
+        label="Back to Home"
         primary={true}
-        onTouchTap={this.handleClose}
-      />,
-      <FlatButton
-        label="Submit"
-        primary={true}
-        disabled={true}
         onTouchTap={this.handleClose}
       />,
     ];
@@ -36,12 +30,12 @@ export default class Notification extends React.Component {
     return (
       <div>
         <Dialog
-          title="Dialog With Actions"
+          title="Game Over!"
           actions={actions}
           modal={true}
           open={this.state.open}
         >
-          Game Over
+          {this.props.text}
         </Dialog>
       </div>
     );
