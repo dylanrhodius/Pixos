@@ -9,8 +9,8 @@
 }
 
 .deck-card-img-holder {
-  min-height: 80px;
-  width: 90px;
+  min-height: 70px;
+  width: 80px;
 }
 
 .deck-card-img {
@@ -19,13 +19,13 @@
 }
 
 .deck-card-name {
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   transform: rotate(-90deg);
   transform-origin: left bottom 0;
   position: absolute;
   bottom: 3px;
-  left: 11px;
-  max-width: 105px;
+  left: 14px;
+  max-width: 125px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -33,46 +33,36 @@
 
 .deck-card-name-holder {
   position: relative;
-  width: 14px;
+  width: 16px;
 }
 
 .deck-card-power {
-  width: 22px;
-  height: 22px;
-  font-size: 0.75rem;
-  line-height: 1.9;
+  width: 24px;
+  height: 24px;
+  font-size: 0.9rem;
+  line-height: 1.8;
   position: absolute;
   bottom: 3px;
-  left: 25px;
-  color: white;
-  text-shadow: 1px 1px 1px black;
-  font-weight: bold;
+  left: 20px;
 }
 
 .deck-card-cost {
-  width: 22px;
-  height: 22px;
-  font-size: 0.75rem;
-  line-height: 1.9;
+  width: 30px;
+  height: 30px;
+  font-size: 0.9rem;
+  line-height: 2.1;
   position: absolute;
   top: 3px;
-  left: 48px;
-  color: white;
-  text-shadow: 1px 1px 1px black;
-  font-weight: bold;
+  right: 3px;
   background-color: grey;
 }
 
-.deck-card-medic {
-  width: 22px;
-  height: 22px;
-  font-size: 0.75rem;
-  line-height: 1.9;
+.deck-card-special {
+  width: 24px;
+  height: 24px;
+  font-size: 0.9rem;
+  line-height: 1.8;
   position: absolute;
   bottom: 3px;
-  right: 10px;
-  color: white;
-  text-shadow: 1px 1px 1px black;
-  font-weight: bold;
-  background-color: blue;
+  right: 3px;
 }

@@ -90,6 +90,7 @@ render () {
             imgUrl={this.props.imgUrl}
             placeInDeck={this.props.placeInDeck}
             removeFromDeck={this.props.removeFromDeck}
+            special={this.props.special}
           />
         </div>
       <Popover

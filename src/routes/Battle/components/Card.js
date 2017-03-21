@@ -8,7 +8,6 @@ constructor (props) {
 }
 
 getSpecialIcon() {
-  console.log(this.props.name, this.props.special);
   if (this.props.special) {
     return (
       <img src={`/icons/${this.props.special}.svg`} className={`game-card-special ${this.props.special}-bkgrnd p-1 circle d-inline-block mx-auto`}/>
