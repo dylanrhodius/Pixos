@@ -38,7 +38,10 @@ render() {
       <span className={`deck-card-cost ${this.props.cost}-bkgrnd circle d-inline-block mx-auto highlighted-white-text`}>
         ${ this.props.cost }
       </span>
-      <ReactTooltip id={`card_${this.props.name}`}>{this.capitalize(this.props.name)}</ReactTooltip>
+      <ReactTooltip id={`card_${this.props.name}`}>
+        <p>{this.capitalize(this.props.name)}</p>
+        <p>{this.props.description}</p>
+      </ReactTooltip>
       { specialIcon }
     </div>
   )
@@ -50,6 +53,6 @@ render() {
     name : React.PropTypes.string.isRequired,
     power : React.PropTypes.string.isRequired,
     cost : React.PropTypes.string.isRequired,
-    special : React.PropTypes.string.isRequired
+    special : React.PropTypes.string.isRequired,
   }
 }
