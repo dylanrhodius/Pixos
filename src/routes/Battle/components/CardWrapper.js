@@ -65,6 +65,7 @@ export default class CardWrapper extends React.Component {
           imgUrl={this.props.imgUrl}
           name={this.props.name}
           special={this.props.special}
+          description={this.props.description}          
           showPointer={true}
         />
        </div>
@@ -88,6 +89,7 @@ export default class CardWrapper extends React.Component {
    imgUrl : React.PropTypes.string.isRequired,
    name : React.PropTypes.string.isRequired,
    power : React.PropTypes.string.isRequired,
+   description : React.PropTypes.string.isRequired,
    special : React.PropTypes.string.isRequired,
    removeCard : React.PropTypes.func.isRequired,
    addCard : React.PropTypes.func.isRequired,

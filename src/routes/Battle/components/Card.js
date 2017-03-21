@@ -44,6 +44,7 @@ render() {
     name : React.PropTypes.string.isRequired,
     power : React.PropTypes.string.isRequired,
     special : React.PropTypes.string.isRequired,
+    description : React.PropTypes.string.isRequired,
     showPointer: React.PropTypes.bool.isRequired
   }
 }
