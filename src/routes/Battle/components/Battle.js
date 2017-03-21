@@ -45,60 +45,44 @@ export default class Battle extends React.Component {
     }
   }
 
-  updateScores() {
-    let battle = this.props.battle
-    if (battle.self.power > battle.enemy.power) {
-      this.props.incrementSelfScore()
-    } else if (battle.self.power < battle.enemy.power) {
-      this.props.incrementEnemyScore()
-    }
-  }
-
   gameIsOver() {
     this.battle = this.props.battle
-    if (battle.selfRoundCounter == 3 || battle.self.score == 2
+    if (battle.self.roundCounter == 3 || battle.self.score == 2
       || battle.enemy.score == 2) {
         return true
       }
   }
 
-  getResult() {
+  endRound() {
     let battle = this.props.battle
-    if (this.gameIsOver()) {
-      if (battle.self.score == 2) {
-        return "Game is over and you win"
-      }
-    }
+    let roundResult = ""
+
+    if (battle.self.power > battle.enemy.power) { roundResult = "win" }
+    else if (battle.self.power < battle.enemy.power) { roundResult = "lose" }
+    else { roundResult = "both draw" }
+    if (roundResult == "win") {this.props.incrementSelfScore()}
+
+    this.props.incrementRoundCounter()
+    this.props.setPlayerNotification("Round over, you " + roundResult)
+
+    this.props.passTurn(false)
+    this.props.setReadyForNewRound(true)
+    this.props.setTurnFinished(true)
+    this.props.setMyTurn(false)
   }
 
-  // adjudicateGameStateBeta() {
-  //     this.props.incrementRoundCounter() - DONE
-  //     this.props.updateScores() - DONE
-  //     let result = this.props.getResult()
-  //     this.props.displayResult(result)
-  // if gameIsOver() do something accordingly here
-  //     this.props.passTurn(false)
-  //     this.props.setReadyForNewRound(true)
-  //     this.props.setTurnFinished(true)
-  //     this.props.setMyTurn(false)
-  //   }
+  endGame() {
+    let battle = this.props.battle
+    let gameResult = ""
 
-    adjudicateGameState() {
-      let battle = this.props.battle
-      let roundResult = ""
-      if (battle.self.power > battle.enemy.power) { roundResult = "win" }
-      else if (battle.self.power < battle.enemy.power) { roundResult = "lose" }
-      else { roundResult = "draw" }
+    if (battle.self.score > battle.enemy.score) { gameResult = "win" }
+    else if (battle.self.score < battle.enemy.score) { gameResult = "lose" }
+    else { gameResult = "both draw" }
 
-      if (roundResult == "win") {this.props.incrementSelfScore()}
-      this.props.incrementRoundCounter()
-      this.props.setRoundNotification(roundResult)
-
-      this.props.passTurn(false)
-      this.props.setReadyForNewRound(true)
-      this.props.setTurnFinished(true)
-      this.props.setMyTurn(false)
-
+    this.props.setPlayerNotification("Game over, you " + roundResult)
+    this.props.setTurnFinished(true)
+    this.props.setMyTurn(false)
+    this.props.setGameEnded()
   }
 
   componentDidMount() {
@@ -106,20 +90,30 @@ export default class Battle extends React.Component {
     if(this.props.battle.self.hand.length == 0) {
       socket.emit('request:matchmaking');
     }
-    socket.on("init:battle", function(data) {
-      that.props.setupPlayers(data)
+    socket.on("init:battle", function(enemyData) {
+      that.props.setupPlayers(enemyData)
     })
-    socket.on("receive:data", function(data) {
-      console.log("Received data from Opponent!:", data);
+    socket.on("receive:data", function(enemyData) {
+      console.log("Received data from Opponent!:", enemyData);
       that.props.setMyTurn(true)
       that.props.setReadyForNewRound(false)
-      that.props.updateEnemyState(data)
+      that.props.updateEnemyState(enemyData)
       if (that.roundIsOver()) {
-        that.adjudicateGameState()
+        that.endRound()
       }
-      if(data.readyForNewRound) {
+      if(enemyData.readyForNewRound) {
         that.props.clearPlayingArea()
         that.props.updatePower()
+        that.props.clearPlayerNotification()
+        // if that.gameIsOver() {
+        //   that.endGame()
+        //   that.props.finaliseGame() // being:
+        //   determineWinner()
+        //   setNofification(result)
+        //   that.props.endAll()
+        //   that.props.setMyTurn(false)
+        //   that.props.setTurnFinished(true)
+        // }
        }
       if (that.props.battle.self.hasPassed) {
         that.props.setMyTurn(false)
@@ -166,10 +160,11 @@ Battle.propTypes = {
   updatePower : React.PropTypes.func.isRequired,
   updateScore : React.PropTypes.func.isRequired,
   clearPlayingArea : React.PropTypes.func.isRequired,
-  setRoundNotification : React.PropTypes.func.isRequired,
+  setPlayerNotification : React.PropTypes.func.isRequired,
   setReadyForNewRound : React.PropTypes.func.isRequired,
   incrementRoundCounter : React.PropTypes.func.isRequired,
-  setRoundNotification : React.PropTypes.func.isRequired,
+  setPlayerNotification : React.PropTypes.func.isRequired,
   incrementEnemyScore : React.PropTypes.func.isRequired,
-  incrementSelfScore : React.PropTypes.func.isRequired
+  incrementSelfScore : React.PropTypes.func.isRequired,
+  clearPlayerNotification : React.PropTypes.func.isRequired
 }

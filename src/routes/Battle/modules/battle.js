@@ -22,11 +22,12 @@ export const ADD_CARD = 'ADD_CARD'
 export const UPDATE_POWER = 'UPDATE_POWER'
 export const UPDATE_SCORE = 'UPDATE_SCORE'
 export const CLEAR_PLAYING_AREA = 'CLEAR_PLAYING_AREA'
-export const SET_ROUND_NOTIFICATION = 'SET_ROUND_NOTIFICATION'
+export const SET_PLAYER_NOTIFICATION = 'SET_PLAYER_NOTIFICATION'
 export const SET_READY_FOR_NEW_ROUND = 'SET_READY_FOR_NEW_ROUND'
 export const INCREMENT_ROUND_COUNTER = 'INCREMENT_ROUND_COUNTER'
 export const INCREMENT_ENEMY_SCORE = 'INCREMENT_ENEMY_SCORE'
 export const INCREMENT_SELF_SCORE = 'INCREMENT_SELF_SCORE'
+export const CLEAR_PLAYER_NOTIFICATION = 'CLEAR_PLAYER_NOTIFICATION'
 
 
 // ------------------------------------
@@ -109,11 +110,18 @@ export function clearPlayingArea () {
     type: CLEAR_PLAYING_AREA
   }
 }
-export function setRoundNotification (roundResult) {
-  console.log("setRoundNotification")
+export function setPlayerNotification (notification) {
+  console.log("setPlayerNotification")
   return {
-    type: SET_ROUND_NOTIFICATION,
-    payload: roundResult
+    type: SET_PLAYER_NOTIFICATION,
+    payload: notification
+  }
+}
+
+export function clearPlayerNotification () {
+  console.log("setPlayerNotification")
+  return {
+    type: CLEAR_PLAYER_NOTIFICATION
   }
 }
 
@@ -169,11 +177,12 @@ export const actions = {
   removeCard,
   updateScore,
   clearPlayingArea,
-  setRoundNotification,
+  setPlayerNotification,
   setReadyForNewRound,
   incrementRoundCounter,
   incrementEnemyScore,
-  incrementSelfScore
+  incrementSelfScore,
+  clearPlayerNotification
 }
 
 // ------------------------------------
@@ -308,27 +317,18 @@ const ACTION_HANDLERS = {
     }
     return state
   },
-  [SET_ROUND_NOTIFICATION] : (state, action) => {
-    let roundResult = action.payload
-    if (roundResult == "win") {
-      return Object.assign({}, state, {
-        self: Object.assign({}, state.self, {
-          roundNotification: "Round over: you win"
-        }),
-      })
-    } else if (roundResult == "lose"){
-      return Object.assign({}, state, {
-        self: Object.assign({}, state.self, {
-          roundNotification: "Round over: you lose"
-        }),
-      })
-    } else {
-      return Object.assign({}, state, {
-        self: Object.assign({}, state.self, {
-          roundNotification: "Round over: it's a draw"
-        }),
-      })
-    }
+  [SET_PLAYER_NOTIFICATION] : (state, action) => {
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        PlayerNotification: action.payload
+      }),
+    })
+  },[CLEAR_PLAYER_NOTIFICATION] : (state, action) => {
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        PlayerNotification: ""
+      }),
+    })
   },
   [CLEAR_PLAYING_AREA] : (state, action) => {
     let enemyDiscards = []

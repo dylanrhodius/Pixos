@@ -11,14 +11,14 @@ import {
   REMOVE_CARD,
   UPDATE_POWER,
   ADD_CARD,
-  SET_ROUND_NOTIFICATION,
+  SET_PLAYER_NOTIFICATION,
   INCREMENT_ENEMY_SCORE,
   INCREMENT_ROUND_COUNTER,
   INCREMENT_SELF_SCORE,
   incrementSelfScore,
   incrementEnemyScore,
   incrementRoundCounter,
-  setRoundNotification,
+  setPlayerNotification,
   addCard,
   passTurn,
   updateEnemyState,
@@ -31,7 +31,7 @@ import {
   updatePower,
   updateScore,
   clearPlayingArea,
-  setRoundNotification,
+  setPlayerNotification,
   setReadyForNewRound,
   incrementRoundCounter
   default as battleReducer
@@ -56,10 +56,10 @@ describe('(Redux Module) Battle', () => {
     expect(UPDATE_POWER).to.equal('UPDATE_POWER'),
     expect(UPDATE_SCORE).to.equal('UPDATE_SCORE'),
     expect(CLEAR_PLAYING_AREA).to.equal('CLEAR_PLAYING_AREA'),
-    expect(SET_ROUND_NOTIFICATION).to.equal('SET_ROUND_NOTIFICATION')
+    expect(SET_PLAYER_NOTIFICATION).to.equal('SET_PLAYER_NOTIFICATION')
     expect(SET_READY_FOR_NEW_ROUND).to.equal('SET_READY_FOR_NEW_ROUND')
     expect(INCREMENT_ROUND_COUNTER).to.equal('INCREMENT_ROUND_COUNTER')
-    expect(SET_ROUND_NOTIFICATION).to.equal('SET_ROUND_NOTIFICATION')
+    expect(SET_PLAYER_NOTIFICATION).to.equal('SET_PLAYER_NOTIFICATION')
     expect(INCREMENT_ENEMY_SCORE).to.equal('INCREMENT_ENEMY_SCORE')
     expect(INCREMENT_ROUND_COUNTER).to.equal('INCREMENT_ROUND_COUNTER')
     expect(INCREMENT_SELF_SCORE).to.equal('INCREMENT_SELF_SCORE')
@@ -133,13 +133,13 @@ describe('(Redux Module) Battle', () => {
     })
   })
 
-  describe('(Action Creator) setRoundNotification', () => {
+  describe('(Action Creator) setPlayerNotification', () => {
     it('Should be exported as a function.', () => {
-      expect(setRoundNotification).to.be.a('function')
+      expect(setPlayerNotification).to.be.a('function')
     })
 
-    it('Should return an action with type "SET_ROUND_NOTIFICATION".', () => {
-      expect(setRoundNotification()).to.have.property('type', SET_ROUND_NOTIFICATION)
+    it('Should return an action with type "SET_PLAYER_NOTIFICATION".', () => {
+      expect(setPlayerNotification()).to.have.property('type', SET_PLAYER_NOTIFICATION)
     })
   })
 
@@ -203,13 +203,13 @@ describe('(Redux Module) Battle', () => {
     })
   })
 
-  describe('(Action Creator) setRoundNotification', () => {
+  describe('(Action Creator) setPlayerNotification', () => {
     it('Should be exported as a function.', () => {
-      expect(setRoundNotification).to.be.a('function')
+      expect(setPlayerNotification).to.be.a('function')
     })
 
-    it('Should return an action with type "SET_ROUND_NOTIFICATION".', () => {
-      expect(setRoundNotification()).to.have.property('type', SET_ROUND_NOTIFICATION)
+    it('Should return an action with type "SET_PLAYER_NOTIFICATION".', () => {
+      expect(setPlayerNotification()).to.have.property('type', SET_PLAYER_NOTIFICATION)
     })
   })
 
