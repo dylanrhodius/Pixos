@@ -26,15 +26,20 @@ export default class Battle extends React.Component {
                     setMyTurn={this.props.setMyTurn}
                     passTurn={this.props.passTurn}
                     />
-          <Board battle={this.props.battle}
-                setTurnFinished={this.props.setTurnFinished}
-                setMyTurn={this.props.setMyTurn}
-                removeCard={this.props.removeCard}
-                addCard={this.props.addCard}
-                updatePower={this.props.updatePower} />
+          <Board  battle={this.props.battle}
+                  setTurnFinished={this.props.setTurnFinished}
+                  setMyTurn={this.props.setMyTurn}
+                  removeCard={this.props.removeCard}
+                  addCard={this.props.addCard}
+                  updatePower={this.props.updatePower}
+                  />
         </div>
       )
     }
+  }
+
+  popUpDialog() {
+
   }
 
   roundIsOver() {
@@ -60,12 +65,18 @@ export default class Battle extends React.Component {
     else if (battle.self.power < battle.enemy.power) { roundResult = "lose" }
     else { roundResult = "both draw" }
     if (roundResult == "win") {this.props.incrementSelfScore()}
-    this.props.incrementRoundCounter()
     this.props.setPlayerNotification("Round over, you " + roundResult)
     this.props.passTurn(false)
     this.props.setReadyForNewRound(true)
     this.props.setMyTurn(false)
     this.props.setTurnFinished(true)
+  }
+
+  startNewRound() {
+    this.props.clearPlayingArea()
+    this.props.updatePower()
+    this.props.clearPlayerNotification()  // to do remove once pop up working
+    this.props.incrementRoundCounter()
   }
 
   endGame() {
@@ -90,7 +101,6 @@ export default class Battle extends React.Component {
     })
 
     socket.on("receive:data", function(enemyData) {
-      // console.log("Received data from Opponent!:", enemyData);
       that.props.setMyTurn(true)
       that.props.setReadyForNewRound(false)
       that.props.updateEnemyState(enemyData)
@@ -98,9 +108,7 @@ export default class Battle extends React.Component {
       if (that.roundIsOver()) { that.endRound() }
 
       else if(enemyData.readyForNewRound) {
-        that.props.clearPlayingArea()
-        that.props.updatePower()
-        that.props.clearPlayerNotification()
+        that.startNewRound()
         if (that.gameIsOver()) { that.endGame() }
       }
 
@@ -155,5 +163,6 @@ Battle.propTypes = {
   incrementEnemyScore : React.PropTypes.func.isRequired,
   incrementSelfScore : React.PropTypes.func.isRequired,
   clearPlayerNotification : React.PropTypes.func.isRequired,
-  setGameEnded : React.PropTypes.func.isRequired
+  setGameEnded : React.PropTypes.func.isRequired,
+  popUpDialog : React.PropTypes.func.isRequired
 }
