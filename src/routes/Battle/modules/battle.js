@@ -28,6 +28,7 @@ export const INCREMENT_ROUND_COUNTER = 'INCREMENT_ROUND_COUNTER'
 export const INCREMENT_ENEMY_SCORE = 'INCREMENT_ENEMY_SCORE'
 export const INCREMENT_SELF_SCORE = 'INCREMENT_SELF_SCORE'
 export const CLEAR_PLAYER_NOTIFICATION = 'CLEAR_PLAYER_NOTIFICATION'
+export const SET_GAME_ENDED = 'SET_GAME_ENDED'
 
 
 // ------------------------------------
@@ -124,6 +125,12 @@ export function clearPlayerNotification () {
     type: CLEAR_PLAYER_NOTIFICATION
   }
 }
+export function setGameEnded () {
+  console.log("setGameEnded")
+  return {
+    type: SET_GAME_ENDED
+  }
+}
 
 
 export function removeCard(cardId) {
@@ -182,7 +189,8 @@ export const actions = {
   incrementRoundCounter,
   incrementEnemyScore,
   incrementSelfScore,
-  clearPlayerNotification
+  clearPlayerNotification,
+  setGameEnded
 }
 
 // ------------------------------------
@@ -216,6 +224,13 @@ const ACTION_HANDLERS = {
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
         hasPassed: action.payload
+      }),
+    })
+  },
+  [SET_GAME_ENDED] : (state, action) => {
+    return Object.assign({}, state, {
+      self: Object.assign({}, state.self, {
+        gameEnded: true
       }),
     })
   },

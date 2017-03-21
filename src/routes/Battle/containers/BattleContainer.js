@@ -16,7 +16,8 @@ import {  increment,
           setPlayerNotification,
           incrementEnemyScore,
           incrementSelfScore,
-          clearPlayerNotification
+          clearPlayerNotification,
+          setGameEnded
 } from '../modules/battle'
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -48,7 +49,8 @@ const mapDispatchToProps = {
   setPlayerNotification,
   incrementEnemyScore,
   incrementSelfScore,
-  clearPlayerNotification
+  clearPlayerNotification,
+  setGameEnded
 }
 
 const mapStateToProps = (state) => ({

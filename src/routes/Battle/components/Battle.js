@@ -46,7 +46,7 @@ export default class Battle extends React.Component {
   }
 
   gameIsOver() {
-    this.battle = this.props.battle
+    let battle = this.props.battle
     if (battle.self.roundCounter == 3 || battle.self.score == 2
       || battle.enemy.score == 2) {
         return true
@@ -79,7 +79,7 @@ export default class Battle extends React.Component {
     else if (battle.self.score < battle.enemy.score) { gameResult = "lose" }
     else { gameResult = "both draw" }
 
-    this.props.setPlayerNotification("Game over, you " + roundResult)
+    this.props.setPlayerNotification("Game over, you " + gameResult)
     this.props.setTurnFinished(true)
     this.props.setMyTurn(false)
     this.props.setGameEnded()
@@ -95,29 +95,25 @@ export default class Battle extends React.Component {
     })
     socket.on("receive:data", function(enemyData) {
       console.log("Received data from Opponent!:", enemyData);
-      that.props.setMyTurn(true)
-      that.props.setReadyForNewRound(false)
-      that.props.updateEnemyState(enemyData)
-      if (that.roundIsOver()) {
-        that.endRound()
-      }
-      if(enemyData.readyForNewRound) {
-        that.props.clearPlayingArea()
-        that.props.updatePower()
-        that.props.clearPlayerNotification()
-        // if that.gameIsOver() {
-        //   that.endGame()
-        //   that.props.finaliseGame() // being:
-        //   determineWinner()
-        //   setNofification(result)
-        //   that.props.endAll()
-        //   that.props.setMyTurn(false)
-        //   that.props.setTurnFinished(true)
-        // }
-       }
-      if (that.props.battle.self.hasPassed) {
-        that.props.setMyTurn(false)
-        that.props.setTurnFinished(true)
+      if (!that.props.battle.self.gameEnded) {
+        that.props.setMyTurn(true)
+        that.props.setReadyForNewRound(false)
+        that.props.updateEnemyState(enemyData)
+        if (that.roundIsOver()) {
+          that.endRound()
+        }
+        if(enemyData.readyForNewRound) {
+          that.props.clearPlayingArea()
+          that.props.updatePower()
+          that.props.clearPlayerNotification()
+          if (that.gameIsOver()) {
+            that.endGame()
+          }
+        }
+        if (that.props.battle.self.hasPassed) {
+          that.props.setMyTurn(false)
+          that.props.setTurnFinished(true)
+        }
       }
     })
     console.log('Battle state is:', that.props.battle)
@@ -166,5 +162,6 @@ Battle.propTypes = {
   setPlayerNotification : React.PropTypes.func.isRequired,
   incrementEnemyScore : React.PropTypes.func.isRequired,
   incrementSelfScore : React.PropTypes.func.isRequired,
-  clearPlayerNotification : React.PropTypes.func.isRequired
+  clearPlayerNotification : React.PropTypes.func.isRequired,
+  setGameEnded : React.PropTypes.func.isRequired
 }
