@@ -26,7 +26,7 @@ export default class Hand extends React.Component {
           )
         } else {
           return (
-            <Card key={i} {...card }
+            <Card key={i} showPointer={false} {...card }
                   id={i} />
           )
         }

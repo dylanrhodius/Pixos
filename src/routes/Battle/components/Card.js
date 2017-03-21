@@ -17,8 +17,10 @@ getSpecialIcon() {
 
 render() {
   let specialIcon = this.getSpecialIcon()
+  let showPointerClass
+  if (this.props.showPointer) { showPointerClass = "show-pointer" }
   return (
-      <div className={`game-card box-shadow mx-1 ${this.props.type}-faint-bkgrnd d-flex align-items-stretch`}>
+      <div className={`game-card box-shadow mx-1 ${this.props.type}-faint-bkgrnd d-flex align-items-stretch ${showPointerClass}`}>
         <div className={`game-card-name-holder pb-1 ${this.props.type}-main-bkgrnd`}>
           <h4 className="game-card-name m-0 text-left highlighted-white-text">
             { this.props.name.charAt(0).toUpperCase() + this.props.name.slice(1) }
@@ -41,6 +43,7 @@ render() {
     imgUrl : React.PropTypes.string.isRequired,
     name : React.PropTypes.string.isRequired,
     power : React.PropTypes.string.isRequired,
-    special : React.PropTypes.string.isRequired
+    special : React.PropTypes.string.isRequired,
+    showPointer: React.PropTypes.bool.isRequired
   }
 }

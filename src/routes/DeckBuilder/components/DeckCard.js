@@ -18,7 +18,7 @@ getSpecialIcon() {
 render() {
   let specialIcon = this.getSpecialIcon()
   return (
-    <div className={`deck-card box-shadow mx-1 ${this.props.type}-faint-bkgrnd d-flex align-items-stretch`}>
+    <div className={`deck-card box-shadow mx-1 ${this.props.type}-faint-bkgrnd d-flex align-items-stretch show-pointer`}>
       <div className={`deck-card-name-holder pb-1 ${this.props.type}-main-bkgrnd`}>
         <h4 className="deck-card-name m-0 text-left highlighted-white-text">
           { this.props.name.charAt(0).toUpperCase() + this.props.name.slice(1) }
