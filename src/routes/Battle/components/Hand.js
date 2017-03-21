@@ -34,7 +34,7 @@ export default class Hand extends React.Component {
                                 updatePower={this.props.updatePower}
                                 resurrectCards={this.props.resurrectCards}
                                 applyMeteorEffect={this.props.applyMeteorEffect}
-                                applyParagonEffectSelf={this.props.applyParagonEffectSelf}
+                                applyParagonEffect={this.props.applyParagonEffect}
                                 subjectToMeteor={subjectToMeteor}
                                 subjectToParagonSelf={subjectToParagonSelf}
                                  />
@@ -80,7 +80,7 @@ export default class Hand extends React.Component {
     updatePower : React.PropTypes.func.isRequired,
     resurrectCards : React.PropTypes.func.isRequired,
     applyMeteorEffect : React.PropTypes.func.isRequired,
-    applyParagonEffectSelf : React.PropTypes.func.isRequired,
+    applyParagonEffect : React.PropTypes.func.isRequired,
     meteorState : React.PropTypes.object.isRequired,
     paragonStateSelf : React.PropTypes.object.isRequired
 

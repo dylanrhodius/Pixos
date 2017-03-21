@@ -27,7 +27,7 @@ export const UPDATE_HAS_ROUND_FINISHED = 'UPDATE_HAS_ROUND_FINISHED'
 export const UPDATE_ROUND_COUNTER = 'UPDATE_ROUND_COUNTER'
 export const RESURRECT_CARDS = 'RESURRECT_CARDS'
 export const APPLY_METEOR_EFFECT = 'APPLY_METEOR_EFFECT'
-export const APPLY_PARAGON_EFFECT_SELF = 'APPLY_PARAGON_EFFECT_SELF'
+export const APPLY_PARAGON_EFFECT = 'APPLY_PARAGON_EFFECT'
 export const APPLY_PARAGON_EFFECT_ENEMY = 'APPLY_PARAGON_EFFECT_ENEMY'
 
 
@@ -163,9 +163,9 @@ export function applyMeteorEffect (type) {
   }
 }
 
-export function applyParagonEffectSelf (data) {
+export function applyParagonEffect (data) {
   return {
-    type: APPLY_PARAGON_EFFECT_SELF,
+    type: APPLY_PARAGON_EFFECT,
     payload: data
   }
 }
@@ -191,7 +191,7 @@ export const actions = {
   updateHasRoundFinished,
   updateRoundCounter,
   resurrectCards,
-  applyParagonEffectSelf,
+  applyParagonEffect,
   applyParagonEffectEnemy
 }
 
@@ -415,7 +415,7 @@ const ACTION_HANDLERS = {
       })
     })
   },
-  [APPLY_PARAGON_EFFECT_SELF] : (state, action) => {
+  [APPLY_PARAGON_EFFECT] : (state, action) => {
 
     let type = action.payload
     let selfInspiredRow = []

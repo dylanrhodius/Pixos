@@ -48,10 +48,10 @@ export default class CardWrapper extends React.Component {
    if(this.isMeteorConditions()) {
      this.props.applyMeteorEffect(this.props.type)
      if (this.isParagonConditionsSelf()){
-       this.props.applyParagonEffectSelf(this.props.type)
+       this.props.applyParagonEffect(this.props.type)
      }
    } else if (this.isParagonConditionsSelf()){
-     this.props.applyParagonEffectSelf(this.props.type)
+     this.props.applyParagonEffect(this.props.type)
    }
    this.props.updatePower()
    this.setTurnFinishedToTrue()
@@ -115,7 +115,7 @@ export default class CardWrapper extends React.Component {
    resurrectCards : React.PropTypes.func.isRequired,
    applyMeteorEffect : React.PropTypes.func.isRequired,
    subjectToMeteor : React.PropTypes.bool.isRequired,
-   applyParagonEffectSelf : React.PropTypes.func.isRequired,
+   applyParagonEffect : React.PropTypes.func.isRequired,
    subjectToParagonSelf : React.PropTypes.bool.isRequired
 
  }
