@@ -3,11 +3,21 @@ import './Card.scss'
 
 export default class Card extends React.Component {
 
-    constructor (props) {
-      super(props)
-    }
+constructor (props) {
+  super(props)
+}
+
+getSpecialIcon() {
+  console.log(this.props.name, this.props.special);
+  if (this.props.special) {
+    return (
+      <img src={`/icons/${this.props.special}.svg`} className={`game-card-special ${this.props.special}-bkgrnd p-1 circle d-inline-block mx-auto`}/>
+    )
+  }
+}
 
 render() {
+  let specialIcon = this.getSpecialIcon()
   return (
       <div className={`game-card box-shadow mx-1 ${this.props.type}-faint-bkgrnd d-flex align-items-stretch`}>
         <div className={`game-card-name-holder pb-1 ${this.props.type}-main-bkgrnd`}>
@@ -21,6 +31,7 @@ render() {
         <span className={`game-card-power ${this.props.type}-bkgrnd circle d-inline-block mx-auto highlighted-white-text`}>
           { this.props.power }
         </span>
+        { specialIcon }
       </div>
 
   )
@@ -30,6 +41,7 @@ render() {
     type : React.PropTypes.string.isRequired,
     imgUrl : React.PropTypes.string.isRequired,
     name : React.PropTypes.string.isRequired,
-    power : React.PropTypes.string.isRequired
+    power : React.PropTypes.string.isRequired,
+    special : React.PropTypes.string.isRequired
   }
 }

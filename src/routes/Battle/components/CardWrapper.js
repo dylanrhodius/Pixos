@@ -59,6 +59,7 @@ export default class CardWrapper extends React.Component {
           type={this.props.type}
           imgUrl={this.props.imgUrl}
           name={this.props.name}
+          special={this.props.special}
         />
        </div>
      <Popover
@@ -81,6 +82,7 @@ export default class CardWrapper extends React.Component {
    imgUrl : React.PropTypes.string.isRequired,
    name : React.PropTypes.string.isRequired,
    power : React.PropTypes.string.isRequired,
+   special : React.PropTypes.string.isRequired,
    removeCard : React.PropTypes.func.isRequired,
    addCard : React.PropTypes.func.isRequired,
    setTurnFinished  : React.PropTypes.func.isRequired,
