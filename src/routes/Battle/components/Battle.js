@@ -2,11 +2,34 @@ import React from 'react'
 import InfoBar from 'routes/Battle/components/InfoBar'
 import Board from 'routes/Battle/components/Board'
 import CircularProgress from 'material-ui/CircularProgress'
+import './Battle.scss'
+import shortId from 'shortid'
 
 import io from 'socket.io-client';
 const socket = io.connect(`${window.location.origin}`);
 
 export default class Battle extends React.Component {
+
+  loadNotifcation () {
+    console.log('loading notification')
+    if (this.props.battle.self.PlayerNotification) {
+      // var element = document.getElementById('notification-popup');
+      // element.style.display = 'block'
+      console.log('notification shold be ', this.props.battle.self.PlayerNotification)
+      return (
+        <div id="notification-popup" className="notification" style={{display: 'block'}} key={shortId.generate()}>
+          <p>{this.props.battle.self.PlayerNotification}</p>
+          <button onClick={this.hideNotification}>Go Away</button>
+        </div>
+       )
+    }
+  }
+
+  hideNotification() {
+    var element = document.getElementById('notification-popup');
+    element.style.display = 'none'
+    window.setTimeout(() => {  }, 5000)
+  }
 
   loadContent () {
     if(this.props.battle.self.hand.length == 0) {
@@ -90,7 +113,7 @@ export default class Battle extends React.Component {
     })
 
     socket.on("receive:data", function(enemyData) {
-      // console.log("Received data from Opponent!:", enemyData);
+      console.log("Received data from Opponent!:", enemyData);
       that.props.setMyTurn(true)
       that.props.setReadyForNewRound(false)
       that.props.updateEnemyState(enemyData)
@@ -112,6 +135,7 @@ export default class Battle extends React.Component {
   }
 
   componentDidUpdate() {
+    console.log('Battle updated', this.props.battle)
     if (this.props.battle.self.hand.length == 0) {
       this.props.passTurn(true)
     }
@@ -124,11 +148,13 @@ export default class Battle extends React.Component {
   }
 
   render () {
+    let notification = this.loadNotifcation();
     let content = this.loadContent();
+    console.log('notification for display is', notification)
     return (
       <div>
       { content }
-
+      { notification }
       </div>
     )
   }
