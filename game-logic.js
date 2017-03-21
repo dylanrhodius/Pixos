@@ -1,8 +1,8 @@
 socket.on("receive:data", function(data) {
   that.props.setMyTurn(true)
     // self.myTurn = true
-  that.props.updateHasRoundFinished(false)
-    // reset self.hasRoundFinished ; this is a flag only for the enemy's info
+  that.props.setReadyForNewRound(false)
+    // reset self.readyForNewRound ; this is a flag only for the enemy's info
   that.props.updateEnemyState(data)
     // get state of enemy at end of their last turn
 
@@ -12,7 +12,7 @@ socket.on("receive:data", function(data) {
     // so better if put an if statement here rather than in the other function
 
   // i.e. if enemy has decided the round has ended do this
-  if(data.hasRoundFinished) {
+  if(data.readyForNewRound) {
 
     that.props.clearPlayingArea()
     // clears own playing area state that is passed to enemy
@@ -32,7 +32,7 @@ adjudicateGameState() {
 
   // if have passed  + enemy has passed or ended round
   if (battle.self.hasPassed && ( battle.enemy.hasPassed
-  || battle.enemy.hasRoundFinished) )  {
+  || battle.enemy.readyForNewRound) )  {
     // set haveWon if self power > enemy power
     let selfHasWon = battle.self.power > battle.enemy.power
 
@@ -40,7 +40,7 @@ adjudicateGameState() {
     this.props.updateScore(selfHasWon)
 
     // set hasFinished for enemy information
-    this.props.updateHasRoundFinished(true)
+    this.props.setReadyForNewRound(true)
 
     // increment own copy of round counter
     this.props.incrementRoundCounter()

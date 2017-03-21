@@ -1,7 +1,7 @@
 export const INITIAL_STATE = {
   self: {
     myTurn: false,
-    hasRoundFinished: false,
+    readyForNewRound: false,
     roundCounter: 0,
     roundNotification: "",
     name: '',
@@ -18,7 +18,7 @@ export const INITIAL_STATE = {
   },
   enemy: {
     myTurn: false,
-    hasRoundFinished: false,
+    readyForNewRound: false,
     roundCounter: 0,
     roundNotification: "",
     name: '',

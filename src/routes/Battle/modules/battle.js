@@ -23,7 +23,7 @@ export const UPDATE_POWER = 'UPDATE_POWER'
 export const UPDATE_SCORE = 'UPDATE_SCORE'
 export const CLEAR_PLAYING_AREA = 'CLEAR_PLAYING_AREA'
 export const SET_ROUND_NOTIFICATION = 'SET_ROUND_NOTIFICATION'
-export const UPDATE_HAS_ROUND_FINISHED = 'UPDATE_HAS_ROUND_FINISHED'
+export const SET_READY_FOR_NEW_ROUND = 'SET_READY_FOR_NEW_ROUND'
 export const INCREMENT_ROUND_COUNTER = 'INCREMENT_ROUND_COUNTER'
 export const INCREMENT_ENEMY_SCORE = 'INCREMENT_ENEMY_SCORE'
 export const INCREMENT_SELF_SCORE = 'INCREMENT_SELF_SCORE'
@@ -95,10 +95,10 @@ export function incrementRoundCounter() {
     type: INCREMENT_ROUND_COUNTER
   }
 }
-export function updateHasRoundFinished (boolean) {
-  console.log("updateHasRoundFinished")
+export function setReadyForNewRound (boolean) {
+  console.log("setReadyForNewRound")
   return {
-    type: UPDATE_HAS_ROUND_FINISHED,
+    type: SET_READY_FOR_NEW_ROUND,
     payload: boolean
   }
 }
@@ -109,11 +109,11 @@ export function clearPlayingArea () {
     type: CLEAR_PLAYING_AREA
   }
 }
-export function setRoundNotification (selfHasWon) {
+export function setRoundNotification (roundResult) {
   console.log("setRoundNotification")
   return {
     type: SET_ROUND_NOTIFICATION,
-    payload: selfHasWon
+    payload: roundResult
   }
 }
 
@@ -170,7 +170,7 @@ export const actions = {
   updateScore,
   clearPlayingArea,
   setRoundNotification,
-  updateHasRoundFinished,
+  setReadyForNewRound,
   incrementRoundCounter,
   incrementEnemyScore,
   incrementSelfScore
@@ -210,10 +210,10 @@ const ACTION_HANDLERS = {
       }),
     })
   },
-  [UPDATE_HAS_ROUND_FINISHED] : (state, action) => {
+  [SET_READY_FOR_NEW_ROUND] : (state, action) => {
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
-        hasRoundFinished: action.payload
+        readyForNewRound: action.payload
       }),
     })
   },
@@ -309,17 +309,23 @@ const ACTION_HANDLERS = {
     return state
   },
   [SET_ROUND_NOTIFICATION] : (state, action) => {
-    let selfHasWon = action.payload
-    if (selfHasWon) {
+    let roundResult = action.payload
+    if (roundResult == "win") {
       return Object.assign({}, state, {
         self: Object.assign({}, state.self, {
           roundNotification: "Round over: you win"
         }),
       })
-    } else {
+    } else if (roundResult == "lose"){
       return Object.assign({}, state, {
         self: Object.assign({}, state.self, {
           roundNotification: "Round over: you lose"
+        }),
+      })
+    } else {
+      return Object.assign({}, state, {
+        self: Object.assign({}, state.self, {
+          roundNotification: "Round over: it's a draw"
         }),
       })
     }

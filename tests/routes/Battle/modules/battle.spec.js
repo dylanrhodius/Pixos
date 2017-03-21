@@ -32,7 +32,7 @@ import {
   updateScore,
   clearPlayingArea,
   setRoundNotification,
-  updateHasRoundFinished,
+  setReadyForNewRound,
   incrementRoundCounter
   default as battleReducer
 } from 'routes/Battle/modules/battle'
@@ -57,7 +57,7 @@ describe('(Redux Module) Battle', () => {
     expect(UPDATE_SCORE).to.equal('UPDATE_SCORE'),
     expect(CLEAR_PLAYING_AREA).to.equal('CLEAR_PLAYING_AREA'),
     expect(SET_ROUND_NOTIFICATION).to.equal('SET_ROUND_NOTIFICATION')
-    expect(UPDATE_HAS_ROUND_FINISHED).to.equal('UPDATE_HAS_ROUND_FINISHED')
+    expect(SET_READY_FOR_NEW_ROUND).to.equal('SET_READY_FOR_NEW_ROUND')
     expect(INCREMENT_ROUND_COUNTER).to.equal('INCREMENT_ROUND_COUNTER')
     expect(SET_ROUND_NOTIFICATION).to.equal('SET_ROUND_NOTIFICATION')
     expect(INCREMENT_ENEMY_SCORE).to.equal('INCREMENT_ENEMY_SCORE')
@@ -213,13 +213,13 @@ describe('(Redux Module) Battle', () => {
     })
   })
 
-  describe('(Action Creator) updateHasRoundFinished', () => {
+  describe('(Action Creator) setReadyForNewRound', () => {
     it('Should be exported as a function.', () => {
-      expect(updateHasRoundFinished).to.be.a('function')
+      expect(setReadyForNewRound).to.be.a('function')
     })
 
-    it('Should return an action with type "UPDATE_HAS_ROUND_FINISHED".', () => {
-      expect(updateHasRoundFinished()).to.have.property('type', UPDATE_HAS_ROUND_FINISHED)
+    it('Should return an action with type "SET_READY_FOR_NEW_ROUND".', () => {
+      expect(setReadyForNewRound()).to.have.property('type', SET_READY_FOR_NEW_ROUND)
     })
   })
   describe('(Action Creator) incrementEnemyScore', () => {
