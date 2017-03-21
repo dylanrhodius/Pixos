@@ -85,20 +85,20 @@ export function addCard (cardId) {
 }
 
 export function updateScore (selfHasWon) {
-  console.log("updateScore")
+  // console.log("updateScore")
   return {
     type: UPDATE_SCORE,
     payload: selfHasWon
   }
 }
 export function incrementRoundCounter() {
-  console.log("incrementRoundCounter")
+  // console.log("incrementRoundCounter")
   return {
     type: INCREMENT_ROUND_COUNTER
   }
 }
 export function setReadyForNewRound (boolean) {
-  console.log("setReadyForNewRound")
+  // console.log("setReadyForNewRound")
   return {
     type: SET_READY_FOR_NEW_ROUND,
     payload: boolean
@@ -106,13 +106,13 @@ export function setReadyForNewRound (boolean) {
 }
 
 export function clearPlayingArea () {
-  console.log("clearPlayingArea")
+  // console.log("clearPlayingArea")
   return {
     type: CLEAR_PLAYING_AREA
   }
 }
 export function setPlayerNotification (notification) {
-  console.log("setPlayerNotification")
+  // console.log("setPlayerNotification")
   return {
     type: SET_PLAYER_NOTIFICATION,
     payload: notification
@@ -120,13 +120,13 @@ export function setPlayerNotification (notification) {
 }
 
 export function clearPlayerNotification () {
-  console.log("setPlayerNotification")
+  // console.log("setPlayerNotification")
   return {
     type: CLEAR_PLAYER_NOTIFICATION
   }
 }
 export function setGameEnded () {
-  console.log("setGameEnded")
+  // console.log("setGameEnded")
   return {
     type: SET_GAME_ENDED
   }
@@ -190,7 +190,9 @@ export const actions = {
   incrementEnemyScore,
   incrementSelfScore,
   clearPlayerNotification,
-  setGameEnded
+  setGameEnded,
+  setTurnFinished,
+  passTurn
 }
 
 // ------------------------------------

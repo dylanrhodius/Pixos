@@ -34,7 +34,7 @@ export default class CardWrapper extends React.Component {
  }
 
  handleTouchTap (event) {
-   console.log('have been tapped')
+  //  console.log('have been tapped')
    // This prevents ghost click.
    event.preventDefault();
 

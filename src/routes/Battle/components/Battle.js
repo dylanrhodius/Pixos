@@ -1,7 +1,7 @@
 import React from 'react'
 import InfoBar from 'routes/Battle/components/InfoBar'
 import Board from 'routes/Battle/components/Board'
-import CircularProgress from 'material-ui/CircularProgress';
+import CircularProgress from 'material-ui/CircularProgress'
 
 import io from 'socket.io-client';
 const socket = io.connect(`${window.location.origin}`);
@@ -47,7 +47,7 @@ export default class Battle extends React.Component {
 
   gameIsOver() {
     let battle = this.props.battle
-    if (battle.self.roundCounter == 3 || battle.self.score == 2
+    if (battle.self.roundCounter == 4 || battle.self.score == 2
       || battle.enemy.score == 2) {
         return true
       }
@@ -64,8 +64,8 @@ export default class Battle extends React.Component {
     this.props.setPlayerNotification("Round over, you " + roundResult)
     this.props.passTurn(false)
     this.props.setReadyForNewRound(true)
-    this.props.setTurnFinished(true)
     this.props.setMyTurn(false)
+    this.props.setTurnFinished(true)
   }
 
   endGame() {
@@ -76,8 +76,8 @@ export default class Battle extends React.Component {
     else { gameResult = "both draw" }
     this.props.setPlayerNotification("Game over, you " + gameResult)
     this.props.setGameEnded()
-    this.props.setTurnFinished(true)
     this.props.setMyTurn(false)
+    this.props.setTurnFinished(true)
   }
 
   componentDidMount() {
@@ -88,32 +88,35 @@ export default class Battle extends React.Component {
     socket.on("init:battle", function(enemyData) {
       that.props.setupPlayers(enemyData)
     })
+
     socket.on("receive:data", function(enemyData) {
-      console.log("Received data from Opponent!:", enemyData);
+      // console.log("Received data from Opponent!:", enemyData);
       that.props.setMyTurn(true)
       that.props.setReadyForNewRound(false)
       that.props.updateEnemyState(enemyData)
+
       if (that.roundIsOver()) { that.endRound() }
-      if(enemyData.readyForNewRound) {
+
+      else if(enemyData.readyForNewRound) {
         that.props.clearPlayingArea()
         that.props.updatePower()
         that.props.clearPlayerNotification()
         if (that.gameIsOver()) { that.endGame() }
       }
-      if (that.props.battle.self.hasPassed) {
+
+      else if (that.props.battle.self.hasPassed) {
         that.props.setMyTurn(false)
         that.props.setTurnFinished(true)
       }
     })
-    console.log('Battle state is:', that.props.battle)
   }
 
   componentDidUpdate() {
     if (this.props.battle.self.hand.length == 0) {
       this.props.passTurn(true)
     }
-    console.log('Battle state is:', this.props.battle)
     if (this.props.battle.turnFinished) {
+      console.log('End of round:', this.props.battle)
       socket.emit('pass:ToRoom', this.props.battle.self)
       this.props.setTurnFinished(false)
     }

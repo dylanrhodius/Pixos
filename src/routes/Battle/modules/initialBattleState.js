@@ -2,7 +2,7 @@ export const INITIAL_STATE = {
   self: {
     myTurn: false,
     readyForNewRound: false,
-    roundCounter: 0,
+    roundCounter: 1,
     PlayerNotification: "",
     gameEnded: false,
     name: '',
@@ -20,7 +20,7 @@ export const INITIAL_STATE = {
   enemy: {
     myTurn: false,
     readyForNewRound: false,
-    roundCounter: 0,
+    roundCounter: 1,
     PlayerNotification: "",
     gameEnded: false,
     name: '',
