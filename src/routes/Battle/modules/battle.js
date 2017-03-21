@@ -29,6 +29,7 @@ export const INCREMENT_ENEMY_SCORE = 'INCREMENT_ENEMY_SCORE'
 export const INCREMENT_SELF_SCORE = 'INCREMENT_SELF_SCORE'
 export const CLEAR_PLAYER_NOTIFICATION = 'CLEAR_PLAYER_NOTIFICATION'
 export const SET_GAME_ENDED = 'SET_GAME_ENDED'
+export const POP_UP_DIALOG = 'POP_UP_DIALOG'
 
 
 // ------------------------------------
@@ -76,6 +77,7 @@ export function setupPlayers (data) {
     payload: data
   }
 }
+
 
 export function addCard (cardId) {
   return {
@@ -229,6 +231,7 @@ const ACTION_HANDLERS = {
       }),
     })
   },
+
   [SET_GAME_ENDED] : (state, action) => {
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
@@ -236,6 +239,8 @@ const ACTION_HANDLERS = {
       }),
     })
   },
+
+
   [SET_READY_FOR_NEW_ROUND] : (state, action) => {
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
