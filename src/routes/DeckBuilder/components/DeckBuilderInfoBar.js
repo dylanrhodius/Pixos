@@ -96,11 +96,11 @@ export default class DeckBuilderInfoBar extends React.Component {
   render () {
     let content = this.loadContent()
     return (
-      <div className="info-bar float-left justify-content-center align-items-center">
+      <div className="inside">
         <PixosMenu/>
-        <p className="dino-dollars justify-content-center mb-5">Current DinoDollars ${ this.props.playerDeck.dinoDollars }</p>
-        <p className="card-in-deck justify-content-center mt-5">Cards in Deck - {this.props.playerDeck.cardsInDeck}</p>
+        <p className="info-card-cost px-1 circle align-middle justify-content-center mx-4">${ this.props.playerDeck.dinoDollars }</p>
         { content }
+        <p className="card-in-deck justify-content-center align-middle mx-2">Cards in Deck - {this.props.playerDeck.cardsInDeck}</p>
       </div>
       )
   }
