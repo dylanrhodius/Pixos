@@ -1,18 +1,19 @@
 import React from 'react'
 import Hand from 'routes/Battle/components/Hand'
 import { PlayingArea } from 'routes/Battle/components/PlayingArea'
+import './Board.scss'
 
 export default class Board extends React.Component {
 
   render() {
     return (
-      <div className="board col-11" >
+      <div className="board-bkgrnd col-11 d-flex flex-column justify-content-center" >
           { <Hand hand={this.props.battle.enemy.hand}
                   removeCard={this.props.removeCard}
                   addCard={this.props.addCard}
                   isEnemyHand={true}  /> }
           { <PlayingArea type={'enemy'} cardArrays={this.props.battle.enemy.playingArea}/> }
-          <hr className="m-0"/>
+          <hr className="m-0 board-divider"/>
           { <PlayingArea type={'self'} cardArrays={this.props.battle.self.playingArea}/> }
           { <Hand hand={this.props.battle.self.hand}
                   removeCard={this.props.removeCard}

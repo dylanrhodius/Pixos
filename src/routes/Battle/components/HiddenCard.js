@@ -1,13 +1,20 @@
 import React from 'react'
 import './HiddenCard.scss'
 
-export const HiddenCard = (props) => (
 
-  <div className="px-2 py-4 mx-1 box-shadow game-card grey-faint-bkgrnd" >
-    <div className="d-flex justify-content-center align-items-center hidden-card-img-holder">
-      <img className="card-img-top game-card-img" src="/img/card-reverse-dino.svg" alt="Card image cap"/>
-    </div>
-  </div>
-)
+export default class HiddenCard extends React.Component {
 
-export default HiddenCard
+  render() {
+    return (
+      <div className={`px-2 py-4 mx-1 box-shadow game-card grey-faint-bkgrnd`} >
+        <div className="d-flex justify-content-center align-items-center hidden-card-img-holder">
+          <img className="card-img-top game-card-img" src="/img/card-reverse-dino.svg" alt="Card image cap"/>
+        </div>
+      </div>
+    )
+  }
+}
+
+HiddenCard.propTypes = {
+
+}

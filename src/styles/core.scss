@@ -6,6 +6,7 @@ $shadow-color: rgb(159, 159, 159);
 $light-bkgrnd: rgb(249, 249, 249);
 $bkgrnd-gradient: rgb(232, 229, 229);
 $text-color: rgb(71, 71, 71);
+$grey-bkgrnd: #666666;
 
 // Some best-practice CSS that's useful for most apps
 // Just remove them if they're not what you want
@@ -35,6 +36,10 @@ body {
   box-shadow: 2px 2px 2px $shadow-color;
 }
 
+.circle-highlight {
+  box-shadow: 0px 0px 2px 1px $shadow-color;
+}
+
 .overflow-wrap {
   overflow-wrap: break-word;
   hyphens: auto;
@@ -53,6 +58,12 @@ body {
 .show-pointer {
   cursor: pointer;
 }
+
+.full-width {
+  width: 100%;
+}
+
+$material-ui-blue: #00BCD4;
 
 $water-light: #b7deed;
 $water-mid: #71ceef;
@@ -85,6 +96,10 @@ $paragon-col: #f4cc41;
   background-color: $paragon-col;
 }
 
+.material-bkgrnd {
+  background-color: $material-ui-blue;
+}
+
 .water-main-bkgrnd {
   background-color: $water-main;
 }
@@ -95,6 +110,10 @@ $paragon-col: #f4cc41;
 
 .air-main-bkgrnd {
   background-color: $air-main;
+}
+
+.board-bkgrnd {
+  background: linear-gradient(180deg, $air-light 0%,$water-light 5%,$land-light 10%,$light-bkgrnd 20%, $light-bkgrnd 50%, $light-bkgrnd 80%,$land-light 90%,$water-light 95%,$air-light 100%)
 }
 
 .water-bkgrnd {
@@ -121,6 +140,10 @@ $paragon-col: #f4cc41;
   background: linear-gradient(225deg, lighten($air-mid, 20%) 0%,lighten($air-light, 23%) 100%)
 }
 
+.grey-bkgrnd {
+  background: linear-gradient(180deg,$grey-bkgrnd 0%, lighten($grey-bkgrnd, 10%) 100%)
+}
+
 .grey-faint-bkgrnd {
   background: linear-gradient(225deg,$grey-mid 0%,$grey-light 100%)
 }
@@ -131,4 +154,20 @@ $paragon-col: #f4cc41;
 
 .min-page-height {
   min-height: 100vh;
+}
+
+.sign-in-background {
+  background-image: url("../../public/background.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+.pulse {
+  animation:pulse 0.8s infinite alternate;
+}
+
+@keyframes pulse {
+  from { box-shadow:0px 0px 5px 3px $paragon-col; }
+  to { box-shadow:0px 0px 20px 5px $paragon-col; }
 }

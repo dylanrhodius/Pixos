@@ -1,6 +1,8 @@
 import React from 'react'
 import RaisedButton from 'material-ui/RaisedButton';
 import PixosMenu from 'routes/Battle/components/PixosMenu'
+import './InfoBar.scss'
+import DiscardPile from 'routes/Battle/components/DiscardPile'
 
 export default class InfoBar extends React.Component {
 
@@ -19,29 +21,46 @@ export default class InfoBar extends React.Component {
   loadContent () {
     if(this.props.battle.self.myTurn){
       return (
-        <div>
-          <RaisedButton label="Pass" primary={true} onTouchTap={this.setTurnFinishedToTrue} />
+        <div className="full-width">
+          <RaisedButton label="Pass"
+                        primary={true}
+                        fullWidth={true}
+                        onTouchTap={this.setTurnFinishedToTrue} />
         </div>
+      )
+    } else {
+      return (
+        <div style={{ height: '35.99px' }}></div>
       )
     }
   }
 
   render () {
-    let content = this.loadContent()
+    let passButton = this.loadContent()
+    let myTurn = this.props.battle.self.myTurn
     return (
-      <div className="info-bar col-1 d-flex flex-column justify-content-center align-items-center pt-2 pb-4">
-        <PixosMenu/>
-        <h3 className="my-2"><span>Score: </span>{this.props.battle.enemy.score}</h3>
-        <p className="mb-auto">{ this.props.battle.enemy.name }</p>
-        <img className="game-avatar" src={`${this.props.battle.enemy.img}`}/>
-        <h4 className="my-2"><span>Power: </span>{this.props.battle.enemy.power}</h4>
-        {content}
-        <h4 className="my-2"><span>Power: </span>{this.props.battle.self.power}</h4>
-        <p className="mt-auto">{ this.props.battle.self.PlayerNotification }</p>
-        <p className="mt-auto">{ this.props.battle.self.name }</p>
-        <img className="game-avatar" src={`${this.props.battle.self.img}`}/>
-        <h3 className="my-2"><span>Score: </span>{this.props.battle.self.score}</h3>
-        <h3 className="my-2"><span>Round: </span>{ this.props.battle.self.roundCounter > 3 ? 3 : this.props.battle.self.roundCounter }</h3>
+      <div className="info-bar col-1 d-flex flex-column justify-content-center align-items-center grey-bkgrnd">
+        <PixosMenu />
+        <img className={`game-avatar ${!myTurn ? 'pulse' : ''} circle circle-highlight mb-1`} src={`${this.props.battle.enemy.img}`}/>
+        <span className="info-bar-text mx-2">{ this.props.battle.enemy.name }</span>
+        <span className="my-2 info-bar-text land-main-bkgrnd circle circle-highlight info-bar-indicator">{this.props.battle.enemy.score}</span>
+        <span className="info-bar-text small-text mb-auto">Score</span>
+
+        <DiscardPile key={'enemy'} name={this.props.battle.enemy.name} cards={this.props.battle.enemy.discardPile} />
+
+        <span className="mb-1 info-bar-text small-text">Power</span>
+        <span className="mb-2 air-main-bkgrnd circle circle-highlight info-bar-indicator">{this.props.battle.enemy.power}</span>
+        <span className="my-2 circle circle-highlight round-indicator material-bkgrnd">{ this.props.battle.self.roundCounter > 3 ? 3 : this.props.battle.self.roundCounter }/3</span>
+        <span className="mt-2 air-main-bkgrnd circle circle-highlight info-bar-indicator">{this.props.battle.self.power}</span>
+        <span className="mt-1 info-bar-text small-text">Power</span>
+
+        <DiscardPile key={'self'} name={this.props.battle.self.name} cards={this.props.battle.self.discardPile} />
+
+        <span className="mt-auto mb-1 info-bar-text small-text">Score</span>
+        <span className="mb-2 info-bar-text land-main-bkgrnd circle circle-highlight info-bar-indicator">{this.props.battle.self.score}</span>
+        <span className="info-bar-text mx-2">{ this.props.battle.self.name }</span>
+        <img className={`game-avatar ${myTurn ? 'pulse' : ''} circle circle-highlight mb-2 mt-1`} src={`${this.props.battle.self.img}`}/>
+        {passButton}
     </div>
     )
   }

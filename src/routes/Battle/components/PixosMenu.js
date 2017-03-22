@@ -37,13 +37,15 @@ export default class PixosMenu extends React.Component {
 
   render () {
     return (
-      <div className="mb-2">
+      <div className="mb-2 full-width">
       <RaisedButton
         onTouchTap={this.handleTouchTap}
         label="Pixos"
         labelPosition="before"
         primary={true}
-        icon={<NavigationMenu />}
+        fullWidth={true}
+        labelStyle={{ margin: 'auto', padding: '0 3px 0 0' }}
+        icon={<NavigationMenu style={{ margin: 'auto' }}/>}
       />
       <Popover
          open={this.state.open}

@@ -75,7 +75,7 @@ export default class CardWrapper extends React.Component {
 
  render () {
    return (
-     <div className="mb-2">
+     <div className="mb-2 pulse">
        <div onTouchTap={this.handleTouchTap}>
          <Card
           power={this.props.power}
@@ -83,7 +83,7 @@ export default class CardWrapper extends React.Component {
           imgUrl={this.props.imgUrl}
           name={this.props.name}
           special={this.props.special}
-          description={this.props.description}          
+          description={this.props.description}
           showPointer={true}
         />
        </div>
