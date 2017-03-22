@@ -91,7 +91,6 @@ var Room = (function(){
       choice = Math.floor(Math.random() * deckDouble.length)
       result.push(deckDouble[choice])
       deckDouble.splice(choice, 1)
-      console.log("DECK LENGTH", deck.length)
     }
     return result
   }
@@ -136,7 +135,7 @@ var Room = (function(){
     if (this._users.length > 0) {
       this._users[0].send("opponent:disconnected")
     }
-    
+
     // if(this._battle){
     //   this._battle.userLeft(p);
     // }
