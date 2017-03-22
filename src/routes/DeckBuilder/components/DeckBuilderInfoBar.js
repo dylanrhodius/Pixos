@@ -27,16 +27,19 @@ export default class DeckBuilderInfoBar extends React.Component {
 
   handleCloseAndSave = () => {
     this.setState({open: false});
-    this.saveDeck()
+    this.saveDeck(false)
   }
 
   handleCloseSaveAndHome = () => {
     this.setState({open: false});
-    this.saveDeck()
+    this.saveDeck(true)
+  }
+
+  goHome () {
     window.location = "/"
   }
 
-  saveDeck () {
+  saveDeck (goHome) {
     let deck = this.props.playerDeck.land.inDeck
                 .concat(this.props.playerDeck.air.inDeck
                   .concat(this.props.playerDeck.water.inDeck))
@@ -48,6 +51,10 @@ export default class DeckBuilderInfoBar extends React.Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(deck)
+    }).then(() => {
+      if (goHome) {
+        this.goHome()
+      }
     })
   }
 
