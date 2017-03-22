@@ -8,9 +8,6 @@ import store from 'store/createStore'
 // Constants
 // ------------------------------------
 export const SETUP_PLAYERS = 'SETUP_PLAYERS'
-// export const SET_NEXT_PLAYER = 'SET_NEXT_PLAYER'
-// export const SET_PLAYER_PASS = 'SET_PLAYER_PASS'
-// export const PLAY_CARD = 'PLAY_CARD'
 export const SET_TURN_FINISHED = 'SET_TURN_FINISHED'
 export const SET_MY_TURN = 'SET_MY_TURN'
 export const UPDATE_ENEMY_STATE = 'UPDATE_ENEMY_STATE'
@@ -20,16 +17,12 @@ export const ADD_CARD = 'ADD_CARD'
 export const UPDATE_POWER = 'UPDATE_POWER'
 export const UPDATE_SCORE = 'UPDATE_SCORE'
 export const CLEAR_PLAYING_AREA = 'CLEAR_PLAYING_AREA'
-// export const SET_ROUND_NOTIFICATION = 'SET_ROUND_NOTIFICATION'
-// export const UPDATE_HAS_ROUND_FINISHED = 'UPDATE_HAS_ROUND_FINISHED'
-// export const UPDATE_ROUND_COUNTER = 'UPDATE_ROUND_COUNTER'
 export const RESURRECT_CARDS = 'RESURRECT_CARDS'
 export const APPLY_METEOR_EFFECT = 'APPLY_METEOR_EFFECT'
 export const APPLY_PARAGON_EFFECT = 'APPLY_PARAGON_EFFECT'
 export const SET_PLAYER_NOTIFICATION = 'SET_PLAYER_NOTIFICATION'
 export const SET_READY_FOR_NEW_ROUND = 'SET_READY_FOR_NEW_ROUND'
 export const INCREMENT_ROUND_COUNTER = 'INCREMENT_ROUND_COUNTER'
-// export const INCREMENT_ENEMY_SCORE = 'INCREMENT_ENEMY_SCORE'
 export const INCREMENT_SELF_SCORE = 'INCREMENT_SELF_SCORE'
 export const CLEAR_PLAYER_NOTIFICATION = 'CLEAR_PLAYER_NOTIFICATION'
 export const SET_GAME_ENDED = 'SET_GAME_ENDED'
@@ -39,11 +32,6 @@ export const SET_GAME_ENDED = 'SET_GAME_ENDED'
 // Actions
 // ------------------------------------
 
-export function incrementEnemyScore () {
-  return {
-    type: INCREMENT_ENEMY_SCORE
-  }
-}
 export function incrementSelfScore () {
   return {
     type: INCREMENT_SELF_SCORE
@@ -65,13 +53,6 @@ export function addCard (cardId) {
   }
 }
 
-// export function updateScore (selfHasWon) {
-//   // console.log("updateScore")
-//   return {
-//     type: UPDATE_SCORE,
-//     payload: selfHasWon
-//   }
-// }
 export function incrementRoundCounter() {
   return {
     type: INCREMENT_ROUND_COUNTER
@@ -175,14 +156,12 @@ export const actions = {
   updatePower,
   addCard,
   removeCard,
-  // updateScore,
   clearPlayingArea,
   resurrectCards,
   applyParagonEffect,
   setPlayerNotification,
   setReadyForNewRound,
   incrementRoundCounter,
-  incrementEnemyScore,
   incrementSelfScore,
   clearPlayerNotification,
   setGameEnded,
@@ -246,14 +225,6 @@ const ACTION_HANDLERS = {
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
         roundCounter: newRoundCount
-      }),
-    })
-  },
-  [INCREMENT_ENEMY_SCORE] : (state, action) => {
-    let newEnemyScore = state.enemy.score + 1
-    return Object.assign({}, state, {
-      enemy: Object.assign({}, state.enemy, {
-        score: newEnemyScore
       }),
     })
   },

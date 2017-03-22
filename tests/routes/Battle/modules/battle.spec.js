@@ -17,11 +17,9 @@ import {
   applyParagonEffect,
   setRoundNotification,
   SET_PLAYER_NOTIFICATION,
-  INCREMENT_ENEMY_SCORE,
   INCREMENT_ROUND_COUNTER,
   INCREMENT_SELF_SCORE,
   incrementSelfScore,
-  incrementEnemyScore,
   incrementRoundCounter,
   setPlayerNotification,
   addCard,
@@ -72,7 +70,6 @@ describe('(Redux Module) Battle', () => {
     expect(SET_READY_FOR_NEW_ROUND).to.equal('SET_READY_FOR_NEW_ROUND')
     expect(INCREMENT_ROUND_COUNTER).to.equal('INCREMENT_ROUND_COUNTER')
     expect(SET_PLAYER_NOTIFICATION).to.equal('SET_PLAYER_NOTIFICATION')
-    expect(INCREMENT_ENEMY_SCORE).to.equal('INCREMENT_ENEMY_SCORE')
     expect(INCREMENT_ROUND_COUNTER).to.equal('INCREMENT_ROUND_COUNTER')
     expect(INCREMENT_SELF_SCORE).to.equal('INCREMENT_SELF_SCORE')
 
@@ -244,15 +241,6 @@ describe('(Redux Module) Battle', () => {
       expect(setReadyForNewRound()).to.have.property('type', SET_READY_FOR_NEW_ROUND)
     })
   })
-  describe('(Action Creator) incrementEnemyScore', () => {
-    it('Should be exported as a function.', () => {
-      expect(incrementEnemyScore).to.be.a('function')
-    })
-
-    it('Should return an action with type "INCREMENT_ENEMY_SCORE".', () => {
-      expect(incrementEnemyScore()).to.have.property('type', INCREMENT_ENEMY_SCORE)
-    })
-  })
   describe('(Action Creator) incrementSelfScore', () => {
     it('Should be exported as a function.', () => {
       expect(incrementSelfScore).to.be.a('function')
@@ -291,8 +279,3 @@ describe('(Redux Module) Battle', () => {
       expect(applyMeteorEffect()).to.have.property('type', APPLY_METEOR_EFFECT)
     })
   })
-
-  
-  // NOTE: if you have a more complex state, you will probably want to verify
-  // that you did not mutate the state. In this case our state is just a number
-  // (which cannot be mutated).
