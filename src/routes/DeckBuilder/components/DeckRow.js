@@ -1,6 +1,6 @@
 import React from 'react'
-import './DeckCard.scss'
 import DeckCardWrapper from './DeckCardWrapper'
+import './DeckRow.scss'
 
 export default class DeckCard extends React.Component {
 
@@ -34,13 +34,14 @@ export default class DeckCard extends React.Component {
     let deckCards = this.renderDeckComponents(this.props.cards.inDeck, "deck")
 
     return (
-      <div>
-        <h4>{`Available ${this.props.type} cards`}</h4>
-        <div className="card-container d-flex justify-content-center flex-wrap">
+      <div className="deck-row">
+        <h4 className='deck-row-header text-left pl-4'>{`${this.props.type} cards`}</h4>
+        <h4 className='deck-row-sub-header text-left pl-4'>{`Available (${poolCards.length})`}</h4>
+        <div className="card-container p-2 d-flex justify-content-center flex-wrap">
             { poolCards }
         </div>
-        <h4>{`Chosen ${this.props.type} cards`}</h4>
-        <div className="card-container d-flex justify-content-center flex-wrap">
+        <h4 className='deck-row-sub-header text-left pl-4'>{`In Deck (${deckCards.length})`}</h4>
+        <div className="mx-2 mb-4 p-2 card-container deck-card-container d-flex justify-content-center flex-wrap">
           { deckCards }
         </div>
       </div>

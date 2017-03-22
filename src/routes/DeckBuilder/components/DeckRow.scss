@@ -1,0 +1,19 @@
+.deck-row-header {
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: normal;
+}
+
+.deck-row-sub-header {
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.card-container {
+  min-height: 156px;
+}
+
+.deck-card-container {
+  border: 2px dashed rgb(136, 136, 136);
+}
