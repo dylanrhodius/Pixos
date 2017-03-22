@@ -147,9 +147,9 @@ var User = (function(){
     // })
 
     socket.on("request:matchmaking", function() {
-      console.log('Matchmaking requested by'+ self.getName())
-      console.log('User obj in User is', self._userObj)
-      console.log('user deck is ', self._deck)
+      console.log('Matchmaking requested by '+ self.getName())
+      // console.log('User obj in User is', self._userObj)
+      // console.log('user deck is ', self._deck)
       if(self._inQueue) return;
       matchmaking.findOpponent(self);
     });

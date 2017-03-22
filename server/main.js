@@ -120,7 +120,7 @@ io.use(function(socket, next) {
         console.log('sidCookie is', sidCookie)
         // Then we just need to load the session from the Express Session Store
         store.load(sidCookie, function(err, session) {
-            console.log('in store loading, sessions is ', session)
+            // console.log('in store loading, sessions is ', session)
             // And last, we check if the used has a valid session and if he is logged in
             if (err) {
                 return next(err);
@@ -151,14 +151,14 @@ io.listen(server)
 
 // When a client connects, we note it in the console
 io.sockets.on('connection', function (socket) {
-    console.log('new socket connection, session is ', socket.request.session)
+    // console.log('new socket connection, session is ', socket.request.session)
     var userId = null;
     var deck = socket.request.session.deck
     if (socket.request.session.hasOwnProperty('passport')) {
       userId = socket.request.session.passport.user;
     }
     usersCollection.findOne({facebookId: userId}).then((userObj) => {
-      console.log(userObj)
+      console.log("Replace this text and log out userObj to see userObj")
       console.log('A client is connected!');
       var user;
       connections.add(user = User(socket, userObj, deck));
@@ -251,7 +251,7 @@ if (project.env === 'development') {
     })
 
   app.get('/user', (req,res) => {
-    console.log('session is ', req.session)
+    // console.log('session is ', req.session)
     // if a session exists:
     if(typeof(req.session.passport) !== 'undefined') {
       console.log('Session exists');
@@ -284,7 +284,7 @@ if (project.env === 'development') {
 
 
   app.post('/user/deck', function (req, res) {
-    console.log("Request in /user", req.session);
+    console.log("This line will request the session in /user, which will also log out deck");
     console.log("Request in /user", req.sessionId);
     req.session.deck = req.body
     res.send('')
