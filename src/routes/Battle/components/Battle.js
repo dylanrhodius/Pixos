@@ -203,7 +203,7 @@ Battle.propTypes = {
   removeCard : React.PropTypes.func.isRequired,
   addCard : React.PropTypes.func.isRequired,
   updatePower : React.PropTypes.func.isRequired,
-  updateScore : React.PropTypes.func.isRequired,
+  // updateScore : React.PropTypes.func.isRequired,
   clearPlayingArea : React.PropTypes.func.isRequired,
   resurrectCards : React.PropTypes.func.isRequired,
   applyMeteorEffect : React.PropTypes.func.isRequired,

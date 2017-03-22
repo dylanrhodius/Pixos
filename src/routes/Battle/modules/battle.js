@@ -8,9 +8,9 @@ import store from 'store/createStore'
 // Constants
 // ------------------------------------
 export const SETUP_PLAYERS = 'SETUP_PLAYERS'
-export const SET_NEXT_PLAYER = 'SET_NEXT_PLAYER'
-export const SET_PLAYER_PASS = 'SET_PLAYER_PASS'
-export const PLAY_CARD = 'PLAY_CARD'
+// export const SET_NEXT_PLAYER = 'SET_NEXT_PLAYER'
+// export const SET_PLAYER_PASS = 'SET_PLAYER_PASS'
+// export const PLAY_CARD = 'PLAY_CARD'
 export const SET_TURN_FINISHED = 'SET_TURN_FINISHED'
 export const SET_MY_TURN = 'SET_MY_TURN'
 export const UPDATE_ENEMY_STATE = 'UPDATE_ENEMY_STATE'
@@ -20,21 +20,19 @@ export const ADD_CARD = 'ADD_CARD'
 export const UPDATE_POWER = 'UPDATE_POWER'
 export const UPDATE_SCORE = 'UPDATE_SCORE'
 export const CLEAR_PLAYING_AREA = 'CLEAR_PLAYING_AREA'
-export const SET_ROUND_NOTIFICATION = 'SET_ROUND_NOTIFICATION'
-export const UPDATE_HAS_ROUND_FINISHED = 'UPDATE_HAS_ROUND_FINISHED'
-export const UPDATE_ROUND_COUNTER = 'UPDATE_ROUND_COUNTER'
+// export const SET_ROUND_NOTIFICATION = 'SET_ROUND_NOTIFICATION'
+// export const UPDATE_HAS_ROUND_FINISHED = 'UPDATE_HAS_ROUND_FINISHED'
+// export const UPDATE_ROUND_COUNTER = 'UPDATE_ROUND_COUNTER'
 export const RESURRECT_CARDS = 'RESURRECT_CARDS'
 export const APPLY_METEOR_EFFECT = 'APPLY_METEOR_EFFECT'
 export const APPLY_PARAGON_EFFECT = 'APPLY_PARAGON_EFFECT'
-export const APPLY_PARAGON_EFFECT_ENEMY = 'APPLY_PARAGON_EFFECT_ENEMY'
 export const SET_PLAYER_NOTIFICATION = 'SET_PLAYER_NOTIFICATION'
 export const SET_READY_FOR_NEW_ROUND = 'SET_READY_FOR_NEW_ROUND'
 export const INCREMENT_ROUND_COUNTER = 'INCREMENT_ROUND_COUNTER'
-export const INCREMENT_ENEMY_SCORE = 'INCREMENT_ENEMY_SCORE'
+// export const INCREMENT_ENEMY_SCORE = 'INCREMENT_ENEMY_SCORE'
 export const INCREMENT_SELF_SCORE = 'INCREMENT_SELF_SCORE'
 export const CLEAR_PLAYER_NOTIFICATION = 'CLEAR_PLAYER_NOTIFICATION'
 export const SET_GAME_ENDED = 'SET_GAME_ENDED'
-export const POP_UP_DIALOG = 'POP_UP_DIALOG'
 
 
 // ------------------------------------
@@ -67,21 +65,19 @@ export function addCard (cardId) {
   }
 }
 
-export function updateScore (selfHasWon) {
-  // console.log("updateScore")
-  return {
-    type: UPDATE_SCORE,
-    payload: selfHasWon
-  }
-}
+// export function updateScore (selfHasWon) {
+//   // console.log("updateScore")
+//   return {
+//     type: UPDATE_SCORE,
+//     payload: selfHasWon
+//   }
+// }
 export function incrementRoundCounter() {
-  // console.log("incrementRoundCounter")
   return {
     type: INCREMENT_ROUND_COUNTER
   }
 }
 export function setReadyForNewRound (boolean) {
-  // console.log("setReadyForNewRound")
   return {
     type: SET_READY_FOR_NEW_ROUND,
     payload: boolean
@@ -89,13 +85,11 @@ export function setReadyForNewRound (boolean) {
 }
 
 export function clearPlayingArea () {
-  // console.log("clearPlayingArea")
   return {
     type: CLEAR_PLAYING_AREA
   }
 }
 export function setPlayerNotification (notification) {
-  // console.log("setPlayerNotification")
   return {
     type: SET_PLAYER_NOTIFICATION,
     payload: notification
@@ -103,13 +97,11 @@ export function setPlayerNotification (notification) {
 }
 
 export function clearPlayerNotification () {
-  // console.log("setPlayerNotification")
   return {
     type: CLEAR_PLAYER_NOTIFICATION
   }
 }
 export function setGameEnded () {
-  // console.log("setGameEnded")
   return {
     type: SET_GAME_ENDED
   }
@@ -177,24 +169,16 @@ export function applyParagonEffect (data) {
   }
 }
 
-export function applyParagonEffectEnemy (data) {
-  return {
-    type: APPLY_PARAGON_EFFECT_ENEMY,
-    payload: data
-  }
-}
-
 export const actions = {
   setupPlayers,
   setMyTurn,
   updatePower,
   addCard,
   removeCard,
-  updateScore,
+  // updateScore,
   clearPlayingArea,
   resurrectCards,
   applyParagonEffect,
-  applyParagonEffectEnemy,
   setPlayerNotification,
   setReadyForNewRound,
   incrementRoundCounter,
