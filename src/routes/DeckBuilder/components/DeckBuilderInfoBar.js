@@ -82,7 +82,7 @@ export default class DeckBuilderInfoBar extends React.Component {
         <div>
           <RaisedButton onTouchTap={this.handleOpen} label="Save Deck" primary={true}/>
             <Dialog
-             title="You must choose 25 cards!"
+             title="You must choose 20 cards!"
              actions={actions[2]}
              modal={false}
              open={this.state.open}

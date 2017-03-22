@@ -17,7 +17,7 @@ let waterArray = cardData.cards.filter(isWater);
 let airArray = cardData.cards.filter(isAir);
 
 export const DECKBUILD_STATE = {
-    dinoDollars: 200,
+    dinoDollars: 225,
     deckSize: cardData.deckLimit,
     cardsInDeck: 0,
     duplicateCardLimit: 3,
