@@ -86,9 +86,12 @@ var Room = (function(){
   r.generateRandomHand = function(deck){
     var result = []
     var choice
+    var deckDouble = deck.slice(0)
     for (var i = 0; i < 10; i++) {
-      choice = Math.floor(Math.random() * cardData.deckLimit)
-      result.push(deck[choice])
+      choice = Math.floor(Math.random() * deckDouble.length)
+      result.push(deckDouble[choice])
+      deckDouble.splice(choice, 1)
+      console.log("DECK LENGTH", deck.length)
     }
     return result
   }
