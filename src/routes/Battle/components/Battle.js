@@ -11,6 +11,19 @@ import './Battle.scss'
 import io from 'socket.io-client';
 const socket = io.connect(`${window.location.origin}`);
 
+var oldLocation = window.location.href;
+setInterval(function() {
+     if(window.location.href != oldLocation) {
+          // do your action
+            console.log('MOVING PAGE')
+            console.log(socket)
+          if (socket) {
+            socket.disconnect();
+          }
+          oldLocation = window.location.href
+     }
+ }, 1000);
+
 export default class Battle extends React.Component {
 
   loadNotifcation () {

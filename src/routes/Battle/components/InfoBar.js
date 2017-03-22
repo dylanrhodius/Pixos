@@ -4,6 +4,7 @@ import PixosMenu from 'routes/Battle/components/PixosMenu'
 import './InfoBar.scss'
 import DiscardPile from 'routes/Battle/components/DiscardPile'
 
+
 export default class InfoBar extends React.Component {
 
   constructor (props) {
