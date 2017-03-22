@@ -14,11 +14,11 @@ import {
   RESURRECT_CARDS,
   APPLY_METEOR_EFFECT,
   APPLY_PARAGON_EFFECT,
-  applyParagonEffect,
-  setRoundNotification,
   SET_PLAYER_NOTIFICATION,
   INCREMENT_ROUND_COUNTER,
   INCREMENT_SELF_SCORE,
+  applyParagonEffect,
+  setRoundNotification,
   incrementSelfScore,
   incrementRoundCounter,
   setPlayerNotification,
@@ -32,7 +32,6 @@ import {
   updatePower,
   updateScore,
   clearPlayingArea,
-  updateHasRoundFinished,
   updateRoundCounter,
   resurrectCards,
   applyMeteorEffect,
@@ -60,7 +59,6 @@ describe('(Redux Module) Battle', () => {
     expect(UPDATE_SCORE).to.equal('UPDATE_SCORE'),
     expect(CLEAR_PLAYING_AREA).to.equal('CLEAR_PLAYING_AREA'),
     expect(SET_ROUND_NOTIFICATION).to.equal('SET_ROUND_NOTIFICATION')
-    expect(UPDATE_HAS_ROUND_FINISHED).to.equal('UPDATE_HAS_ROUND_FINISHED')
     expect(UPDATE_ROUND_COUNTER).to.equal('UPDATE_ROUND_COUNTER')
     expect(SET_ROUND_NOTIFICATION).to.equal('SET_ROUND_NOTIFICATION')
     expect(RESURRECT_CARDS).to.equal('RESURRECT_CARDS')
