@@ -130,7 +130,10 @@ var Room = (function(){
     }
 
     this._users.splice(i, 1);
-
+    if (this._users.length > 0) {
+      this._users[0].send("opponent:disconnected")
+    }
+    
     // if(this._battle){
     //   this._battle.userLeft(p);
     // }

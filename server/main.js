@@ -165,6 +165,7 @@ io.sockets.on('connection', function (socket) {
       console.log("new user ", user.getName());
 
       socket.on("disconnect", function() {
+        console.log('Disconnected: ', user)
         connections.remove(user);
         user.disconnect();
         console.log("user ", user.getName(), " disconnected");
