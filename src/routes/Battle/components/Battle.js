@@ -8,7 +8,6 @@ import RaisedButton from 'material-ui/RaisedButton'
 import { Link } from 'react-router'
 import './Battle.scss'
 
-
 import io from 'socket.io-client';
 const socket = io.connect(`${window.location.origin}`);
 
@@ -31,7 +30,8 @@ export default class Battle extends React.Component {
         && this.props.battle.self.power == 0 ) {
       return (
         <div className="row max-page-height sign-in-background">
-          <div className="col-12 text-center max-page-height d-flex flex-column align-items-center justify-content-center">
+          <div className="col-12 text-center max-page-height
+            d-flex flex-column align-items-center justify-content-center">
             <h2 className="mb-4">Matchmaking&hellip;</h2>
             <CircularProgress className='mb-4' size={60} thickness={7} />
             <Link to={`/`} ><RaisedButton label="Cancel" primary={true}/></Link>
@@ -88,9 +88,14 @@ export default class Battle extends React.Component {
 
   roundIsOver() {
     let battle = this.props.battle
-    console.log('EVALUATING ROUND IS OVER', { selfHasPassed: this.props.battle.self.hasPassed, selfreadyForNewRound: this.props.battle.self.hasPassed,  enemyHasPassed: this.props.battle.enemy.hasPassed, enemyreadyForNewRound: this.props.battle.enemy.readyForNewRound })
+    console.log('EVALUATING ROUND IS OVER', {
+      selfHasPassed: this.props.battle.self.hasPassed,
+      selfreadyForNewRound: this.props.battle.self.hasPassed,
+      enemyHasPassed: this.props.battle.enemy.hasPassed,
+      enemyreadyForNewRound: this.props.battle.enemy.readyForNewRound })
 
-    if (battle.self.hasPassed && ( battle.enemy.hasPassed || battle.enemy.readyForNewRound) ) {
+    if (battle.self.hasPassed &&
+      ( battle.enemy.hasPassed || battle.enemy.readyForNewRound) ) {
       return true;
     }
   }
@@ -127,10 +132,10 @@ export default class Battle extends React.Component {
   endGame() {
     let battle = this.props.battle
     let gameResult = ""
-    if (battle.self.score > battle.enemy.score) { gameResult = "win" }
-    else if (battle.self.score < battle.enemy.score) { gameResult = "lose" }
-    else { gameResult = "both draw" }
-    this.props.setPlayerNotification("Game over, you " + gameResult)
+    if (battle.self.score > battle.enemy.score) { gameResult = "You win!" }
+    else if (battle.self.score < battle.enemy.score) { gameResult = "You lose!"}
+    else { gameResult = "It's a draw!" }
+    this.props.setPlayerNotification(gameResult)
     this.props.setGameEnded()
     this.props.setMyTurn(false)
     this.props.setTurnFinished(true)
@@ -172,7 +177,8 @@ export default class Battle extends React.Component {
     console.log('Battle updated with: ', this.props.battle)
 
     if (this.props.battle.turnFinished) {
-      if (this.props.battle.self.hand.length == 0 && (!this.props.battle.self.readyForNewRound)) {
+      if (this.props.battle.self.hand.length == 0
+        && (!this.props.battle.self.readyForNewRound)) {
         this.props.passTurn(true)
       }
       console.log('Passing to Opponent!:', this.props.battle)
@@ -197,8 +203,6 @@ export default class Battle extends React.Component {
 Battle.propTypes = {
   setupPlayers  : React.PropTypes.func.isRequired,
   setTurnFinished  : React.PropTypes.func.isRequired,
-  doubleAsync : React.PropTypes.func.isRequired,
-  increment   : React.PropTypes.func.isRequired,
   battle : React.PropTypes.object.isRequired,
   setMyTurn : React.PropTypes.func.isRequired,
   updateEnemyState : React.PropTypes.func.isRequired,
@@ -206,7 +210,6 @@ Battle.propTypes = {
   removeCard : React.PropTypes.func.isRequired,
   addCard : React.PropTypes.func.isRequired,
   updatePower : React.PropTypes.func.isRequired,
-  updateScore : React.PropTypes.func.isRequired,
   clearPlayingArea : React.PropTypes.func.isRequired,
   resurrectCards : React.PropTypes.func.isRequired,
   applyMeteorEffect : React.PropTypes.func.isRequired,
@@ -215,7 +218,6 @@ Battle.propTypes = {
   setReadyForNewRound : React.PropTypes.func.isRequired,
   incrementRoundCounter : React.PropTypes.func.isRequired,
   setPlayerNotification : React.PropTypes.func.isRequired,
-  incrementEnemyScore : React.PropTypes.func.isRequired,
   incrementSelfScore : React.PropTypes.func.isRequired,
   clearPlayerNotification : React.PropTypes.func.isRequired,
   setGameEnded : React.PropTypes.func.isRequired

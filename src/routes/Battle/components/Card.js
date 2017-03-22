@@ -38,9 +38,9 @@ render() {
         <span className={`game-card-power text-center ${this.props.type}-bkgrnd circle d-inline-block mx-auto highlighted-white-text`}>
           { this.props.doubled ? this.props.power * 2 : this.props.power }
         </span>
-        <ReactTooltip id={`card_${this.props.name}`}>
-          <p>{this.capitalize(this.props.name)}</p>
-          <p>{this.props.description}</p>
+        <ReactTooltip id={`card_${this.props.name}`} className={`${this.props.type}-main-bkgrnd`}>
+          <p className="mb-1 highlighted-white-text">{this.capitalize(this.props.name)}</p>
+          <p className="mb-0 highlighted-white-text" style={{ fontWeight: 'normal' }}>{this.props.description}</p>
         </ReactTooltip>
         { specialIcon }
       </div>
