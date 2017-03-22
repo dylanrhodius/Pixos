@@ -5,7 +5,7 @@ import DeckCardWrapper from './DeckCardWrapper'
 export default class DeckCard extends React.Component {
 
   renderDeckComponents (cardArray, section) {
-    return cardArray.map(
+    return cardArray.sort(this.compareCardsbyCost).map(
       (card, i) => { return(
         <DeckCardWrapper removeFromDeck={this.props.removeFromDeck}
                     playerDeck={this.props.playerDeck}
@@ -16,6 +16,17 @@ export default class DeckCard extends React.Component {
                   )
       }
     )
+  }
+
+  compareCardsbyCost(a,b) {
+    let field = 'cost'
+    if (a[field] < b[field]) {
+      return -1;
+    }
+    if (a[field] > b[field]) {
+      return 1;
+    }
+    return 0;
   }
 
   render () {
