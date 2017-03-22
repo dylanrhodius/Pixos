@@ -1,11 +1,11 @@
 import React from 'react'
-import './DeckCard.scss'
 import DeckCardWrapper from './DeckCardWrapper'
+import './DeckRow.scss'
 
 export default class DeckCard extends React.Component {
 
   renderDeckComponents (cardArray, section) {
-    return cardArray.map(
+    return cardArray.sort(this.compareCardsbyCost).map(
       (card, i) => { return(
         <DeckCardWrapper removeFromDeck={this.props.removeFromDeck}
                     playerDeck={this.props.playerDeck}
@@ -18,18 +18,30 @@ export default class DeckCard extends React.Component {
     )
   }
 
+  compareCardsbyCost(a,b) {
+    let field = 'cost'
+    if (a[field] < b[field]) {
+      return -1;
+    }
+    if (a[field] > b[field]) {
+      return 1;
+    }
+    return 0;
+  }
+
   render () {
     let poolCards = this.renderDeckComponents(this.props.cards.inPool, "pool")
     let deckCards = this.renderDeckComponents(this.props.cards.inDeck, "deck")
 
     return (
-      <div>
-        <h4>{`Available ${this.props.type} cards`}</h4>
-        <div className="card-container d-flex justify-content-center flex-wrap">
+      <div className="deck-row">
+        <h4 className='deck-row-header text-left pl-4'>{`${this.props.type} cards`}</h4>
+        <h4 className='deck-row-sub-header text-left pl-4'>{`Available (${poolCards.length})`}</h4>
+        <div className="card-container p-2 d-flex justify-content-center flex-wrap">
             { poolCards }
         </div>
-        <h4>{`Chosen ${this.props.type} cards`}</h4>
-        <div className="card-container d-flex justify-content-center flex-wrap">
+        <h4 className='deck-row-sub-header text-left pl-4'>{`In Deck (${deckCards.length})`}</h4>
+        <div className="mx-2 mb-4 p-2 card-container deck-card-container d-flex justify-content-center flex-wrap">
           { deckCards }
         </div>
       </div>

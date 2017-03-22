@@ -1,8 +1,6 @@
-.info-bar {
+.deck-builder-info-bar {
+  color: #ffffff;
   position: relative;
-  word-wrap: break-word;
-  border-right: 5px solid #474747;
-  min-height: 100%;
 }
 
 .info-card-cost {
@@ -14,6 +12,15 @@
   color: white;
 }
 
-.inside {
-  height: 100%;
+.deck-buidler-info-bar-text {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.deck-indicator {
+  width: 50px;
+  height: 50px;
+  font-size: 1.4rem;
+  line-height: 2.3;
+  font-weight: bold;
 }
