@@ -26,6 +26,7 @@ export const INCREMENT_ROUND_COUNTER = 'INCREMENT_ROUND_COUNTER'
 export const INCREMENT_SELF_SCORE = 'INCREMENT_SELF_SCORE'
 export const CLEAR_PLAYER_NOTIFICATION = 'CLEAR_PLAYER_NOTIFICATION'
 export const SET_GAME_ENDED = 'SET_GAME_ENDED'
+export const SET_OPPONENT_DISCONNECTED = 'SET_OPPONENT_DISCONNECTED'
 
 // ------------------------------------
 // Actions
@@ -150,6 +151,13 @@ export function applyParagonEffect (data) {
   }
 }
 
+export function setOpponentDisconnected (bool) {
+  return {
+    type: SET_OPPONENT_DISCONNECTED,
+    payload: bool
+  }
+}
+
 export const actions = {
   setupPlayers,
   setMyTurn,
@@ -166,7 +174,8 @@ export const actions = {
   clearPlayerNotification,
   setGameEnded,
   setTurnFinished,
-  passTurn
+  passTurn,
+  setOpponentDisconnected
 }
 
 // ------------------------------------
@@ -419,6 +428,11 @@ const ACTION_HANDLERS = {
             [action.payload]: true
           })
       })
+    })
+  },
+  [SET_OPPONENT_DISCONNECTED] : (state, action) => {
+    return Object.assign({}, state, {
+      opponentDisconnected: action.payload
     })
   }
 }

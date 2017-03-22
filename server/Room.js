@@ -94,14 +94,17 @@ var Room = (function(){
   }
 
   r.passData = function(from, data){
-    console.log(from.getID(), data)
     var to;
     if (this._users[0] == from) {
       to = this._users[1];
     } else {
       to = this._users[0]
     }
-    to.send("receive:data", data);
+    if (to) {
+      to.send("receive:data", data);
+    } else {
+      from.send("opponent:disconnected");
+    }
   }
 
 

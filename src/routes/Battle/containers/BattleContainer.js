@@ -18,7 +18,8 @@ import {  setupPlayers,
           setPlayerNotification,
           incrementSelfScore,
           clearPlayerNotification,
-          setGameEnded
+          setGameEnded,
+          setOpponentDisconnected
 } from '../modules/battle'
 
 import Battle from '../components/Battle'
@@ -43,7 +44,8 @@ const mapDispatchToProps = {
   setPlayerNotification,
   incrementSelfScore,
   clearPlayerNotification,
-  setGameEnded
+  setGameEnded,
+  setOpponentDisconnected
 }
 
 const mapStateToProps = (state) => ({

@@ -15,11 +15,17 @@ export default class Battle extends React.Component {
 
   loadNotifcation () {
     if (this.props.battle.self.gameEnded) {
-      console.log('GAME ENDED!!!')
       return (
         <Notification open={true}
            key={shortId.generate()}
            text={this.props.battle.self.PlayerNotification} />
+      )
+    }
+    if (this.props.battle.opponentDisconnected) {
+      return (
+        <Notification open={true}
+           key={shortId.generate()}
+           text="Opponent Disconnected" />
       )
     }
   }
@@ -171,6 +177,11 @@ export default class Battle extends React.Component {
         }
       }
     })
+
+    socket.on("opponent:disconnected", function() {
+      console.log("OPPONENT DISCONNECTED!");
+      that.props.setOpponentDisconnected(true)
+    })
   }
 
   componentDidUpdate() {
@@ -220,5 +231,6 @@ Battle.propTypes = {
   setPlayerNotification : React.PropTypes.func.isRequired,
   incrementSelfScore : React.PropTypes.func.isRequired,
   clearPlayerNotification : React.PropTypes.func.isRequired,
-  setGameEnded : React.PropTypes.func.isRequired
+  setGameEnded : React.PropTypes.func.isRequired,
+  setOpponentDisconnected : React.PropTypes.func.isRequired
 }

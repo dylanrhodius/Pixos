@@ -57,5 +57,6 @@ export const INITIAL_STATE = {
       air: false
     }
   },
-  turnFinished: false
+  turnFinished: false,
+  opponentDisconnected: false
 }
