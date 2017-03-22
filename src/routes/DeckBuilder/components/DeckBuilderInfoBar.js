@@ -66,8 +66,13 @@ export default class DeckBuilderInfoBar extends React.Component {
     if (this.props.playerDeck.cardsInDeck == this.props.playerDeck.deckSize)
     {
       return (
-        <div>
-          <RaisedButton onTouchTap={this.handleOpen} label="Save Deck" primary={true}/>
+        <div className='full-width p-1 my-auto' style={{ overflow: 'hidden' }}>
+          <RaisedButton onTouchTap={this.handleOpen}
+                        label={<span>Save<br/>Deck</span>}
+                        primary={true}
+                        labelStyle={{ margin: 'auto', padding: '0' }}
+                        buttonStyle={{ height: '47px' }}
+                        style={{ height: '47px' }}/>
            <Dialog
             title="Are you sure you want save your deck?"
             actions={actions.splice(0,2)}
@@ -79,8 +84,13 @@ export default class DeckBuilderInfoBar extends React.Component {
       )
     } else {
       return (
-        <div>
-          <RaisedButton onTouchTap={this.handleOpen} label="Save Deck" primary={true}/>
+        <div className='full-width p-1 my-auto' style={{ overflow: 'hidden' }}>
+          <RaisedButton onTouchTap={this.handleOpen}
+                        label={<span>Save<br/>Deck</span>}
+                        primary={true}
+                        labelStyle={{ margin: 'auto', padding: '0' }}
+                        buttonStyle={{ height: '47px' }}
+                        style={{ height: '47px' }}/>
             <Dialog
              title="You must choose 20 cards!"
              actions={actions[2]}
@@ -96,11 +106,16 @@ export default class DeckBuilderInfoBar extends React.Component {
   render () {
     let content = this.loadContent()
     return (
-      <div className="inside">
-        <PixosMenu/>
-        <p className="info-card-cost px-1 circle align-center justify-content-center mx-4">${ this.props.playerDeck.dinoDollars }</p>
+      <div className="max-page-height d-flex flex-column justify-content-center align-items-center">
+        <div className="mb-auto full-width" style={{ width: '100%' }}>
+          <PixosMenu />
+        </div>
+
+        <p className="info-card-cost px-1 circle circle-highlight">${ this.props.playerDeck.dinoDollars }</p>
         { content }
-        <p className="card-in-deck justify-content-center align-middle mx-2">Cards in Deck: {this.props.playerDeck.cardsInDeck}</p>
+        <span className="card-in-deck px-1 deck-buidler-info-bar-text mb-1">In Deck </span>
+        <span className="circle circle-highlight material-bkgrnd mb-auto deck-indicator">{this.props.playerDeck.cardsInDeck}</span>
+
       </div>
       )
   }
