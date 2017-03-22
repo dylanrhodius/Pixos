@@ -30,6 +30,7 @@ var Connections = (function(){
   r.remove = function(user) {
     delete this._connections[user.getID()];
     this._length--;
+    console.log("Current amount of users waiting to matchmake:", this._length);
   }
 
   r.get = function() {
