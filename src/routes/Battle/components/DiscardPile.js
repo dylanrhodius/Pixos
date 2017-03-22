@@ -43,7 +43,7 @@ export default class DiscardPile extends React.Component {
       <div className='full-width p-1 my-auto'>
         <RaisedButton fullWidth={true} label="Discards" labelStyle={{ margin: 'auto', padding: '0' }} onTouchTap={this.handleOpen} />
         <Dialog
-          title="Discards"
+          title={`${this.props.name}'s Discards`}
           actions={actions}
           modal={false}
           open={this.state.open}

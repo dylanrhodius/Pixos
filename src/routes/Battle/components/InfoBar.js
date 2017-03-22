@@ -45,7 +45,7 @@ export default class InfoBar extends React.Component {
         <span className="my-2 info-bar-text land-main-bkgrnd circle circle-highlight info-bar-indicator">{this.props.battle.enemy.score}</span>
         <span className="info-bar-text small-text mb-auto">Score</span>
 
-        <DiscardPile key={'enemy'} cards={this.props.battle.enemy.discardPile} />
+        <DiscardPile key={'enemy'} name={this.props.battle.enemy.name} cards={this.props.battle.enemy.discardPile} />
 
         <span className="mb-1 info-bar-text small-text">Power</span>
         <span className="mb-2 air-main-bkgrnd circle circle-highlight info-bar-indicator">{this.props.battle.enemy.power}</span>
@@ -53,7 +53,7 @@ export default class InfoBar extends React.Component {
         <span className="mt-2 air-main-bkgrnd circle circle-highlight info-bar-indicator">{this.props.battle.self.power}</span>
         <span className="mt-1 info-bar-text small-text">Power</span>
 
-        <DiscardPile key={'self'} cards={this.props.battle.self.discardPile} />
+        <DiscardPile key={'self'} name={this.props.battle.self.name} cards={this.props.battle.self.discardPile} />
 
         <span className="mt-auto mb-1 info-bar-text small-text">Score</span>
         <span className="mb-2 info-bar-text land-main-bkgrnd circle circle-highlight info-bar-indicator">{this.props.battle.self.score}</span>
