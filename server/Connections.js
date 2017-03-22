@@ -24,6 +24,7 @@ var Connections = (function(){
   r.add = function(user) {
     this._connections[user.getID()] = user;
     this._length++;
+    console.log("Current amount of users waiting to matchmake:", this._length);
   }
 
   r.remove = function(user) {
