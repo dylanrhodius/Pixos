@@ -1,3 +1,4 @@
+
 var Matchmaker = (function(){
   var Matchmaker = function(){
     if(!(this instanceof Matchmaker)){
@@ -37,7 +38,7 @@ var Matchmaker = (function(){
     var found = this._checkForOpponent();
 
     if(found){
-      console.log('Opponent found: ' + found.getName() + ' will play ' + user.getName());
+
       var room = Room();
       c.roomCollection[room.getID()] = room;
       room.join(user);

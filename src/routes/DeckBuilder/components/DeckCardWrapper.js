@@ -16,6 +16,8 @@ export default class DeckCardWrapper extends React.Component {
 
     this.addCardToDeck = this.addCardToDeck.bind(this)
     this.removeCardFromDeck = this.removeCardFromDeck.bind(this)
+    this.canBeAdded = this.canBeAdded.bind(this)
+
   }
 
   handleTouchTap = (event) => {
@@ -46,17 +48,19 @@ export default class DeckCardWrapper extends React.Component {
     return counter < this.props.playerDeck.duplicateCardLimit
   }
 
+  canBeAdded = () => {
+    return this.props.playerDeck.cardsInDeck < this.props.playerDeck.deckSize
+  }
+
   addCardToDeck = () => {
     let cardData = {
       type : this.props.type,
       cardId: parseInt(this.props.id.split("_")[2])
     }
-    if ((this.sufficientDollars()) && (this.lessThanCardLimit())) { this.props.placeInDeck(cardData) }
+    if ((this.sufficientDollars()) && (this.lessThanCardLimit()) && (this.canBeAdded())) { this.props.placeInDeck(cardData) }
   }
 
   removeCardFromDeck = () => {
-    console.log("removeCardFromDeck");
-    console.log(this.props.id.split("_")[1]);
     let cardData = {
       type : this.props.type,
       cardId: parseInt(this.props.id.split("_")[2])

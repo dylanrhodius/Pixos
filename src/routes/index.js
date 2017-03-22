@@ -1,12 +1,8 @@
 // We only need to import the modules necessary for initial render
 import CoreLayout from '../layouts/CoreLayout'
-import Home from './Home'
-import CounterRoute from './Counter'
 import BattleRoute from './Battle'
-import MatchMakingRoute from './MatchMaking'
 import SignIn from './SignIn/index.jsx'
 import DeckBuilderRoute from './DeckBuilder'
-
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -16,9 +12,7 @@ export const createRoutes = (store) => ({
   component   : CoreLayout,
   indexRoute  : SignIn,
   childRoutes : [
-    CounterRoute(store),
     BattleRoute(store),
-    MatchMakingRoute(store),
     DeckBuilderRoute(store)
   ]
 })
