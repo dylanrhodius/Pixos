@@ -4,6 +4,8 @@ import { Link } from 'react-router'
 import Header from '../../../components/Header'
 import RaisedButton from 'material-ui/RaisedButton'
 import CircularProgress from 'material-ui/CircularProgress';
+import Credits from './Credits.js'
+import Help from './Help.js'
 
 export default class SignInPage extends React.Component {
 
@@ -87,9 +89,14 @@ export default class SignInPage extends React.Component {
     console.log('state is ', this.state)
     return (
       <div className='max-page-height sign-in-background'>
-        <div className="max-page-height d-flex flex-column justify-content-center align-items-center">
+        <div className="max-page-height d-flex flex-column justify-content-center align-items-center" style={{ position: 'relative' }}>
           <Header />
           { content }
+          <Credits />
+          <Help/>
+          <a href={`https://github.com/bvjones/final-project`} target="_blank" >
+            <RaisedButton className="button-shadow" style={{ position: 'absolute', bottom: '75px', left: '50px' }} label="Pixos Github Repo"/>
+          </a>
         </div>
       </div>
 

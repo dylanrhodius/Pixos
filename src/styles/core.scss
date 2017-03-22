@@ -49,6 +49,10 @@ body {
   box-shadow: 2px 2px 2px $shadow-color;
 }
 
+.button-shadow {
+  box-shadow: 0px 0px 2px 2px $text-color !important;
+}
+
 .circle-highlight {
   box-shadow: 0px 0px 2px 1px $shadow-color;
 }
@@ -96,6 +100,11 @@ $grey-mid: #9a9a9a;
 $resurrector-col: #f4419c;
 $meteor-col: #cd3434;
 $paragon-col: #f4cc41;
+
+a {
+  color: $material-ui-blue;
+
+}
 
 .resurrector-bkgrnd {
   background-color: $resurrector-col;
@@ -179,6 +188,12 @@ $paragon-col: #f4cc41;
 
 .pulse {
   animation:pulse 0.8s infinite alternate;
+}
+
+.help-header {
+  text-transform: uppercase;
+  font-weight: normal;
+  font-size: 1.1rem;
 }
 
 @keyframes pulse {
