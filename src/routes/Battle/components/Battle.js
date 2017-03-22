@@ -15,7 +15,6 @@ export default class Battle extends React.Component {
 
   loadNotifcation () {
     if (this.props.battle.self.gameEnded) {
-      console.log('GAME ENDED!!!')
       return (
         <Notification open={true}
            key={shortId.generate()}
@@ -65,24 +64,20 @@ export default class Battle extends React.Component {
   checkMeteorStatus() {
     let meteor = false
     if (this.props.battle.enemy.meteor.land) {
-      console.log('APPLYING METEOR EFFECT');
       this.props.applyMeteorEffect('land')
       meteor = true
     }
     if (this.props.battle.enemy.meteor.water) {
-      console.log('APPLYING METEOR EFFECT');
       this.props.applyMeteorEffect('water')
       meteor = true
     }
     if (this.props.battle.enemy.meteor.air) {
-      console.log('APPLYING METEOR EFFECT');
       this.props.applyMeteorEffect('air')
       meteor = true
     }
     if (meteor) {
       this.props.updatePower()
     }
-
   }
 
 
@@ -151,7 +146,6 @@ export default class Battle extends React.Component {
     })
 
     socket.on("receive:data", function(enemyData) {
-      console.log("Received data from Opponent!:", enemyData);
       if (!that.props.battle.self.gameEnded) {
         that.props.setMyTurn(true)
         that.props.setReadyForNewRound(false)
@@ -174,18 +168,14 @@ export default class Battle extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log('Battle updated with: ', this.props.battle)
-
     if (this.props.battle.turnFinished) {
       if (this.props.battle.self.hand.length == 0
         && (!this.props.battle.self.readyForNewRound)) {
         this.props.passTurn(true)
       }
-      console.log('Passing to Opponent!:', this.props.battle)
       socket.emit('pass:ToRoom', this.props.battle.self)
       this.props.setTurnFinished(false)
     }
-
   }
 
   render () {

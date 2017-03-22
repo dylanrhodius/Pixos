@@ -3,7 +3,7 @@ import SignInPage from 'routes/SignIn/components/SignInPage.jsx'
 import { shallow } from 'enzyme'
 
 
-describe('(View) SignInPage', () => {
+xdescribe('(View) SignInPage', () => {
   let _component
 
   beforeEach(() => {

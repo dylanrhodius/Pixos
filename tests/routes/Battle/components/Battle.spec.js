@@ -20,11 +20,9 @@ describe('(Component) Battle', () => {
     }
     _wrapper = shallow(<Battle {..._props} />)
   })
-
   it('Should render as a <div>.', () => {
     expect(_wrapper.is('div')).to.equal(true)
   })
-
   it('Should render an InfoBar.', () => {
     const infobar = _wrapper.find(InfoBar);
     expect(infobar).to.exist;
@@ -33,6 +31,4 @@ describe('(Component) Battle', () => {
     const board = _wrapper.find(Board);
     expect(board).to.exist;
   })
-
-
 })
