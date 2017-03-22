@@ -30,6 +30,12 @@ export default class DeckBuilderInfoBar extends React.Component {
     this.saveDeck()
   }
 
+  handleCloseSaveAndHome = () => {
+    this.setState({open: false});
+    this.saveDeck()
+    window.location = "/"
+  }
+
   saveDeck () {
     let deck = this.props.playerDeck.land.inDeck
                 .concat(this.props.playerDeck.air.inDeck
@@ -53,9 +59,14 @@ export default class DeckBuilderInfoBar extends React.Component {
           onClick={this.handleClose}
         />,
         <FlatButton
-          label="Submit"
+          label="Save Deck"
           primary={true}
           onClick={this.handleCloseAndSave}
+        />,
+        <FlatButton
+          label="Save Deck and Home"
+          primary={true}
+          onClick={this.handleCloseSaveAndHome}
         />,
         <FlatButton
           label="Ok"
@@ -70,7 +81,7 @@ export default class DeckBuilderInfoBar extends React.Component {
           <RaisedButton onTouchTap={this.handleOpen} label="Save Deck" primary={true}/>
            <Dialog
             title="Are you sure you want save your deck?"
-            actions={actions.splice(0,2)}
+            actions={actions.splice(0,3)}
             modal={false}
             open={this.state.open}
             onRequestClose={this.handleClose}
@@ -83,7 +94,7 @@ export default class DeckBuilderInfoBar extends React.Component {
           <RaisedButton onTouchTap={this.handleOpen} label="Save Deck" primary={true}/>
             <Dialog
              title="You must choose 20 cards!"
-             actions={actions[2]}
+             actions={actions[3]}
              modal={false}
              open={this.state.open}
              onRequestClose={this.handleClose}
