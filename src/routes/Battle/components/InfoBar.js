@@ -39,7 +39,7 @@ export default class InfoBar extends React.Component {
     let passButton = this.loadContent()
     let myTurn = this.props.battle.self.myTurn
     return (
-      <div className="info-bar col-1 d-flex flex-column justify-content-center align-items-center grey-bkgrnd">
+      <div className="info-bar max-page-height col-1 d-flex flex-column justify-content-center align-items-center grey-bkgrnd">
         <PixosMenu />
         <img className={`game-avatar ${!myTurn ? 'pulse' : ''} circle circle-highlight mb-1`} src={`${this.props.battle.enemy.img}`}/>
         <span className="info-bar-text mx-2">{ this.props.battle.enemy.name }</span>

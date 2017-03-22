@@ -6,6 +6,7 @@ import shortId from 'shortid'
 import Notification from 'routes/Battle/components/Notification'
 import RaisedButton from 'material-ui/RaisedButton'
 import { Link } from 'react-router'
+import './Battle.scss'
 
 
 import io from 'socket.io-client';

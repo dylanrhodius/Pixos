@@ -7,29 +7,33 @@ export default class Board extends React.Component {
 
   render() {
     return (
-      <div className="board-bkgrnd col-11 d-flex flex-column justify-content-center" >
-          { <Hand hand={this.props.battle.enemy.hand}
-                  removeCard={this.props.removeCard}
-                  addCard={this.props.addCard}
-                  isEnemyHand={true}  /> }
-          { <PlayingArea type={'enemy'} cardArrays={this.props.battle.enemy.playingArea}/> }
-          <hr className="m-0 board-divider"/>
-          { <PlayingArea type={'self'} cardArrays={this.props.battle.self.playingArea}/> }
-          { <Hand hand={this.props.battle.self.hand}
-                  removeCard={this.props.removeCard}
-                  setTurnFinished={this.props.setTurnFinished}
-                  setMyTurn={this.props.setMyTurn}
-                  addCard={this.props.addCard}
-                  isEnemyHand={false}
-                  isSelfTurn={this.props.battle.self.myTurn}
-                  updatePower={ this.props.updatePower }
-                  resurrectCards={this.props.resurrectCards}
-                  applyMeteorEffect={this.props.applyMeteorEffect}
-                  applyParagonEffect={this.props.applyParagonEffect}
-                  meteorState = {this.props.battle.self.meteor}
-                  paragonStateSelf={this.props.battle.self.paragon}
-                  /> }
+      <div className="col-11 max-page-height board-bkgrnd board-container">
+        <div className="max-page-height" >
+            { <Hand hand={this.props.battle.enemy.hand}
+                    removeCard={this.props.removeCard}
+                    addCard={this.props.addCard}
+                    isEnemyHand={true}  /> }
+            { <PlayingArea type={'enemy'} cardArrays={this.props.battle.enemy.playingArea}/> }
+            <hr className="m-0 board-divider"/>
+            { <PlayingArea type={'self'} cardArrays={this.props.battle.self.playingArea}/> }
+            { <Hand hand={this.props.battle.self.hand}
+                    removeCard={this.props.removeCard}
+                    setTurnFinished={this.props.setTurnFinished}
+                    setMyTurn={this.props.setMyTurn}
+                    addCard={this.props.addCard}
+                    isEnemyHand={false}
+                    isSelfTurn={this.props.battle.self.myTurn}
+                    updatePower={ this.props.updatePower }
+                    resurrectCards={this.props.resurrectCards}
+                    applyMeteorEffect={this.props.applyMeteorEffect}
+                    applyParagonEffect={this.props.applyParagonEffect}
+                    meteorState = {this.props.battle.self.meteor}
+                    paragonStateSelf={this.props.battle.self.paragon}
+                    /> }
+        </div>
+
       </div>
+
     )
   }
 }
