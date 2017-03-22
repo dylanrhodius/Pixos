@@ -127,10 +127,10 @@ export default class Battle extends React.Component {
   endGame() {
     let battle = this.props.battle
     let gameResult = ""
-    if (battle.self.score > battle.enemy.score) { gameResult = "win" }
-    else if (battle.self.score < battle.enemy.score) { gameResult = "lose" }
-    else { gameResult = "both draw" }
-    this.props.setPlayerNotification("Game over, you " + gameResult)
+    if (battle.self.score > battle.enemy.score) { gameResult = "You win!" }
+    else if (battle.self.score < battle.enemy.score) { gameResult = "You lose!" }
+    else { gameResult = "It's a draw!" }
+    this.props.setPlayerNotification(gameResult)
     this.props.setGameEnded()
     this.props.setMyTurn(false)
     this.props.setTurnFinished(true)
