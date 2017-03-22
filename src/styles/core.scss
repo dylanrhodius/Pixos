@@ -112,6 +112,10 @@ $paragon-col: #f4cc41;
   background-color: $air-main;
 }
 
+.board-bkgrnd {
+  background: linear-gradient(180deg, $air-light 0%,$water-light 5%,$land-light 10%,$light-bkgrnd 20%, $light-bkgrnd 50%, $light-bkgrnd 80%,$land-light 90%,$water-light 95%,$air-light 100%)
+}
+
 .water-bkgrnd {
   background: linear-gradient(135deg, $water-light 0%,$water-mid 50%,$water-main 51%,$water-light 100%)
 }
@@ -159,9 +163,11 @@ $paragon-col: #f4cc41;
   background-position: center;
 }
 
-// .sign-in-position {
-//   height: 100%;
-//   width: 100%;
-//   position: fixed;
-//   padding: 15%;
-// }
+.pulse {
+  animation:pulse 0.8s infinite alternate;
+}
+
+@keyframes pulse {
+  from { box-shadow:0px 0px 5px 3px $paragon-col; }
+  to { box-shadow:0px 0px 20px 5px $paragon-col; }
+}
