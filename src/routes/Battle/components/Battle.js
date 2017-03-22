@@ -196,8 +196,6 @@ export default class Battle extends React.Component {
 Battle.propTypes = {
   setupPlayers  : React.PropTypes.func.isRequired,
   setTurnFinished  : React.PropTypes.func.isRequired,
-  doubleAsync : React.PropTypes.func.isRequired,
-  increment   : React.PropTypes.func.isRequired,
   battle : React.PropTypes.object.isRequired,
   setMyTurn : React.PropTypes.func.isRequired,
   updateEnemyState : React.PropTypes.func.isRequired,

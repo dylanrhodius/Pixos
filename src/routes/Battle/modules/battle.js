@@ -7,8 +7,6 @@ import store from 'store/createStore'
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const BATTLE_INCREMENT = 'BATTLE_INCREMENT'
-export const BATTLE_DOUBLE_ASYNC = 'BATTLE_DOUBLE_ASYNC'
 export const SETUP_PLAYERS = 'SETUP_PLAYERS'
 export const SET_NEXT_PLAYER = 'SET_NEXT_PLAYER'
 export const SET_PLAYER_PASS = 'SET_PLAYER_PASS'
@@ -42,30 +40,6 @@ export const POP_UP_DIALOG = 'POP_UP_DIALOG'
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function increment (value = 1) {
-  return {
-    type    : BATTLE_INCREMENT,
-    payload : value
-  }
-}
-
-/*  This is a thunk, meaning it is a function that immediately
-    returns a function for lazy evaluation. It is incredibly useful for
-    creating async actions, especially when combined with redux-thunk! */
-
-export const doubleAsync = () => {
-  return (dispatch, getState) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        dispatch({
-          type    : BATTLE_DOUBLE_ASYNC,
-          payload : getState().battle
-        })
-        resolve()
-      }, 200)
-    })
-  }
-}
 
 export function incrementEnemyScore () {
   return {
@@ -211,8 +185,6 @@ export function applyParagonEffectEnemy (data) {
 }
 
 export const actions = {
-  increment,
-  doubleAsync,
   setupPlayers,
   setMyTurn,
   updatePower,
@@ -238,8 +210,6 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [BATTLE_INCREMENT]    : (state, action) => state + action.payload,
-  [BATTLE_DOUBLE_ASYNC] : (state, action) => state * 2,
   [SETUP_PLAYERS] : (state, action) => {
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
