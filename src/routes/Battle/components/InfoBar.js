@@ -2,6 +2,7 @@ import React from 'react'
 import RaisedButton from 'material-ui/RaisedButton';
 import PixosMenu from 'routes/Battle/components/PixosMenu'
 import './InfoBar.scss'
+import DiscardPile from 'routes/Battle/components/DiscardPile'
 
 export default class InfoBar extends React.Component {
 
@@ -43,13 +44,17 @@ export default class InfoBar extends React.Component {
         <span className="info-bar-text mx-2">{ this.props.battle.enemy.name }</span>
         <span className="my-2 info-bar-text land-main-bkgrnd circle circle-highlight info-bar-indicator">{this.props.battle.enemy.score}</span>
         <span className="info-bar-text small-text mb-auto">Score</span>
+
+        <DiscardPile key={'enemy'} cards={this.props.battle.enemy.discardPile} />
+
         <span className="mb-1 info-bar-text small-text">Power</span>
         <span className="mb-2 air-main-bkgrnd circle circle-highlight info-bar-indicator">{this.props.battle.enemy.power}</span>
         <span className="my-2 circle circle-highlight round-indicator material-bkgrnd">{ this.props.battle.self.roundCounter > 3 ? 3 : this.props.battle.self.roundCounter }/3</span>
-
-
         <span className="mt-2 air-main-bkgrnd circle circle-highlight info-bar-indicator">{this.props.battle.self.power}</span>
         <span className="mt-1 info-bar-text small-text">Power</span>
+
+        <DiscardPile key={'self'} cards={this.props.battle.self.discardPile} />
+
         <span className="mt-auto mb-1 info-bar-text small-text">Score</span>
         <span className="mb-2 info-bar-text land-main-bkgrnd circle circle-highlight info-bar-indicator">{this.props.battle.self.score}</span>
         <span className="info-bar-text mx-2">{ this.props.battle.self.name }</span>

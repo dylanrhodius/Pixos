@@ -63,7 +63,7 @@ export default class Hand extends React.Component {
   render () {
     let content = this.loadContent()
     return (
-      <div>
+      <div className='hand'>
         { content }
       </div>
     )

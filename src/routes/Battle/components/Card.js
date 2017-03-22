@@ -35,7 +35,7 @@ render() {
         <div className="d-flex justify-content-center align-items-start game-card-img-holder p-1">
           <img className="game-card-img" src={this.props.imgUrl} alt="Card image cap"/>
         </div>
-        <span className={`game-card-power ${this.props.type}-bkgrnd circle d-inline-block mx-auto highlighted-white-text`}>
+        <span className={`game-card-power text-center ${this.props.type}-bkgrnd circle d-inline-block mx-auto highlighted-white-text`}>
           { this.props.doubled ? this.props.power * 2 : this.props.power }
         </span>
         <ReactTooltip id={`card_${this.props.name}`}>
