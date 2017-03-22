@@ -40,7 +40,7 @@ export default class DiscardPile extends React.Component {
     ];
     let cards = this.loadCards()
     return (
-      <div className='full-width p-1 my-auto'>
+      <div className='full-width p-1 my-auto' style={{ overflow: 'hidden' }}>
         <RaisedButton fullWidth={true} label="Discards" labelStyle={{ margin: 'auto', padding: '0' }} onTouchTap={this.handleOpen} />
         <Dialog
           title={`${this.props.name}'s Discards`}

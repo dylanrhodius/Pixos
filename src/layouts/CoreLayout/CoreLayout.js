@@ -8,11 +8,9 @@ injectTapEventPlugin();
 
 export const CoreLayout = ({ children }) => (
   <MuiThemeProvider>
-    <div className='core-container container-fluid text-center p-0'>
-      <div className='core-layout__viewport max-page-height'>
+      <div className='core-layout__viewport max-page-height text-center'>
         {children}
       </div>
-    </div>
   </MuiThemeProvider>
 )
 

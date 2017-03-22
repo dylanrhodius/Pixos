@@ -1,3 +1,9 @@
+#root > [data-reactroot] {
+    min-height: 100% !important;
+    height: 100% !important;
+}
+
+
 .game-card-name {
   font-size: 0.6rem;
   transform: rotate(-90deg);

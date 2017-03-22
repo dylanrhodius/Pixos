@@ -1,5 +1,6 @@
 .game-avatar {
-  width: 70%;
+  width: 50px;
+  height: 50px;
   background-color: #ffffff;
 }
 
@@ -23,6 +24,7 @@
   font-size: 1.3rem;
   line-height: 2.1;
   font-weight: bold;
+  position: relative !important;
 }
 
 .round-indicator {
@@ -31,4 +33,16 @@
   font-size: 1.4rem;
   line-height: 2.3;
   font-weight: bold;
+}
+
+.info-bar-vert-text {
+  transform: rotate(-90deg);
+  transform-origin: left bottom 0;
+  position: absolute;
+  bottom: 3px;
+  left: 3px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-weight: normal;
 }

@@ -86,10 +86,13 @@ export default class SignInPage extends React.Component {
     let content = this.loadContent()
     console.log('state is ', this.state)
     return (
-      <div className="sign-in-background max-page-height d-flex flex-column justify-content-center align-items-center">
-        <Header />
-        { content }
+      <div className='max-page-height sign-in-background'>
+        <div className="max-page-height d-flex flex-column justify-content-center align-items-center">
+          <Header />
+          { content }
+        </div>
       </div>
+
     );
   }
 }
