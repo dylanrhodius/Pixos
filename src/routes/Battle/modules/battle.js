@@ -27,7 +27,6 @@ export const INCREMENT_SELF_SCORE = 'INCREMENT_SELF_SCORE'
 export const CLEAR_PLAYER_NOTIFICATION = 'CLEAR_PLAYER_NOTIFICATION'
 export const SET_GAME_ENDED = 'SET_GAME_ENDED'
 
-
 // ------------------------------------
 // Actions
 // ------------------------------------
@@ -45,7 +44,6 @@ export function setupPlayers (data) {
   }
 }
 
-
 export function addCard (cardId) {
   return {
     type: ADD_CARD,
@@ -58,6 +56,7 @@ export function incrementRoundCounter() {
     type: INCREMENT_ROUND_COUNTER
   }
 }
+
 export function setReadyForNewRound (boolean) {
   return {
     type: SET_READY_FOR_NEW_ROUND,
@@ -70,6 +69,7 @@ export function clearPlayingArea () {
     type: CLEAR_PLAYING_AREA
   }
 }
+
 export function setPlayerNotification (notification) {
   return {
     type: SET_PLAYER_NOTIFICATION,
@@ -82,12 +82,12 @@ export function clearPlayerNotification () {
     type: CLEAR_PLAYER_NOTIFICATION
   }
 }
+
 export function setGameEnded () {
   return {
     type: SET_GAME_ENDED
   }
 }
-
 
 export function removeCard(cardId) {
   return {
@@ -188,14 +188,11 @@ const ACTION_HANDLERS = {
       })
     })
   },
-
-
   [SET_TURN_FINISHED] : (state, action) => {
     return Object.assign({}, state, {
       turnFinished: action.payload
     })
   },
-
   [PASS_TURN] : (state, action) => {
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
@@ -203,7 +200,6 @@ const ACTION_HANDLERS = {
       }),
     })
   },
-
   [SET_GAME_ENDED] : (state, action) => {
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
@@ -211,8 +207,6 @@ const ACTION_HANDLERS = {
       }),
     })
   },
-
-
   [SET_READY_FOR_NEW_ROUND] : (state, action) => {
     return Object.assign({}, state, {
       self: Object.assign({}, state.self, {
