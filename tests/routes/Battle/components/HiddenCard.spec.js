@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { HiddenCard } from 'routes/Battle/components/HiddenCard'
 import { shallow } from 'enzyme'
 
-describe('(Component) HiddenCard', () => {
+xdescribe('(Component) HiddenCard', () => {
   let _props, _wrapper
 
   beforeEach(() => {

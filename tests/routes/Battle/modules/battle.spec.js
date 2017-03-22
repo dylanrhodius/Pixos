@@ -17,6 +17,12 @@ import {
   SET_PLAYER_NOTIFICATION,
   INCREMENT_ROUND_COUNTER,
   INCREMENT_SELF_SCORE,
+  CLEAR_PLAYING_AREA,
+  SET_READY_FOR_NEW_ROUND,
+  CLEAR_PLAYER_NOTIFICATION,
+  SET_GAME_ENDED,
+  clearPlayerNotification,
+  setGameEnded,
   applyParagonEffect,
   setRoundNotification,
   incrementSelfScore,
@@ -71,6 +77,8 @@ describe('(Redux Module) Battle', () => {
     expect(INCREMENT_ROUND_COUNTER).to.equal('INCREMENT_ROUND_COUNTER')
     expect(INCREMENT_SELF_SCORE).to.equal('INCREMENT_SELF_SCORE')
 
+    expect(CLEAR_PLAYER_NOTIFICATION).to.equal('CLEAR_PLAYER_NOTIFICATION')
+    expect(SET_READY_FOR_NEW_ROUND).to.equal('SET_READY_FOR_NEW_ROUND')
   })
 
   describe('(Reducer)', () => {
@@ -157,6 +165,26 @@ describe('(Redux Module) Battle', () => {
 
     it('Should return an action with type "SET_PLAYER_NOTIFICATION".', () => {
       expect(setPlayerNotification()).to.have.property('type', SET_PLAYER_NOTIFICATION)
+    })
+  })
+
+  describe('(Action Creator) clearPlayerNotification', () => {
+    it('Should be exported as a function.', () => {
+      expect(clearPlayerNotification).to.be.a('function')
+    })
+
+    it('Should return an action with type "CLEAR_PLAYER_NOTIFICATION".', () => {
+      expect(clearPlayerNotification()).to.have.property('type', CLEAR_PLAYER_NOTIFICATION)
+    })
+  })
+
+  describe('(Action Creator) setGameEnded', () => {
+    it('Should be exported as a function.', () => {
+      expect(setGameEnded).to.be.a('function')
+    })
+
+    it('Should return an action with type "SET_GAME_ENDED".', () => {
+      expect(setGameEnded()).to.have.property('type', SET_GAME_ENDED)
     })
   })
 
