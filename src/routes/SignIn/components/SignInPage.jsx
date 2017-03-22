@@ -7,6 +7,8 @@ import CircularProgress from 'material-ui/CircularProgress';
 import Credits from './Credits.js'
 import Help from './Help.js'
 
+document.title='Pixos';
+
 export default class SignInPage extends React.Component {
 
   constructor(props) {
@@ -18,6 +20,7 @@ export default class SignInPage extends React.Component {
       completedAPICall: false
     };
   }
+
 
   componentDidMount() {
     let hasDeck = this.state.hasDeck;

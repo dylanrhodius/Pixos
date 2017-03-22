@@ -3,6 +3,8 @@ import DeckRow from './DeckRow'
 import DeckBuilderInfoBar from './DeckBuilderInfoBar'
 import './DeckBuilder.scss'
 
+document.title='Pixos';
+
 export default class DeckBuilder extends React.Component {
 
   render () {

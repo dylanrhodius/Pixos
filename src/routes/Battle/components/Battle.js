@@ -8,6 +8,8 @@ import RaisedButton from 'material-ui/RaisedButton'
 import { Link } from 'react-router'
 import './Battle.scss'
 
+document.title='Pixos';
+
 import io from 'socket.io-client';
 const socket = io.connect(`${window.location.origin}`);
 
