@@ -1,4 +1,4 @@
-# Steami
+# Pixos
 Pixos is a realtime multiplayer, turn based card game based on Gwent from The Witcher 3, but not actually Gwent due to copyright reasons. The app was built with Javascript, on the MERN stack and made by [Rick Clark](https://github.com/rkclark), [Ben Vaughan-Jones](https://github.com/bvjones), [Dylan Rhodius](https://github.com/dylanrhodius), [Rob Holden](https://github.com/holden4), [Mike Field-May](https://github.com/mikefieldmay), and [Ross Benzie](https://github.com/rossbenzie).
 
 [Click here to try out the demo on Heroku.](http://pixos.herokuapp.com/)
