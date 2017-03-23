@@ -21,9 +21,43 @@ capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
+loadPower () {
+  if(this.props.meteored && this.props.doubled){
+    console.log("METEORED AND DOUBLED");
+    return (
+      <span className={`game-card-power text-center ${this.props.type}-bkgrnd circle d-inline-block mx-auto highlighted-white-text`}>
+        { 2 }
+      </span>
+    )
+  } else if (this.props.meteored){
+    console.log("JUST METEORED");
+    return (
+      <span className={`game-card-power text-center ${this.props.type}-bkgrnd circle d-inline-block mx-auto highlighted-white-text`}>
+        { 1 }
+      </span>
+    )
+  } else if (this.props.doubled) {
+    console.log('JUST DOUBLED');
+    return (
+      <span className={`game-card-power text-center ${this.props.type}-bkgrnd circle d-inline-block mx-auto highlighted-white-text`}>
+        { this.props.power * 2 }
+      </span>
+    )
+  } else {
+    console.log('JUST NORMAL');
+    return (
+      <span className={`game-card-power text-center ${this.props.type}-bkgrnd circle d-inline-block mx-auto highlighted-white-text`}>
+        { this.props.power }
+      </span>
+    )
+  }
+
+}
+
 render() {
   let specialIcon = this.getSpecialIcon()
   let showPointerClass
+  let power = this.loadPower()
   if (this.props.showPointer) { showPointerClass = "show-pointer" }
   return (
       <div className={`game-card box-shadow ${this.props.inCardWrapper ? '' : 'mx-1 mb-2'} ${this.props.type}-faint-bkgrnd d-flex align-items-stretch ${showPointerClass}`} data-tip data-for={`card_${this.props.name}`}>
@@ -35,9 +69,7 @@ render() {
         <div className="d-flex justify-content-center align-items-start game-card-img-holder p-1">
           <img className="game-card-img" src={this.props.imgUrl} alt="Card image cap"/>
         </div>
-        <span className={`game-card-power text-center ${this.props.type}-bkgrnd circle d-inline-block mx-auto highlighted-white-text`}>
-          { this.props.doubled ? this.props.power * 2 : this.props.power }
-        </span>
+          { power }
         <ReactTooltip id={`card_${this.props.name}`} className={`${this.props.type}-main-bkgrnd`}>
           <p className="mb-1 highlighted-white-text">{this.capitalize(this.props.name)}</p>
           <p className="mb-0 highlighted-white-text" style={{ fontWeight: 'normal' }}>{this.props.description}</p>

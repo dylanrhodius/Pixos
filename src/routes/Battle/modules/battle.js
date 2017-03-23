@@ -275,8 +275,12 @@ const ACTION_HANDLERS = {
     let enemyPower = 0
     for (let array of Object.values(state.enemy.playingArea)) {
       array.forEach((card) => {
-        if (card.doubled){
+        if (card.doubled && card.meteored){
+            enemyPower += 2
+        } else if (card.doubled) {
             enemyPower += (card.power * 2)
+        } else if (card.meteored) {
+            enemyPower += 1
         } else {
             enemyPower += card.power
         }
@@ -286,8 +290,12 @@ const ACTION_HANDLERS = {
     let selfPower = 0
     for (let array of Object.values(state.self.playingArea)) {
       array.forEach((card) => {
-        if (card.doubled){
+        if (card.doubled && card.meteored){
+            selfPower += 2
+        } else if (card.doubled) {
             selfPower += (card.power * 2)
+        } else if (card.meteored) {
+            selfPower += 1
         } else {
             selfPower += card.power
         }
@@ -331,6 +339,7 @@ const ACTION_HANDLERS = {
     let enemyDiscards = []
     for (let array of Object.values(state.enemy.playingArea)) {
       array.forEach((card) => {
+          card.meteored = false
           card.doubled = false
           enemyDiscards.push(card)
       })
@@ -338,6 +347,7 @@ const ACTION_HANDLERS = {
     let selfDiscards = []
     for (let array of Object.values(state.self.playingArea)) {
       array.forEach((card) => {
+          card.meteored = false
           card.doubled = false
           selfDiscards.push(card)
       })
@@ -385,11 +395,11 @@ const ACTION_HANDLERS = {
     let enemyMeteoredRow = []
 
     state.self.playingArea[action.payload].forEach((card) => {
-      card.power = 1
+      card.meteored = true
       selfMeteoredRow.push(card)
     })
     state.enemy.playingArea[action.payload].forEach((card) => {
-      card.power = 1
+      card.meteored = true
       enemyMeteoredRow.push(card)
     })
 
