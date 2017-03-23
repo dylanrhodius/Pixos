@@ -9,6 +9,7 @@ import store from 'store/createStore'
 // const function
 export const PLACE_IN_DECK = 'PLACE_IN_DECK'
 export const REMOVE_FROM_DECK = 'REMOVE_FROM_DECK'
+export const SET_INITIAL_DECK = 'SET_INITIAL_DECK'
 
 // ------------------------------------
 // Actions
@@ -28,9 +29,18 @@ export function removeFromDeck (card) {
   }
 }
 
+
+export function setInitialDeck (deck) {
+  return {
+    type: SET_INITIAL_DECK,
+    payload: deck
+  }
+}
+
 export const actions = {
   placeInDeck,
-  removeFromDeck
+  removeFromDeck,
+  setInitialDeck
 }
 
 // ------------------------------------
@@ -60,6 +70,45 @@ const ACTION_HANDLERS = {
       }),
       cardsInDeck: state.cardsInDeck - 1,
       dinoDollars: state.dinoDollars + card.cost
+    })
+  },
+  [SET_INITIAL_DECK] : (state, action) => {
+    let landArray = action.payload.filter( (card) => {
+        if (card.type === 'land') { return card }
+      }
+    );
+    let waterArray = action.payload.filter( (card) => {
+        if (card.type === 'water') { return card }
+      }
+    );
+    let airArray = action.payload.filter( (card) => {
+        if (card.type === 'air') { return card }
+      }
+    );
+    let deckSize = landArray.length + waterArray.length + airArray.length
+    let dollars = 0
+    landArray.forEach((card) => {
+      dollars += card.cost
+    })
+    waterArray.forEach((card) => {
+      dollars += card.cost
+    })
+    airArray.forEach((card) => {
+      dollars += card.cost
+    })
+
+    return Object.assign({}, state, {
+      dinoDollars: (225 - dollars),
+      cardsInDeck: deckSize,
+      land: Object.assign({}, state.land, {
+        inDeck: landArray
+      }),
+      water: Object.assign({}, state.water, {
+        inDeck: waterArray
+      }),
+      air: Object.assign({}, state.air, {
+        inDeck: airArray
+      }),
     })
   }
 }

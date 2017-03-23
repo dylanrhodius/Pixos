@@ -1,11 +1,12 @@
 import { connect } from 'react-redux'
-import { placeInDeck, removeFromDeck } from '../modules/deckbuilder'
+import { placeInDeck, removeFromDeck, setInitialDeck } from '../modules/deckbuilder'
 
 import DeckBuilder from '../components/DeckBuilder'
 
 const mapDispatchToProps = {
   placeInDeck,
-  removeFromDeck
+  removeFromDeck,
+  setInitialDeck
 }
 
 const mapStateToProps = (state) => ({
