@@ -44,6 +44,7 @@ export default class Credits extends React.Component {
           <p><strong className='mb-1'>Chief Fruit and Logic Officer: </strong><a href="https://github.com/rossbenzie" target="_blank">Ross Benzie</a></p>
           <p><strong className='mb-1'>Chief Gwent and Chocolate Officer: </strong><a href="https://github.com/mikefieldmay" target="_blank">Mike Field-May</a></p>
           <p><strong className='mb-1'>Chief Deckbuilding Officer: </strong><a href="https://github.com/bvjones" target="_blank">Ben Vaughan-Jones</a></p>
+          <p className="mt-2"><em>Thanks to <a href="https://github.com/exane" target="_blank">Tim Meier</a> for his <a href="https://github.com/exane/not-gwent-online" target="_blank">Not Gwent Online</a> open source code which helped us get our Socket.io implementation up and running.</em></p>
         </Dialog>
       </div>
     );
