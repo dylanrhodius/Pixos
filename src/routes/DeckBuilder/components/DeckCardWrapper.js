@@ -1,39 +1,17 @@
 import React from 'react'
 import DeckCard from './DeckCard'
 import RaisedButton from 'material-ui/RaisedButton'
-import Popover from 'material-ui/Popover'
-import Menu from 'material-ui/Menu'
-import MenuItem from 'material-ui/MenuItem'
 import { Link } from 'react-router'
 
 export default class DeckCardWrapper extends React.Component {
   constructor (props) {
     super (props);
 
-    this.state = {
-      open: false
-    }
-
     this.addCardToDeck = this.addCardToDeck.bind(this)
     this.removeCardFromDeck = this.removeCardFromDeck.bind(this)
     this.canBeAdded = this.canBeAdded.bind(this)
 
   }
-
-  handleTouchTap = (event) => {
-    // This prevents ghost click.
-    event.preventDefault()
-    this.setState({
-      open: true,
-      anchorEl: event.currentTarget,
-    });
-  };
-
-  handleRequestClose = () => {
-    this.setState({
-      open: false,
-    });
-  };
 
   sufficientDollars = () => {
     return (this.props.playerDeck.dinoDollars >= this.props.cost)
@@ -68,24 +46,15 @@ export default class DeckCardWrapper extends React.Component {
     this.props.removeFromDeck(cardData)
   }
 
-  loadContent () {
-    if(this.props.id.split("_")[1] == 'pool'){
-      return (
-        <MenuItem primaryText="Place In Deck" onClick={this.addCardToDeck} />
-      )
-    } else {
-      return(
-        <MenuItem primaryText="Remove From Deck" onClick={this.removeCardFromDeck} />
-      )
-    }
+  inPool () {
+    return (this.props.id.split("_")[1] == 'pool')
   }
 
 
 render () {
-  let content = this.loadContent()
+  let inPool = this.inPool()
    return (
     <div className="mb-2">
-       <div onTouchTap={this.handleTouchTap}>
          <DeckCard
             name={this.props.name}
             power={this.props.power}
@@ -96,20 +65,8 @@ render () {
             removeFromDeck={this.props.removeFromDeck}
             special={this.props.special}
             description={this.props.description}
+            addOrRemove={inPool ? this.addCardToDeck : this.removeCardFromDeck }
           />
-        </div>
-      <Popover
-        open={this.state.open}
-        anchorEl={this.state.anchorEl}
-        anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-        targetOrigin={{horizontal: 'left', vertical: 'top'}}
-        onRequestClose={this.handleRequestClose}
-      >
-        <Menu>
-          { content }
-        </Menu>
-
-      </Popover>
     </div>
    )
  }
