@@ -132,7 +132,7 @@ export default class DeckBuilderInfoBar extends React.Component {
         <p className="info-card-cost px-1 circle circle-highlight">${ this.props.playerDeck.dinoDollars }</p>
         { content }
         <span className="card-in-deck px-1 deck-buidler-info-bar-text mb-1">In Deck </span>
-        <span className="circle circle-highlight material-bkgrnd mb-auto deck-indicator">{this.props.playerDeck.cardsInDeck}</span>
+        <span className="circle circle-highlight material-bkgrnd mb-auto deck-indicator">{this.props.playerDeck.cardsInDeck}/20</span>
 
       </div>
       )

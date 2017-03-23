@@ -6,6 +6,8 @@ export default class DeckCard extends React.Component {
 
 constructor (props) {
   super(props)
+
+  this.handleTouchTap = this.handleTouchTap.bind(this)
 }
 
 getSpecialIcon() {
@@ -20,10 +22,17 @@ capitalize(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
+handleTouchTap (event) {
+  // This prevents ghost click.
+  event.preventDefault();
+  console.log('touch tapped card')
+  this.props.addOrRemove()
+}
+
 render() {
   let specialIcon = this.getSpecialIcon()
   return (
-    <div className={`deck-card box-shadow mx-1 ${this.props.type}-faint-bkgrnd d-flex align-items-stretch show-pointer`} data-tip data-for={`card_${this.props.name}`}>
+    <div onTouchTap={this.handleTouchTap} className={`deck-card box-shadow mx-1 ${this.props.type}-faint-bkgrnd d-flex align-items-stretch show-pointer`} data-tip data-for={`card_${this.props.name}`}>
       <div className={`deck-card-name-holder pb-1 ${this.props.type}-main-bkgrnd`}>
         <h4 className="deck-card-name m-0 text-left highlighted-white-text">
           { this.props.name.charAt(0).toUpperCase() + this.props.name.slice(1) }
@@ -54,6 +63,7 @@ render() {
     power : React.PropTypes.string.isRequired,
     cost : React.PropTypes.string.isRequired,
     special : React.PropTypes.string.isRequired,
-    description : React.PropTypes.string.isRequired
+    description : React.PropTypes.string.isRequired,
+    addOrRemove : React.PropTypes.func.isRequired
   }
 }
