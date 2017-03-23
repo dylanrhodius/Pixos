@@ -75,8 +75,8 @@ export default class CardWrapper extends React.Component {
 
  render () {
    return (
-     <div className="mb-2 pulse">
-       <div onTouchTap={this.handleTouchTap}>
+     <div style={{borderRadius: '5px'}} className="mb-2 mx-1 pulse transparent">
+       <div onTouchTap={this.handleTouchTap} className="card-wrapper transparent">
          <Card
           power={this.props.power}
           type={this.props.type}
@@ -85,6 +85,7 @@ export default class CardWrapper extends React.Component {
           special={this.props.special}
           description={this.props.description}
           showPointer={true}
+          inCardWrapper={true}
         />
        </div>
      <Popover

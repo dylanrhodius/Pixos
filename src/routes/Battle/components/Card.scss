@@ -10,7 +10,7 @@
   transform-origin: left bottom 0;
   position: absolute;
   bottom: 3px;
-  left: 11px;
+  left: 10px;
   max-width: 85px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -24,7 +24,6 @@
   border-radius: 5px;
 }
 
-
 .game-card-img-holder {
   min-height: 62px;
   width: 76px;
@@ -33,6 +32,7 @@
 .game-card-name-holder {
   position: relative;
   width: 14px;
+  border-radius: 5px 0 0 5px;
 }
 
 .game-card-img {

@@ -26,7 +26,7 @@ render() {
   let showPointerClass
   if (this.props.showPointer) { showPointerClass = "show-pointer" }
   return (
-      <div className={`game-card box-shadow mx-1 ${this.props.type}-faint-bkgrnd d-flex align-items-stretch ${showPointerClass}`} data-tip data-for={`card_${this.props.name}`}>
+      <div className={`game-card box-shadow ${this.props.inCardWrapper ? '' : 'mx-1'} ${this.props.type}-faint-bkgrnd d-flex align-items-stretch ${showPointerClass}`} data-tip data-for={`card_${this.props.name}`}>
         <div className={`game-card-name-holder pb-1 ${this.props.type}-main-bkgrnd`}>
           <h4 className="game-card-name m-0 text-left highlighted-white-text">
             { this.props.name.charAt(0).toUpperCase() + this.props.name.slice(1) }
@@ -55,6 +55,7 @@ render() {
     power : React.PropTypes.string.isRequired,
     special : React.PropTypes.string.isRequired,
     description : React.PropTypes.string.isRequired,
-    showPointer: React.PropTypes.bool.isRequired
+    showPointer: React.PropTypes.bool.isRequired,
+    inCardWrapper: React.PropTypes.bool.isRequired
   }
 }

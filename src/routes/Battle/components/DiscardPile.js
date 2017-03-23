@@ -15,7 +15,8 @@ export default class DiscardPile extends React.Component {
       (card, i) => {
         return (
           <Card key={i} showPointer={false} {...card }
-                id={i} />
+                id={i}
+                inCardWrapper={false} />
         )
       }
     )

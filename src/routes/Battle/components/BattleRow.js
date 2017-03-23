@@ -6,7 +6,7 @@ export default class BattleRow extends React.Component {
 
   renderCardComponents () {
     return this.props.cards.map(
-      (card, i) => <Card key={i} {...card} showPointer={false} />
+      (card, i) => <Card key={i} {...card} showPointer={false} inCardWrapper={false} />
     )
   }
 
