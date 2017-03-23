@@ -75,7 +75,7 @@ export default class CardWrapper extends React.Component {
 
  render () {
    return (
-     <div style={{borderRadius: '5px'}} className="mb-2 mx-1 pulse transparent">
+     <div style={{borderRadius: '5px'}} className="mx-1 mb-2 pulse transparent">
        <div onTouchTap={this.handleTouchTap} className="card-wrapper transparent">
          <Card
           power={this.props.power}

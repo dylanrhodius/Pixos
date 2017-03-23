@@ -54,7 +54,7 @@ export default class Hand extends React.Component {
     let cards = this.renderHandComponents()
     let owner = this.props.isEnemyHand ? 'enemy' : 'self'
     return (
-      <div className={`d-flex flex-wrap justify-content-center px-2 py-2 ${owner}-hand-border`}>
+      <div className={`d-flex flex-wrap justify-content-center px-2 ${this.props.isEnemyHand ? 'pt-2 pb-2' : 'pt-3 pb-1'} ${owner}-hand-border`}>
         { cards }
       </div>
     )
