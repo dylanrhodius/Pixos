@@ -118,6 +118,10 @@ a {
   background-color: $paragon-col;
 }
 
+.paragon-box-shadow {
+  box-shadow: 0px 0px 4px 4px $paragon-col;
+}
+
 .material-bkgrnd {
   background-color: $material-ui-blue;
 }
