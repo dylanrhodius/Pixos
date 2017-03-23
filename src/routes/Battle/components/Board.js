@@ -13,9 +13,9 @@ export default class Board extends React.Component {
                     removeCard={this.props.removeCard}
                     addCard={this.props.addCard}
                     isEnemyHand={true}  /> }
-            { <PlayingArea type={'enemy'} cardArrays={this.props.battle.enemy.playingArea}/> }
+            { <PlayingArea type={'enemy'} cardArrays={this.props.battle.enemy.playingArea} passed={this.props.battle.enemy.hasPassed}/> }
             <hr className="m-0 board-divider"/>
-            { <PlayingArea type={'self'} cardArrays={this.props.battle.self.playingArea}/> }
+            { <PlayingArea type={'self'} cardArrays={this.props.battle.self.playingArea} passed={this.props.battle.self.hasPassed}/> }
             { <Hand hand={this.props.battle.self.hand}
                     removeCard={this.props.removeCard}
                     setTurnFinished={this.props.setTurnFinished}

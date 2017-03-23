@@ -10,11 +10,24 @@ export default class BattleRow extends React.Component {
     )
   }
 
+  renderRowMessage () {
+    if (this.props.passed) {
+      return (
+        <span className="row-message highlighted-white-text">PASSED</span>
+      )
+    } else
+    return (
+      <span className="row-message">{this.props.type}</span>
+    )
+  }
+
   render () {
     let content = this.renderCardComponents()
+    let message = this.renderRowMessage()
     return (
-      <div className="battle-row d-flex flex-wrap justify-content-center px-2 my-1">
+      <div className={`battle-row ${this.props.passed ? 'grey-bkgrnd' : ''} d-flex flex-wrap justify-content-center align-items-center px-2 py-1`}>
         { content }
+        { message }
         <div className={`${this.props.type}-bkgrnd battle-row-type circle`}/>
       </div>
     )
@@ -22,6 +35,7 @@ export default class BattleRow extends React.Component {
 
   propTypes: {
     type  : React.PropTypes.string.isRequired,
-    cards  : React.PropTypes.array.isRequired
+    cards  : React.PropTypes.array.isRequired,
+    passed : React.PropTypes.bool.isRequired
   }
 }

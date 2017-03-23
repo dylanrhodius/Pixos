@@ -10,3 +10,17 @@
   right: 20px;
   top: 22px;
 }
+
+.row-message {
+  transform: rotate(-90deg);
+  transform-origin: left bottom 0;
+  position: absolute;
+  bottom: 7px;
+  left: 25px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-weight: normal;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
