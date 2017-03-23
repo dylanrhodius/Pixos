@@ -23,28 +23,28 @@ capitalize(string) {
 
 loadPower () {
   if(this.props.meteored && this.props.doubled){
-    console.log("METEORED AND DOUBLED");
+    //METEORED AND DOUBLED
     return (
-      <span className={`game-card-power text-center ${this.props.type}-bkgrnd circle d-inline-block mx-auto highlighted-white-text`}>
+      <span className={`game-card-power text-center meteor-bkgrnd circle d-inline-block mx-auto highlighted-white-text`}>
         { 2 }
       </span>
     )
   } else if (this.props.meteored){
-    console.log("JUST METEORED");
+    //JUST METEORED
     return (
-      <span className={`game-card-power text-center ${this.props.type}-bkgrnd circle d-inline-block mx-auto highlighted-white-text`}>
+      <span className={`game-card-power text-center meteor-bkgrnd circle d-inline-block mx-auto highlighted-white-text`}>
         { 1 }
       </span>
     )
   } else if (this.props.doubled) {
-    console.log('JUST DOUBLED');
+    //JUST DOUBLED
     return (
       <span className={`game-card-power text-center ${this.props.type}-bkgrnd circle d-inline-block mx-auto highlighted-white-text`}>
         { this.props.power * 2 }
       </span>
     )
   } else {
-    console.log('JUST NORMAL');
+    // JUST NORMAL
     return (
       <span className={`game-card-power text-center ${this.props.type}-bkgrnd circle d-inline-block mx-auto highlighted-white-text`}>
         { this.props.power }
@@ -86,6 +86,8 @@ render() {
     name : React.PropTypes.string.isRequired,
     power : React.PropTypes.string.isRequired,
     special : React.PropTypes.string.isRequired,
+    doubled : React.PropTypes.string.isRequired,
+    meteored : React.PropTypes.string.isRequired,
     description : React.PropTypes.string.isRequired,
     showPointer: React.PropTypes.bool.isRequired,
     inCardWrapper: React.PropTypes.bool.isRequired
