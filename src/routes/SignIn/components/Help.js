@@ -39,7 +39,7 @@ export default class Help extends React.Component {
         >
           <p className="mt-2"><em>Pixos</em> is a 2-player card game that pits two teams of creatures against each other in the field of battle.</p>
           <p>Each player takes turns placing one card on the field at a time. At the end of each round, the player with the highest total power wins and his score increases by 1.
-            The winner the person with the highest score after 3 rounds.</p>
+            The winner is the person with the highest score after 3 rounds.</p>
           <h4 className="help-header">Setup</h4>
           <p>To play, each player must pick a deck consisting of 20 creatures. Each creature has a Pixo Dollar cost and your deck cost must be below $225. You can have up to 3 of each creature in your deck.</p>
           <p>The creature's power is shown in the bottom left of the card and it’s cost is shown at the top right.</p>
