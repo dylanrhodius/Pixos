@@ -1,6 +1,7 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 import CoreLayout from 'layouts/CoreLayout/CoreLayout'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 function shallowRender (component) {
   const renderer = TestUtils.createRenderer()
@@ -13,7 +14,7 @@ function shallowRenderWithProps (props = {}) {
   return shallowRender(<CoreLayout {...props} />)
 }
 
-xdescribe('(Layout) Core', function () {
+describe('(Layout) Core', function () {
   let _component
   let _props
   let _child
@@ -27,7 +28,7 @@ xdescribe('(Layout) Core', function () {
     _component = shallowRenderWithProps(_props)
   })
 
-  it('Should render as a <div>.', function () {
-    expect(_component.type).to.equal('div')
+  it('Should render as a MuiThemeProvider.', function () {
+    expect(_component.type).to.equal(MuiThemeProvider)
   })
 })
