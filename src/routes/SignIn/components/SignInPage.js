@@ -1,11 +1,13 @@
 import React from 'react'
-import SignInForm from './SignInForm.jsx'
+import SignInForm from './SignInForm.js'
 import { Link } from 'react-router'
 import Header from '../../../components/Header'
 import RaisedButton from 'material-ui/RaisedButton'
 import CircularProgress from 'material-ui/CircularProgress';
 import Credits from './Credits.js'
 import Help from './Help.js'
+import './SignInPage.scss'
+
 
 document.title='Pixos';
 

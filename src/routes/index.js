@@ -1,7 +1,7 @@
 // We only need to import the modules necessary for initial render
 import CoreLayout from '../layouts/CoreLayout'
 import BattleRoute from './Battle'
-import SignIn from './SignIn/index.jsx'
+import SignIn from './SignIn/index.js'
 import DeckBuilderRoute from './DeckBuilder'
 
 /*  Note: Instead of using JSX, we recommend using react-router
