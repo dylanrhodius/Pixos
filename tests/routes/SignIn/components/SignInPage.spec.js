@@ -1,5 +1,5 @@
 import React from 'react'
-import SignInPage from 'routes/SignIn/components/SignInPage.jsx'
+import SignInPage from 'routes/SignIn/components/SignInPage.js'
 import { shallow } from 'enzyme'
 
 
