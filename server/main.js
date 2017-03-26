@@ -42,6 +42,7 @@ global.Room = require("./Room");
 global.User = require("./User");
 
 const deckAPI = require('./deckAPI.js')
+const userAPI = require('./userAPI.js')(usersCollection)
 
 // Apply gzip compression
 app.use(compress())
@@ -82,6 +83,7 @@ app.use(function (req, res, next) {
 })
 
 app.use(deckAPI);
+app.use(userAPI);
 
 // Loading socket.io
 var io = socketIo({
@@ -235,22 +237,6 @@ if (project.env === 'development') {
       res.redirect('/')
     })
 
-  app.get('/user', (req,res) => {
-    // console.log('session is ', req.session)
-    // if a session exists:
-    if(typeof(req.session.passport) !== 'undefined') {
-      // find the user in the database whose facebookId (white) matches the session user's id (red)
-      usersCollection.findOne({facebookId: req.session.passport.user}).then((userObj) => {
-        res.setHeader('Content-Type', 'application/json');
-        // return (or send) the document object
-        res.send({user: userObj});
-      })
-    } else {
-      res.setHeader('Content-Type', 'application/json');
-      res.send({ user: null });
-    }
-  });
-
   app.use('*', function (req, res, next) {
     const filename = path.join(compiler.outputPath, 'index.html')
     compiler.outputFileSystem.readFile(filename, (err, result) => {
@@ -280,21 +266,6 @@ if (project.env === 'development') {
       // Successful authentication, redirect home.
       res.redirect('/')
     })
-
-  app.get('/user', (req,res) => {
-    // if a session exists:
-    if(typeof(req.session.passport) !== 'undefined') {
-      // find the user in the database whose facebookId (white) matches the session user's id (red)
-      usersCollection.findOne({facebookId: req.session.passport.user}).then((userObj) => {
-        res.setHeader('Content-Type', 'application/json');
-        // return (or send) the document object
-        res.send({user: userObj});
-      })
-    } else {
-      res.setHeader('Content-Type', 'application/json');
-      res.send({ user: null });
-    }
-  });
 
   // Serving ~/dist by default. Ideally these files should be served by
   // the web server and not the app server, but this helps to demo the
