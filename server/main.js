@@ -87,11 +87,9 @@ var io = socketIo({
 
 
 io.use(function(socket, next) {
-  console.log('in new session code')
     var request = socket.request;
 
     if(!request.headers.cookie) {
-        console.log('no cookie transmitted')
         // If we want to refuse authentification, we pass an error to the first callback
         return next(new Error('No cookie transmitted.'));
     }
@@ -100,14 +98,12 @@ io.use(function(socket, next) {
     // Express cookieParser(req, res, next) is used initialy to parse data in "req.headers.cookie".
     // Here our cookies are stored in "request.headers.cookie", so we just pass "request" to the first argument of function
     cookieParser(request, {}, function(parseErr) {
-        console.log('in cookie parser')
         if(parseErr) { return next(new Error('Error parsing cookies.')); }
 
         // Get the SID cookie
         var sidCookie = (request.secureCookies && request.secureCookies[EXPRESS_SID_KEY]) ||
                         (request.signedCookies && request.signedCookies[EXPRESS_SID_KEY]) ||
                         (request.cookies && request.cookies[EXPRESS_SID_KEY]);
-        console.log('sidCookie is', sidCookie)
         // Then we just need to load the session from the Express Session Store
         store.load(sidCookie, function(err, session) {
             // console.log('in store loading, sessions is ', session)
@@ -125,7 +121,6 @@ io.use(function(socket, next) {
 
             // Everything is fine
             } else {
-                console.log('all is well')
                 // If you want, you can attach the session to the handshake data, so you can use it again later
                 // You can access it later with "socket.request.session" and "socket.request.sessionId"
                 request.session = session;
@@ -241,7 +236,6 @@ if (project.env === 'development') {
     // console.log('session is ', req.session)
     // if a session exists:
     if(typeof(req.session.passport) !== 'undefined') {
-      console.log('Session exists');
       // find the user in the database whose facebookId (white) matches the session user's id (red)
       usersCollection.findOne({facebookId: req.session.passport.user}).then((userObj) => {
         res.setHeader('Content-Type', 'application/json');
@@ -249,7 +243,6 @@ if (project.env === 'development') {
         res.send({user: userObj});
       })
     } else {
-      console.log('Session does not exist');
       res.setHeader('Content-Type', 'application/json');
       res.send({ user: null });
     }
@@ -258,12 +251,10 @@ if (project.env === 'development') {
   app.get('/user/deck', (req,res) => {
     // if a session deck exists:
     if (typeof(req.session.deck) !== 'undefined') {
-      console.log('Session deck exists');
       res.setHeader('Content-Type', 'application/json');
       // return (or send) the document object
       res.send({ deck: req.session.deck });
     } else {
-      console.log('Session does not exist');
       res.setHeader('Content-Type', 'application/json');
       res.send({ deck: null });
     }
@@ -271,8 +262,6 @@ if (project.env === 'development') {
 
 
   app.post('/user/deck', function (req, res) {
-    console.log("This line will request the session in /user, which will also log out deck");
-    console.log("Request in /user", req.sessionId);
     req.session.deck = req.body
     res.send('')
   })
@@ -310,7 +299,6 @@ if (project.env === 'development') {
   app.get('/user', (req,res) => {
     // if a session exists:
     if(typeof(req.session.passport) !== 'undefined') {
-      console.log('Session exists');
       // find the user in the database whose facebookId (white) matches the session user's id (red)
       usersCollection.findOne({facebookId: req.session.passport.user}).then((userObj) => {
         res.setHeader('Content-Type', 'application/json');
@@ -318,7 +306,6 @@ if (project.env === 'development') {
         res.send({user: userObj});
       })
     } else {
-      console.log('Session does not exist');
       res.setHeader('Content-Type', 'application/json');
       res.send({ user: null });
     }
@@ -327,20 +314,16 @@ if (project.env === 'development') {
   app.get('/user/deck', (req,res) => {
     // if a session deck exists:
     if (typeof(req.session.deck) !== 'undefined') {
-      console.log('Session deck exists');
       res.setHeader('Content-Type', 'application/json');
       // return (or send) the document object
       res.send({ deck: req.session.deck });
     } else {
-      console.log('Session does not exist');
       res.setHeader('Content-Type', 'application/json');
       res.send({ deck: null });
     }
   });
 
   app.post('/user/deck', function (req, res) {
-    console.log("Request in /user", req.session);
-    console.log("Request in /user", req.sessionId);
     req.session.deck = req.body
     res.send('')
   })
