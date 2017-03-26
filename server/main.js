@@ -12,7 +12,6 @@ const project = require('../config/project.config')
 const compress = require('compression')
 const passport = require('passport')
 const databasetools = require('./databasetools')
-const sharedSession = require("express-socket.io-session");
 var FacebookStrategy = require('passport-facebook').Strategy
 var socketIo = require('socket.io')
 
@@ -21,7 +20,6 @@ const mongo = require('mongodb')
 const monk = require('monk')
 const mongoUrl = process.env.MONGO_URL
 var db = monk(mongoUrl)
-const request = require('request')
 // import session from express
 const session = require('express-session')
 const MongodbStoreFactory = require('connect-mongodb-session')
@@ -29,8 +27,6 @@ const MongoDBStore = MongodbStoreFactory(session)
 // set a usersCollection constant equal to the users collection
 
 const usersCollection = db.get('users')
-const sessionsCollection = db.get('mySessions')
-
 
 const domain = process.env.APP_DOMAIN || 'localhost'
 const app = express()
@@ -51,12 +47,6 @@ app.use(compress())
 app.use(bodyParser.json());
 
 // Set up sessions
-var userStore = new MongoDBStore(
-  {
-    uri: mongoUrl,
-    collection: 'users'
-  })
-
 var store = new MongoDBStore(
   {
     uri: mongoUrl,
@@ -158,7 +148,6 @@ io.sockets.on('connection', function (socket) {
       userId = socket.request.session.passport.user;
     }
     usersCollection.findOne({facebookId: userId}).then((userObj) => {
-      console.log("Replace this text and log out userObj to see userObj")
       console.log('A client is connected!');
       var user;
       connections.add(user = User(socket, userObj, deck));
@@ -198,9 +187,6 @@ passport.serializeUser(function (user, done) {
 })
 
 passport.deserializeUser(function (user, done) {
-  // For this demo, we'll just return an object literal since our user
-  // objects are this trivial.  In the real world, you'd probably fetch
-  // your user object from your database here.
   done(null, {
     user: user
   })
