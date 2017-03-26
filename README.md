@@ -91,3 +91,5 @@ Pixos was built by:
 [Rick Clark](https://github.com/rkclark), [Ben Vaughan-Jones](https://github.com/bvjones), [Dylan Rhodius](https://github.com/dylanrhodius), [Rob Holden](https://github.com/holden4), [Mike Field-May](https://github.com/mikefieldmay), and [Ross Benzie](https://github.com/rossbenzie).
 
 Icons made by [Freepik](http://www.freepik.com) from [Flaticon.com](http://www.flaticon.com), licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/).
+
+App skeleton built with the [React Redux Starter Kit](https://github.com/davezuko/react-redux-starter-kit).
