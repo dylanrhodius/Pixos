@@ -99,7 +99,7 @@ export default class SignInPage extends React.Component {
           { content }
           <Credits />
           <Help/>
-          <a href={`https://github.com/bvjones/final-project`} target="_blank" >
+          <a href={`https://github.com/rkclark/Pixos`} target="_blank" >
             <RaisedButton className="button-shadow" style={{ position: 'absolute', bottom: '75px', left: '50px' }} label="Pixos Github Repo"/>
           </a>
         </div>
