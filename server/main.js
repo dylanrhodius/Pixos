@@ -13,10 +13,8 @@ const compress = require('compression')
 const passport = require('passport')
 const databasetools = require('./databasetools')
 var FacebookStrategy = require('passport-facebook').Strategy
-var socketIo = require('socket.io')
 
 // Import mongoDB
-const mongo = require('mongodb')
 const monk = require('monk')
 const mongoUrl = process.env.MONGO_URL
 var db = monk(mongoUrl)
@@ -82,86 +80,10 @@ app.use(function (req, res, next) {
   next()
 })
 
+const io = require('./socketIo')(cookieParser, store, EXPRESS_SID_KEY, usersCollection, server)
+
 app.use(deckAPI);
 app.use(userAPI);
-
-// Loading socket.io
-var io = socketIo({
-    // Optional Socket.io options
-});
-
-
-io.use(function(socket, next) {
-    var request = socket.request;
-
-    if(!request.headers.cookie) {
-        // If we want to refuse authentification, we pass an error to the first callback
-        return next(new Error('No cookie transmitted.'));
-    }
-
-    // We use the Express cookieParser created before to parse the cookie
-    // Express cookieParser(req, res, next) is used initialy to parse data in "req.headers.cookie".
-    // Here our cookies are stored in "request.headers.cookie", so we just pass "request" to the first argument of function
-    cookieParser(request, {}, function(parseErr) {
-        if(parseErr) { return next(new Error('Error parsing cookies.')); }
-
-        // Get the SID cookie
-        var sidCookie = (request.secureCookies && request.secureCookies[EXPRESS_SID_KEY]) ||
-                        (request.signedCookies && request.signedCookies[EXPRESS_SID_KEY]) ||
-                        (request.cookies && request.cookies[EXPRESS_SID_KEY]);
-        // Then we just need to load the session from the Express Session Store
-        store.load(sidCookie, function(err, session) {
-            // console.log('in store loading, sessions is ', session)
-            // And last, we check if the used has a valid session and if he is logged in
-            if (err) {
-                return next(err);
-
-            // Session is empty
-            } else if(!session) {
-                return next(new Error('Session cannot be found/loaded'));
-
-            // // Check for auth here, here is a basic example
-            // } else if (session.isLogged !== true) {
-            //     return next(new Error('User not logged in'));
-
-            // Everything is fine
-            } else {
-                // If you want, you can attach the session to the handshake data, so you can use it again later
-                // You can access it later with "socket.request.session" and "socket.request.sessionId"
-                request.session = session;
-                request.sessionId = sidCookie;
-
-                return next();
-            }
-        });
-    });
-});
-
-io.listen(server)
-
-// When a client connects, we note it in the console
-io.sockets.on('connection', function (socket) {
-    // console.log('new socket connection, session is ', socket.request.session)
-    var userId = null;
-    var deck = socket.request.session.deck
-    if (socket.request.session.hasOwnProperty('passport')) {
-      userId = socket.request.session.passport.user;
-    }
-    usersCollection.findOne({facebookId: userId}).then((userObj) => {
-      console.log('A client is connected!');
-      var user;
-      connections.add(user = User(socket, userObj, deck));
-      console.log("new user ", user.getName());
-
-      socket.on("disconnect", function() {
-        console.log('Disconnected: ', user)
-        connections.remove(user);
-        user.disconnect();
-        console.log("user ", user.getName(), " disconnected");
-        user = null;
-      })
-    })
- });
 
 var FBStrategy = new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,

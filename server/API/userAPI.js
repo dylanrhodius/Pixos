@@ -7,7 +7,6 @@ module.exports = function(usersCollection) {
   var router = express.Router();
 
   router.get('/user', (req,res) => {
-    console.log('IN GETUSER')
     // if a session exists:
     if (typeof(req.session.passport) !== 'undefined') {
       // find the user in the database whose facebookId (white) matches the session user's id (red)
