@@ -1,9 +1,9 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
-import { HiddenCard } from 'routes/Battle/components/HiddenCard'
+import HiddenCard from 'routes/Battle/components/HiddenCard'
 import { shallow } from 'enzyme'
 
-xdescribe('(Component) HiddenCard', () => {
+describe('(Component) HiddenCard', () => {
   let _props, _wrapper
 
   beforeEach(() => {

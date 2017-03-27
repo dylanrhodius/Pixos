@@ -1,11 +1,13 @@
 import React from 'react'
-import SignInForm from './SignInForm.jsx'
+import SignInForm from './SignInForm.js'
 import { Link } from 'react-router'
 import Header from '../../../components/Header'
 import RaisedButton from 'material-ui/RaisedButton'
 import CircularProgress from 'material-ui/CircularProgress';
 import Credits from './Credits.js'
 import Help from './Help.js'
+import './SignInPage.scss'
+
 
 document.title='Pixos';
 
@@ -97,7 +99,7 @@ export default class SignInPage extends React.Component {
           { content }
           <Credits />
           <Help/>
-          <a href={`https://github.com/bvjones/final-project`} target="_blank" >
+          <a href={`https://github.com/rkclark/Pixos`} target="_blank" >
             <RaisedButton className="button-shadow" style={{ position: 'absolute', bottom: '75px', left: '50px' }} label="Pixos Github Repo"/>
           </a>
         </div>

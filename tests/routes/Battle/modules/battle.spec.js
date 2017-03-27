@@ -21,6 +21,7 @@ import {
   SET_READY_FOR_NEW_ROUND,
   CLEAR_PLAYER_NOTIFICATION,
   SET_GAME_ENDED,
+  SET_OPPONENT_DISCONNECTED,
   clearPlayerNotification,
   setGameEnded,
   applyParagonEffect,
@@ -36,12 +37,12 @@ import {
   setupPlayers,
   removeCard,
   updatePower,
-  updateScore,
   clearPlayingArea,
   updateRoundCounter,
   resurrectCards,
   applyMeteorEffect,
   setReadyForNewRound,
+  setOpponentDisconnected,
   default as battleReducer
 } from 'routes/Battle/modules/battle'
 
@@ -52,33 +53,24 @@ import {
 describe('(Redux Module) Battle', () => {
   it('Should export a full set of constants.', () => {
     expect(SETUP_PLAYERS).to.equal('SETUP_PLAYERS')
-    expect(SET_NEXT_PLAYER).to.equal('SET_NEXT_PLAYER')
-    expect(SET_PLAYER_PASS).to.equal('SET_PLAYER_PASS')
-    expect(PLAY_CARD).to.equal('PLAY_CARD')
     expect(SET_TURN_FINISHED).to.equal('SET_TURN_FINISHED')
     expect(SET_MY_TURN).to.equal('SET_MY_TURN')
     expect(UPDATE_ENEMY_STATE).to.equal('UPDATE_ENEMY_STATE')
     expect(PASS_TURN).to.equal('PASS_TURN')
     expect(REMOVE_CARD).to.equal('REMOVE_CARD')
     expect(ADD_CARD).to.equal('ADD_CARD')
-    expect(UPDATE_POWER).to.equal('UPDATE_POWER'),
-    expect(UPDATE_SCORE).to.equal('UPDATE_SCORE'),
-    expect(CLEAR_PLAYING_AREA).to.equal('CLEAR_PLAYING_AREA'),
-    expect(SET_ROUND_NOTIFICATION).to.equal('SET_ROUND_NOTIFICATION')
-    expect(UPDATE_ROUND_COUNTER).to.equal('UPDATE_ROUND_COUNTER')
-    expect(SET_ROUND_NOTIFICATION).to.equal('SET_ROUND_NOTIFICATION')
+    expect(UPDATE_POWER).to.equal('UPDATE_POWER')
+    expect(CLEAR_PLAYING_AREA).to.equal('CLEAR_PLAYING_AREA')
     expect(RESURRECT_CARDS).to.equal('RESURRECT_CARDS')
     expect(APPLY_METEOR_EFFECT).to.equal('APPLY_METEOR_EFFECT')
     expect(APPLY_PARAGON_EFFECT).to.equal('APPLY_PARAGON_EFFECT')
     expect(SET_PLAYER_NOTIFICATION).to.equal('SET_PLAYER_NOTIFICATION')
     expect(SET_READY_FOR_NEW_ROUND).to.equal('SET_READY_FOR_NEW_ROUND')
     expect(INCREMENT_ROUND_COUNTER).to.equal('INCREMENT_ROUND_COUNTER')
-    expect(SET_PLAYER_NOTIFICATION).to.equal('SET_PLAYER_NOTIFICATION')
-    expect(INCREMENT_ROUND_COUNTER).to.equal('INCREMENT_ROUND_COUNTER')
     expect(INCREMENT_SELF_SCORE).to.equal('INCREMENT_SELF_SCORE')
-
     expect(CLEAR_PLAYER_NOTIFICATION).to.equal('CLEAR_PLAYER_NOTIFICATION')
-    expect(SET_READY_FOR_NEW_ROUND).to.equal('SET_READY_FOR_NEW_ROUND')
+    expect(SET_GAME_ENDED).to.equal('SET_GAME_ENDED')
+    expect(SET_OPPONENT_DISCONNECTED).to.equal('SET_OPPONENT_DISCONNECTED')
   })
 
   describe('(Reducer)', () => {
@@ -105,16 +97,6 @@ describe('(Redux Module) Battle', () => {
 
     it('Should return an action with type "SETUP_PLAYERS".', () => {
       expect(setupPlayers()).to.have.property('type', SETUP_PLAYERS)
-    })
-  })
-
-  describe('(Action Creator) incrementRoundCounter', () => {
-    it('Should be exported as a function.', () => {
-      expect(incrementRoundCounter).to.be.a('function')
-    })
-
-    it('Should return an action with type "INCREMENT_ROUND_COUNTER".', () => {
-      expect(incrementRoundCounter()).to.have.property('type', SETUP_PLAYERS)
     })
   })
 
@@ -228,16 +210,6 @@ describe('(Redux Module) Battle', () => {
     })
   })
 
-  describe('(Action Creator) updateScore', () => {
-    it('Should be exported as a function.', () => {
-      expect(updateScore).to.be.a('function')
-    })
-
-    it('Should return an action with type "UPDATE_SCORE".', () => {
-      expect(updateScore()).to.have.property('type', UPDATE_SCORE)
-    })
-  })
-
   describe('(Action Creator) clearPlayingArea', () => {
     it('Should be exported as a function.', () => {
       expect(clearPlayingArea).to.be.a('function')
@@ -305,3 +277,14 @@ describe('(Redux Module) Battle', () => {
       expect(applyMeteorEffect()).to.have.property('type', APPLY_METEOR_EFFECT)
     })
   })
+
+  describe('(Action Creator) setOpponentDisconnected', () => {
+    it('Should be exported as a function.', () => {
+      expect(setOpponentDisconnected).to.be.a('function')
+    })
+
+    it('Should return an action with type "SET_OPPONENT_DISCONNECTED".', () => {
+      expect(setOpponentDisconnected()).to.have.property('type', SET_OPPONENT_DISCONNECTED)
+    })
+  })
+})

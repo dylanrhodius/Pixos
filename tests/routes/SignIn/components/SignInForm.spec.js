@@ -1,5 +1,5 @@
 import React from 'react'
-import { SignInForm } from 'routes/SignIn/components/SignInForm.jsx'
+import { SignInForm } from 'routes/SignIn/components/SignInForm.js'
 import { shallow } from 'enzyme'
 
 describe('(View) SignInForm', () => {

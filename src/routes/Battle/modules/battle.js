@@ -15,7 +15,6 @@ export const PASS_TURN = 'PASS_TURN'
 export const REMOVE_CARD = 'REMOVE_CARD'
 export const ADD_CARD = 'ADD_CARD'
 export const UPDATE_POWER = 'UPDATE_POWER'
-export const UPDATE_SCORE = 'UPDATE_SCORE'
 export const CLEAR_PLAYING_AREA = 'CLEAR_PLAYING_AREA'
 export const RESURRECT_CARDS = 'RESURRECT_CARDS'
 export const APPLY_METEOR_EFFECT = 'APPLY_METEOR_EFFECT'
@@ -310,17 +309,6 @@ const ACTION_HANDLERS = {
         power: enemyPower
       })
     })
-  },
-  [UPDATE_SCORE] : (state, action) => {
-    let selfHasWon = action.payload
-    if (selfHasWon) {
-      return Object.assign({}, state, {
-        self: Object.assign({}, state.self, {
-          score: state.self.score + 1
-        }),
-      })
-    }
-    return state
   },
   [SET_PLAYER_NOTIFICATION] : (state, action) => {
     return Object.assign({}, state, {

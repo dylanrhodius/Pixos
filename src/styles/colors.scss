@@ -1,0 +1,104 @@
+$shadow-color: rgb(159, 159, 159);
+$light-bkgrnd: rgb(249, 249, 249);
+$bkgrnd-gradient: rgb(232, 229, 229);
+$text-color: rgb(71, 71, 71);
+$grey-bkgrnd: #666666;
+
+$material-ui-blue: #00BCD4;
+
+$water-light: #b7deed;
+$water-mid: #71ceef;
+$water-main: #21b4e2;
+
+$land-light: #b2e09a;
+$land-mid: #7ad76f;
+$land-main: #32c31a;
+
+$air-light: #d0b7ed;
+$air-mid: #ce71ee;
+$air-main: #a421e2;
+
+$grey-light: #d4d4d4;
+$grey-mid: #9a9a9a;
+
+$resurrector-col: #f4419c;
+$meteor-col: #cd3434;
+$paragon-col: #f4cc41;
+
+
+.resurrector-bkgrnd {
+  background-color: $resurrector-col;
+}
+
+.meteor-bkgrnd {
+  background-color: $meteor-col;
+}
+
+.paragon-bkgrnd {
+  background-color: $paragon-col;
+}
+
+.paragon-box-shadow {
+  box-shadow: 0px 0px 4px 4px $paragon-col;
+}
+
+.material-bkgrnd {
+  background-color: $material-ui-blue;
+}
+
+.water-main-bkgrnd {
+  background-color: $water-main !important;
+}
+
+.land-main-bkgrnd {
+  background-color: $land-main !important;
+}
+
+.air-main-bkgrnd {
+  background-color: $air-main !important;
+}
+
+.board-bkgrnd {
+  background: linear-gradient(180deg, $air-light 0%,$water-light 5%,$land-light 10%,$light-bkgrnd 20%, $light-bkgrnd 50%, $light-bkgrnd 80%,$land-light 90%,$water-light 95%,$air-light 100%)
+}
+
+.water-bkgrnd {
+  background: linear-gradient(135deg, $water-light 0%,$water-mid 50%,$water-main 51%,$water-light 100%)
+}
+
+.land-bkgrnd {
+  background: linear-gradient(135deg, $land-light 0%,$land-mid 50%,$land-main 51%,$land-light 100%)
+}
+
+.air-bkgrnd {
+  background: linear-gradient(135deg, $air-light 0%,$air-mid 50%,$air-main 51%,$air-light 100%)
+}
+
+.water-faint-bkgrnd {
+  background: linear-gradient(225deg, lighten($water-mid, 20%) 0%,lighten($water-light, 23%) 100%)
+}
+
+.land-faint-bkgrnd {
+  background: linear-gradient(225deg, lighten($land-mid, 20%) 0%,lighten($land-light, 23%) 100%)
+}
+
+.air-faint-bkgrnd {
+  background: linear-gradient(225deg, lighten($air-mid, 20%) 0%,lighten($air-light, 23%) 100%)
+}
+
+.grey-bkgrnd {
+  background: linear-gradient(180deg,$grey-bkgrnd 0%, lighten($grey-bkgrnd, 10%) 100%)
+}
+
+.grey-faint-bkgrnd {
+  background: linear-gradient(225deg,$grey-mid 0%,$grey-light 100%)
+}
+
+.pulse {
+  animation:pulse 0.8s infinite alternate;
+}
+
+@keyframes pulse {
+  from { box-shadow:0px 0px 5px 3px $material-ui-blue; }
+  to { box-shadow:0px 0px 20px 5px $material-ui-blue; }
+}
