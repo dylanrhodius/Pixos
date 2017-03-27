@@ -41,8 +41,8 @@ global.Room = require("./Room");
 
 global.User = require("./User");
 
-const deckAPI = require('./deckAPI.js')
-const userAPI = require('./userAPI.js')(usersCollection)
+const deckAPI = require('./API/deckAPI.js')
+const userAPI = require('./API/userAPI.js')(usersCollection)
 
 // Apply gzip compression
 app.use(compress())
