@@ -83,10 +83,10 @@ app.use(deckAPI);
 app.use(userAPI);
 
 const passport = require('./passportSetup')(usersCollection, domain)
-
+const passportRoutes = require('./passportRoutes')(passport)
 app.use(passport.initialize())
 app.use(passport.session())
-
+app.use(passportRoutes);
 
 // ------------------------------------
 // Apply Webpack HMR Middleware
@@ -118,16 +118,6 @@ if (project.env === 'development') {
   // (ignoring file requests). If you want to implement universal
   // rendering, you'll want to remove this middleware.
 
-  app.get('/auth/facebook',
-    passport.authenticate('facebook'))
-
-  app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', { failureRedirect: '/login' }),
-    function (req, res) {
-      // Successful authentication, redirect home.
-      res.redirect('/')
-    })
-
   app.use('*', function (req, res, next) {
     const filename = path.join(compiler.outputPath, 'index.html')
     compiler.outputFileSystem.readFile(filename, (err, result) => {
@@ -147,16 +137,6 @@ if (project.env === 'development') {
     'server such as nginx to serve your static files. See the "deployment" ' +
     'section in the README for more information on deployment strategies.'
   )
-
-  app.get('/auth/facebook',
-    passport.authenticate('facebook'))
-
-  app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', { failureRedirect: '/login' }),
-    function (req, res) {
-      // Successful authentication, redirect home.
-      res.redirect('/')
-    })
 
   // Serving ~/dist by default. Ideally these files should be served by
   // the web server and not the app server, but this helps to demo the
