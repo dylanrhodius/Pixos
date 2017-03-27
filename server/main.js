@@ -10,9 +10,6 @@ const webpack = require('webpack')
 const webpackConfig = require('../config/webpack.config')
 const project = require('../config/project.config')
 const compress = require('compression')
-const passport = require('passport')
-const databasetools = require('./databasetools')
-var FacebookStrategy = require('passport-facebook').Strategy
 
 // Import mongoDB
 const monk = require('monk')
@@ -85,35 +82,7 @@ const io = require('./socketIo')(cookieParser, store, EXPRESS_SID_KEY, usersColl
 app.use(deckAPI);
 app.use(userAPI);
 
-var FBStrategy = new FacebookStrategy({
-  clientID: process.env.FACEBOOK_APP_ID,
-  clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: "http://"+domain+"/auth/facebook/callback",
-  profileFields: ['id', 'displayName', 'photos', 'email']
-},
-function (accessToken, refreshToken, profile, done) {
-  var user = {
-    identifier: profile.id,
-    name: profile.displayName,
-    image: profile.photos[0].value
-  }
-  return done(null, user)
-})
-
-passport.use(FBStrategy)
-
-passport.serializeUser(function (user, done) {
-  done(null, user.identifier)
-  // CALL SAVE/Store NEW USER
-  databasetools.addTo(user, usersCollection)
-})
-
-passport.deserializeUser(function (user, done) {
-  done(null, {
-    user: user
-  })
-
-})
+const passport = require('./passportSetup')(usersCollection, domain)
 
 app.use(passport.initialize())
 app.use(passport.session())
