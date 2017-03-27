@@ -1,50 +1,49 @@
 'use strict'
-
+//Import server modules
 const express = require('express')
 const bodyParser = require('body-parser')
 const expressCookieParser = require('cookie-parser')
 const debug = require('debug')('app:server')
 const path = require('path')
 const http = require('http')
+const compress = require('compression')
+
+//Import webpack and config
 const webpack = require('webpack')
 const webpackConfig = require('../config/webpack.config')
 const project = require('../config/project.config')
-const compress = require('compression')
 
 // Import mongoDB
 const monk = require('monk')
 const mongoUrl = process.env.MONGO_URL
 var db = monk(mongoUrl)
-// import session from express
+
+// Import sessions
 const session = require('express-session')
 const MongodbStoreFactory = require('connect-mongodb-session')
 const MongoDBStore = MongodbStoreFactory(session)
-// set a usersCollection constant equal to the users collection
 
+// Setup database and server
 const usersCollection = db.get('users')
-
 const domain = process.env.APP_DOMAIN || 'localhost'
 const app = express()
-
 const server = http.createServer(app);
+// Apply gzip compression
+app.use(compress())
+// Include JSON parser
+app.use(bodyParser.json());
 
+// Import game handling modules
 global.connections = require("./Connections")();
-
 global.matchmaking = require("./Matchmaker")();
-
 global.Room = require("./Room");
-
 global.User = require("./User");
 
+//Import API routes
 const deckAPI = require('./API/deckAPI.js')
 const userAPI = require('./API/userAPI.js')(usersCollection)
 
-// Apply gzip compression
-app.use(compress())
-
-app.use(bodyParser.json());
-
-// Set up sessions
+// Set up sessions store
 var store = new MongoDBStore(
   {
     uri: mongoUrl,
@@ -56,15 +55,15 @@ store.on('error', function (error) {
   assert.ok(false)
 })
 
+// Set up sessions
 const SESSION_SECRET = 'Dr4c0R3x is the best'
-
 const EXPRESS_SID_KEY = 'connect.sid';
 const cookieParser = expressCookieParser(SESSION_SECRET)
 
 app.use(session({
   secret: SESSION_SECRET,
   cookie: {
-    maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+    maxAge: 1000 * 60 * 60 * 24 * 28 // 4 weeks
   },
   store: store,
   resave: false,
@@ -72,21 +71,25 @@ app.use(session({
   name: EXPRESS_SID_KEY
 }))
 
+// Add database to requests
 app.use(function (req, res, next) {
   req.db = db
   next()
 })
 
-const io = require('./socketIo')(cookieParser, store, EXPRESS_SID_KEY, usersCollection, server)
+// Import socket-io
+require('./socketIo')(cookieParser, store, EXPRESS_SID_KEY, usersCollection, server)
 
-app.use(deckAPI);
-app.use(userAPI);
-
+// Import and use passport
 const passport = require('./passportSetup')(usersCollection, domain)
 const passportRoutes = require('./passportRoutes')(passport)
 app.use(passport.initialize())
 app.use(passport.session())
+
+// Use routes
 app.use(passportRoutes);
+app.use(deckAPI);
+app.use(userAPI);
 
 // ------------------------------------
 // Apply Webpack HMR Middleware
