@@ -3,7 +3,7 @@ Pixos is a real-time multiplayer, turn-based card game inspired by [Gwent](http:
 
 It is a full stack javascript app built with React, Redux and Socket-io.
 
-[Click here to try out the demo on Heroku.](http://rkclark-pixos.herokuapp.com/) (Using Chrome is recommended)
+[Click here to try out the demo on Heroku.](http://pixos.herokuapp.com/) (Using Chrome is recommended)
 
 Click 'Learn the Rules!' on the homepage to get started. We recommend roping in a friend to matchmake against, but you can always play against yourself on separate browser tabs if you just want to test it out.
 
